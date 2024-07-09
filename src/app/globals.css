@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  box-sizing: border-box;
+  font-family: "Gill Sans", sans-serif;
+}
+
+.breadcrumb-bar {
+  background-image: url(../../public//assets/bg.png);
+  text-align: center;
+  position: relative;
+  padding: 70px 0;
+}
+
