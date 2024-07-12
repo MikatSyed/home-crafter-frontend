@@ -7,7 +7,7 @@ import { FiMapPin } from 'react-icons/fi';
 import { Swiper, SwiperSlide, Swiper as SwiperType } from 'swiper/react';
 import 'swiper/css';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-const MostPopularServices = () => {
+const RelatedServices = () => {
     const [swiper, setSwiper] = useState<any | null>(null);
 
     const handleSwiper = (swiper: any) => {
@@ -79,14 +79,14 @@ const MostPopularServices = () => {
     ];
 
     return (
-        <div className="mx-auto px-6 md:px-[7rem] bg-white py-14">
+        <div className="mt-8">
             <div className="section-heading mb-8">
                 <div className="flex flex-wrap items-center">
                     <div className="w-full md:w-1/2" data-aos="fade-up">
-                        <h2 className="text-4xl font-bold text-indigo-900 leading-tight">Most Popular Services</h2>
-                        <p className="text-gray-400 mt-4">Explore the greatest of our services. You won’t be disappointed</p>
+                    <h5 className="text-2xl font-semibold mb-4">Related Services</h5>
+                     
                     </div>
-                    <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
+                    <div className="w-full md:w-1/2 text-right" >
       <div className="inline-flex items-center space-x-4">
         <button className="btn btn-arrow rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white p-3 shadow-lg hover:shadow-xl focus:outline-none transform transition-transform duration-200 ease-out hover:-translate-y-1">
           <FaArrowLeft className="w-5 h-5"   onClick={handlePrevious} />
@@ -106,13 +106,13 @@ const MostPopularServices = () => {
         slidesPerView={1}
         breakpoints={{
           640: {
-            slidesPerView: 2,
+            slidesPerView: 1,
           },
           768: {
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
           1024: {
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
         }}
       >
@@ -171,4 +171,4 @@ const MostPopularServices = () => {
     );
 };
 
-export default MostPopularServices;
+export default RelatedServices;

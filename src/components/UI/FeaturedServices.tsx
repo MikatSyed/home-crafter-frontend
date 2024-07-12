@@ -1,12 +1,31 @@
 "use client"
 import Image from 'next/image';
-import React, { useEffect } from 'react';
-
-import { FaHeart, FaStar } from 'react-icons/fa';
+import React, { useState } from 'react';
+import {  FaStar } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa6';
 import { FiMapPin } from 'react-icons/fi';
+import { Swiper, SwiperSlide, Swiper as SwiperType } from 'swiper/react';
+import 'swiper/css';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+const MostPopularServices = () => {
+    const [swiper, setSwiper] = useState<any | null>(null);
 
-const FeaturedServices = () => {
+    const handleSwiper = (swiper: any) => {
+      setSwiper(swiper);
+    };
+  
+    const handlePrevious = () => {
+      if (swiper) {
+        swiper.slidePrev();
+      }
+    };
+  
+    const handleNext = () => {
+      if (swiper) {
+        swiper.slideNext();
+      }
+    };
+  
 
     const categories = [
         {
@@ -45,7 +64,18 @@ const FeaturedServices = () => {
             oldPrice: '$40.00',
             service: 'Home Electrical Service'
         },
-        // Add more categories as needed
+        {
+            name: 'Construction',
+            category: 'Cleaning',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/services/service-02.jpg',
+            provider: 'Jeny Doe',
+            providerImg: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg',
+            location: 'New Jersey, USA',
+            rating: 4.9,
+            price: '$25.00',
+            oldPrice: '$35.00',
+            service: 'Electric Panel Repairing Service'
+        },
     ];
 
     return (
@@ -57,15 +87,38 @@ const FeaturedServices = () => {
                         <p className="text-gray-400 mt-4">Explore the greatest of our services. You won’t be disappointed</p>
                     </div>
                     <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
-                        <a href="categories.html" className="bg-[#4f46e5] text-white px-4 py-2 rounded">
-                            View All
-                            <i className="ml-2 feather-arrow-right-circle"></i>
-                        </a>
-                    </div>
+      <div className="inline-flex items-center space-x-4">
+        <button className="btn btn-arrow rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white p-3 shadow-lg hover:shadow-xl focus:outline-none transform transition-transform duration-200 ease-out hover:-translate-y-1">
+          <FaArrowLeft className="w-5 h-5"   onClick={handlePrevious} />
+        </button>
+        <button className="btn btn-arrow rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white p-3 shadow-lg hover:shadow-xl focus:outline-none transform transition-transform duration-200 ease-out hover:-translate-y-1">
+          <FaArrowRight className="w-5 h-5"  onClick={handleNext}/>
+        </button>
+      </div>
+    </div>
+                   
                 </div>
             </div>
+            <Swiper
+        onSwiper={handleSwiper}
+        loop={true}
+        spaceBetween={20}
+        slidesPerView={1}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
+      >
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {categories.map((category, index) => (
+            <SwiperSlide key={index}>
                     <div key={index} className="service-widget shadow-md rounded-md" data-aos="fade-up">
                         <div className=" relative">
                             <a href="service-details.html">
@@ -110,10 +163,12 @@ const FeaturedServices = () => {
                             </div>
                         </div>
                     </div>
+                 </SwiperSlide>
                 ))}
             </div>
+            </Swiper>
         </div>
     );
 };
 
-export default FeaturedServices;
+export default MostPopularServices;

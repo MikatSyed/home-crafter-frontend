@@ -1,11 +1,11 @@
 import React from 'react';
 
-const BreadcrumbBar = () => {
+const BreadcrumbBar = ({name,subtitle}:any) => {
   return (
     <div className="breadcrumb-bar bg-[#f8fcfd] py-4">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center">
-          <h2 className="text-4xl font-bold mb-2">Our Blog</h2>
+          <h2 className="text-4xl font-bold mb-2">Our {name}</h2>
           <nav aria-label="breadcrumb">
             <ol className="flex space-x-2 text-gray-500">
               <li>
@@ -13,11 +13,11 @@ const BreadcrumbBar = () => {
                 <span className="mx-2">/</span>
               </li>
               <li>
-                <span aria-current="page">Blog</span>
+                <span aria-current="page">{name}</span>
                 <span className="mx-2">/</span>
               </li>
               <li className="text-gray-700">
-                <span aria-current="page">Blog Details</span>
+                <span aria-current="page">{subtitle}</span>
               </li>
             </ol>
           </nav>

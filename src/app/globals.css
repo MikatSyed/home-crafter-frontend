@@ -14,3 +14,22 @@ body{
   padding: 70px 0;
 }
 
+.circle-icon {   
+    border-radius: 50%;
+} 
+
+.custom-prev-arrow, .custom-next-arrow {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  z-index: 2;
+}
+.custom-prev-arrow:hover, .custom-next-arrow:hover {
+  background: rgba(0,0,0,0.8);
+}

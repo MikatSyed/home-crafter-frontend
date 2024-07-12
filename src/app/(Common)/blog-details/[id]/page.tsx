@@ -4,7 +4,7 @@ import React from 'react';
 const BlogDetails = () => {
     return (
         <div>
-          <BreadcrumbBar/>
+          <BreadcrumbBar name="Blog" subtitle="Blog Details"/>
           <div className="mx-auto px-6 md:px-[7rem] py-4">
       <div className="flex flex-wrap lg:flex-nowrap">
         <div className="lg:w-2/3 w-full mb-8 lg:mb-0">
