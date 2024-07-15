@@ -33,3 +33,12 @@ body{
 .custom-prev-arrow:hover, .custom-next-arrow:hover {
   background: rgba(0,0,0,0.8);
 }
+.input::placeholder {
+  font-size: 10px; 
+}
+
+.text-gold {
+  color: #ffbc35;
+}
+
+
