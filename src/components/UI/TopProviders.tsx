@@ -1,11 +1,16 @@
-"use client"
-import React, { useEffect } from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaCheckCircle, FaStar } from 'react-icons/fa';
-import { FiArrowRightCircle } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 const TopProviders = () => {
+    const pathname = usePathname();
+    const [currentPage, setCurrentPage] = useState(1);
+    const providersPerPage = 8;
+
     useEffect(() => {
         AOS.init({
             duration: 1000,
@@ -44,28 +49,103 @@ const TopProviders = () => {
             rate: 4.8,
             price: '$25.00',
             link: 'provider-details.html'
-        }
+        },
+        {
+            name: 'Thompson',
+            role: 'Mechanic',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/provider/provider-14.jpg',
+            rate: 4.8,
+            price: '$25.00',
+            link: 'provider-details.html'
+        },
+        {
+            name: 'Thompson',
+            role: 'Mechanic',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/provider/provider-14.jpg',
+            rate: 4.8,
+            price: '$25.00',
+            link: 'provider-details.html'
+        },
+        {
+            name: 'Thompson',
+            role: 'Mechanic',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/provider/provider-14.jpg',
+            rate: 4.8,
+            price: '$25.00',
+            link: 'provider-details.html'
+        },
+        {
+            name: 'Thompson',
+            role: 'Mechanic',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/provider/provider-14.jpg',
+            rate: 4.8,
+            price: '$25.00',
+            link: 'provider-details.html'
+        },
+        {
+            name: 'Thompson',
+            role: 'Mechanic',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/provider/provider-14.jpg',
+            rate: 4.8,
+            price: '$25.00',
+            link: 'provider-details.html'
+        },
+        {
+            name: 'Thompson',
+            role: 'Mechanic',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/provider/provider-14.jpg',
+            rate: 4.8,
+            price: '$25.00',
+            link: 'provider-details.html'
+        },
+        {
+            name: 'Thompson',
+            role: 'Mechanic',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/provider/provider-14.jpg',
+            rate: 4.8,
+            price: '$25.00',
+            link: 'provider-details.html'
+        },
+        {
+            name: 'Thompson',
+            role: 'Mechanic',
+            img: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/provider/provider-14.jpg',
+            rate: 4.8,
+            price: '$25.00',
+            link: 'provider-details.html'
+        },
+        // Add more providers as needed
     ];
+
+    // Calculate the displayed providers based on the current page and pathname
+    const displayedProviders = pathname === '/' 
+        ? providers.slice(-4) 
+        : providers.slice((currentPage - 1) * providersPerPage, currentPage * providersPerPage);
+
+    // Calculate the total number of pages for pagination
+    const totalPages = Math.ceil(providers.length / providersPerPage);
 
     return (
         <section className="mx-auto px-6 md:px-[7rem] bg-white py-14">
             <div className="container mx-auto px-6">
-                <div className="flex flex-wrap items-center mb-8">
-                    <div className="w-full md:w-1/2 mb-6 md:mb-0" data-aos="fade-up">
-                        <div className="">
-                            <h2 className="text-4xl font-bold text-indigo-900 leading-tight">Top Providers</h2>
-                            <p className="text-gray-300">Sed ut perspiciatis unde omnis iste natus error</p>
+                {pathname !== '/providers' && (
+                    <div className="flex flex-wrap items-center mb-8">
+                        <div className="w-full md:w-1/2 mb-6 md:mb-0" data-aos="fade-up">
+                            <div className="">
+                                <h2 className="text-4xl font-bold text-indigo-900 leading-tight">Top Providers</h2>
+                                <p className="text-gray-300">Sed ut perspiciatis unde omnis iste natus error</p>
+                            </div>
+                        </div>
+                        <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
+                            <a href="categories.html" className="inline-flex items-center bg-[#4f46e5] text-white px-4 py-2 rounded">
+                                View All
+                                <i className="ml-2 feather-arrow-right-circle"></i>
+                            </a>
                         </div>
                     </div>
-                    <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
-                    <a href="categories.html" className=" inline-flex items-center bg-[#4f46e5] text-white px-4 py-2 rounded">
-                            View All
-                            <i className="ml-2 feather-arrow-right-circle"></i>
-                        </a>
-                    </div>
-                </div>
+                )}
                 <div className="flex flex-wrap -mx-4" data-aos="fade-up">
-                    {providers.map((provider, index) => (
+                    {displayedProviders.map((provider, index) => (
                         <div key={index} className="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
                             <div className="providerset provider-box bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
                                 <div className="providerset-img">
@@ -97,10 +177,52 @@ const TopProviders = () => {
                         </div>
                     ))}
                 </div>
+                {pathname === '/providers' && (
+                <div className="flex justify-center mt-8">
+            
+                <button
+                  className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
+                    currentPage === 1 ? ' text-gray-500 cursor-not-allowed text-sm' : 'text-gray-700 hover:from-blue-500 hover:to-blue-700 text-sm font-bold hover:text-[#4f46e5]'
+                  }`}
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+               <FiArrowLeft className="mr-1" />   PREV
+                </button>
+            
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    className={`px-4 py-2 mx-1 rounded-lg transition-colors ${
+                      currentPage === index + 1
+                        ? 'bg-[#4f46e5] text-white '
+                        : 'bg-[#f8fcfd] border border-gray-300 text-gray-800 hover:bg-[#4f46e5] text-sm hover:text-white'
+                    }`}
+                    onClick={() => setCurrentPage(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              
+              
+              <button
+  className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
+    currentPage === totalPages
+      ? ' text-gray-500 cursor-not-allowed text-sm'
+      : 'text-gray-700 text-sm font-bold hover:text-[#4f46e5]'
+  }`}
+  onClick={() => setCurrentPage(currentPage + 1)}
+  disabled={currentPage === totalPages}
+>
+  NEXT <FiArrowRight className="ml-1" />
+</button>
+              </div>
+              
+                 
+                )}
             </div>
         </section>
     );
 };
 
 export default TopProviders;
-

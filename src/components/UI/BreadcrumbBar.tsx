@@ -14,11 +14,12 @@ const BreadcrumbBar = ({name,subtitle}:any) => {
               </li>
               <li>
                 <span aria-current="page">{name}</span>
+              </li>
+              {subtitle &&   <li className="text-gray-700">
                 <span className="mx-2">/</span>
-              </li>
-              <li className="text-gray-700">
                 <span aria-current="page">{subtitle}</span>
-              </li>
+              </li>}
+            
             </ol>
           </nav>
         </div>
