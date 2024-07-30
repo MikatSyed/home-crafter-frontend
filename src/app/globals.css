@@ -41,4 +41,18 @@ body{
   color: #ffbc35;
 }
 
+/* Add these styles to your global stylesheet or component-level stylesheet */
+.image-wrapper {
+  overflow: hidden; /* Keeps the image within its container */
+}
+
+.image-wrapper img {
+  transition: transform 300ms ease-in-out; /* Smooth transition */
+  display: block; /* Remove extra space below the image */
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.25); /* Slight zoom effect without overflow */
+}
+
 
