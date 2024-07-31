@@ -12,7 +12,7 @@ const Dashboard = () => {
     
     
   return (
-    <div className="container  px-4 py-8  ">
+    <div className=" px-4 py-8  overflow-x-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Card 1 */}
         <div className="bg-white shadow-lg rounded-lg p-6">

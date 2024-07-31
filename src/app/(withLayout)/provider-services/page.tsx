@@ -144,7 +144,7 @@ const MostPopularServices = () => {
   );
 
   return (
-    <div className="mx-auto px-6  bg-white py-14">
+    <div className="mx-auto px-6  bg-white py-7">
       <div className="flex  justify-between">
         <h2 className="text-2xl font-semibold text-[#2a2a3d] mb-6">
           My Services

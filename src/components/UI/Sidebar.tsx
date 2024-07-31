@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FiMenu, FiX, FiHome, FiBarChart, FiSettings, FiUser, FiMessageSquare } from 'react-icons/fi';
 import Link from 'next/link';
 import { FaBuilding, FaUser } from 'react-icons/fa6';
-import { FaMoneyBillAlt, FaProjectDiagram, FaSuitcase, FaUserFriends } from 'react-icons/fa';
+import { FaCalendarAlt, FaMoneyBillAlt, FaProjectDiagram, FaSuitcase, FaUserFriends } from 'react-icons/fa';
 import { MdDashboard } from 'react-icons/md';
 
 interface SidebarProps {
@@ -60,12 +60,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
     </p>
   </Link>
 
-  <Link href="/project">
+  <Link href="/provider-bookings">
     <p
-      onClick={() => handleLinkClick('project')}
-      className={getLinkClass('project')}
+      onClick={() => handleLinkClick('provider-bookings')}
+      className={getLinkClass('provider-bookings')}
     >
-      <FaProjectDiagram className="w-5 h-5 mr-2" />
+      <FaCalendarAlt className="w-5 h-5 mr-2" />
       <span>Bookings</span>
     </p>
   </Link>
