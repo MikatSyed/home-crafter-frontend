@@ -4,9 +4,10 @@ import { FiMenu, FiX, FiHome, FiBarChart, FiSettings, FiUser, FiMessageSquare } 
 import Link from 'next/link';
 import { FaBuilding, FaUser } from 'react-icons/fa6';
 import { FaCalendarAlt, FaMoneyBillAlt, FaProjectDiagram, FaRegCalendarAlt, FaRegClock, FaSuitcase, FaUserFriends } from 'react-icons/fa';
-import { MdDashboard, MdOutlineDashboard } from 'react-icons/md';
+import { MdDashboard, MdHomeRepairService, MdOutlineDashboard } from 'react-icons/md';
 import { CgLockUnlock } from 'react-icons/cg';
 import { BsClockFill, BsSuitcaseLg } from 'react-icons/bs';
+import { AiOutlineProduct } from 'react-icons/ai';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -80,13 +81,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       <span>Availability</span>
     </p>
   </Link>
-  <Link href="/chats">
+  <Link href="/provider-category">
     <p
-      onClick={() => handleLinkClick('chats')}
-      className={getLinkClass('chats')}
+      onClick={() => handleLinkClick('provider-category')}
+      className={getLinkClass('provider-category')}
     >
-      <FiMessageSquare className="w-5 h-5 mr-2" />
-      <span>Chats</span>
+      <AiOutlineProduct  className="w-5 h-5 mr-2" />
+      <span>Category</span>
     </p>
   </Link>
   <Link href="/profile">

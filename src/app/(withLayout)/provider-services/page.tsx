@@ -150,13 +150,12 @@ const MostPopularServices = () => {
           My Services
         </h2>
         <div>
-          <a
-            href="categories.html"
-            className="bg-[#4f46e5] inline-flex items-center text-white px-4 py-2 rounded"
+          <button 
+            className="text-[#4f46e5] hover:bg-[#4f46e5] inline-flex items-center hover:text-white px-4 py-2 rounded text-md border border-[#4f46e5]"
           >
             Add Service
            
-          </a>
+          </button>
         </div>
       </div>
       <div className=" mb-6">

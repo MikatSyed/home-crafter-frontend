@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { FiX } from "react-icons/fi";
 
 const ProviderBookings = () => {
   const bookings = [
@@ -84,17 +85,17 @@ const ProviderBookings = () => {
   const [selectedWorkStatus, setSelectedWorkStatus] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleBookingStatusChange = (e) => {
+  const handleBookingStatusChange = (e:any) => {
     setSelectedBookingStatus(e.target.value);
     // Update the booking status in your state or backend
   };
 
-  const handleWorkStatusChange = (e) => {
+  const handleWorkStatusChange = (e:any) => {
     setSelectedWorkStatus(e.target.value);
     // Update the work status in your state or backend
   };
 
-  const openModal = (booking) => {
+  const openModal = (booking:any) => {
     setSelectedBooking(booking);
     setSelectedBookingStatus(booking.bookingStatus);
     setSelectedWorkStatus(booking.workStatus);
@@ -210,7 +211,17 @@ const ProviderBookings = () => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ">
           <div className="bg-white p-6 rounded-lg w-full max-w-lg mx-4 md:mx-0">
-            <h2 className="text-xl font-bold mb-4">Edit Booking</h2>
+           <div className="flex justify-between items-center">
+           <h2 className="text-xl font-bold mb-4">Edit Booking</h2>
+            <button
+                    onClick={() => {
+                      setIsModalOpen(false);
+                    }}
+                    className="bg-[#4f46e5] text-white rounded-full p-2 hover:bg-opacity-90 transition"
+                >
+                   <FiX size={18}/>
+                </button>
+           </div>
             <div className="">
               <div className="w-full">
                 <label
