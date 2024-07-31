@@ -59,7 +59,7 @@ const ProviderCategory = () => {
     return (
         <div className="px-6 py-7">
             <div className="flex justify-between mb-8">
-                <h2 className="text-2xl font-semibold text-[#2a2a3d]">Service Category</h2>
+                <h2 className="text-2xl font-semibold text-[#2a2a3d]">Category Listing</h2>
                 <div>
                     <button
                         className="text-[#4f46e5] hover:bg-[#4f46e5] inline-flex items-center hover:text-white px-4 py-2 rounded text-md border border-[#4f46e5]"

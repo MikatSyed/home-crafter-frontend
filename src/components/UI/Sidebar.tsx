@@ -8,6 +8,7 @@ import { MdDashboard, MdHomeRepairService, MdOutlineDashboard } from 'react-icon
 import { CgLockUnlock } from 'react-icons/cg';
 import { BsClockFill, BsSuitcaseLg } from 'react-icons/bs';
 import { AiOutlineProduct } from 'react-icons/ai';
+import { IoNewspaperOutline } from 'react-icons/io5';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -90,13 +91,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       <span>Category</span>
     </p>
   </Link>
-  <Link href="/profile">
+  <Link href="/provider-blog">
     <p
-      onClick={() => handleLinkClick('profile')}
-      className={getLinkClass('profile')}
+      onClick={() => handleLinkClick('provider-blog')}
+      className={getLinkClass('provider-blog')}
     >
-      <FiUser className="w-5 h-5 mr-2" />
-      <span>My Profile</span>
+      <IoNewspaperOutline className="w-5 h-5 mr-2" />
+      <span>Blog</span>
     </p>
   </Link>
   <Link href="/settings">
