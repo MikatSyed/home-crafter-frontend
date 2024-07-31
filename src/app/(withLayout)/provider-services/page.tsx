@@ -155,7 +155,7 @@ const MostPopularServices = () => {
             className="bg-[#4f46e5] inline-flex items-center text-white px-4 py-2 rounded"
           >
             Add Service
-            <i className="ml-2 feather-arrow-right-circle"></i>
+           
           </a>
         </div>
       </div>

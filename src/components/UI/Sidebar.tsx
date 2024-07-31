@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { FiMenu, FiX, FiHome, FiBarChart, FiSettings, FiUser, FiMessageSquare } from 'react-icons/fi';
 import Link from 'next/link';
 import { FaBuilding, FaUser } from 'react-icons/fa6';
-import { FaCalendarAlt, FaMoneyBillAlt, FaProjectDiagram, FaSuitcase, FaUserFriends } from 'react-icons/fa';
-import { MdDashboard } from 'react-icons/md';
+import { FaCalendarAlt, FaMoneyBillAlt, FaProjectDiagram, FaRegCalendarAlt, FaRegClock, FaSuitcase, FaUserFriends } from 'react-icons/fa';
+import { MdDashboard, MdOutlineDashboard } from 'react-icons/md';
+import { CgLockUnlock } from 'react-icons/cg';
+import { BsClockFill, BsSuitcaseLg } from 'react-icons/bs';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -46,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       onClick={() => handleLinkClick('dashboard')}
       className={getLinkClass('dashboard')}
     >
-      <MdDashboard className="w-5 h-5 mr-2" />
+      <MdOutlineDashboard className="w-5 h-5 mr-2" />
       <span>Dashboard</span>
     </p>
   </Link>
@@ -55,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       onClick={() => handleLinkClick('provider-services')}
       className={getLinkClass('provider-services')}
     >
-      <FaSuitcase   className="w-5 h-5 mr-2" />
+      <BsSuitcaseLg   className="w-5 h-5 mr-2" />
       <span>My Services</span>
     </p>
   </Link>
@@ -65,17 +67,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       onClick={() => handleLinkClick('provider-bookings')}
       className={getLinkClass('provider-bookings')}
     >
-      <FaCalendarAlt className="w-5 h-5 mr-2" />
+      <FaRegCalendarAlt  className="w-5 h-5 mr-2" />
       <span>Bookings</span>
     </p>
   </Link>
-  <Link href="/connect">
+  <Link href="/availability">
     <p
-      onClick={() => handleLinkClick('connect')}
-      className={getLinkClass('connect')}
+      onClick={() => handleLinkClick('availability')}
+      className={getLinkClass('availability')}
     >
-      <FaUserFriends className="w-5 h-5 mr-2" />
-      <span>Connect User</span>
+      <FaRegClock  className="w-5 h-5 mr-2" />
+      <span>Availability</span>
     </p>
   </Link>
   <Link href="/chats">

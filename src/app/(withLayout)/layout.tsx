@@ -16,7 +16,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <div className=" overflow-x-hidden">
       <div className="flex flex-col flex-1 w-full">
         <Header isSidebarOpen={isSidebarOpen} onToggleSidebar={toggleSidebar} />
-        <main className="flex  md:h-[88vh]  ">
+        <main className="flex  md:h-[88vh] overflow-y-hidden ">
       <Sidebar isOpen={isSidebarOpen} onToggle={toggleSidebar} />
           <div className="container mx-auto p-4  overflow-y-auto">{children}</div>
         </main>
