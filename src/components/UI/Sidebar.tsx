@@ -54,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       <span>Dashboard</span>
     </p>
   </Link>
-  <Link href="/provider-services">
+  <Link href="/provider/services">
     <p
       onClick={() => handleLinkClick('provider-services')}
       className={getLinkClass('provider-services')}
@@ -64,7 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
     </p>
   </Link>
 
-  <Link href="/provider-bookings">
+  <Link href="/provider/bookings">
     <p
       onClick={() => handleLinkClick('provider-bookings')}
       className={getLinkClass('provider-bookings')}
@@ -82,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       <span>Availability</span>
     </p>
   </Link>
-  <Link href="/provider-category">
+  <Link href="/provider/category">
     <p
       onClick={() => handleLinkClick('provider-category')}
       className={getLinkClass('provider-category')}
@@ -91,7 +91,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       <span>Category</span>
     </p>
   </Link>
-  <Link href="/provider-blog">
+  <Link href="/provider/blog">
     <p
       onClick={() => handleLinkClick('provider-blog')}
       className={getLinkClass('provider-blog')}

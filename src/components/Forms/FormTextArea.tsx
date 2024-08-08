@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormContext, Controller } from "react-hook-form";
 import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
-
 
 interface FormTextAreaProps {
   name: string;
@@ -11,22 +10,27 @@ interface FormTextAreaProps {
   placeholder?: string;
 }
 
-const FormTextArea: React.FC<FormTextAreaProps> = ({ 
-  name, 
-  label, 
-  rows = 3, 
-  value, 
-  placeholder 
+const FormTextArea: React.FC<FormTextAreaProps> = ({
+  name,
+  label,
+  rows = 3,
+  value,
+  placeholder,
 }) => {
-  const { control, formState: { errors } } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
   const errorMessage = getErrorMessageByPropertyName(errors, name);
+
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <>
-     {label && (
+      {label && (
         <label
           htmlFor={name}
-          className="block text-gray-600 font-medium mb-1  "
+          className="block text-sm font-medium mb-1 text-gray-700"
         >
           {label}
         </label>
@@ -38,12 +42,15 @@ const FormTextArea: React.FC<FormTextAreaProps> = ({
         render={({ field }) => (
           <textarea
             id={name}
-           
             rows={rows}
             placeholder={placeholder}
-            className="mt-1 p-2 w-full border rounded-md"
+            className={`mt-1 p-2 w-full border rounded-md transition-colors duration-300 ${
+              isFocused ? "border-blue-600" : errorMessage ? "border-red-500" : "border-gray-300"
+            } focus:outline-none`}
             {...field}
             defaultValue={value}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
         )}
       />

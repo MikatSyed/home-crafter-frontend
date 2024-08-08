@@ -36,14 +36,15 @@ const FormSelectField = ({
   const errorMessage = getErrorMessageByPropertyName(errors, name);
   return (
     <div>
-       {label && (
+      {label && (
         <label
           htmlFor={name}
-          className="block text-gray-600 font-medium mb-1  "
+          className="block text-black text-sm font-medium mb-1  "
         >
           {label}
         </label>
       )}
+
       <Controller
         control={control}
         name={name}
@@ -51,7 +52,7 @@ const FormSelectField = ({
           <select
             onChange={(e) => onChange(e.target.value)}
             value={value}
-            className={`${className}`}
+            className={`${className} mt-2 block w-full py-3 px-4 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#1475c6] focus:border-[#1475c6] transition ease-in duration-200 sm:text-sm`}
           >
             {/* Add an empty option as a placeholder */}
             <option value="">
