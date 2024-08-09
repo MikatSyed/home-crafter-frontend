@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.7",
     "aos": "^2.3.4",
     "axios": "^1.7.3",
@@ -30,7 +31,8 @@
     "react-star-ratings": "^2.3.0",
     "react-time-picker": "^7.0.0",
     "slick-carousel": "^1.8.1",
-    "swiper": "^11.1.4"
+    "swiper": "^11.1.4",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",

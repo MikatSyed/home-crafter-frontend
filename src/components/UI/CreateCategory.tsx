@@ -202,7 +202,7 @@ const CreateCategory: React.FC<CreateCategoryFormProps> = ({ show, onClose }) =>
                 className={`px-4 py-2 bg-[#4f46e5] text-white rounded-md hover:bg-blue-600 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 disabled={loading}
               >
-                {loading ? 'Adding...' : 'Add Category'}
+                {loading ? 'Adding...' : 'Create Category'}
               </button>
             </div>
           </Form>
