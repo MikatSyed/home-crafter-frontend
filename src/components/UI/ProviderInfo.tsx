@@ -16,7 +16,30 @@ import ReviewComponent from "./ReviewComponent";
 import RelatedServices from "./RelatedService";
 import ServiceCard from "./ServiceCard";
 
-const ProviderInfo = () => {
+// Define the types for the service data
+interface ServiceData {
+  service_name: string;
+  description: string;
+  price: number;
+  location: string;
+  duration: string;
+  videoUrl: string;
+  service_img: string[];
+}
+
+interface ProviderInfoProps {
+  data: {
+    data: ServiceData;
+  };
+}
+
+const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
+  const service = data?.data;
+  const images = service?.service_img || [];
+  const videoUrl = service?.videoUrl;
+  console.log(service,'40')
+
+
   return (
     <div>
       <div className="mx-auto px-6 md:px-[7rem] py-4">
@@ -24,12 +47,7 @@ const ProviderInfo = () => {
           <div className="lg:w-2/3 w-full mb-8 lg:mb-0 ">
             <div>
               <h5 className="text-2xl font-semibold mb-4">Service Details</h5>
-              <p className="text-gray-700">
-                Car wash is a facility used to clean the exterior and, in some
-                cases, the interior of motor vehicles. Car washes can be
-                self-serve, fully automated, or full-service with attendants who
-                wash the vehicle.
-              </p>
+              <p className="text-gray-700">{service?.description}</p>
             </div>
             <div className="py-6">
               <h5 className="text-2xl font-semibold mb-4">Service Provider</h5>
@@ -42,7 +60,7 @@ const ProviderInfo = () => {
                       alt="img"
                     />
                   </div>
-                  <div className="  ml-3">
+                  <div className="ml-3">
                     <h6 className="text-lg font-semibold mb-2">Member Since</h6>
                     <div className="text-yellow-500 text-sm">
                       <FaStar className="inline" />{" "}
@@ -54,11 +72,11 @@ const ProviderInfo = () => {
 
                 <div className="flex ">
                   <div>
-                    <span className="text-md text-gray-700  block p-4  rounded-full bg-[#f8fcfd] ">
+                    <span className="text-md text-gray-700 block p-4 rounded-full bg-[#f8fcfd]">
                       <FiUser />
                     </span>
                   </div>
-                  <div className="  ml-3">
+                  <div className="ml-3">
                     <h6 className="text-lg font-semibold mb-2">Member Since</h6>
                     <p className="text-sm text-gray-500 font-normal">
                       Apr 2020
@@ -68,11 +86,11 @@ const ProviderInfo = () => {
 
                 <div className="flex ">
                   <div>
-                    <span className="text-md text-gray-700  block p-4  rounded-full bg-[#f8fcfd] ">
+                    <span className="text-md text-gray-700 block p-4 rounded-full bg-[#f8fcfd]">
                       <FiMapPin />
                     </span>
                   </div>
-                  <div className="  ml-3">
+                  <div className="ml-3">
                     <h6 className="text-lg font-semibold mb-2">Address</h6>
                     <p className="text-sm text-gray-500 font-normal">
                       Hanover, Maryland
@@ -82,11 +100,11 @@ const ProviderInfo = () => {
 
                 <div className="flex mt-4">
                   <div>
-                    <span className="text-md text-gray-700  block p-4  rounded-full bg-[#f8fcfd] ">
+                    <span className="text-md text-gray-700 block p-4 rounded-full bg-[#f8fcfd]">
                       <FiMail />
                     </span>
                   </div>
-                  <div className="  ml-3">
+                  <div className="ml-3">
                     <h6 className="text-lg font-semibold mb-2">Email</h6>
                     <p className="text-sm text-gray-500 font-normal">
                       thomash@example.com
@@ -96,11 +114,11 @@ const ProviderInfo = () => {
 
                 <div className="flex mt-4">
                   <div>
-                    <span className="text-md text-gray-700  block p-4  rounded-full bg-[#f8fcfd] ">
+                    <span className="text-md text-gray-700 block p-4 rounded-full bg-[#f8fcfd]">
                       <FiPhone />
                     </span>
                   </div>
-                  <div className="  ml-3">
+                  <div className="ml-3">
                     <h6 className="text-lg font-semibold mb-2">Phone</h6>
                     <p className="text-sm text-gray-500 font-normal">
                       +1 888 888 8888
@@ -114,7 +132,7 @@ const ProviderInfo = () => {
                       <a
                         href="#"
                         target="_blank"
-                        className="text-lg text-gray-700  block p-4  rounded-full bg-[#f8fcfd] "
+                        className="text-lg text-gray-700 block p-4 rounded-full bg-[#f8fcfd]"
                       >
                         <FiInstagram />
                       </a>
@@ -123,7 +141,7 @@ const ProviderInfo = () => {
                       <a
                         href="#"
                         target="_blank"
-                        className="text-lg text-gray-700  block p-4  rounded-full bg-[#f8fcfd] "
+                        className="text-lg text-gray-700 block p-4 rounded-full bg-[#f8fcfd]"
                       >
                         <FiTwitter />
                       </a>
@@ -132,7 +150,7 @@ const ProviderInfo = () => {
                       <a
                         href="#"
                         target="_blank"
-                        className="text-lg text-gray-700  block p-4  rounded-full bg-[#f8fcfd] "
+                        className="text-lg text-gray-700 block p-4 rounded-full bg-[#f8fcfd]"
                       >
                         <FiYoutube />
                       </a>
@@ -141,7 +159,7 @@ const ProviderInfo = () => {
                       <a
                         href="#"
                         target="_blank"
-                        className="text-lg text-gray-700  block p-4  rounded-full bg-[#f8fcfd] "
+                        className="text-lg text-gray-700 block p-4 rounded-full bg-[#f8fcfd]"
                       >
                         <FiLinkedin />
                       </a>
@@ -150,14 +168,14 @@ const ProviderInfo = () => {
                 </div>
               </div>
             </div>
-            <Gallery/>
-            <VideoComponent/>
-            <ReviewComponent/>
-            <RelatedServices/>
+            <Gallery images={images} />
+            <VideoComponent videoUrl={videoUrl || ''} />
+            <ReviewComponent />
+            <RelatedServices />
           </div>
 
           <div className="lg:w-1/3 w-full lg:pl-8 right">
-         <ServiceCard/>
+            <ServiceCard />
           </div>
         </div>
       </div>

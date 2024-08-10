@@ -60,9 +60,12 @@ const CreateService = () => {
       } else {
         throw new Error("Unexpected response format");
       }
-    } catch (err) {
+    } catch (err:any) {
+      console.log(err,'64')
+      setServiceImgs([]);
+      setImgPreviews([]);
       // Handle error
-      toast.error("An error occurred while creating the service.");
+      toast.error(err?.data);
       setLoading(false);
     }
   };

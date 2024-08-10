@@ -1,14 +1,17 @@
-"use client"
-import React, { useState } from 'react';
-import { FaImages, FaPlus, FaRegHeart } from 'react-icons/fa'; 
-import { FiMapPin } from 'react-icons/fi';
+"use client";
+import React, { useState } from "react";
+import { FaImages, FaPlus, FaRegHeart } from "react-icons/fa";
+import { FiMapPin } from "react-icons/fi";
 
-const ProductGallery = () => {
+const ProductGallery = ({ data }: any) => {
+  console.log(data)
+  const service = data?.data;
+
   const [showSlider, setShowSlider] = useState(false);
-  const [sliderImages, setSliderImages] = useState([]);
+  const [sliderImages, setSliderImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleSeeAllPhotos = (photos:any) => {
+  const handleSeeAllPhotos = (photos: string[]) => {
     setSliderImages(photos);
     setCurrentIndex(0);
     setShowSlider(true);
@@ -22,112 +25,97 @@ const ProductGallery = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + sliderImages.length) % sliderImages.length);
   };
 
-  const products = [
-    {
-      title: 'Wines',
-      imgSrc: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bgColor: 'bg-gray-50',
-      allPhotos: [
-        'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1504675099198-7023dd85f5a3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1571104508999-893933ded431?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-      ]
-    }
-  ];
+  if (!service) {
+    return <div>No service data available.</div>;
+  }
 
   return (
     <section className="w-full">
       <div className="mx-auto px-6 md:px-[7rem] py-8 w-full">
-      <h2 className="text-4xl font-semibold mb-4">Car Repair Services</h2>
-      <div className="flex justify-between items-center py-3">
-        <div className="flex items-center space-x-6">
-          <div>
-            <span className="bg-[#f8fcfd] text-blue-600 py-2 px-3">Car Wash</span>
+        <h2 className="text-4xl font-semibold mb-4">{service.service_name}</h2>
+        <div className="flex justify-between items-center py-3">
+          <div className="flex items-center space-x-6">
+            <div>
+              <span className="bg-[#f8fcfd] text-blue-600 py-2 px-3">{service.category.category_name}</span>
+            </div>
+            <div className="flex items-center text-gray-700">
+              <FiMapPin className="text-md mr-2" />
+              {service.location}
+            </div>
           </div>
-          <div className="flex items-center text-gray-700">
-            <FiMapPin className="text-md mr-2" />
-            Alabama, USA
+          <div className="border rounded-full text-black hover:text-white bg-white p-4 hover:bg-blue-600">
+            <FaRegHeart />
           </div>
         </div>
-        <div className="border circle-icon text-black hover:text-white bg-white p-4 hover:bg-blue-600">
-          <FaRegHeart />
-        </div>
-      </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
-          {products.map((product, index) => (
-            <div
-              key={index}
-              className={`col-span-1 sm:col-span-1 md:col-span-2 rounded-lg w-full`}
-            >
-              <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
-                <div className="relative rounded-l-lg overflow-hidden">
-                  <img
-                    src={product?.allPhotos[0]}
-                    alt={`${product.title} `}
-                    className="w-full h-auto md:h-[455px] object-cover rounded-lg"
-                  />
-                 <div>
-                 <button
-                    onClick={() => handleSeeAllPhotos(product.allPhotos)}
+          <div className="col-span-1 sm:col-span-1 md:col-span-2 rounded-lg w-full">
+            <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+              <div className="relative rounded-l-lg overflow-hidden">
+                <img
+                  src={service.service_img[0]}
+                  alt={service.service_name}
+                  className="w-full h-auto md:h-[455px] object-cover rounded-lg"
+                />
+                <div>
+                  <button
+                    onClick={() => handleSeeAllPhotos(service.service_img)}
                     className="absolute bottom-4 md:bottom-16 left-4 py-2 md:py-3 px-3 md:px-5 bg-white text-black text-center rounded-lg hover:bg-blue-700 flex items-center hover:text-white"
                   >
                     <FaImages className="mr-2" /> See All Photos
                   </button>
-                 </div>
                 </div>
-                <div className="grid md:grid-rows-2 gap-2 w-full">
+              </div>
+              <div className="grid md:grid-rows-2 gap-2 w-full">
+                <div className="relative overflow-hidden">
+                  <img
+                    src={service.service_img[1]}
+                    alt={service.service_name}
+                    className="w-full h-auto md:h-[250px] object-cover rounded-lg "
+                  />
+                  <button
+                    onClick={() => handleSeeAllPhotos(service.service_img)}
+                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="bg-white p-3 rounded-full text-black">
+                      <span className="text-2xl p-2">+</span>
+                    </div>
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
                   <div className="relative overflow-hidden">
                     <img
-                      src={product?.allPhotos[1]}
-                      alt={`${product.title} `}
-                      className="w-full h-auto md:h-[250px] object-cover rounded-lg "
+                      src={service.service_img[2]}
+                      alt={service.service_name}
+                      className="w-full h-auto md:h-[200px] object-cover rounded-lg"
                     />
-           <button
-                        onClick={() => handleSeeAllPhotos(product.allPhotos)}
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
-                      >
-                       <div className='bg-white p-3 circle-icon  text-black '>
-                   <span className='text-2xl p-2'> + </span>
-                       </div>
-                      </button>
+                    <button
+                      onClick={() => handleSeeAllPhotos(service.service_img)}
+                      className="absolute md:h-[200px] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
+                    >
+                      <div className="bg-white p-3 rounded-full text-black">
+                        <span className="text-2xl p-2">+</span>
+                      </div>
+                    </button>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={product?.allPhotos[2]}
-                        alt={`${product.title} `}
-                        className="w-full h-auto md:h-[200px] object-cover rounded-lg"
-                      />
-                     <button
-                        onClick={() => handleSeeAllPhotos(product.allPhotos)}
-                        className="absolute   md:h-[200px] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
-                      >
-                       <div className='bg-white p-3 circle-icon  text-black '>
-                   <span className='text-2xl p-2'> + </span>
-                       </div>
-                      </button>
-                    </div>
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={product?.allPhotos[3]}
-                        alt={`${product.title} `}
-                        className="w-full h-auto md:h-[200px] object-cover rounded-lg"
-                      />
-                        <button
-                        onClick={() => handleSeeAllPhotos(product.allPhotos)}
-                        className="absolute  md:h-[200px]  inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
-                      >
-                       <div className='bg-white p-3 circle-icon  text-black '>
-                   <span className='text-2xl p-2'> + </span>
-                       </div>
-                      </button>
-                    </div>
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={service.service_img[3]}
+                      alt={service.service_name}
+                      className="w-full h-auto md:h-[200px] object-cover rounded-lg"
+                    />
+                    <button
+                      onClick={() => handleSeeAllPhotos(service.service_img)}
+                      className="absolute md:h-[200px] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
+                    >
+                      <div className="bg-white p-3 rounded-full text-black">
+                        <span className="text-2xl p-2">+</span>
+                      </div>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
 
         {showSlider && (
