@@ -115,7 +115,7 @@ const ServiceCard = () => {
       </div>
 
       <div>
-        <a href="booking.html" className="btn bg-blue-600 text-white px-4 py-3 rounded w-full block text-center">Book Service</a>
+        <a href="booking.html" className=" bg-[#4c40ed] text-white px-4 py-3 rounded w-full block text-center">Book Service</a>
       </div>
     </div>
   );
