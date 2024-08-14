@@ -5,16 +5,11 @@ import 'react-calendar/dist/Calendar.css'; // Import default styles
  // Import the calendar styles
 import { useState } from 'react';
 import Calendar from 'react-calendar';
+import Appointment from '../UI/Appointment';
 
 
-
-
-const BookingPage = () => {
-    const [date, setDate] = useState(new Date());
-
-    const onChange = (newDate) => {
-        setDate(newDate);
-    };
+const BookingPage = ({ onNext }:any) => {
+ 
 
     return (
         <div className="py-6">
@@ -96,23 +91,11 @@ const BookingPage = () => {
                     </div>
                 </div>
 
-           <div>
-
-           <div>
-                    <Calendar
-                        onChange={onChange}
-                        value={date}
-                        className="custom-calendar" // Apply custom class
-                    />
-                </div>
-
-            <div></div>
-
-           </div>
-
 
 
             </div>
+        
+            <Appointment onNext={onNext} />
         </div>
     );
 };

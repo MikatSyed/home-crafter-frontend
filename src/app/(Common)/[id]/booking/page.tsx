@@ -30,7 +30,7 @@ const ServiceBooking = () => {
       {/* Page Content */}
       {page === 1 && (
         <div>
-         <BookingPage/>
+         <BookingPage onNext={() => setPage(2)}/>
          
           <button
             onClick={() => setPage(2)}

@@ -24,6 +24,8 @@ const ServiceDetails = ({ params }: IDProps) => {
         );
     }
 
+    
+
     return (
         <div>
             <BreadcrumbBar name="Service" subtitle="Service Details" />
