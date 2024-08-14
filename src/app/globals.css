@@ -56,3 +56,71 @@ body{
 }
 
 
+/* Apply custom styles to the Calendar */
+.react-calendar {
+  width: 100%;
+  max-width: 500px; /* Adjust as needed */
+  border: none !important; /* Remove border */
+  border-radius: 8px; /* Slight rounding for the calendar container */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);/* Shadow for a premium look */
+  background: white; /* Ensure the background is white */
+  font-family: 'Arial', sans-serif; /* Custom font */
+}
+
+/* Header Styles */
+.react-calendar__navigation button {
+  background: transparent;
+  border: none !important;
+  color: #4c40ed !important; /* Header color */
+  font-size: 1.25rem;
+}
+
+.react-calendar__navigation__label__labelText .react-calendar__navigation__label__labelText--from{
+  color: #4c40ed !important;
+}
+
+
+
+/* Day Tiles */
+.react-calendar__tile {
+  border-radius: 4px; /* Slightly rounded corners for tiles */
+  padding: 10px;
+  font-size: 0.875rem;
+  color: gray !important; /* Default text color */
+  text-decoration: none !important;
+}
+.react-calendar__tile--now{
+  background:#f0f0f0 !important;
+}
+
+/* Hover and Active Day Styles */
+.react-calendar__tile:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  cursor: pointer;
+}
+
+/* Selected Date Styles */
+.react-calendar__tile--active {
+  background-color: #4c40ed !important; /* Selected date background color */
+  color: white !important; /* Text color for selected date */
+  border-radius: 8px; /* Rounded corners for selected date */
+   /* Shadow for the selected date */
+}
+
+/* Styles for Active Dates in Range */
+.react-calendar__tile--hasActive {
+  background-color: #e0e0e0; /* Background for tiles with active dates */
+  color: gray; /* Text color for active dates */
+}
+
+/* Weekday Header Styles */
+.react-calendar__month-view__weekdays {
+  font-weight: 500;
+  color: gray; /* Weekday header color */
+}
+
+/* Weekend Day Styles */
+.react-calendar__month-view__days__day--weekend {
+  color: gray; /* Weekend day color */
+}
+
