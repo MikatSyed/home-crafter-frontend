@@ -34,10 +34,12 @@ interface ProviderInfoProps {
 }
 
 const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
-  const service = data?.data;
+  const service:any = data?.data;
   const images = service?.service_img || [];
   const videoUrl = service?.videoUrl;
-  console.log(service,'40')
+  const serviceId = service?.id;
+ 
+ 
 
 
   return (
@@ -175,7 +177,7 @@ const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
           </div>
 
           <div className="lg:w-1/3 w-full lg:pl-8 right">
-            <ServiceCard />
+            <ServiceCard  id={serviceId} />
           </div>
         </div>
       </div>

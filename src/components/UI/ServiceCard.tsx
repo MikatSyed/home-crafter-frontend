@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import React from 'react';
 import { FaStar, FaMapPin, FaCheckCircle, FaCar, FaWrench, FaClipboardCheck } from 'react-icons/fa';
 
@@ -39,7 +40,9 @@ const availability = [
   { day: 'Sunday', time: 'Closed', closed: true },
 ];
 
-const ServiceCard = () => {
+const ServiceCard = ({id}:any) => {
+
+
   return (
     <div className="p-4 border rounded-lg bg-white">
       <div className="p-3 rounded-lg mb-8">
@@ -115,7 +118,7 @@ const ServiceCard = () => {
       </div>
 
       <div>
-        <a href="booking.html" className=" bg-[#4c40ed] text-white px-4 py-3 rounded w-full block text-center">Book Service</a>
+        <Link href={`/${id}/booking`} className=" bg-[#4c40ed] text-white px-4 py-3 rounded w-full block text-center">Book Service</Link>
       </div>
     </div>
   );

@@ -97,7 +97,7 @@ const BlogDetails = () => {
                 <input type="text" className="w-full px-4 py-2 border rounded" placeholder="Name*" />
                 <input type="email" className="w-full px-4 py-2 border rounded" placeholder="Email*" />
               </div>
-              <textarea rows="6" className="w-full px-4 py-2 border rounded" placeholder="Message*"></textarea>
+              {/* <textarea rows="6" className="w-full px-4 py-2 border rounded" placeholder="Message*"></textarea> */}
               <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" type="submit">Post Comment</button>
             </form>
           </div>
