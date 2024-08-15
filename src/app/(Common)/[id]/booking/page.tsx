@@ -1,5 +1,6 @@
 "use client";
 import BookingPage from "@/components/pages/BookingPage";
+import BookingPayment from "@/components/pages/BookingPayment";
 import Stepper from "@/components/UI/Stepper";
 import React, { useState } from "react";
 
@@ -32,38 +33,15 @@ const ServiceBooking = () => {
         <div>
          <BookingPage onNext={() => setPage(2)}/>
          
-          <button
-            onClick={() => setPage(2)}
-            className="bg-blue-500 text-white py-2 px-4 rounded"
-          >
-            Next
-          </button>
+         
         </div>
       )}
 
       {page === 2 && (
         <div>
-          <h1 className="text-2xl font-bold mb-4">Payment</h1>
-          <p className="text-gray-600 mb-6">Select Payment Gateway</p>
-          <select className="block w-full p-3 border border-gray-300 rounded mb-6">
-            <option value="credit_card">Credit Card</option>
-            <option value="paypal">PayPal</option>
-            <option value="net_banking">Net Banking</option>
-          </select>
-          <div>
-            <button
-              onClick={() => setPage(1)}
-              className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
-            >
-              Back
-            </button>
-            <button
-              onClick={() => setPage(3)}
-              className="bg-blue-500 text-white py-2 px-4 rounded"
-            >
-              Next
-            </button>
-          </div>
+        <BookingPayment/>
+          
+         
         </div>
       )}
 
