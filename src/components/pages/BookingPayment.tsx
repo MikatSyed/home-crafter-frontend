@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BookingPayment = () => {
+const BookingPayment = ({ onNext }:any) => {
     return (
         <div className=" flex items-center justify-center p-6">
             <div className="max-w-3xl w-full  bg-[#f8fcfd]  rounded-lg overflow-hidden">
@@ -75,12 +75,13 @@ const BookingPayment = () => {
 
 <div className='flex mt-2'>
   <button
-    className="bg-[#4c40ed] text-white hover:text-[#4c40ed] border border-[#4c40ed] mt-4 py-3 px-24 rounded-lg hover:bg-white mr-4 transition-colors duration-300">
+    onClick={onNext}
+    className="bg-[#4c40ed] text-white hover:text-[#4c40ed] border border-[#4c40ed] mt-4 py-3 px-2 md:px-20  lg:px-24 rounded-lg hover:bg-white mr-4 transition-colors duration-300">
     Proceed to Pay $120
   </button>
   
   <button
-    className="bg-[#f8fcfd] text-[#4c40ed] hover:text-white mt-4 py-3 px-6 rounded-lg border border-[#4c40ed] hover:bg-[#4c40ed] transition-colors duration-300">
+    className="bg-[#f8fcfd] text-[#4c40ed] text-sm hover:text-white mt-4 py-3 px-6 rounded-lg border border-[#4c40ed] hover:bg-[#4c40ed] transition-colors duration-300">
     Skip
   </button>
 </div>
