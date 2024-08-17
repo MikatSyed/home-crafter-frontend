@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, FormEvent, ChangeEvent, FocusEvent } from 'react';
+import { useAddAvailbilityMutation, useAvailbilitiesQuery, useDeleteAvailbilityMutation } from '@/redux/api/availbility';
+import React, { useState, useEffect, FormEvent, ChangeEvent, FocusEvent } from 'react';
 
 // Define types for the state and slot
 type Day = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday" | "All day";
@@ -8,6 +9,10 @@ type AvailabilityState = {
 };
 
 const Availability: React.FC = () => {
+    const [addAvailbility] = useAddAvailbilityMutation(); // API mutation hook
+    const { data, isLoading } = useAvailbilitiesQuery(undefined);
+    const [deleteAvailbility] = useDeleteAvailbilityMutation()
+    
     const [availability, setAvailability] = useState<AvailabilityState>({
         Monday: [],
         Tuesday: [],
@@ -18,9 +23,28 @@ const Availability: React.FC = () => {
         Sunday: [],
         "All day": []
     });
-
+    console.log(availability);
+    
     const [selectedDay, setSelectedDay] = useState<Day | null>(null);
     const [inputValues, setInputValues] = useState<{ [key in Day]?: string }>({});
+
+    // Update availability state when data is fetched
+    useEffect(() => {
+        if (data && data.success) {
+            const fetchedAvailability = data.data;
+            setAvailability(prev => ({
+                ...prev,
+                Monday: fetchedAvailability.Monday || [],
+                Tuesday: fetchedAvailability.Tuesday || [],
+                Wednesday: fetchedAvailability.Wednesday || [],
+                Thursday: fetchedAvailability.Thursday || [],
+                Friday: fetchedAvailability.Friday || [],
+                Saturday: fetchedAvailability.Saturday || [],
+                Sunday: fetchedAvailability.Sunday || [],
+                "All day": fetchedAvailability["All day"] || []
+            }));
+        }
+    }, [data]);
 
     // Function to add a slot
     const addSlot = (day: Day, slot: string) => {
@@ -42,32 +66,22 @@ const Availability: React.FC = () => {
     };
 
     // Function to remove a slot
-    const removeSlot = (day: Day, index: number) => {
-        if (day === "All day") {
-            const slotToRemove = availability["All day"][index];
-            setAvailability(prev => {
-                const updatedAvailability = { ...prev };
-                Object.keys(updatedAvailability).forEach(d => {
-                    const key = d as Day;
-                    updatedAvailability[key] = updatedAvailability[key].filter(slot => slot !== slotToRemove);
-                });
-                return updatedAvailability;
-            });
-        } else {
-            setAvailability(prev => ({
-                ...prev,
-                [day]: prev[day].filter((_, i) => i !== index)
-            }));
-        }
-    };
-
+    const removeSlot = async (day: Day, index: number) => {
+        const slotToRemove = availability[day][index];
+        const data = {day:day,slot:slotToRemove}
+      
+    
+        // Call the deleteAvailbility mutation with correct parameters
+        await deleteAvailbility(data);
+      };
+      
+    
     // Function to handle adding slot
     const handleAddSlot = (day: Day) => {
         const value = inputValues[day];
         if (value) {
             const formattedSlot = formatTime(value);
             addSlot(day, formattedSlot);
-            console.log(`Added slot for ${day}: ${formattedSlot}`);
             setInputValues(prev => ({ ...prev, [day]: '' }));
         }
     };
@@ -82,9 +96,37 @@ const Availability: React.FC = () => {
     };
 
     // Handle form submit
-    const handleSubmit = (day: Day) => (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (day: Day) => async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        handleAddSlot(day);
+        
+        const value = inputValues[day];
+        if (value) {
+            const formattedSlot = formatTime(value);
+            
+            // Prepare the data in the required format for the API
+            const postData: { [key: string]: string[] } = {};
+            if (day === "All day") {
+                // When "All day" is selected, send all slots for all days
+                postData["All day"] = [formattedSlot];
+                Object.keys(availability).forEach((key) => {
+                    if (key !== "All day") {
+                        postData[key] = [...availability[key as Day], formattedSlot];
+                    }
+                });
+            } else {
+                postData[day] = [...availability[day], formattedSlot];
+            }
+            
+            // Make the API call to add availability
+            try {
+                console.log(postData, '105');
+                await addAvailbility(postData).unwrap();
+                handleAddSlot(day);
+            } catch (error) {
+                console.error("Failed to add availability:", error);
+            }
+        }
+        
         setSelectedDay(null);
     };
 
@@ -101,7 +143,6 @@ const Availability: React.FC = () => {
 
     // Handle input blur
     const handleBlur = (day: Day) => () => {
-        // Remove the slot if input loses focus and it's not empty
         if (inputValues[day]) {
             handleAddSlot(day);
         }
