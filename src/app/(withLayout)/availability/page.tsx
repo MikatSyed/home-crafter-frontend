@@ -1,4 +1,5 @@
 "use client";
+import Loader from '@/components/UI/Loader';
 import { useAddAvailbilityMutation, useAvailbilitiesQuery, useDeleteAvailbilityMutation } from '@/redux/api/availbility';
 import React, { useState, useEffect, FormEvent, ChangeEvent, FocusEvent } from 'react';
 
@@ -11,8 +12,9 @@ type AvailabilityState = {
 const Availability: React.FC = () => {
     const [addAvailbility] = useAddAvailbilityMutation(); // API mutation hook
     const { data, isLoading } = useAvailbilitiesQuery(undefined);
-    const [deleteAvailbility] = useDeleteAvailbilityMutation()
-    
+    const [deleteAvailbility] = useDeleteAvailbilityMutation();
+
+  
     const [availability, setAvailability] = useState<AvailabilityState>({
         Monday: [],
         Tuesday: [],
@@ -148,6 +150,11 @@ const Availability: React.FC = () => {
         }
         setSelectedDay(null);
     };
+
+    if(isLoading){
+        return <div>|<Loader/> </div>
+    }
+    
 
     return (
         <div className="max-w-3xl px-6 py-7">

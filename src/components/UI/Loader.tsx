@@ -15,3 +15,24 @@ const Loader = () => {
 };
 
 export default Loader;
+
+
+// components/UI/Loader.tsx
+// "use client";
+
+// import { FaSpinner } from "react-icons/fa";
+
+// const Loader = () => {
+//   return (
+//     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+//       <FaSpinner className="animate-spin text-[#4f46e5]" size={32} />
+//     </div>
+//   );
+// };
+
+// export default Loader;
+
+
+
+
+
