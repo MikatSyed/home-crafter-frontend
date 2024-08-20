@@ -4,13 +4,16 @@ import { FiMenu, FiX, FiChevronDown } from "react-icons/fi"; // Importing icons 
 import logo from "../../../public/assets/home (3).png";
 import Image from "next/image";
 import Link from "next/link";
+import { useLoggedUserQuery } from "@/redux/api/userApi";
 
 const Navbar = () => {
+  const { data, isLoading } = useLoggedUserQuery(undefined);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<{ [key: number]: boolean }>(
     {}
   );
 
+  const user = data?.data;
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
@@ -112,15 +115,26 @@ const Navbar = () => {
               <FiX className={`${isOpen ? "block" : "hidden"} h-6 w-6`} />
             </button>
           </div>
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="flex items-center space-x-2 relative">
+  <Link href="/profile">
+  <Image
+    src={user?.profileImg[0]}
+    alt="User Image"
+    className="rounded-full shadow-md transform hover:scale-105 transition-transform duration-200"
+    height={40}
+    width={40}
+  />
+  </Link>
+  <div>
+   
+      <div className="text-left">
+        <p className="text-sm font-medium m-0">{`${user?.fName} ${user?.lName}`}</p>
         
-            <button className="text-[#565666]  font-bold py-2 px-4 rounded">
-              Register
-            </button>
-            <button className="bg-[#4c40ed] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Login
-            </button>
-          </div>
+      </div>
+   
+  </div>
+</div>
+
         </div>
       </div>
       {/* Mobile menu, toggle classes based on menu state */}

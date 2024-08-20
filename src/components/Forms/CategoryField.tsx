@@ -17,7 +17,7 @@ const CategoryField = ({ name, label }: CategoryFieldProps) => {
   const CategoryOptions = Categories?.map((category: any) => {
     
     return {
-      label: category?.category_name,
+      label: category?.categoryName,
       value: category?.id,
     };
   });

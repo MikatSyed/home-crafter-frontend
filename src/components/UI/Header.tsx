@@ -3,19 +3,16 @@ import { FiMenu, FiX, FiBell } from 'react-icons/fi';
 import Image from 'next/image';
 import { TfiWorld } from 'react-icons/tfi';
 import Link from 'next/link';
-
-const demoUser = {
-  imageUrl: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg',
-  name: 'John Doe',
-  role: 'Administrator',
-};
-
+import { useLoggedUserQuery } from '@/redux/api/userApi';
+import { signOut } from 'next-auth/react';
+import { useClickAway } from 'react-use';
 interface HeaderProps {
   isSidebarOpen: boolean;
   onToggleSidebar: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
+  const { data, isLoading } = useLoggedUserQuery(undefined);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileButtonRef = useRef<HTMLButtonElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -24,9 +21,17 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
     setIsProfileOpen((prev) => !prev);
   };
 
-  const closeProfileMenu = () => {
-    setIsProfileOpen(false);
+  const handleSignOut = async () => {
+    await signOut();
+    setIsProfileOpen(false); // Close profile menu after sign out
   };
+
+  useClickAway(profileMenuRef, () => {
+    setIsProfileOpen(false);
+  });
+
+  const user = data?.data;
+
 
   return (
     <header className="z-10 shadow-md">
@@ -47,37 +52,39 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
           <button className="p-2 rounded-full hover:text-white bg-gray-100 text-black hover:bg-[#4f46e5]">
             <FiBell className="w-5 h-5" />
           </button>
-          <div className="relative" onBlur={closeProfileMenu}>
+          <div className="relative">
             <button
               onClick={toggleProfileMenu}
               ref={profileButtonRef}
               className="flex items-center space-x-2 focus:outline-none"
               tabIndex={0}
-              onBlur={closeProfileMenu}
             >
               <Image
-                src={demoUser.imageUrl}
+                src={user?.profileImg[0]}
                 alt="User Image"
                 className="rounded-full shadow-md transform hover:scale-105 transition-transform duration-200"
                 height={40}
                 width={40}
               />
               <div className="hidden md:block">
-                <p className="text-sm font-medium">{demoUser.name}</p>
-                <p className="text-xs text-gray-500">{demoUser.role}</p>
+                {isLoading ? (
+                  <p className="text-sm font-medium">Loading...</p>
+                ) : (
+                  <div className="text-left">
+                    <p className="text-sm font-medium m-0">{`${user?.fName} ${user?.lName}`}</p>
+                    <p className="text-xs text-gray-500 m-0">{user?.role}</p>
+                  </div>
+                )}
               </div>
             </button>
             {isProfileOpen && (
               <div
                 ref={profileMenuRef}
-                tabIndex={0}
                 className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg animate-slide-down"
-                onBlur={closeProfileMenu}
               >
                 <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
-               
                 <div className="border-t border-gray-200"></div>
-                <a href="#" className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
+                <p onClick={handleSignOut} className="block px-4 py-2 text-sm cursor-pointer text-red-600 hover:bg-gray-100">Logout</p>
               </div>
             )}
           </div>

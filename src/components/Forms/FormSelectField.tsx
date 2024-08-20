@@ -56,7 +56,7 @@ const FormSelectField = ({
           >
             {/* Add an empty option as a placeholder */}
             <option value="">
-              {"Select Role"} {/* Use the label or a default text */}
+              {"Select Category"} {/* Use the label or a default text */}
             </option>
             {options?.map((option) => (
               <option

@@ -5,6 +5,7 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { signIn } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
+import Spinner from "../UI/Spinner";
 
 interface LoginProps {
   callbackUrl?: string;
@@ -12,10 +13,13 @@ interface LoginProps {
 
 const LoginPage = ({ callbackUrl }: any) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: any) => {
+    setLoading(true);
     try {
       await signIn("home-crafter", {...data,callbackUrl,});
+      setLoading(false);
     } 
     catch (err: any) {
       toast(err?.data,
@@ -96,9 +100,11 @@ const LoginPage = ({ callbackUrl }: any) => {
               <div className="mt-5">
                 <button
                   type="submit"
-                  className="w-full flex justify-center bg-[#1475c6] text-white p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500"
+                  className={`w-full flex justify-center items-center bg-[#1475c6] text-white p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={loading}
                 >
-                  Login
+                    {loading ? <Spinner /> : 'Login'} 
+                
                 </button>
               </div>
             </Form>

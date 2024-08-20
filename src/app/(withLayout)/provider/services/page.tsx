@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { useServicesQuery } from "@/redux/api/servicesApi";
+import Link from "next/link";
 
 const MostPopularServices = () => {
-  const [activeTab, setActiveTab] = useState("active"); // State to track the active tab
+  const [activeTab, setActiveTab] = useState("Active"); // State to track the active tab
 
   // Fetch services data from Redux
   const { data } = useServicesQuery(undefined);
@@ -15,6 +16,7 @@ const MostPopularServices = () => {
   const filteredServices = data?.data?.filter(
     (service:any) => service.status === activeTab
   );
+  console.log(filteredServices)
 
   return (
     <div className="mx-auto px-6 bg-white py-7">
@@ -23,9 +25,10 @@ const MostPopularServices = () => {
           My Services
         </h2>
         <div>
-          <button className="text-[#4f46e5] hover:bg-[#4f46e5] inline-flex items-center hover:text-white px-4 py-2 rounded text-md border border-[#4f46e5]">
+         <Link href="/provider/services/create-service">
+         <button className="text-[#4f46e5] hover:bg-[#4f46e5] inline-flex items-center hover:text-white px-4 py-2 rounded text-md border border-[#4f46e5]">
             Add Service
-          </button>
+          </button></Link>
         </div>
       </div>
 
@@ -42,7 +45,7 @@ const MostPopularServices = () => {
         </button>
         <button
           onClick={() => setActiveTab("inactive")}
-          className={`px-4 py-2 ${
+          className={`px-4 py-2 ml-2 ${
             activeTab === "inactive"
               ? "bg-[#4f46e5] text-white"
               : "bg-white text-blue-600"
@@ -65,7 +68,7 @@ const MostPopularServices = () => {
                   <Image
                     className="img-fluid w-full rounded-md transition-transform duration-300 ease-in-out h-auto  md:h-[230px]"
                     alt="Service Image"
-                    src={service.service_img[0]}
+                    src={service.serviceImg[0]}
                     height={218}
                     width={328}
                   />
@@ -73,7 +76,7 @@ const MostPopularServices = () => {
               </a>
               <div className="fav-item absolute top-0 left-0 p-4 flex justify-between w-full">
                 <span className="text-sm bg-white px-3 py-1 hover:text-white text-[#665cf0] hover:bg-[#665cf0] rounded flex items-center">
-                  {service.category.category_name}
+                  {service.category.categoryName}
                 </span>
                 <div className="flex items-center">
                   <span className="rate ml-4 flex items-center bg-white px-3 py-1 rounded">
@@ -94,7 +97,7 @@ const MostPopularServices = () => {
             </div>
             <div className="service-content p-4">
               <h3 className="title text-xl font-bold">
-                <a href="service-details.html">{service.service_name}</a>
+                <a href="service-details.html">{service.serviceName}</a>
               </h3>
               <div className="flex items-center justify-between mt-2">
                 <p className="text-gray-500 flex items-center text-sm">

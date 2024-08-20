@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 const serviceSchema = yup.object().shape({
-  service_name: yup
+  serviceName: yup
     .string()
     .required("Service Name is required"),
   

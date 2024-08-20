@@ -32,10 +32,10 @@ const CreateCategory: React.FC<CreateCategoryFormProps> = ({ show, onClose }) =>
 
   const onSubmit = async (values: any) => {
     if (categoryImg) {
-      values.category_img = categoryImg.url;
+      values.categoryImg = categoryImg.url;
     }
     if (categoryIcon) {
-      values.category_icon = categoryIcon.url;
+      values.categoryIcon = categoryIcon.url;
     }
   
     
@@ -129,7 +129,7 @@ const CreateCategory: React.FC<CreateCategoryFormProps> = ({ show, onClose }) =>
           <Form submitHandler={onSubmit}>
             <div className="mb-4">
               <FormInput
-                name="category_name"
+                name="categoryName"
                 label="Category Name"
                 type="text"
               />

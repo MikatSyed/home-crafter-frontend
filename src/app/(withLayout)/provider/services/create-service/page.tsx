@@ -35,7 +35,7 @@ const CreateService = () => {
 
     values.price = parseInt(values.price);
     if (serviceImgs.length > 0) {
-      values.service_img = serviceImgs.map(img => img.url);
+      values.serviceImg = serviceImgs.map(img => img.url);
     }
 
     try {
@@ -135,7 +135,7 @@ const CreateService = () => {
           <div className="w-full">
             <Form submitHandler={onSubmit} resolver={yupResolver(serviceSchema)}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
-                <FormInput name="service_name" label="Service Name" type="text" />
+                <FormInput name="serviceName" label="Service Name" type="text" />
                 <FormInput name="price" label="Price" type="number" className="border border-gray-300 focus:border-[#1475c6] focus:ring-[#1475c6] transition ease-in duration-200" />
               </div>
 
