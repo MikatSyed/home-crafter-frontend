@@ -1,28 +1,39 @@
 "use client";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
-import Logo from "../../../public/assets/home (5).png"
-import Image from "next/image";
+import { signIn } from "next-auth/react";
+import toast, { Toaster } from "react-hot-toast";
+
 interface LoginProps {
   callbackUrl?: string;
 }
 
-const LoginPage = () => {
+const LoginPage = ({ callbackUrl }: any) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const onSubmit = async (values: any) => {
-    console.log(values, "Form Values");
+  const onSubmit = async (data: any) => {
     try {
-      // Handle form submission logic
-    } catch (err: any) {
-      console.error("Login error:", err);
+      await signIn("home-crafter", {...data,callbackUrl,});
+    } 
+    catch (err: any) {
+      toast(err?.data,
+        {
+          icon:  <span style={{color:"white"}}>❌</span>,
+          style: {
+            borderRadius: '10px',
+            background: 'red',
+            color: '#fff'
+          }
+        })
     }
   };
 
   return (
+    <div>
+       <Toaster  position="top-center"
+  reverseOrder={false} />
     <div className="flex justify-center items-center min-h-screen ">
       <div className="flex flex-col md:flex-row justify-center md:w-[80%] mt-11">
         <div className="hidden md:block md:flex md:w-1/2 flex-col items-center p-8 text-center">
@@ -56,7 +67,8 @@ const LoginPage = () => {
                 className="w-20 h-20 mb-4 md:hidden"
               /> */}
               <h3 className="font-semibold text-3xl text-gray-800">
-                Welcome to <span className="text-[#4f46e5]"> Home Crafter </span> 
+                Welcome to{" "}
+                <span className="text-[#4f46e5]"> Home Crafter </span>
               </h3>
             </div>
             <Form submitHandler={onSubmit}>
@@ -105,7 +117,6 @@ const LoginPage = () => {
         </div>
 
         <div className="md:hidden flex flex-col items-center text-center p-4">
-         
           <div className="bg-[#4f46e5] px-6 py-8 flex  rounded-xl items-center gap-6 text-white shadow-md">
             <img
               src="https://portal.tabedge.com/assets/earth-BeyVdefS.png"
@@ -121,6 +132,8 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+    </div>
+  
   );
 };
 

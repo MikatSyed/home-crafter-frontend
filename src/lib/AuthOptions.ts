@@ -1,7 +1,8 @@
-import { jwtHelpers } from "@/helpers/jwtHelpers";
+
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getNewAccessToken } from "../../services/getNewAccessToken";
+import { jwtHelpers } from "../../services/jwtHelpers";
 
 const apiUrl = process.env.NODE_ENV === 'production' ? 'http://localhost:6060/api/v1/auth/login' : 'http://localhost:6060/api/v1/auth/login';
 
@@ -10,7 +11,7 @@ export const authOptions: AuthOptions = {
     // Configure one or more authentication providers
     providers: [
         CredentialsProvider({
-            id: "home-crafters",
+            id: "home-crafter",
             name: "Credentials",
             type: "credentials",
             credentials: {

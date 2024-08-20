@@ -1,11 +1,8 @@
 "use client"
-// import { authKey } from "@/app/constants/storageKey";
 import { authOptions } from "@/lib/AuthOptions";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types";
-// import { getFromLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
-// import { getServerSession } from "next-auth";
-// import { getSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 
 
@@ -17,13 +14,11 @@ instance.defaults.timeout = 30000;
 // Add a request interceptor
 instance.interceptors.request.use(async function (config) {
     // Do something before request is sent
-    // const session : any = await getSession()
-    // console.log(session,'20');
-    // const accessToken = session?.token;
-    // console.log(accessToken,'accessToken');
-    // if(accessToken){
-    //     config.headers.Authorization = accessToken;
-    // }
+    const session : any = await getSession()
+    const accessToken = session?.token;
+    if(accessToken){
+        config.headers.Authorization = accessToken;
+    }
     return config;
   }, function (error) {
     // Do something with request error
@@ -44,7 +39,6 @@ instance.interceptors.response.use(function (response) {
     }
     return responseObject;
   }, function (error) {
-    console.log(error)
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     const responseObject:IGenericErrorResponse = {
