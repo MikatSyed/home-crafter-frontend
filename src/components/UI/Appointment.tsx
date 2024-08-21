@@ -38,7 +38,7 @@ const Appointment= () => {
         refetch();
     }, [date, data, refetch]);
 
-    const onChange = (newDate: Date) => {
+    const onChange = (newDate:any) => {
         setDate(newDate);
         const dayOfWeek = newDate.toLocaleDateString('en-US', { weekday: 'long' });
         console.log(`Selected Date: ${formatDateToISO(newDate)}, Day: ${dayOfWeek}`);

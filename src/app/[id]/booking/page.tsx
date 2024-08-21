@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Stepper from "@/components/UI/Stepper";
 import Checkout from "@/app/checkout/[id]/page";
 import BookingPage from "@/components/pages/BookingPage";
+import BookingDone from "@/app/booking-done/page";
 
 const ServiceBooking = () => {
   const router = useRouter();
@@ -51,8 +52,8 @@ const ServiceBooking = () => {
       {/* Page Content */}
       {pathname.includes("/checkout/") ? (
         <Checkout />
-      ) : pathname.includes("/success") ? (
-        <Checkout />
+      ) : pathname.includes("/booking-done") ? (
+        <BookingDone />
       ) : (
         <BookingPage />
       )}

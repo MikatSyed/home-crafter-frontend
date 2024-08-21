@@ -24,10 +24,7 @@ const Checkout = () => {
     },
   ];
 
-  const handleNext = () => {
-    router.push(`/success`);
-  };
-
+ 
   const handleStepChange = (step: number) => {
     if (step === 1) {
       router.push(`/${dynamicId}/booking`);
@@ -41,7 +38,7 @@ const Checkout = () => {
   return (
     <div className="max-w-full px-12 py-6 md:px-[8rem]">
       <Stepper steps={steps} currentStep={2} onStepClick={handleStepChange} />
-      <CheckoutPage onNext={handleNext} />
+      <CheckoutPage  />
     </div>
   );
 };
