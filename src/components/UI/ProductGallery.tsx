@@ -32,7 +32,7 @@ const ProductGallery = ({ data }: any) => {
   return (
     <section className="w-full">
       <div className="mx-auto px-6 md:px-[7rem] py-8 w-full">
-        <h2 className="text-4xl font-semibold mb-4">{service.service_name}</h2>
+        <h2 className="text-4xl font-semibold mb-4">{service.serviceName}</h2>
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-6">
             <div>
@@ -52,13 +52,13 @@ const ProductGallery = ({ data }: any) => {
             <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
               <div className="relative rounded-l-lg overflow-hidden">
                 <img
-                  src={service.service_img[0]}
-                  alt={service.service_name}
+                  src={service.serviceImg[0]}
+                  alt={service.serviceName}
                   className="w-full h-auto md:h-[455px] object-cover rounded-lg"
                 />
                 <div>
                   <button
-                    onClick={() => handleSeeAllPhotos(service.service_img)}
+                    onClick={() => handleSeeAllPhotos(service.serviceImg)}
                     className="absolute bottom-4 md:bottom-16 left-4 py-2 md:py-3 px-3 md:px-5 bg-white text-black text-center rounded-lg hover:bg-blue-700 flex items-center hover:text-white"
                   >
                     <FaImages className="mr-2" /> See All Photos
@@ -68,12 +68,12 @@ const ProductGallery = ({ data }: any) => {
               <div className="grid md:grid-rows-2 gap-2 w-full">
                 <div className="relative overflow-hidden">
                   <img
-                    src={service.service_img[1]}
-                    alt={service.service_name}
+                    src={service.serviceImg[1]}
+                    alt={service.serviceName}
                     className="w-full h-auto md:h-[250px] object-cover rounded-lg "
                   />
                   <button
-                    onClick={() => handleSeeAllPhotos(service.service_img)}
+                    onClick={() => handleSeeAllPhotos(service.serviceImg)}
                     className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
                   >
                     <div className="bg-white p-3 rounded-full text-black">
@@ -84,12 +84,12 @@ const ProductGallery = ({ data }: any) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
                   <div className="relative overflow-hidden">
                     <img
-                      src={service.service_img[2]}
-                      alt={service.service_name}
+                      src={service.serviceImg[2]}
+                      alt={service.serviceName}
                       className="w-full h-auto md:h-[200px] object-cover rounded-lg"
                     />
                     <button
-                      onClick={() => handleSeeAllPhotos(service.service_img)}
+                      onClick={() => handleSeeAllPhotos(service.serviceImg)}
                       className="absolute md:h-[200px] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
                     >
                       <div className="bg-white p-3 rounded-full text-black">
@@ -99,12 +99,12 @@ const ProductGallery = ({ data }: any) => {
                   </div>
                   <div className="relative overflow-hidden">
                     <img
-                      src={service.service_img[3]}
-                      alt={service.service_name}
+                      src={service.serviceImg[3]}
+                      alt={service.serviceName}
                       className="w-full h-auto md:h-[200px] object-cover rounded-lg"
                     />
                     <button
-                      onClick={() => handleSeeAllPhotos(service.service_img)}
+                      onClick={() => handleSeeAllPhotos(service.serviceImg)}
                       className="absolute md:h-[200px] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
                     >
                       <div className="bg-white p-3 rounded-full text-black">

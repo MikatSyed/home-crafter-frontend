@@ -16,7 +16,7 @@ export const bookingApi = baseApi.injectEndpoints({
         };
       },
     
-      providesTags: [tagTypes.slot,tagTypes.booking],
+      providesTags: [tagTypes.availbility,tagTypes.booking],
     }),
 
     booking: build.query({
@@ -25,7 +25,7 @@ export const bookingApi = baseApi.injectEndpoints({
         method: "GET"
        
       }),
-      providesTags:[tagTypes.slot ,tagTypes.booking]
+      providesTags:[tagTypes.availbility ,tagTypes.booking]
     }),
 
     addBooking: build.mutation({
@@ -34,7 +34,7 @@ export const bookingApi = baseApi.injectEndpoints({
           method: "POST",
           data
         }),
-        invalidatesTags:[tagTypes.slot,tagTypes.booking]
+        invalidatesTags:[tagTypes.availbility,tagTypes.booking]
       }),
 
     updateBooking: build.mutation({
@@ -43,7 +43,7 @@ export const bookingApi = baseApi.injectEndpoints({
         method: "PATCH",
         data:data.body
       }),
-      invalidatesTags:[tagTypes.slot , tagTypes.booking]
+      invalidatesTags:[tagTypes.availbility , tagTypes.booking]
     }),
 
     
@@ -53,7 +53,7 @@ export const bookingApi = baseApi.injectEndpoints({
         method: "DELETE"
        
       }),
-      invalidatesTags:[tagTypes.slot , tagTypes.booking]
+      invalidatesTags:[tagTypes.availbility , tagTypes.booking]
     }),
 
     getStatistics: build.query({

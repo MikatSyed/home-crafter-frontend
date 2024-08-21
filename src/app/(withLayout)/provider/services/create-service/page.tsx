@@ -76,7 +76,7 @@ const CreateService = () => {
         </div>
         <div className="relative">
           <div className="w-full">
-            <Form submitHandler={onSubmit} resolver={yupResolver(serviceSchema)}>
+            <Form submitHandler={onSubmit} resolver={yupResolver(serviceSchema)} >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
                 <FormInput name="serviceName" label="Service Name" type="text" />
                 <FormInput name="price" label="Price" type="number" className="border border-gray-300 focus:border-[#1475c6] focus:ring-[#1475c6] transition ease-in duration-200" />
@@ -114,12 +114,17 @@ const CreateService = () => {
                   Back
                 </button>
                 <button
-                  type="submit"
-                  className={`text-[#4f46e5] hover:bg-[#4f46e5] inline-flex items-center hover:text-white px-4 py-2 rounded text-md border border-[#4f46e5] ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  disabled={loading}
-                >
-                  {loading ? <Spinner /> : 'Create Service'}
-                </button>
+  type="submit"
+  className={`text-[#4f46e5] hover:bg-[#4f46e5] inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5] ${
+    loading
+      ? 'w-[150px] bg-[#4f46e5] text-white opacity-50 cursor-not-allowed inline-flex justify-center items-center'
+      : ''
+  }`}
+  disabled={loading}
+>
+  {loading ? <Spinner /> : 'Create Service'}
+</button>
+
               </div>
             </Form>
           </div>

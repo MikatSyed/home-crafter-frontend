@@ -2,93 +2,110 @@
 import { useAvailbilitiesQuery } from '@/redux/api/availbility';
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
+import Loader from './Loader';
+import { usePathname, useRouter } from 'next/navigation';
+import { useLoggedUserQuery } from '@/redux/api/userApi';
+import { useAddBookingMutation, useCheckAvailableSlotQuery } from '@/redux/api/bookingApi';
 
-const Appointment = ({ onNext }) => {
-    const { data, isLoading } = useAvailbilitiesQuery(undefined);
-    const [date, setDate] = useState(new Date());
+
+
+const Appointment= () => {
+    const {push} = useRouter();
+    const pathname = usePathname();
+    const todayDate = new Date();
+    const [date, setDate] = useState<Date>(todayDate);
     const [availableTimes, setAvailableTimes] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
+    const { data, isLoading, refetch } = useAvailbilitiesQuery(undefined);
+    const { data: userData } = useLoggedUserQuery(undefined);
+    const [addBooking] = useAddBookingMutation();
+    const formattedDate = formatDateToISO(date);
+    const { data: checkAvailableSlotData } = useCheckAvailableSlotQuery(formattedDate);
+
+    const serviceId = pathname?.split('/')[1]; 
+    const userId = userData?.data?.id;
+
+    // Extract booked times from API response
+    const bookedTimes = checkAvailableSlotData?.data?.map((slot: any) => slot.Time) || [];
 
     useEffect(() => {
         if (data) {
-            // Extract the day of the week from the selected date
             const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
-
-            // Get available times for the selected day
             const timesForDay = data.data[dayOfWeek] || [];
             setAvailableTimes(timesForDay);
-            setSelectedTime(null); // Reset the selected time when the date changes
+            setSelectedTime(null);
         }
-    }, [date, data]);
+        refetch();
+    }, [date, data, refetch]);
 
-    // Handle the change of date from the calendar
-    const onChange = (newDate) => {
+    const onChange = (newDate: Date) => {
         setDate(newDate);
-
-        // Log the selected date and day
-        const selectedDate = newDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
         const dayOfWeek = newDate.toLocaleDateString('en-US', { weekday: 'long' });
-
-        console.log(`Selected Date: ${selectedDate}, Day: ${dayOfWeek}`);
+        console.log(`Selected Date: ${formatDateToISO(newDate)}, Day: ${dayOfWeek}`);
     };
 
-    // Handle time slot selection
-    const onTimeSelect = (time) => {
-        setSelectedTime(time);
-
-        // Log the selected time along with the day
-        const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
-        console.log(`Selected Time: ${time}, Day: ${dayOfWeek}`);
+    const onTimeSelect = (time: string) => {
+        if (!bookedTimes.includes(time)) {
+            setSelectedTime(time);
+        }
     };
 
-    // Format the selected date for display
-    const formattedDate = date.toLocaleDateString('en-US', {
-        weekday: 'long',
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric'
-    });
+    function formatDateToISO(date: Date): string {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}T00:00:00.000Z`;
+    }
+
+    const handleBooking = async () => {
+        if (date && selectedTime) {
+            const selectedDate = formatDateToISO(date);
+            const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
+            console.log(`Booking Appointment - Date: ${selectedDate}, Day: ${dayOfWeek}, Time: ${selectedTime}`);
+            try {
+                const res = await addBooking({ bookingDate: selectedDate, day: dayOfWeek, time: selectedTime, serviceId, userId }).unwrap();
+        
+                if (res?.data) {
+                    // Redirect to checkout page with booking ID
+                    push(`/checkout/${res?.data?.id}`);
+                }
+                // onNext()
+            
+            } catch (error) {
+                console.error('Error booking appointment:', error);
+            }
+        }
+    };
 
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <Loader />;
     }
 
     return (
         <div className="md:flex md:space-x-6 mt-6 py-8">
-            {/* Calendar Section */}
             <div>
                 <h6 className="text-lg font-semibold mb-5">Appointment Date</h6>
-                <Calendar
-                    onChange={onChange}
-                    value={date}
-                    className="custom-calendar"
-                />
-                <div className="mt-4">
-                    <p className="text-gray-700">
-                        <strong>Selected Date:</strong> {formattedDate}
-                    </p>
-                </div>
+                <Calendar onChange={onChange} value={date} className="custom-calendar" />
             </div>
-
-            {/* Time Selection Section */}
             <div className="md:px-12 py-4 md:py-0">
                 <h6 className="text-lg font-semibold mb-5">Appointment Time</h6>
                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-4">
                     {availableTimes.length > 0 ? (
                         availableTimes.map((time, index) => (
                             <div
-                                key={index}
-                                onClick={() => onTimeSelect(time)}
-                                className={`border border-gray-200 shadow-sm flex items-center justify-center px-2 py-4 rounded-lg font-medium text-sm cursor-pointer ${
-                                    selectedTime === time ? 'bg-[#4c40ed] text-white' : 'bg-[#f8fcfd] text-gray-600 hover:text-white hover:bg-[#4c40ed]'
-                                }`}
-                            >
-                                {time}
-                            </div>
+    key={index}
+    onClick={() => !bookedTimes.includes(time) && onTimeSelect(time)}
+    className={`border border-gray-200 shadow-sm flex items-center justify-center px-2 py-4 rounded-lg font-medium text-sm ${
+        bookedTimes.includes(time)
+            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            : selectedTime === time
+            ? 'bg-[#4c40ed] text-white'
+            : 'bg-[#f8fcfd] text-gray-600 hover:text-white hover:bg-[#4c40ed] cursor-pointer'
+    }`}
+    aria-disabled={bookedTimes.includes(time)}
+>
+    {time}
+</div>
                         ))
                     ) : (
                         <div className="col-span-full text-center py-10">
@@ -98,14 +115,20 @@ const Appointment = ({ onNext }) => {
                         </div>
                     )}
                 </div>
-
-                {/* Action Buttons */}
                 {availableTimes.length > 0 && (
                     <div className="flex justify-end mt-6 space-x-4">
                         <button className="bg-gray-200 text-gray-700 py-2 px-4 rounded-md shadow-sm hover:bg-gray-300">
                             Cancel
                         </button>
-                        <button onClick={onNext} className="bg-[#4c40ed] text-white py-3 px-4 rounded-md shadow-sm hover:bg-blue-600">
+                        <button
+                            onClick={handleBooking}
+                            className={`py-3 px-4 rounded-md shadow-sm ${
+                                date && selectedTime
+                                    ? 'bg-[#4c40ed] text-white hover:bg-blue-600 cursor-pointer'
+                                    : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                            }`}
+                            disabled={!date || !selectedTime}
+                        >
                             Book Appointment
                         </button>
                     </div>

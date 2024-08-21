@@ -97,7 +97,7 @@ const MostPopularServices = () => {
                   <Image
                     className="img-fluid w-full rounded-md transition-transform duration-300 ease-in-out h-auto  md:h-[220px]"
                     alt="Service Image"
-                    src={service.service_img[0]}
+                    src={service.serviceImg[0]}
                     height={218}
                     width={328}
                   />
@@ -105,7 +105,7 @@ const MostPopularServices = () => {
 
                 <div className="fav-item absolute top-0 left-0 p-4 flex justify-between w-full">
                   <span className="flex items-center justify-center text-sm bg-white p-2 hover:text-white text-[#665cf0] hover:bg-[#665cf0] rounded">
-                    {service?.category?.category_name}
+                    {service?.category?.categoryName}
                   </span>
                   <div className="flex items-center justify-center border rounded-full text-black hover:text-white bg-white w-10 h-10 hover:bg-blue-600">
                     <FaRegHeart className="w-4 h-4" />
@@ -124,7 +124,7 @@ const MostPopularServices = () => {
               </div>
               <div className="service-content p-4">
                 <h3 className="title text-xl font-bold">
-                  <a href="service-details.html">{service.service_name}</a>
+                  <a href="service-details.html">{service.serviceName}</a>
                 </h3>
                 <div className="flex items-center justify-between mt-2">
                   <p className="text-gray-500 flex items-center">

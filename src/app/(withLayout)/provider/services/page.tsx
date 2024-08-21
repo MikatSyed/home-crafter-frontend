@@ -16,7 +16,7 @@ const MostPopularServices = () => {
   const filteredServices = data?.data?.filter(
     (service:any) => service.status === activeTab
   );
-  console.log(filteredServices)
+  
 
   return (
     <div className="mx-auto px-6 bg-white py-7">
@@ -34,9 +34,9 @@ const MostPopularServices = () => {
 
       <div className="mb-6">
         <button
-          onClick={() => setActiveTab("active")}
+          onClick={() => setActiveTab("Active")}
           className={`px-4 py-2 ${
-            activeTab === "active"
+            activeTab === "Active"
               ? "bg-[#4f46e5] text-white"
               : "bg-white text-blue-600"
           } border rounded-l-md`}
@@ -44,9 +44,9 @@ const MostPopularServices = () => {
           Active Services
         </button>
         <button
-          onClick={() => setActiveTab("inactive")}
+          onClick={() => setActiveTab("Inactive")}
           className={`px-4 py-2 ml-2 ${
-            activeTab === "inactive"
+            activeTab === "Inactive"
               ? "bg-[#4f46e5] text-white"
               : "bg-white text-blue-600"
           } border rounded-r-md`}
@@ -87,7 +87,7 @@ const MostPopularServices = () => {
               <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
                 <a href="providers.html" className="flex items-center">
                   <img
-                    src={service.category.category_icon}
+                    src={service.category.categoryIcon}
                     className="avatar w-10 h-10 rounded-full"
                     alt="User"
                   />

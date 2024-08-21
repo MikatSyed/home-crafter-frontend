@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 import Appointment from '../UI/Appointment';
 
 
-const BookingPage = ({ onNext }:any) => {
+const BookingPage = () => {
  
 
     return (
@@ -95,7 +95,7 @@ const BookingPage = ({ onNext }:any) => {
 
             </div>
         
-            <Appointment onNext={onNext} />
+            <Appointment  />
         </div>
     );
 };

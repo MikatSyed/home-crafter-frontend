@@ -18,13 +18,13 @@ import ServiceCard from "./ServiceCard";
 
 // Define the types for the service data
 interface ServiceData {
-  service_name: string;
+  serviceName: string;
   description: string;
   price: number;
   location: string;
   duration: string;
   videoUrl: string;
-  service_img: string[];
+  serviceImg: string[];
 }
 
 interface ProviderInfoProps {
@@ -35,7 +35,7 @@ interface ProviderInfoProps {
 
 const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
   const service:any = data?.data;
-  const images = service?.service_img || [];
+  const images = service?.serviceImg || [];
   const videoUrl = service?.videoUrl;
   const serviceId = service?.id;
  
