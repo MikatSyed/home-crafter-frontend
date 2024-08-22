@@ -9,7 +9,7 @@ import BookingDone from "@/app/booking-done/page";
 const ServiceBooking = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const dynamicId = pathname?.split('/')[1]; // Extract dynamicId from URL
+  const dynamicId = pathname?.split('/')[2]; // Extract dynamicId from URL
 
   const steps = [
     {
@@ -51,7 +51,7 @@ const ServiceBooking = () => {
 
       {/* Page Content */}
       {pathname.includes("/checkout/") ? (
-        <Checkout />
+        <Checkout params={{ id: dynamicId }} /> 
       ) : pathname.includes("/booking-done") ? (
         <BookingDone />
       ) : (

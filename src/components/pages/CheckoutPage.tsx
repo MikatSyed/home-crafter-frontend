@@ -1,108 +1,173 @@
-"use client"
+import React, { useCallback, useState } from "react";
+import Shipping from "../UI/Shipping";
+import { useInitialPaymentMutation } from "@/redux/api/paymentApi";
+import { useRouter } from "next/navigation";
 
-import { useRouter } from 'next/navigation';
-import React from 'react';
-import Shipping from '../UI/Shipping';
+const CheckoutPage = ({ data }: any) => {
+  const {push} = useRouter();
+  const [shippingData, setShippingData] = useState({
+    address: "",
+    country: "",
+    state: "",
+    city: "",
+    zipCode: "",
+  });
 
-const CheckoutPage = () => {
-    const {push} = useRouter()
-    const handleCheckOut = ()=>{
-        push("/booking-done")
+  const [errors, setErrors] = useState({
+    address: "",
+    country: "",
+    state: "",
+    city: "",
+    zipCode: "",
+  });
+
+  const [initialPayment] = useInitialPaymentMutation();
+
+  const user = data?.data?.user;
+  const service = data?.data?.service;
+  const date = data?.data?.bookingDate;
+  const bookingId = data?.data?.id;
+  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const time = data?.data?.Time;
+  const total = service?.price;
+
+  const validateFields = () => {
+    const newErrors = {
+      address: shippingData.address ? "" : "Address is required.",
+      country: shippingData.country ? "" : "Country is required.",
+      state: shippingData.state ? "" : "State is required.",
+      city: shippingData.city ? "" : "City is required.",
+      zipCode: shippingData.zipCode ? "" : "Zip Code is required.",
+    };
+    setErrors(newErrors);
+
+    return !Object.values(newErrors).some((error) => error);
+  };
+
+  const handleCheckOut = async () => {
+    if (validateFields()) {
+      const checkoutData = {
+        amount: total,
+        ...shippingData,
+        bookingId,
+      };
+
+      const res = await initialPayment(checkoutData).unwrap();
+      console.log(res)
+      if(res?.data){
+        push(res?.data);
+      }
+    } else {
+      console.log("Please fill out all the fields.");
     }
-    
-    return (
-        <div >
-        <div className="flex flex-col md:flex-row">
-          {/* Checkout Form Section */}
-          <div className="w-full  mt-6">
-           <Shipping/>
+  };
 
-          </div>
+  const handleShippingDataChange = useCallback((data: any) => {
+    setShippingData(data);
+  }, []);
+  return (
+    <div>
+      <div className="flex flex-col md:flex-row">
+        {/* Checkout Form Section */}
+        <div className="w-full mt-6">
+        <Shipping
+            user={user}
+            shippingData={shippingData}
+            errors={errors}
+            onShippingDataChange={handleShippingDataChange}
+          />
+        </div>
 
-
-
-
-      
-          {/* Booking Summary Section */}
-          <div className="w-full rounded-lg mt-6">
-                <h2 className="text-xl font-bold text-gray-600 pb-4">Booking Summary</h2>
-            <div className="w-full bg-[#f8fcfd]  rounded-lg overflow-hidden">
-             
-              <div className="p-8">
-                <div className="flex items-center mb-6">
-                  <img
-                    src="https://truelysell.dreamstechnologies.com/html/template/assets/img/booking.jpg"
-                    alt="Car Wash"
-                    className="w-12 h-12 mr-4"
-                  />
-                  <div>
-                    <p className="text-gray-800 text-xl font-semibold">Car Wash</p>
-                    <p className="text-gray-600">Car Repair Services</p>
-                  </div>
+        {/* Booking Summary Section */}
+        <div className="w-full md:w-[85%] rounded-lg mt-6 md:pl-8">
+          <h2 className="text-xl font-bold text-gray-600 pb-4">
+            Booking Summary
+          </h2>
+          <div className="w-full bg-[#f8fcfd] rounded-lg overflow-hidden">
+            <div className="p-8">
+              <div className="flex items-center mb-6">
+                <img
+                  src={service?.serviceImg[0]}
+                  alt="Car Wash"
+                  className="w-12 h-12 mr-4"
+                />
+                <div>
+                  <p className="text-gray-800 text-xl font-semibold">
+                    {service?.category?.categoryName}
+                  </p>
+                  <p className="text-gray-600">{service?.serviceName}</p>
                 </div>
-      
-                <div className="border-t border-gray-200 pt-4 mb-4">
-                  <div className="flex justify-between mb-2">
-                    <p className="text-gray-700">Rating</p>
-                    <p className="text-gray-700 font-semibold">4.9 (255 reviews)</p>
-                  </div>
-                  <div className="flex justify-between mb-2">
-                    <p className="text-gray-700">Location</p>
-                    <p className="text-gray-700 font-semibold">Alabama, USA</p>
-                  </div>
-                  <div className="flex justify-between mb-2">
-                    <p className="text-gray-700">Date</p>
-                    <p className="text-gray-700 font-semibold">07/09/2023</p>
-                  </div>
-                  <div className="flex justify-between mb-4">
-                    <p className="text-gray-700">Time</p>
-                    <p className="text-gray-700 font-semibold">12:30 PM - 01:00 PM</p>
-                  </div>
+              </div>
+
+              <div className="border-t border-gray-200 pt-4 mb-4">
+                <div className="flex justify-between mb-2">
+                  <p className="text-gray-700">Rating</p>
+                  <p className="text-gray-700 font-semibold">
+                    4.9 (255 reviews)
+                  </p>
                 </div>
-      
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="flex justify-between mb-4">
-                    <p className="text-gray-700">Service Provider</p>
-                    <p className="text-gray-700 font-semibold">Thomas Herzberg</p>
-                  </div>
-                  <div className="flex justify-between mb-4">
-                    <p className="text-gray-700">Subtotal</p>
-                    <p className="text-gray-700 font-semibold">$150.00</p>
-                  </div>
-                  <div className="flex justify-between mb-4">
-                    <p className="text-gray-700">Coupon Discount</p>
-                    <p className="text-green-600 font-semibold">- $5.00</p>
-                  </div>
-                  <div className="flex justify-between mb-4">
-                    <p className="text-gray-700">Service Charges</p>
-                    <p className="text-gray-700 font-semibold">$3.00</p>
-                  </div>
-                  <div className="flex justify-between text-lg font-semibold mt-4">
-                    <p className="text-gray-800">Total</p>
-                    <p className="text-gray-800">$148.00</p>
-                  </div>
+                <div className="flex justify-between mb-2">
+                  <p className="text-gray-700">Location</p>
+                  <p className="text-gray-700 font-semibold">
+                    {service?.location}
+                  </p>
                 </div>
-      
-                <div className="flex mt-2">
-                  <button
-                    onClick={handleCheckOut}
-                    className="flex-1 bg-indigo-600 text-white hover:text-indigo-600 border border-indigo-600 py-3 rounded-lg hover:bg-white transition-colors duration-300 mr-4"
-                  >
-                    Proceed to Pay $120
-                  </button>
-                  <button
-                    className="flex-1 bg-white text-indigo-600 hover:text-white border border-indigo-600 py-3 rounded-lg hover:bg-indigo-600 transition-colors duration-300"
-                  >
-                    Skip
-                  </button>
+                <div className="flex justify-between mb-2">
+                  <p className="text-gray-700">Date</p>
+                  <p className="text-gray-700 font-semibold">
+                    {formattedDate}
+                  </p>
+                </div>
+                <div className="flex justify-between mb-4">
+                  <p className="text-gray-700">Time</p>
+                  <p className="text-gray-700 font-semibold">{time}</p>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-200 pt-4">
+                <div className="flex justify-between mb-4">
+                  <p className="text-gray-700">Service Provider</p>
+                  <p className="text-gray-700 font-semibold">
+                    Thomas Herzberg
+                  </p>
+                </div>
+                <div className="flex justify-between mb-4">
+                  <p className="text-gray-700">Subtotal</p>
+                  <p className="text-gray-700 font-semibold">$0.00</p>
+                </div>
+
+                <div className="flex justify-between mb-4">
+                  <p className="text-gray-700">Service Charges</p>
+                  <p className="text-gray-700 font-semibold">${total}</p>
+                </div>
+                <div className="flex justify-between text-lg font-semibold mt-4">
+                  <p className="text-gray-800">Total</p>
+                  <p className="text-gray-800">${total}</p>
                 </div>
               </div>
             </div>
           </div>
+          <div className="flex my-5">
+            <button
+              onClick={handleCheckOut}
+              className="bg-[#4c40ed] text-semibold text-white border border-[#4c40ed] py-3 px-10 rounded-lg flex items-center justify-center hover:scale-105 transition-all duration-300 ease-in-out w-full sm:w-auto text-center mr-4"
+            >
+              Proceed to Pay ${total}
+            </button>
+            <button className="bg-[#f8fcfd] text-[#4c40ed] text-bold text-sm border border-[#4c40ed] py-3 px-8 rounded-lg flex items-center justify-center hover:scale-105 transition-all duration-300 ease-in-out w-full sm:w-auto text-center">
+              Skip
+            </button>
+          </div>
+        
         </div>
       </div>
-      
-    );
+    </div>
+  );
 };
 
 export default CheckoutPage;
