@@ -7,13 +7,13 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import { useSignupMutation } from "@/redux/api/authApi";
 import { TiTickOutline } from "react-icons/ti";
-import ImageUpload from "@/components/UI/ImageUpload";
 import Spinner from "@/components/UI/Spinner";
+import SingleImageUpload from "../UI/SingleImageUpload";
 
 const SignupPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [profileImg, setProfileImg] = useState<{ id: number; url: string } | null>(null);
-  const [imgPreview, setImgPreview] = useState<string | null>(null); // Add imgPreview state
+  const [imgPreview, setImgPreview] = useState<string | null>(null); 
   const [loading, setLoading] = useState<boolean>(false);
 
   const [signup] = useSignupMutation();
@@ -95,10 +95,10 @@ const SignupPage = () => {
                 </div>
               </div>
 
-              <ImageUpload
+              <SingleImageUpload
                 label="Upload Profile"
-                imgPreview={imgPreview} // Pass imgPreview state
-                setImgPreview={setImgPreview} // Pass setImgPreview state updater
+                imgPreview={imgPreview} 
+                setImgPreview={setImgPreview} 
                 onImageChange={setProfileImg}
               />
 

@@ -19,6 +19,13 @@ function Shipping({ user, shippingData, errors, onShippingDataChange }: any) {
     GetCountries().then((result: any) => {
       setCountryList(result);
     });
+    if (countryId) {
+      GetState(countryId).then((result: any) => {
+        setStateList(result);
+        setStateId(0);
+        setCityList([]);
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -61,7 +68,7 @@ function Shipping({ user, shippingData, errors, onShippingDataChange }: any) {
             id="name"
             type="text"
             className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 transition duration-200"
-            value={`${user?.fName} ${user?.lName}`}
+            value={`${user?.fName} ${user?.lName} || ""`}
             disabled
           />
         </div>
@@ -74,7 +81,7 @@ function Shipping({ user, shippingData, errors, onShippingDataChange }: any) {
             id="email"
             type="email"
             className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 transition duration-200"
-            value={user?.email}
+            value={user?.email || ""}
             disabled
           />
         </div>
@@ -87,7 +94,7 @@ function Shipping({ user, shippingData, errors, onShippingDataChange }: any) {
             id="phone"
             type="tel"
             className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 transition duration-200"
-            value={user?.contactNo}
+            value={user?.contactNo || ""}
             disabled
           />
         </div>

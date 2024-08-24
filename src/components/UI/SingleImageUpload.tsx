@@ -13,7 +13,7 @@ interface ImageUploadProps {
   setImgPreview: React.Dispatch<React.SetStateAction<string | null>>; // Add setImgPreview prop
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label, imgPreview, setImgPreview }) => {
+const SingleImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label, imgPreview, setImgPreview }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -47,14 +47,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label, imgPrev
   };
 
   return (
-    <div className="flex flex-col gap-1 w-full h-full rounded-md">
+    <div className="flex flex-col gap-1 w-full h-full  rounded-md">
       {label && (
         <span className="mr-2 font-medium text-gray-500 text-sm">
           {label}
         </span>
       )}
       <button
-        className="w-full rounded-md text-4xl lg:text-5xl md:mt-2 flex flex-col items-center justify-center text-gray-400 py-6 border border-dashed hover:text-[#1475c6] hover:border-[#1475c6] transition ease-in duration-300"
+        className="w-full rounded-md text-4xl lg:text-5xl md:mt-2 flex flex-col items-center justify-center text-gray-400 py-10 border border-dashed hover:text-[#1475c6] hover:border-[#1475c6] transition ease-in duration-300"
         onClick={handleClick}
         type="button"
       >
@@ -97,4 +97,4 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label, imgPrev
   );
 };
 
-export default ImageUpload;
+export default SingleImageUpload;

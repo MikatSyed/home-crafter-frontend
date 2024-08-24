@@ -42,17 +42,7 @@ const ProviderCategory: React.FC = () => {
     setShowUpdateModal(true);
   };
 
-  const handleClick = ()=>{
-    toast("Category created successfully", { // Show success toast
-      icon: <span style={{ marginRight: -8, fontSize: 22 }}><TiTickOutline/></span>,
-      style: {
-        borderRadius: "10px",
-        background: "#4f46e5",
-        color: "#fff",
-      },
-      duration: 2000, // Show toast for 2 seconds
-    });
-  }
+
 
   return (
     <>
@@ -103,7 +93,7 @@ const ProviderCategory: React.FC = () => {
             </div>
           </div>
         ))}
-        <button onClick={handleClick}>Toast</button>
+     
       </div>
 
       <CreateCategory
