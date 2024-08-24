@@ -1,7 +1,24 @@
+"use client"
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
+import Loader from '@/components/UI/Loader';
+import { useBlogQuery } from '@/redux/api/blogApi';
 import React from 'react';
 
-const BlogDetails = () => {
+type IDProps = {
+  params: any;
+};
+
+
+const BlogDetails = ({ params }: IDProps) => {
+  const { id } = params;
+  console.log(id)
+  const {data,isLoading} = useBlogQuery(id);
+  console.log(data)
+  const blog = data?.data;
+  console.log(blog)
+  if(isLoading) {
+  return <Loader/>
+}
     return (
         <div>
           <BreadcrumbBar name="Blog" subtitle="Blog Details"/>
@@ -10,24 +27,26 @@ const BlogDetails = () => {
         <div className="lg:w-2/3 w-full mb-8 lg:mb-0">
           <div className="mb-6">
             <ul className="flex space-x-2 mb-2">
-              <li><span className="bg-blue-100 text-blue-500 px-2 py-1 rounded">Construction</span></li>
+              <li><span className="bg-blue-100 text-blue-500 px-2 py-1 rounded">{blog?.category?.categoryName}</span></li>
             </ul>
-            <h3 className="text-3xl font-bold mb-4">Lorem ipsum dolor sit amet, eiusmod tempor ut labore et dolore magna aliqua.</h3>
+            <h3 className="text-3xl font-bold mb-4">{blog?.title}</h3>
             <div className="flex items-center space-x-4 text-gray-500 mb-4">
-              <span><i className="feather-calendar mr-1"></i>28 Sep 2023</span>
+              <span><i className="feather-calendar mr-1"></i>  {new Date(blog.createdAt).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })}</span>
               <div className="flex items-center space-x-2">
-                <img src="https://truelysell.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg" alt="Post Author" className="w-8 h-8 rounded-full" />
-                <span>Admin</span>
+                <img src={blog?.user?.profileImg[0]} alt="Post Author" className="w-8 h-8 rounded-full" />
+                <span>{blog?.user?.role}</span>
               </div>
             </div>
           </div>
 
           <div className="mb-6">
-            <img className="w-full h-auto rounded-lg mb-4" src="https://truelysell.dreamstechnologies.com/html/template/assets/img/blog/blog-04.jpg" alt="Post Image" />
+            <img className="w-full h-auto rounded-lg mb-4" src={blog?.blogImg[0]} alt="Post Image" />
             <div className="space-y-4 text-gray-700 leading-relaxed">
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-              <p className="text-gray-600">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+              <p className='text-justify'>{blog?.content}</p>
             </div>
           </div>
 
@@ -113,7 +132,7 @@ const BlogDetails = () => {
 
           <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm mb-6">
             <h4 className="text-lg font-semibold mb-4">About Me</h4>
-            <img src="https://truelysell.dreamstechnologies.com/html/template/assets/img/profile.jpg" alt="User" className="w-full h-auto rounded mb-4" />
+            <img src={blog?.user?.profileImg[0]} alt="User" className="w-full h-auto rounded mb-4" />
             <p className="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
             <a href="#" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">About Author</a>
           </div>
