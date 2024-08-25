@@ -7,6 +7,7 @@ import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAddCategoryMutation } from '@/redux/api/categoryApi';
 import { TiTickOutline } from 'react-icons/ti';
+import Spinner from './Spinner';
 
 
 interface CreateCategoryFormProps {
@@ -199,19 +200,19 @@ const CreateCategory: React.FC<CreateCategoryFormProps> = ({ show, onClose }) =>
               </button>
               <button
                 type="submit"
-                className={`px-4 py-2 bg-[#4f46e5] text-white rounded-md hover:bg-blue-600 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`px-4 py-2 bg-[#4f46e5] text-white rounded-md hover:bg-blue-600 ${loading ? 'opacity-50 cursor-not-allowed w-[150px] bg-[#4f46e5] text-white opacity-50 cursor-not-allowed inline-flex justify-center items-center' : ''}`}
                 disabled={loading}
               >
-                {loading ? 'Adding...' : 'Create Category'}
+                {loading ? <Spinner/> : 'Create Category'}
               </button>
             </div>
           </Form>
         </div>
-        {loading && (
+        {/* {loading && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40">
             <div className="w-16 h-16 border-4 border-t-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );
