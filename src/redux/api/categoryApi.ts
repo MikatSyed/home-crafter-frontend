@@ -17,6 +17,15 @@ export const categoryApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.category],
     }),
 
+    categoriesName: build.query({
+      query: (id : string) => ({
+        url : `${URL}/name`,
+        method: "GET"
+       
+      }),
+      providesTags:[tagTypes.category]
+    }), 
+
     category: build.query({
       query: (id : string) => ({
         url : `${URL}/${id}`,
@@ -57,4 +66,4 @@ export const categoryApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddCategoryMutation,useUpdateCategoryMutation,useDeleteCategoryMutation,useCategoryQuery,useCategoriesQuery } = categoryApi;
+export const { useAddCategoryMutation,useUpdateCategoryMutation,useDeleteCategoryMutation,useCategoryQuery,useCategoriesQuery,useCategoriesNameQuery } = categoryApi;
