@@ -17,6 +17,7 @@ type FormProps = {
   className?: string;
   description?: string;
   content?:string;
+  comment?:string;
 
   // Added className prop for dynamic class
 } & FormConfig;
@@ -40,7 +41,8 @@ const Form = ({
     submitHandler(data);
     reset({
       description: "",
-      content:""
+      content:"",
+      comment:""
     });
   };
 

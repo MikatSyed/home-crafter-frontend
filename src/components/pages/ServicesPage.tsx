@@ -254,7 +254,7 @@ const ServicesPage = () => {
                         </span>
                       </h6>
                       <a
-                        href={`/booking/${service.id}`}
+                        href={`/service-details/${service.id}`}
                         className="bg-[#6240ed] text-white py-2 px-6 rounded-full hover:bg-blue-600 transition-colors"
                       >
                         Book Now

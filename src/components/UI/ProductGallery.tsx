@@ -36,7 +36,7 @@ const ProductGallery = ({ data }: any) => {
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-6">
             <div>
-              <span className="bg-[#f8fcfd] text-blue-600 py-2 px-3">{service.category.category_name}</span>
+              <span className="bg-[#f8fcfd] text-blue-600 py-2 px-3">{service.category.categoryName}</span>
             </div>
             <div className="flex items-center text-gray-700">
               <FiMapPin className="text-md mr-2" />

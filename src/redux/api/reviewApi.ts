@@ -2,7 +2,7 @@ import {  IMeta } from "@/types";
 import { baseApi } from "./baseApi";
 import { tagTypes } from "../tag-types";
 
-const  URL = "/review";
+const  URL = "/reviews";
 
 export const reviewApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

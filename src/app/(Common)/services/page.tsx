@@ -5,7 +5,7 @@ import React from 'react';
 const Services = () => {
     return (
         <div>
-          <BreadcrumbBar name="Services" subtitle="Services List"/>
+          <BreadcrumbBar name="Services" subtitle=""/>
             <ServicesPage/>
         </div>
     );

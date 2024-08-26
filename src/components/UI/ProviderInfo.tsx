@@ -15,6 +15,7 @@ import VideoComponent from "./VideoComponent";
 import ReviewComponent from "./ReviewComponent";
 import RelatedServices from "./RelatedService";
 import ServiceCard from "./ServiceCard";
+import Review from "./Review";
 
 // Define the types for the service data
 interface ServiceData {
@@ -46,7 +47,7 @@ const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
     <div>
       <div className="mx-auto px-6 md:px-[7rem] py-4">
         <div className="flex flex-wrap lg:flex-nowrap ">
-          <div className="lg:w-2/3 w-full mb-8 lg:mb-0 ">
+          <div className="lg:w-2/3 w-full mb-8 lg:mb-0  md:h-[1700px] overflow-y-auto scrollbar-hide">
             <div>
               <h5 className="text-2xl font-semibold mb-4">Service Details</h5>
               <p className="text-gray-700">{service?.description}</p>
@@ -172,11 +173,12 @@ const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
             </div>
             <Gallery images={images} />
             <VideoComponent videoUrl={videoUrl || ''} />
+            <Review  serviceId={serviceId}/>
             <ReviewComponent />
             <RelatedServices />
           </div>
 
-          <div className="lg:w-1/3 w-full lg:pl-8 right">
+          <div className="lg:w-1/3 w-full lg:pl-8 right md:h-[1700px] ">
             <ServiceCard  id={serviceId} />
           </div>
         </div>
