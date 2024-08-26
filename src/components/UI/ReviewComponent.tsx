@@ -1,38 +1,65 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
+import { useReviewByServiceIdQuery } from '@/redux/api/reviewApi';
 import { FaStar, FaThumbsUp, FaThumbsDown, FaReply } from 'react-icons/fa';
 
-const reviews = [
-  {
-    name: 'Dennis',
-    time: 'a week ago',
-    avatar: '/assets/avatar-02.jpg',
-    rating: 5,
-    comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    name: 'Jaime',
-    time: 'yesterday | 10:35AM',
-    avatar: '/assets/avatar-03.jpg',
-    rating: 5,
-    comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  }
-];
+interface Review {
+  id: string;
+  userId: string;
+  serviceId: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  user: {
+    id: string;
+    fName: string;
+    lName: string;
+    email: string;
+    profileImg: string[];
+  };
+}
 
-const ReviewComponent = () => {
+interface ServiceCardProps {
+  serviceId: string;
+}
+
+const ReviewComponent: React.FC<ServiceCardProps> = ({ serviceId }) => {
+  const { data } = useReviewByServiceIdQuery(serviceId);
+  const [showAll, setShowAll] = useState(false);
+
+  if (!data || data?.data?.length === 0) {
+    return (
+      <div className="mt-8 text-center">
+        <h5 className="text-2xl font-semibold mb-4">Reviews</h5>
+        <p className="text-gray-600">No reviews available for this service yet. Be the first to leave a review!</p>
+      </div>
+    );
+  }
+
+  const reviewsToShow = showAll ? data.data : data.data.slice(0, 2);
+
   return (
     <div className="mt-8">
       <h5 className="text-2xl font-semibold mb-4">Reviews</h5>
       <ul className="space-y-6">
-        {reviews.map((review, index) => (
-          <li key={index} className="border p-4 rounded-lg shadow-sm">
+        {reviewsToShow.map((review: Review) => (
+          <li key={review.id} className="border p-4 rounded-lg shadow-sm">
             <div className="review-profile flex items-start mb-4">
               <div className="review-img flex-shrink-0">
-                <img src={review.avatar} className="img-fluid rounded-full w-12 h-12" alt="img" />
+                <img src={review.user.profileImg[0]} className="img-fluid rounded-full w-12 h-12" alt="User Avatar" />
               </div>
               <div className="review-name ml-4">
-                <h6 className="text-lg font-semibold">{review.name}</h6>
-                <p className="text-sm text-gray-600">{review.time}</p>
+                <h6 className="text-lg font-semibold">{review.user.fName} {review.user.lName}</h6>
+                <p className="text-sm text-gray-600">
+                  {new Date(review.createdAt).toLocaleString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </p>
               </div>
               <div className="ml-auto flex items-center mt-3">
                 <div className="rating flex">
@@ -40,7 +67,6 @@ const ReviewComponent = () => {
                     <FaStar key={i} className="text-yellow-500" />
                   ))}
                 </div>
-               
               </div>
             </div>
             <p className="mb-4 text-gray-700">{review.comment}</p>
@@ -61,22 +87,16 @@ const ReviewComponent = () => {
                 </a>
               </div>
             </div>
-            {review.reply && (
-              <div className="reply-area mt-4">
-                <textarea
-                  className="form-control w-full p-2 border rounded"
-                  rows="3"
-                  placeholder="Type your response..."
-                ></textarea>
-              </div>
-            )}
           </li>
         ))}
       </ul>
       <div className="text-center mt-6">
-        <a href="customer-reviews.html" className="btn btn-primary btn-review bg-blue-500 text-white px-4 py-2 rounded">
-          View All Reviews
-        </a>
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className="text-white bg-[#4f46e5] inline-flex items-center justify-center px-4 py-2 rounded text-sm border border-[#4f46e5]"
+        >
+          {showAll ? 'Show Less' : 'View All Reviews'}
+        </button>
       </div>
     </div>
   );

@@ -174,7 +174,7 @@ const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
             <Gallery images={images} />
             <VideoComponent videoUrl={videoUrl || ''} />
             <Review  serviceId={serviceId}/>
-            <ReviewComponent />
+            <ReviewComponent serviceId={serviceId} />
             <RelatedServices />
           </div>
 
