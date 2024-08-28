@@ -26,6 +26,28 @@ export const blogApi = baseApi.injectEndpoints({
       providesTags:[tagTypes.blog]
     }),
 
+    latestBlogs: build.query({
+      query: (blogId) => {
+        return {
+          url:  `${URL}/latest?blogId=${blogId}`,
+          method: "GET",      
+        };
+      },
+    
+      providesTags: [tagTypes.blog],
+    }),
+
+    similarBlogs: build.query({
+      query: ({ categoryId, blogId }) => {
+        return {
+          url:  `${URL}/category/similar?categoryId=${categoryId}&blogId=${blogId}`,
+          method: "GET",      
+        };
+      },
+    
+      providesTags: [tagTypes.blog],
+    }),
+
     addBlog: build.mutation({
         query: (data) => ({
           url : `${URL}`,
@@ -57,4 +79,4 @@ export const blogApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useBlogsQuery,useBlogQuery,useAddBlogMutation,useUpdateBlogMutation,useDeleteBlogMutation } = blogApi;
+export const { useBlogsQuery,useBlogQuery,useLatestBlogsQuery,useSimilarBlogsQuery,useAddBlogMutation,useUpdateBlogMutation,useDeleteBlogMutation } = blogApi;

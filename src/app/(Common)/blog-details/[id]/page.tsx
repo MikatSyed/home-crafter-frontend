@@ -2,7 +2,9 @@
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
 import Comment from '@/components/UI/Comment';
 import CommentCard from '@/components/UI/CommentCard';
+import LatestNews from '@/components/UI/LatestNews';
 import Loader from '@/components/UI/Loader';
+import SimilarArticle from '@/components/UI/SimilarArticle';
 import { useBlogQuery } from '@/redux/api/blogApi';
 import React from 'react';
 
@@ -15,6 +17,8 @@ const BlogDetails = ({ params }: IDProps) => {
   const { id } = params;
   const {data,isLoading} = useBlogQuery(id);
   const blog = data?.data;
+  const categoryId = blog?.categoryId;
+  console.log(categoryId)
 
   if(isLoading) {
   return <Loader/>
@@ -24,14 +28,14 @@ const BlogDetails = ({ params }: IDProps) => {
           <BreadcrumbBar name="Blog" subtitle="Blog Details"/>
           <div className="mx-auto px-6 md:px-[7rem] py-4">
       <div className="flex flex-wrap lg:flex-nowrap">
-        <div className="lg:w-2/3 w-full mb-8 lg:mb-0">
+        <div className="lg:w-2/3 w-full mb-8 lg:mb-0 md:h-[1700px] overflow-y-auto scrollbar-hide">
           <div className="mb-6">
             <ul className="flex space-x-2 mb-2">
               <li><span className="bg-blue-100 text-blue-500 px-2 py-1 rounded">{blog?.category?.categoryName}</span></li>
             </ul>
             <h3 className="text-3xl font-bold mb-4">{blog?.title}</h3>
             <div className="flex items-center space-x-4 text-gray-500 mb-4">
-              <span><i className="feather-calendar mr-1"></i>  {new Date(blog.createdAt).toLocaleDateString('en-US', {
+              <span><i className="feather-calendar mr-1"></i>  {new Date(blog?.createdAt).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -44,20 +48,20 @@ const BlogDetails = ({ params }: IDProps) => {
           </div>
 
           <div className="mb-6">
-            <img className="w-full h-auto rounded-lg mb-4" src={blog?.blogImg[0]} alt="Post Image" />
+            <img className="w-full h-auto md:h-[400px] rounded-lg mb-4" src={blog?.blogImg[0]} alt="Post Image" />
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p className='text-justify'>{blog?.content}</p>
             </div>
           </div>
 
           <div className="mb-6">
-            <h4 className="text-lg font-semibold mb-2">Tags</h4>
+            <h4 className="text-lg font-semibold mb-4">Tags</h4>
             <ul className="flex flex-wrap space-x-2">
-              <li><a href="#" className=" bg-[#f8fcfd] text-gray-700 px-2 py-1 rounded">Construction</a></li>
-              <li><a href="#" className="bg-[#f8fcfd] text-gray-700 px-2 py-1 rounded">Car Wash</a></li>
-              <li><a href="#" className="bg-[#f8fcfd] text-gray-700 px-2 py-1 rounded">Appliance</a></li>
-              <li><a href="#" className="bg-[#f8fcfd] text-gray-700 px-2 py-1 rounded">Interior</a></li>
-              <li><a href="#" className="bg-[#f8fcfd] text-gray-700 px-2 py-1 rounded">Carpentry</a></li>
+              <li><a href="#" className=" bg-[#f8fcfd] hover:bg-[#4f46e5] text-sm text-gray-700 hover:text-white px-3 py-3 rounded">Construction</a></li>
+              <li><a href="#" className="bg-[#f8fcfd] text-gray-700 text-sm hover:text-white  px-3 py-3 hover:bg-[#4f46e5]  rounded">Car Wash</a></li>
+              <li><a href="#" className="bg-[#f8fcfd] text-gray-700 text-sm hover:text-white px-3 py-3 rounded hover:bg-[#4f46e5]">Appliance</a></li>
+              <li><a href="#" className="bg-[#f8fcfd] text-gray-700 text-sm hover:text-white  px-3 py-3  rounded hover:bg-[#4f46e5]">Interior</a></li>
+              <li><a href="#" className="bg-[#f8fcfd] text-gray-700 text-sm hover:text-white  px-3 py-3  rounded hover:bg-[#4f46e5]">Carpentry</a></li>
             </ul>
           </div>
 
@@ -68,22 +72,20 @@ const BlogDetails = ({ params }: IDProps) => {
           <Comment blogId={id} />
         </div>
 
-        <div className="lg:w-1/3 w-full lg:pl-8">
-          <div className="mb-6">
-            <form className="flex mb-4">
-              <input type="text" placeholder="Search..." className="flex-grow px-4 py-2 border rounded-l" />
-              <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600"><i className="fa fa-search"></i></button>
-            </form>
-          </div>
+        <div className="lg:w-1/3 w-full lg:pl-8 md:h-[1700px] overflow-y-auto scrollbar-hide">
+     
 
           <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm mb-6">
-            <h4 className="text-lg font-semibold mb-4">About Me</h4>
-            <img src={blog?.user?.profileImg[0]} alt="User" className="w-full h-auto rounded mb-4" />
-            <p className="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-            <a href="#" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">About Author</a>
+            <h4 className="text-2xl font-semibold mb-6">About Me</h4>
+            <img src={blog?.user?.profileImg[0]} alt="User" className="w-full h-auto md:h-[250px]  rounded-lg mb-4" />
+            <p className="text-gray-700 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+            <a href="#" className="text-white bg-[#4f46e5] inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5]">About Author</a>
           </div>
 
-          <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm mb-6">
+          <SimilarArticle categoryId={categoryId} blogId={id} />
+          
+
+          {/* <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm mb-6">
             <h4 className="text-lg font-semibold mb-4">Categories</h4>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-500 hover:underline">Car Wash</a></li>
@@ -91,44 +93,11 @@ const BlogDetails = ({ params }: IDProps) => {
               <li><a href="#" className="text-gray-500 hover:underline">Carpenter</a></li>
               <li><a href="#" className="text-gray-500 hover:underline">Computer Service</a></li>
             </ul>
-          </div>
+          </div> */}
 
-          <div className=" p-4 rounded-lg shadow-sm mb-6  bg-[#f8fcfd]">
-            <h4 className="text-lg font-semibold mb-4">Latest News</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start">
-                <img className="w-24 h-24 rounded-lg mr-4" src="https://truelysell.dreamstechnologies.com/html/template/assets/img/services/service-01.jpg" alt="Blog Image" />
-                <div>
-                  <p className="text-sm text-gray-500 mb-2">06 Nov 2023</p>
-                  <h4 className="text-md font-semibold"><a href="#" className="=hover:underline">Lorem ipsum dolor amet, consectetur adipiscing elit. Amet.</a></h4>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <img className="w-24 h-24 rounded-lg mr-4" src="https://truelysell.dreamstechnologies.com/html/template/assets/img/services/service-01.jpg" alt="Blog Image" />
-                <div>
-                  <p className="text-sm text-gray-500 mb-2">06 Nov 2023</p>
-                  <h4 className="text-md font-semibold"><a href="#" className="=hover:underline">Lorem ipsum dolor amet, consectetur adipiscing elit. Amet.</a></h4>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <img className="w-24 h-24 rounded-lg mr-4" src="https://truelysell.dreamstechnologies.com/html/template/assets/img/services/service-01.jpg" alt="Blog Image" />
-                <div>
-                  <p className="text-sm text-gray-500 mb-2">06 Nov 2023</p>
-                  <h4 className="text-md font-semibold"><a href="#" className="=hover:underline">Lorem ipsum dolor amet, consectetur adipiscing elit. Amet.</a></h4>
-                </div>
-              </li>
-              {/* Add more posts similarly */}
-            </ul>
-          </div>
+         <LatestNews blogId={id} />
 
-          <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm mb-6">
-            <h4 className="text-lg font-semibold mb-4">Tags</h4>
-            <ul className="flex flex-wrap space-x-2">
-              <li><a href="#" className="bg-white text-gray-700 px-2 py-1 rounded">Consulting</a></li>
-              <li><a href="#" className="bg-white text-gray-700 px-2 py-1 rounded">Design</a></li>
-              {/* Add more tags similarly */}
-            </ul>
-          </div>
+       
 
           <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm">
             <h4 className="text-lg font-semibold mb-4">Archives</h4>

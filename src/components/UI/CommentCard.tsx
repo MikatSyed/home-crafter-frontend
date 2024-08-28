@@ -49,14 +49,13 @@ const CommentCard: React.FC<ServiceCardProps> = ({ blogId }) => {
                 <div className="ml-4">
                   <h6 className="font-semibold">{comment.user.fName} {comment.user.lName}</h6>
                   <p className="text-sm text-gray-500">
-                 {new Date(comment?.createdAt).toLocaleString('en-US', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
+                  {new Date(comment?.createdAt).toLocaleString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+})}
                   </p>
                 </div>
                 <a href="#" className="ml-auto text-blue-500">
