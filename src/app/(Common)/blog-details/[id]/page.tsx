@@ -29,7 +29,7 @@ const BlogDetails = ({ params }: IDProps) => {
       <BreadcrumbBar name="Blog" subtitle="Blog Details" />
       <div className="mx-auto px-6 md:px-[7rem] py-6">
         <div className="flex flex-wrap lg:flex-nowrap pb-4">
-          <div className="lg:w-2/3 w-full mb-8 lg:mb-0 md:h-[1600px] overflow-y-auto scrollbar-hide">
+          <div className="lg:w-2/3 w-full mb-8 lg:mb-0 md:h-[1560px] overflow-y-auto scrollbar-hide">
             <div className="mb-6">
               <p className="inline-block bg-[#f8fcfd] hover:bg-[#4f46e5] text-sm text-[#4f46e5] hover:text-white px-3 py-3 rounded my-4">
                 {blog?.category?.categoryName}
@@ -67,14 +67,14 @@ const BlogDetails = ({ params }: IDProps) => {
               </div>
             </div>
 
-             <Tags/>
+            <Tags />
 
             <CommentCard blogId={id} />
 
             <Comment blogId={id} />
           </div>
 
-          <div className="lg:w-1/3 w-full lg:pl-8 md:h-[1600px] overflow-y-auto scrollbar-hide">
+          <div className="lg:w-1/3 w-full lg:pl-8 md:h-[1560px] overflow-y-auto scrollbar-hide">
             <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm mb-6 mt-4">
               <h4 className="text-2xl font-semibold mb-6">About Me</h4>
               <img
@@ -97,44 +97,37 @@ const BlogDetails = ({ params }: IDProps) => {
 
             <SimilarArticle categoryId={categoryId} blogId={id} />
 
-            {/* <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm mb-6">
-            <h4 className="text-lg font-semibold mb-4">Categories</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-500 hover:underline">Car Wash</a></li>
-              <li><a href="#" className="text-gray-500 hover:underline">Plumbing</a></li>
-              <li><a href="#" className="text-gray-500 hover:underline">Carpenter</a></li>
-              <li><a href="#" className="text-gray-500 hover:underline">Computer Service</a></li>
-            </ul>
-          </div> */}
-
             <LatestNews blogId={id} />
 
             <div className=" bg-[#f8fcfd] p-4 rounded-lg shadow-sm">
               <h4 className="text-lg font-semibold mb-4">Archives</h4>
               <ul className="space-y-2">
                 <li>
-                <Link
-  href={{
-    pathname: "/blogs",
-    query: { 
-      month: new Date(blog?.createdAt).toLocaleDateString("en-US", { month: "long" }),
-      year: new Date(blog?.createdAt).toLocaleDateString("en-US", { year: "numeric" }),
-    },
-  }}
-  className="text-gray-500 hover:underline"
->
-  {new Date(blog?.createdAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-  })}
-</Link>
-
+                  <Link
+                    href={{
+                      pathname: "/blogs",
+                      query: {
+                        month: new Date(blog?.createdAt).toLocaleDateString(
+                          "en-US",
+                          { month: "long" }
+                        ),
+                        year: new Date(blog?.createdAt).toLocaleDateString(
+                          "en-US",
+                          { year: "numeric" }
+                        ),
+                      },
+                    }}
+                    className="text-gray-500 hover:underline"
+                  >
+                    {new Date(blog?.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                    })}
+                  </Link>
                 </li>
-                {/* Add more archives similarly */}
               </ul>
             </div>
           </div>
-
         </div>
       </div>
     </div>

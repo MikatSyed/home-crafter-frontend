@@ -44,6 +44,28 @@ export const servicesApi = baseApi.injectEndpoints({
     }),
 
     
+    additionalService: build.query({
+      query: (serviceId) => {
+        return {
+          url:  `${URL}/latest?serviceId=${serviceId}`,
+          method: "GET",      
+        };
+      },
+    
+      providesTags: [tagTypes.services],
+    }),
+
+    relatedService: build.query({
+      query: ({ categoryId, serviceId }) => {
+        return {
+          url:  `${URL}/category/similar?categoryId=${categoryId}&blogId=${serviceId}`,
+          method: "GET",      
+        };
+      },
+    
+      providesTags: [tagTypes.services],
+    }),
+    
 
     addService: build.mutation({
         query: (data:any) => ({
@@ -76,4 +98,4 @@ export const servicesApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddServiceMutation,useServicesQuery,useOverviewQuery,useServiceQuery,useUpdateServiceMutation,useDeleteServiceMutation,useCategoriesQuery } = servicesApi;
+export const { useAddServiceMutation,useServicesQuery,useOverviewQuery,useAdditionalServiceQuery,useRelatedServiceQuery,useServiceQuery,useUpdateServiceMutation,useDeleteServiceMutation,useCategoriesQuery } = servicesApi;

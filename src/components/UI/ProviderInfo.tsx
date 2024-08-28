@@ -39,6 +39,7 @@ const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
   const images = service?.serviceImg || [];
   const videoUrl = service?.videoUrl;
   const serviceId = service?.id;
+  const categoryId = service?.categoryId;
 
 
   return (
@@ -173,7 +174,7 @@ const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
             <VideoComponent videoUrl={videoUrl || ''} />
             <Review  serviceId={serviceId}/>
             <ReviewComponent serviceId={serviceId} />
-            <RelatedServices />
+            <RelatedServices categoryId={categoryId} serviceId={serviceId}/>
           </div>
 
           <div className="lg:w-1/3 w-full lg:pl-8 right md:h-[1700px] ">

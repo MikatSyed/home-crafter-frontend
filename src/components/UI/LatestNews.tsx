@@ -1,4 +1,5 @@
 import { useLatestBlogsQuery } from '@/redux/api/blogApi';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 interface LatestBlogsProps {
@@ -22,11 +23,11 @@ const LatestNews : React.FC<LatestBlogsProps> = ({blogId}) => {
       <h4 className="text-lg font-semibold mb-4">Latest News</h4>
       <ul className="space-y-4">
         {blogsToShow?.map((blog:any) => (
-          <li key={blog.id} className="flex items-start">
+          <li key={blog?.id} className="flex items-start">
             <img
               className="w-24 h-24 rounded-lg mr-4"
-              src={blog.blogImg[0]}
-              alt={blog.title}
+              src={blog?.blogImg[0]}
+              alt={blog?.title}
             />
             <div>
               <p className="text-sm text-gray-500 mb-2">
@@ -36,10 +37,10 @@ const LatestNews : React.FC<LatestBlogsProps> = ({blogId}) => {
                   day: 'numeric',
                 })}
               </p>
-              <h4 className="text-md font-semibold">
-                <a href="#" className="hover:underline">
-                  {blog.title}
-                </a>
+              <h4 className="text-sm font-semibold">
+                <Link href={`/blog-details/${blog?.id}`} className="hover:underline">
+                  {blog?.title}
+                </Link>
               </h4>
             </div>
           </li>

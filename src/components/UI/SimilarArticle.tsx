@@ -1,4 +1,5 @@
 import { useSimilarBlogsQuery } from '@/redux/api/blogApi';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 
@@ -9,10 +10,6 @@ interface Blog {
   createdAt: string;
 }
 
-
-interface SimilarBlogsData {
-  data: Blog[];
-}
 
 interface SimilarArticleProps {
   categoryId: string; 
@@ -51,11 +48,11 @@ const SimilarArticle: React.FC<SimilarArticleProps> = ({ categoryId, blogId }) =
                   day: 'numeric',
                 })}
               </p>
-              <h4 className="text-md font-semibold">
+              <h4 className="text-sm font-semibold">
               
-                <a href={`/blog-details/${blog.id}`} className="hover:underline">
-                  {blog.title}
-                </a>
+              <Link href={`/blog-details/${blog?.id}`} className="hover:underline">
+                  {blog?.title}
+                </Link>
               </h4>
             </div>
           </li>

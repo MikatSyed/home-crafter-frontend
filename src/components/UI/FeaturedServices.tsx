@@ -31,6 +31,7 @@ const MostPopularServices = () => {
     }
   };
   const { data,isLoading } = useServicesQuery(undefined);
+  const services = data?.data;
   if (isLoading) {
     return (
         <div >
@@ -51,22 +52,24 @@ const MostPopularServices = () => {
               Explore the greatest of our services. You won’t be disappointed
             </p>
           </div>
-          <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
-            <div className="inline-flex items-center space-x-4">
-              <button
-                className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
-                onClick={handlePrevious}
-              >
-                <IoIosArrowBack className="w-5 h-5" />
-              </button>
-              <button
-                className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
-                onClick={handleNext}
-              >
-                <IoIosArrowForward className="w-5 h-5" />
-              </button>
+          {services?.length > 3 && ( 
+            <div className="w-full md:w-1/2 text-right">
+              <div className="inline-flex items-center space-x-4">
+                <button
+                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+                  onClick={handlePrevious}
+                >
+                  <IoIosArrowBack className="w-5 h-5" />
+                </button>
+                <button
+                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+                  onClick={handleNext}
+                >
+                  <IoIosArrowForward className="w-5 h-5" />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <Swiper
@@ -86,7 +89,7 @@ const MostPopularServices = () => {
           },
         }}
       >
-        {data?.data?.map((service: any, index: number) => (
+        {services?.map((service: any, index: number) => (
           <SwiperSlide key={index}>
             <div
               className="border shadow-md rounded-md transition-transform transform hover:scale-105 hover:shadow-lg duration-300"
