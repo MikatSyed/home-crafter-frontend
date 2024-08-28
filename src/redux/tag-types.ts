@@ -14,6 +14,7 @@ export enum tagTypes {
     booking = "booking",
     category = "category",
     review = "review",
+    comment = "comment",
     payment = "payment"
   
   }
@@ -34,6 +35,7 @@ export enum tagTypes {
     tagTypes.booking,
     tagTypes.category,
     tagTypes.review,
+    tagTypes.comment,
     tagTypes.payment
   ];
   

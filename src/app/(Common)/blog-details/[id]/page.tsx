@@ -1,5 +1,7 @@
 "use client"
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
+import Comment from '@/components/UI/Comment';
+import CommentCard from '@/components/UI/CommentCard';
 import Loader from '@/components/UI/Loader';
 import { useBlogQuery } from '@/redux/api/blogApi';
 import React from 'react';
@@ -11,11 +13,9 @@ type IDProps = {
 
 const BlogDetails = ({ params }: IDProps) => {
   const { id } = params;
-  console.log(id)
   const {data,isLoading} = useBlogQuery(id);
-  console.log(data)
   const blog = data?.data;
-  console.log(blog)
+
   if(isLoading) {
   return <Loader/>
 }
@@ -61,65 +61,11 @@ const BlogDetails = ({ params }: IDProps) => {
             </ul>
           </div>
 
-          <div className="mb-6">
-            <h4 className="text-lg font-semibold mb-2">Comments</h4>
-            <ul className="space-y-4">
-              <li>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="flex items-center mb-4">
-                    <img src="https://truelysell.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg" className="w-12 h-12 rounded-full" alt="img" />
-                    <div className="ml-4">
-                      <h6 className="font-semibold">Dennis</h6>
-                      <p className="text-sm text-gray-500">a week ago</p>
-                    </div>
-                    <a href="#" className="ml-auto text-blue-500"><i className="fas fa-reply mr-2"></i>Reply</a>
-                  </div>
-                  <p className="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  {/* <form className="space-y-4">
-                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                      <input type="text" className="w-full px-4 py-2 border rounded" placeholder="Name*" />
-                      <input type="email" className="w-full px-4 py-2 border rounded" placeholder="Email*" />
-                    </div>
-                    <input type="text" className="w-full px-4 py-2 border rounded" placeholder="Website" />
-                    <textarea rows="4" className="w-full px-4 py-2 border rounded" placeholder="Message*"></textarea>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" type="submit">Send Message</button>
-                  </form> */}
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="flex items-center mb-4">
-                    <img src="https://truelysell.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg" className="w-12 h-12 rounded-full" alt="img" />
-                    <div className="ml-4">
-                      <h6 className="font-semibold">Dennis</h6>
-                      <p className="text-sm text-gray-500">a week ago</p>
-                    </div>
-                    <a href="#" className="ml-auto text-blue-500"><i className="fas fa-reply mr-2"></i>Reply</a>
-                  </div>
-                  <p className="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  {/* <form className="space-y-4">
-                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                      <input type="text" className="w-full px-4 py-2 border rounded" placeholder="Name*" />
-                      <input type="email" className="w-full px-4 py-2 border rounded" placeholder="Email*" />
-                    </div>
-                    <input type="text" className="w-full px-4 py-2 border rounded" placeholder="Website" />
-                    <textarea rows="4" className="w-full px-4 py-2 border rounded" placeholder="Message*"></textarea>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" type="submit">Send Message</button>
-                  </form> */}
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-semibold mb-2">Write a Comment</h4>
-            <form className="space-y-4">
-              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                <input type="text" className="w-full px-4 py-2 border rounded" placeholder="Name*" />
-                <input type="email" className="w-full px-4 py-2 border rounded" placeholder="Email*" />
-              </div>
-              {/* <textarea rows="6" className="w-full px-4 py-2 border rounded" placeholder="Message*"></textarea> */}
-              <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" type="submit">Post Comment</button>
-            </form>
-          </div>
+        
+         <CommentCard blogId={id} />
+         
+          
+          <Comment blogId={id} />
         </div>
 
         <div className="lg:w-1/3 w-full lg:pl-8">

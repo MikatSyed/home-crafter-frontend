@@ -36,7 +36,7 @@ const ReviewComponent: React.FC<ServiceCardProps> = ({ serviceId }) => {
     );
   }
 
-  const reviewsToShow = showAll ? data.data : data.data.slice(0, 2);
+  const reviewsToShow = showAll ? data.data : data.data.slice(0, 3);
 
   return (
     <div className="mt-8">

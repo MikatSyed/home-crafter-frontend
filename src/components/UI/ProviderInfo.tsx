@@ -39,8 +39,6 @@ const ProviderInfo: React.FC<ProviderInfoProps> = ({ data }) => {
   const images = service?.serviceImg || [];
   const videoUrl = service?.videoUrl;
   const serviceId = service?.id;
- 
- 
 
 
   return (
