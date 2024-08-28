@@ -10,13 +10,14 @@ interface LatestBlogsProps {
 
 const LatestNews : React.FC<LatestBlogsProps> = ({blogId}) => {
   const { data } = useLatestBlogsQuery(blogId);
+  const blogs = data?.data;
   const [showAll, setShowAll] = useState(false); 
 
 
   const toggleShowAll = () => setShowAll(!showAll);
 
 
-  const blogsToShow = showAll ? data?.data : data?.data.slice(0, 3);
+  const blogsToShow = showAll ? blogs : blogs.slice(0, 3);
 
   return (
     <div className="p-4 rounded-lg shadow-sm mb-6 bg-[#f8fcfd]">
@@ -48,7 +49,7 @@ const LatestNews : React.FC<LatestBlogsProps> = ({blogId}) => {
       </ul>
 
       {/* Show "See More" or "See Less" button if there are more than 4 blogs */}
-      {data?.data.length > 3 && (
+      {blogs.length > 3 && (
         <button
           onClick={toggleShowAll}
           className="text-blue-500 hover:underline mt-4"

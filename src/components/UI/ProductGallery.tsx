@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { FaImages, FaPlus, FaRegHeart } from "react-icons/fa";
+import { FaImages, FaRegHeart } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const ProductGallery = ({ data }: any) => {
   console.log(data)
@@ -76,8 +77,8 @@ const ProductGallery = ({ data }: any) => {
                     onClick={() => handleSeeAllPhotos(service.serviceImg)}
                     className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
                   >
-                    <div className="bg-white p-3 rounded-full text-black">
-                      <span className="text-2xl p-2">+</span>
+                    <div className="bg-white p-5 rounded-full text-black">
+                     <MdOutlineRemoveRedEye />
                     </div>
                   </button>
                 </div>
@@ -92,8 +93,8 @@ const ProductGallery = ({ data }: any) => {
                       onClick={() => handleSeeAllPhotos(service.serviceImg)}
                       className="absolute md:h-[200px] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
                     >
-                      <div className="bg-white p-3 rounded-full text-black">
-                        <span className="text-2xl p-2">+</span>
+                      <div className="bg-white p-5 rounded-full text-black">
+                      <MdOutlineRemoveRedEye />
                       </div>
                     </button>
                   </div>
@@ -107,8 +108,8 @@ const ProductGallery = ({ data }: any) => {
                       onClick={() => handleSeeAllPhotos(service.serviceImg)}
                       className="absolute md:h-[200px] inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
                     >
-                      <div className="bg-white p-3 rounded-full text-black">
-                        <span className="text-2xl p-2">+</span>
+                      <div className="bg-white p-5 rounded-full text-black">
+                      <MdOutlineRemoveRedEye />
                       </div>
                     </button>
                   </div>

@@ -47,7 +47,7 @@ export const servicesApi = baseApi.injectEndpoints({
     additionalService: build.query({
       query: (serviceId) => {
         return {
-          url:  `${URL}/latest?serviceId=${serviceId}`,
+          url:  `${URL}/additional?serviceId=${serviceId}`,
           method: "GET",      
         };
       },
@@ -58,7 +58,7 @@ export const servicesApi = baseApi.injectEndpoints({
     relatedService: build.query({
       query: ({ categoryId, serviceId }) => {
         return {
-          url:  `${URL}/category/similar?categoryId=${categoryId}&blogId=${serviceId}`,
+          url:  `${URL}/category/similar?categoryId=${categoryId}&serviceId=${serviceId}`,
           method: "GET",      
         };
       },

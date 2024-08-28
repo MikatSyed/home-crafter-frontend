@@ -18,14 +18,14 @@ interface SimilarArticleProps {
 
 const SimilarArticle: React.FC<SimilarArticleProps> = ({ categoryId, blogId }) => {
   
-  const { data: similarBlogsData } = useSimilarBlogsQuery({ categoryId, blogId });
+  const { data } = useSimilarBlogsQuery({ categoryId, blogId });
   const [showAll, setShowAll] = useState<boolean>(false); 
 
   const toggleShowAll = () => setShowAll(!showAll);
 
 
 
-  const blogs: Blog[] = similarBlogsData?.data || [];
+  const blogs: Blog[] = data?.data || [];
 
   const blogsToShow = showAll ? blogs : blogs.slice(0, 3);
 

@@ -2,33 +2,8 @@
 import Link from 'next/link';
 import React from 'react';
 import { FaStar, FaMapPin, FaCheckCircle, FaCar, FaWrench, FaClipboardCheck } from 'react-icons/fa';
+import AdditionalService from './AdditionalService';
 
-const services = [
-  {
-    name: 'House Cleaning',
-    location: 'Alabama, USA',
-    price: '$500.75',
-    image: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/services/service-07.jpg',
-  },
-  {
-    name: 'Air Conditioner Service',
-    location: 'Illinois, USA',
-    price: '$500.75',
-    image: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/services/service-16.jpg',
-  },
-  {
-    name: 'Interior Designing',
-    location: 'California, USA',
-    price: '$500.75',
-    image: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/services/service-07.jpg',
-  },
-  {
-    name: 'Wooden Carpentry Work',
-    location: 'Alabama, USA',
-    price: '$354.45',
-    image: 'https://truelysell.dreamstechnologies.com/html/template/assets/img/services/service-03.jpg',
-  },
-];
 
 const availability = [
   { day: 'Monday', time: '9:30 AM - 7:00 PM' },
@@ -70,32 +45,7 @@ const ServiceCard = ({id}:any) => {
         </ul>
       </div>
 
-      <div className="mb-8">
-        <h5 className="text-xl font-semibold py-4">Additional Service</h5>
-        <ul>
-          {services.map((service, index) => (
-            <li key={index} className="flex justify-between items-center mb-4 p-4 rounded-lg bg-[#f8fcfd]">
-              <div className="flex items-center">
-                <label className="custom_check mr-2">
-                  <input type="checkbox" name="additionalService" className="h-4 w-4" />
-                  <span className="checkmark"></span>
-                </label>
-                <div className="flex items-center">
-                  <img src={service.image} className="w-12 h-12 rounded mr-2" alt="service" />
-                  <div className="add-serv-info">
-                    <h6 className="text-sm font-medium">{service.name}</h6>
-                    <p className="text-gray-600 text-xs flex items-center"><FaMapPin className="mr-1" />{service.location}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="add-serv-amt">
-                <h6 className="text-sm font-medium">{service.price}</h6>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
+     <AdditionalService serviceId={id} />
       <div className="card card-available mb-8 p-6 bg-[#f8fcfd] rounded-lg">
         <h5 className="text-xl font-semibold py-4">Service Availability</h5>
         <ul>
