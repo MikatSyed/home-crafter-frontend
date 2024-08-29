@@ -4,7 +4,7 @@ import Loader from '@/components/UI/Loader';
 import { useBlogsQuery } from '@/redux/api/blogApi';
 import Link from 'next/link';
 import React from 'react';
-import { FiX, FiEdit, FiTrash2 } from 'react-icons/fi';
+import { FiEdit, FiTrash2 } from 'react-icons/fi';
 
 // Define the types for Blog
 interface Blog {
@@ -24,9 +24,10 @@ interface Blog {
 }
 
 const ProviderBlog = () => {
-  const { data, isLoading } = useBlogsQuery(undefined);
+  // Pass an empty object to fetch all blogs without any filters
+  const { data, isLoading } = useBlogsQuery({});
 
-  if (isLoading) return <Loader/>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="px-6 py-7">
@@ -56,10 +57,10 @@ const ProviderBlog = () => {
                 <div className="service-bottom-icons flex items-center text-gray-500 text-sm">
                   <i className="feather-calendar mr-1"></i>
                   <span> {new Date(blog.createdAt).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })}</span>
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}</span>
                 </div>
                 <h6 className="text-gray-500">{blog.category.categoryName}</h6>
               </div>

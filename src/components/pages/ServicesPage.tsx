@@ -1,10 +1,11 @@
 "use client";
 import { useServicesQuery } from "@/redux/api/servicesApi";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaHeart, FaMapMarkerAlt, FaRegStar, FaStar } from "react-icons/fa";
 import Loader from "../UI/Loader";
 import { useCategoriesNameQuery } from "@/redux/api/categoryApi";
 import { useDebounced } from "@/redux/hook";
+import { useSearchParams } from "next/navigation";
 
 const ServicesPage = () => {
   const query: Record<string, any> = {};
@@ -15,7 +16,15 @@ const ServicesPage = () => {
   const [locationTerm, setLocationTerm] = useState<string>(""); 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const searchParams = useSearchParams();
+  const categoryId = searchParams.get("categoryId");
 
+  useEffect(() => {
+    // Set the category ID to the selected categories state if it exists in the URL
+    if (categoryId) {
+      setSelectedCategories([categoryId]);
+    }
+  }, [categoryId]);
   query["limit"] = size;
   query["page"] = page;
 
@@ -107,8 +116,11 @@ const ServicesPage = () => {
                 />
               </div>
             </div>
-
-            <div className="w-full py-4">
+{
+  categoryId ? <>
+  
+  </> : <>
+  <div className="w-full py-4">
               <div className="flex flex-col rounded-md py-6 bg-[#f8fcfd]">
                 <p className="text-[#32353C] py-1 px-4 font-semibold text-xl">
                   Categories
@@ -134,8 +146,11 @@ const ServicesPage = () => {
                 ))}
               </div>
             </div>
+  </>
+}
+      
 
-            <div className="bg-[#f8fcfd] rounded-lg py-4">
+            <div className={`bg-[#f8fcfd] rounded-lg py-4 ${categoryId && `mt-4`}`}>
               <div className="p-6">
                 <p className="text-xl font-semibold text-gray-800 mb-4">
                   Location

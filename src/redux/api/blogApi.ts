@@ -7,13 +7,20 @@ export const blogApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
 
     blogs: build.query({
-      query: () => {
+      query: ({ categoryId, month, year }: { categoryId?: string; month?: number; year?: number }) => {
+        let queryString = `${URL}`;
+        if (categoryId || month || year) {
+          queryString += `?`;
+          if (categoryId) queryString += `categoryId=${categoryId}&`;
+          if (month) queryString += `month=${month}&`;
+          if (year) queryString += `year=${year}&`;
+          queryString = queryString.slice(0, -1); 
+        }
         return {
-          url: URL,
-          method: "GET",      
+          url: queryString,
+          method: "GET",
         };
       },
-    
       providesTags: [tagTypes.blog],
     }),
 
