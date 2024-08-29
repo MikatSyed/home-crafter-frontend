@@ -17,7 +17,6 @@ const ServicesPage = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedFilters, setSelectedFilters] = useState({});
   const [selectedRating, setSelectedRating] = useState<number | null>(null); 
-  console.log(typeof(selectedRating),'20')
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
 
