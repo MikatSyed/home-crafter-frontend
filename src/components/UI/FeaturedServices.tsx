@@ -11,6 +11,7 @@ import { useServicesQuery } from "@/redux/api/servicesApi";
 import Link from "next/link";
 import Loader from "./Loader";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import Rating from "./Rating";
 
 const MostPopularServices = () => {
   const [swiper, setSwiper] = useState<any | null>(null);
@@ -135,13 +136,13 @@ const MostPopularServices = () => {
                   </p>
                   <p className="flex items-center">
                     <span className="rate ml-4 flex items-center">
-                      <FaStar className="filled text-yellow-500 mr-1" /> 4
+                    <Rating rating={service?.averageRating || 0} /> {service?.averageRating}
                     </span>
                   </p>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <h6 className="text-lg font-bold">
-                    {service.price}{" "}
+                    ${service.price}
                     <span className="line-through text-gray-500 ml-2">
                       $35.00
                     </span>

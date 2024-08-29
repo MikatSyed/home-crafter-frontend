@@ -16,6 +16,8 @@ const ServicesPage = () => {
   const [locationTerm, setLocationTerm] = useState<string>(""); 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [selectedRating, setSelectedRating] = useState<number | null>(null); 
+  console.log(typeof(selectedRating),'20')
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
 
@@ -53,6 +55,16 @@ const ServicesPage = () => {
     query["category"] = selectedCategories;
   }
 
+// Assuming `selectedRating` can be a number or an array of numbers
+if (Array.isArray(selectedRating) && selectedRating.length > 0) {
+  // Case: Filtering for multiple ratings
+  query["rating"] = selectedRating; // Filter by multiple ratings (e.g., [3, 4])
+} else if (typeof selectedRating === "number") {
+  // Case: Filtering for a single rating
+  query["rating"] = selectedRating; // Filter by a single rating (e.g., 3)
+}
+
+
   const { data, isLoading } = useServicesQuery({
     ...query,
     ...selectedFilters,
@@ -78,8 +90,17 @@ const ServicesPage = () => {
   const handleSliderChange = (event: any) => {
     const value = event.target.value;
     setSliderValue(value);
-    console.log();
     setSelectedFilters({ ...selectedFilters, minPrice: value });
+  };
+
+  const handleRatingFilter = (stars: number) => {
+    if (selectedRating === stars) {
+      setSelectedRating(null); 
+   
+    } else {
+      setSelectedRating(stars); 
+      
+    }
   };
 
   const renderStars = (count: any) => {
@@ -197,6 +218,8 @@ const ServicesPage = () => {
                       type="checkbox"
                       id={`rating-${stars}`}
                       className="mr-2 h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                      checked={selectedRating === stars}
+                      onChange={() => handleRatingFilter(stars)}
                     />
                     <label
                       htmlFor={`rating-${stars}`}
