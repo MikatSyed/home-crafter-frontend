@@ -1,7 +1,7 @@
 "use client";
 import { useServicesQuery } from "@/redux/api/servicesApi";
 import React, { useEffect, useState } from "react";
-import { FaHeart, FaMapMarkerAlt, FaRegStar, FaStar } from "react-icons/fa";
+import { FaChevronDown, FaHeart, FaMapMarkerAlt, FaRegStar, FaStar } from "react-icons/fa";
 import Loader from "../UI/Loader";
 import { useCategoriesNameQuery } from "@/redux/api/categoryApi";
 import { useDebounced } from "@/redux/hook";
@@ -13,21 +13,41 @@ const ServicesPage = () => {
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [locationTerm, setLocationTerm] = useState<string>(""); 
+  const [locationTerm, setLocationTerm] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedFilters, setSelectedFilters] = useState({});
-  const [selectedRating, setSelectedRating] = useState<number | null>(null); 
+  const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('asc');
+  const [ratingCounts, setRatingCounts] = useState<Record<number, number>>({
+    5: 0,
+    4: 0,
+    3: 0,
+    2: 0,
+    1: 0
+  });
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
+    setIsDropdownOpen(false);
+  };
 
   useEffect(() => {
-    // Set the category ID to the selected categories state if it exists in the URL
     if (categoryId) {
       setSelectedCategories([categoryId]);
     }
   }, [categoryId]);
+
   query["limit"] = size;
   query["page"] = page;
+  query["sortBy"] = "price"; // Default sorting field
+  query["sortOrder"] = selectedOption;
 
   const debouncedSearchTerm = useDebounced({
     searchQuery: searchTerm,
@@ -38,37 +58,34 @@ const ServicesPage = () => {
     searchQuery: locationTerm,
     delay: 600,
   });
-  console.log(debouncedLocationTerm)
 
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
-  // Add location filter to the query
   if (!!debouncedLocationTerm) {
     query["location"] = debouncedLocationTerm;
   }
 
-  // Add selected categories to the query if any are selected
   if (selectedCategories.length > 0) {
     query["category"] = selectedCategories;
   }
 
-// Assuming `selectedRating` can be a number or an array of numbers
-if (Array.isArray(selectedRating) && selectedRating.length > 0) {
-  // Case: Filtering for multiple ratings
-  query["rating"] = selectedRating; // Filter by multiple ratings (e.g., [3, 4])
-} else if (typeof selectedRating === "number") {
-  // Case: Filtering for a single rating
-  query["rating"] = selectedRating; // Filter by a single rating (e.g., 3)
-}
-
+  if (typeof selectedRating === "number") {
+    query["rating"] = selectedRating;
+  }
 
   const { data, isLoading } = useServicesQuery({
     ...query,
     ...selectedFilters,
     price_gte: sliderValue,
   });
+
+  useEffect(() => {
+    if (data?.meta?.ratingCounts) {
+      setRatingCounts(data.meta.ratingCounts);
+    }
+  }, [data]);
 
   const { data: categoriesData }: any = useCategoriesNameQuery(undefined);
   const categories = categoriesData?.data;
@@ -94,11 +111,9 @@ if (Array.isArray(selectedRating) && selectedRating.length > 0) {
 
   const handleRatingFilter = (stars: number) => {
     if (selectedRating === stars) {
-      setSelectedRating(null); 
-   
+      setSelectedRating(null);
     } else {
-      setSelectedRating(stars); 
-      
+      setSelectedRating(stars);
     }
   };
 
@@ -106,7 +121,7 @@ if (Array.isArray(selectedRating) && selectedRating.length > 0) {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= count) {
-        stars.push(<FaStar key={i} className="text-[#ffbc35] ml-2 " />);
+        stars.push(<FaStar key={i} className="text-[#ffbc35] ml-2" />);
       } else {
         stars.push(<FaRegStar key={i} className="text-[#ffbc35] ml-2" />);
       }
@@ -121,11 +136,45 @@ if (Array.isArray(selectedRating) && selectedRating.length > 0) {
   return (
     <div className="md:px-[7rem] py-6">
       <section>
-        <div className="grid grid-cols-4 gap-4">
-          <div className="col-span-1 rounded-md hidden md:block">
+        <div className="flex justify-between items-center w-full mb-4">
+          <h2 className="text-xl font-semibold text-gray-800">Filter By</h2>
+          <div className="relative inline-block">
+            <button
+              onClick={toggleDropdown}
+              className={`text-black border border-gray-400 px-4 py-2 rounded flex items-center`}
+            >
+              {selectedOption === 'asc' ? 'Price Low to High' : 'Price High to Low'}
+              <FaChevronDown
+                className={`ml-2 ${isDropdownOpen ? 'transform rotate-180' : ''}`}
+                size={14}
+              />
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute right-0 w-48 bg-white border rounded shadow-lg">
+                <a
+                  href="#"
+                  onClick={() => handleOptionClick('asc')}
+                  className={`block px-4 py-2 ${selectedOption === 'asc' ? 'bg-[#6240ed] text-white' : 'text-gray-700 hover:bg-[#f8fcfd] hover:text-black'}`}
+                >
+                  Price Low to High
+                </a>
+                <a
+                  href="#"
+                  onClick={() => handleOptionClick('desc')}
+                  className={`block px-4 py-2 ${selectedOption === 'desc' ? 'bg-[#6240ed] text-white' : 'text-gray-700 hover:bg-[#f8fcfd] hover:text-black'}`}
+                >
+                  Price High to Low
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-4 gap-x-4">
+          <div className="col-span-4 md:col-span-1 mx-4 md:mx-0 rounded-md md:block">
             <div className="bg-[#f8fcfd] rounded-lg">
               <div className="p-6">
-                <p className="text-xl font-semibold text-gray-800 mb-4">
+                <p className="text-lg font-semibold text-gray-800 mb-4">
                   Keyword
                 </p>
                 <input
@@ -136,39 +185,36 @@ if (Array.isArray(selectedRating) && selectedRating.length > 0) {
                 />
               </div>
             </div>
-{
-  categoryId ? <>
-  
-  </> : <>
-  <div className="w-full py-4">
-              <div className="flex flex-col rounded-md py-6 bg-[#f8fcfd]">
-                <p className="text-[#32353C] py-1 px-4 font-semibold text-xl">
-                  Categories
-                </p>
-                {categories?.map((category: any) => (
-                  <div
-                    key={category?.id}
-                    className="w-full px-5 py-2 rounded-md flex items-center"
-                  >
-                    <label className="cursor-pointer flex items-center ">
-                      <input
-                        className="checkbox checkbox-md"
-                        type="checkbox"
-                        style={{ accentColor: "#1475c6" }}
-                        onChange={handleCategoryChange}
-                        value={category?.id}
-                      />
-                      <span className="text-sm text-gray-500 font-sm ml-2">
-                        {category?.name}
-                      </span>
-                    </label>
-                  </div>
-                ))}
+            {categoryId ? (
+              <></>
+            ) : (
+              <div className="w-full py-4">
+                <div className="flex flex-col rounded-md py-6 bg-[#f8fcfd]">
+                  <p className="text-[#32353C] py-1 px-4 font-semibold text-lg">
+                    Categories
+                  </p>
+                  {categories?.map((category: any) => (
+                    <div
+                      key={category?.id}
+                      className="w-full px-5 py-2 rounded-md flex items-center"
+                    >
+                      <label className="cursor-pointer flex items-center">
+                        <input
+                          className="checkbox checkbox-md"
+                          type="checkbox"
+                          style={{ accentColor: "#1475c6" }}
+                          onChange={handleCategoryChange}
+                          value={category?.id}
+                        />
+                        <span className="text-sm text-gray-500 font-sm ml-2">
+                          {category?.name}
+                        </span>
+                      </label>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-  </>
-}
-      
+            )}
 
             <div className={`bg-[#f8fcfd] rounded-lg py-4 ${categoryId && `mt-4`}`}>
               <div className="p-6">
@@ -179,13 +225,13 @@ if (Array.isArray(selectedRating) && selectedRating.length > 0) {
                   type="text"
                   className="border border-gray-300 rounded-lg px-3 py-2 w-full text-gray-700 focus:outline-none focus:border-blue-500 focus:shadow-outline transition duration-300 ease-in-out font-md"
                   placeholder="Select Location"
-                  onChange={(e) => setLocationTerm(e.target.value)} 
+                  onChange={(e) => setLocationTerm(e.target.value)}
                 />
               </div>
             </div>
 
             <div className="bg-[#f8fcfd] rounded-lg mt-4 p-6">
-              <p className="text-xl font-semibold text-gray-800 mb-4">
+              <p className="text-lg font-semibold text-gray-800 mb-4">
                 Price Range
               </p>
               <div className="flex items-center justify-between mb-6">
@@ -194,7 +240,6 @@ if (Array.isArray(selectedRating) && selectedRating.length > 0) {
                   <input
                     type="range"
                     className="w-full h-2 rounded-full bg-blue-600 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
-                  
                     min={0}
                     max={100}
                     value={sliderValue} // Use the upper limit of the range
@@ -203,13 +248,11 @@ if (Array.isArray(selectedRating) && selectedRating.length > 0) {
                   <span className="text-gray-700 ml-4">$100</span>
                 </div>
               </div>
-             
-             <p className="text-gray-700">Selected Price: <span className="text-blue-600 font-semibold">${sliderValue}</span></p>
-             
+              <p className="text-gray-700">Selected Price: <span className="text-blue-600 font-semibold">${sliderValue}</span></p>
             </div>
 
             <div className="bg-[#f8fcfd] rounded-lg mt-4 p-6">
-              <p className="text-xl font-semibold text-gray-800 mb-4">Rating</p>
+              <p className="text-lg font-semibold text-gray-800 mb-4">Rating</p>
               <div className="space-y-2">
                 {[5, 4, 3, 2, 1].map((stars) => (
                   <div key={stars} className="flex items-center">
@@ -222,27 +265,30 @@ if (Array.isArray(selectedRating) && selectedRating.length > 0) {
                     />
                     <label
                       htmlFor={`rating-${stars}`}
-                      className="flex items-center text-xl"
+                      className="flex items-center text-lg"
                     >
                       {renderStars(stars)}
+                      <span className="pl-10 text-gray-600 text-sm font-normal">
+                        ({ratingCounts[stars] || 0})
+                      </span>
                     </label>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          <div className="col-span-4 mx-4 md:mx-0 md:col-span-3">
+          <div className="col-span-4 md:col-span-3 mx-4 md:mx-0">
             {data?.data.map((service: any) => (
               <div
                 key={service.id}
-                className="bg-white border px-3 rounded-lg overflow-hidden w-full mx-auto my-2"
+                className="bg-white border px-3 rounded-lg overflow-hidden w-full mx-auto mb-3"
               >
                 <div className="flex flex-col md:flex-row py-2">
                   <div className="relative w-full md:w-1/3">
                     <img
                       className="w-full h-auto md:h-48 object-cover rounded-lg"
                       alt={service.serviceName}
-                      src={service.serviceImg[0]} // Assuming you want to display the first image
+                      src={service.serviceImg[0]}
                     />
                     <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md">
                       <a href="javascript:void(0)" className="text-red-500">
