@@ -6,6 +6,7 @@ import Loader from "../UI/Loader";
 import { useCategoriesNameQuery } from "@/redux/api/categoryApi";
 import { useDebounced } from "@/redux/hook";
 import { useSearchParams } from "next/navigation";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const ServicesPage = () => {
   const query: Record<string, any> = {};
@@ -28,6 +29,10 @@ const ServicesPage = () => {
     2: 0,
     1: 0
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6); 
+
+ 
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -75,11 +80,21 @@ const ServicesPage = () => {
     query["rating"] = selectedRating;
   }
 
+  const servicesPerPage = 6
+
   const { data, isLoading } = useServicesQuery({
     ...query,
     ...selectedFilters,
     price_gte: sliderValue,
   });
+  console.log(data)
+
+  const services = data?.data?.slice(
+    (currentPage - 1) * servicesPerPage,
+    currentPage * servicesPerPage
+  );
+
+  const totalPages = Math.ceil(data?.meta?.total / servicesPerPage);
 
   useEffect(() => {
     if (data?.meta?.ratingCounts) {
@@ -129,9 +144,13 @@ const ServicesPage = () => {
     return stars;
   };
 
+  
+
   if (isLoading) {
     return <Loader />;
   }
+
+
 
   return (
     <div className="md:px-[7rem] py-6">
@@ -278,7 +297,7 @@ const ServicesPage = () => {
             </div>
           </div>
           <div className="col-span-4 md:col-span-3 mx-4 md:mx-0">
-            {data?.data.map((service: any) => (
+            {services?.map((service: any) => (
               <div
                 key={service.id}
                 className="bg-white border px-3 rounded-lg overflow-hidden w-full mx-auto mb-3"
@@ -347,7 +366,46 @@ const ServicesPage = () => {
                 </div>
               </div>
             ))}
+
+<div className="flex justify-end mt-8">
+          <button
+            className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
+              currentPage === 1
+                ? "text-gray-500 cursor-not-allowed text-sm"
+                : "text-gray-700 hover:from-blue-500 hover:to-blue-700 text-sm font-bold hover:text-[#4f46e5]"
+            }`}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            <FiArrowLeft className="mr-1" /> PREV
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              className={`px-4 py-2 mx-1 rounded-lg transition-colors ${
+                currentPage === index + 1
+                  ? "bg-[#4f46e5] text-white"
+                  : "bg-[#f8fcfd] border border-gray-300 text-gray-800 hover:bg-[#4f46e5] text-sm hover:text-white"
+              }`}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
+              currentPage === totalPages
+                ? "text-gray-500 cursor-not-allowed text-sm"
+                : "text-gray-700 text-sm font-bold hover:text-[#4f46e5]"
+            }`}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            NEXT <FiArrowRight className="ml-1" />
+          </button>
+        </div>
           </div>
+
         </div>
       </section>
     </div>
