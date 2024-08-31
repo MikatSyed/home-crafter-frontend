@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaCalendarAlt, FaClock, FaStar } from 'react-icons/fa';
-import { FiInstagram, FiLinkedin, FiMail, FiMapPin, FiPhone, FiTwitter, FiUser, FiYoutube } from 'react-icons/fi';// Assuming you use a calendar library
+import {  FaStar } from 'react-icons/fa';
+import {  FiMail, FiMapPin, FiPhone } from 'react-icons/fi';// Assuming you use a calendar library
 import 'react-calendar/dist/Calendar.css'; // Import default styles
  // Import the calendar styles
 import { useState } from 'react';

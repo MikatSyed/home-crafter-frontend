@@ -30,7 +30,7 @@ const FormTextArea: React.FC<FormTextAreaProps> = ({
       {label && (
         <label
           htmlFor={name}
-          className="block text-sm font-medium mb-1 text-gray-700"
+          className="block text-black text-sm font-medium mb-1 "
         >
           {label}
         </label>

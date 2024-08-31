@@ -163,8 +163,8 @@ const Navbar = () => {
 
       {/* Right Action Buttons */}
       <div className="hidden md:flex flex-1 justify-end space-x-5">
-        <Link href="/profile">
-          <p className="text-md font-medium m-0 text-[#4c40ed]">Become A Provider</p>
+        <Link href="/provider/signup">
+          <p className="text-md font-medium m-0 text-[#4c40ed] hover:text-gray-600">Become A Provider</p>
         </Link>
         <Link href="/signup">
           <p className="text-md font-medium m-0 text-[#4c40ed] hover:text-gray-600">Become A User</p>

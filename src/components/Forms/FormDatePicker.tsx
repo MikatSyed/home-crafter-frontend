@@ -1,18 +1,12 @@
 import React, { ChangeEvent } from "react";
-import {
-  Controller,
-  useFormContext,
-  UseFormSetValue,
-} from "react-hook-form";
-import dayjs, { Dayjs } from "dayjs";
+import { Controller, useFormContext } from "react-hook-form";
+import dayjs from "dayjs";
 import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
-
-
 
 interface FormDatePickerProps {
   name: string;
   label?: string;
-  onChange?: (date: Dayjs, formattedDate: string) => void;
+  onChange?: (date: dayjs.Dayjs, formattedDate: string) => void;
   size?: string;
   className?: string;
 }
@@ -24,11 +18,7 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
   size = "large",
   className,
 }) => {
-  const {
-    control,
-    setValue,
-    formState: { errors },
-  } = useFormContext();
+  const { control, setValue, formState: { errors } } = useFormContext();
 
   const errorMessage = getErrorMessageByPropertyName(errors, name);
 
@@ -39,11 +29,11 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
   };
 
   return (
-    <div>
+    <div className="mb-4">
       {label && (
         <label
           htmlFor={name}
-          className="text-sm font-medium text-gray-600 block mb-2 "
+          className="block text-black text-sm font-medium mb-1 "
         >
           {label}
         </label>
@@ -57,7 +47,7 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
             type="date"
             value={field.value ? dayjs(field.value).format("YYYY-MM-DD") : ""}
             onChange={handleOnChange}
-            className={`${className}`}
+            className={`${className} block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#1475c6] focus:border-[#1475c6] transition ease-in duration-200 sm:text-sm`}
           />
         )}
       />

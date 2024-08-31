@@ -11,32 +11,29 @@ interface LoginProps {
   callbackUrl?: string;
 }
 
-const LoginPage = ({ callbackUrl }: any) => {
+const ProviderLoginPage = ({ callbackUrl }: any) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const pathName = '/login'; // Update this path based on your route
+  const pathName = '/provider';
 
   const onSubmit = async (data: any) => {
     setLoading(true);
     try {
-      await signIn("home-crafter", {
-        ...data,
-        callbackUrl,
-        pathName
-      });
+      await signIn("home-crafter", {...data,callbackUrl,pathName});
       setLoading(false);
-    } catch (err: any) {
-      toast.error(err?.data, {
-        icon: <span style={{ color: "white" }}>❌</span>,
-        style: {
-          borderRadius: '10px',
-          background: 'red',
-          color: '#fff'
-        }
-      });
+    } 
+    catch (err: any) {
+      toast(err?.data,
+        {
+          icon:  <span style={{color:"white"}}>❌</span>,
+          style: {
+            borderRadius: '10px',
+            background: 'red',
+            color: '#fff'
+          }
+        })
     }
   };
-
 
   return (
     <div>
@@ -147,4 +144,4 @@ const LoginPage = ({ callbackUrl }: any) => {
   );
 };
 
-export default LoginPage;
+export default ProviderLoginPage;

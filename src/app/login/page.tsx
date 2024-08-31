@@ -14,7 +14,7 @@ const Login = ({searchParams:{callbackUrl}}:any) => {
 
     return (
         <div>
-            <LoginPage  callbackUrl={callbackUrl || "/profile"}/>
+            <LoginPage  callbackUrl={callbackUrl || "/profile"} />
            
         </div>
     );

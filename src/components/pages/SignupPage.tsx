@@ -70,7 +70,7 @@ const SignupPage = () => {
         <div className="w-full max-w-xl flex justify-center items-center">
           <div className="p-12 bg-white rounded-3xl w-full">
             <div className="mb-7">
-              <h3 className="font-semibold text-3xl text-gray-800">Register</h3>
+              <h3 className="font-semibold text-3xl text-gray-800">Signup</h3>
             </div>
             <Form submitHandler={onSubmit}>
               <div className="flex flex-col sm:flex-row sm:space-x-4 mb-4">

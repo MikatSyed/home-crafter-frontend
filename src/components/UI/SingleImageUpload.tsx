@@ -49,7 +49,7 @@ const SingleImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label, i
   return (
     <div className="flex flex-col gap-1 w-full h-full  rounded-md">
       {label && (
-        <span className="mr-2 font-medium text-gray-500 text-sm">
+        <span className="mr-2 block text-black text-sm font-medium mb-1 ">
           {label}
         </span>
       )}

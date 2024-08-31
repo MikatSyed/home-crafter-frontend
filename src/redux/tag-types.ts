@@ -15,7 +15,8 @@ export enum tagTypes {
     category = "category",
     review = "review",
     comment = "comment",
-    payment = "payment"
+    payment = "payment",
+    provider = "provider"
   
   }
   
@@ -36,6 +37,7 @@ export enum tagTypes {
     tagTypes.category,
     tagTypes.review,
     tagTypes.comment,
-    tagTypes.payment
+    tagTypes.payment,
+    tagTypes.provider,
   ];
   
