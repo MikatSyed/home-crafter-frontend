@@ -126,7 +126,7 @@ const TopProviders = () => {
     const totalPages = Math.ceil(providers.length / providersPerPage);
 
     return (
-        <section className="mx-auto px-6 md:px-[7rem] bg-white py-14">
+        <section className="mx-auto px-6 md:px-[6rem] bg-white py-14">
             <div className="container mx-auto px-6">
                 {pathname !== '/providers' && (
                     <div className="flex flex-wrap items-center mb-8">

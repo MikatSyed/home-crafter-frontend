@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const HowItWorks = () => {
   return (
-    <div className="mx-auto px-6 md:px-[7rem]  py-10 bg-[#f8fcfd] ">
+    <div className="mx-auto px-6 md:px-[6rem]  py-10 bg-[#f8fcfd] ">
     <div className="text-center mb-10">
       <div className="section-heading" data-aos="fade-up">
         <h2 className="text-4xl font-extrabold text-indigo-900 leading-tight">How It Works</h2>

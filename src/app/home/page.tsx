@@ -9,12 +9,15 @@ import Navbar from '@/components/UI/Navbar';
 import Partners from '@/components/UI/Partners';
 import PricingPlan from '@/components/UI/PricingPlan';
 import Testimonial from '@/components/UI/Testimonial';
+import TopHeader from '@/components/UI/TopHeader';
 import TopProviders from '@/components/UI/TopProviders';
 import React from 'react';
 
 const HomePage = () => {
     return (
         <div>
+
+          
             <Navbar/>
             <Hero/>
             <FeaturedCategories/>

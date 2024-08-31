@@ -7,7 +7,7 @@ import pricingImg3 from '../../../public/assets/pricing-seven-3.svg';
 
 const PricingPlan = () => {
   return (
-    <div className="mx-auto px-6 md:px-[7rem] py-16 ">
+    <div className="mx-auto px-6 md:px-[6rem] py-16 ">
       <div className="text-center mb-12">
         <div className="section-heading section-heading-seven" data-aos="fade-up">
           <h2 className="text-4xl font-bold text-indigo-900 leading-tight">Pricing Plan</h2>

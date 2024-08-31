@@ -49,7 +49,7 @@ const Blog = () => {
   const totalPages = Math.ceil(blogs?.length / blogsPerPage);
 
   return (
-    <div className="mx-auto px-6 md:px-[7rem] py-20">
+    <div className="mx-auto px-6 md:px-[6rem] py-20">
       {pathname !== "/blogs" && (
         <div className="text-center mb-8">
           <div

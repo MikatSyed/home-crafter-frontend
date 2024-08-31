@@ -155,9 +155,9 @@ const ServicesPage = () => {
   return (
     <div className="md:px-[7rem] py-6">
       <section>
-        <div className="flex justify-between items-center w-full mb-4">
-          <h2 className="text-xl font-semibold text-gray-800">Filter By</h2>
-          <div className="relative inline-block">
+        <div className="flex justify-between items-center w-full mb-4 ">
+          <h2 className="text-xl font-semibold text-gray-800 ml-4 md:ml-0">Filter By</h2>
+          <div className="mr-4 md:mr-0">
             <button
               onClick={toggleDropdown}
               className={`text-black border border-gray-400 px-4 py-2 rounded flex items-center`}

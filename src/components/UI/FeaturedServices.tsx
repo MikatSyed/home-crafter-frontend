@@ -42,7 +42,7 @@ const MostPopularServices = () => {
 }
 
   return (
-    <div className="mx-auto px-6 md:px-[7rem] bg-white py-14">
+    <div className="mx-auto px-6 md:px-[6rem] bg-white py-14">
       <div className="section-heading mb-8">
         <div className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2" data-aos="fade-up">
