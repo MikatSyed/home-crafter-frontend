@@ -79,7 +79,7 @@ const CreateService = () => {
             <Form submitHandler={onSubmit} resolver={yupResolver(serviceSchema)} >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
                 <FormInput name="serviceName" label="Service Name" type="text" />
-                <FormInput name="price" label="Price" type="number" className="border border-gray-300 focus:border-[#1475c6] focus:ring-[#1475c6] transition ease-in duration-200" />
+                <FormInput name="regularPrice" label="Price" type="number" className="border border-gray-300 focus:border-[#1475c6] focus:ring-[#1475c6] transition ease-in duration-200" />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
@@ -106,6 +106,20 @@ const CreateService = () => {
                 error={imgError}
               />
 
+<h2 className="text-xl font-semibold text-[#2a2a3d] mb-8">
+           Additional Feature(optional*)
+          </h2> 
+
+         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+                <FormInput name="keyFeature1" label="key Feature 1" type="text" />
+                <FormInput name="keyFeature2" label="key Feature 2" type="text" className="border border-gray-300 focus:border-[#1475c6] focus:ring-[#1475c6] transition ease-in duration-200" />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+                <FormInput name="keyFeature3" label="key Feature 3" type="text" />
+                <FormInput name="keyFeature4" label="key Feature 4" type="text" className="border border-gray-300 focus:border-[#1475c6] focus:ring-[#1475c6] transition ease-in duration-200" />
+              </div>
+
               <div className="flex">
                 <button
                   type="button"
@@ -115,7 +129,7 @@ const CreateService = () => {
                 </button>
                 <button
   type="submit"
-  className={`text-[#4f46e5] hover:bg-[#4f46e5] inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5] ${
+  className={`text-[#4f46e5] hover:bg-[#4f46e5] hover:text-white inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5] ${
     loading
       ? 'w-[150px] bg-[#4f46e5] text-white opacity-50 cursor-not-allowed inline-flex justify-center items-center'
       : ''

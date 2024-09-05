@@ -101,7 +101,7 @@ const MostPopularServices = () => {
                   <Image
                     className="img-fluid w-full rounded-md transition-transform duration-300 ease-in-out h-auto  md:h-[220px]"
                     alt="Service Image"
-                    src={service.serviceImg[0]}
+                    src={service.serviceImg[service.serviceImg.length - 1]}
                     height={218}
                     width={328}
                   />
@@ -118,11 +118,11 @@ const MostPopularServices = () => {
                 <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
                   <a href="providers.html" className="flex items-center">
                     <img
-                      src="https://truelysell.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg"
+                      src={service.provider.profileImg[0]}
                       className="avatar w-10 h-10 rounded-full"
                       alt="User"
                     />
-                    <span className="ml-2 text-white">Jeny Doe</span>
+                    <span className="ml-2 text-white">{`${service?.provider?.fName} ${service?.provider?.lName}`}</span>
                   </a>
                 </div>
               </div>
@@ -136,16 +136,18 @@ const MostPopularServices = () => {
                   </p>
                   <p className="flex items-center">
                     <span className="rate ml-4 flex items-center">
-                    <Rating rating={service?.averageRating || 0} /> {service?.averageRating}
+                    <Rating rating={service?.averageRating || 0} /> ({service?.averageRating})
                     </span>
                   </p>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <h6 className="text-lg font-bold">
-                    ${service.price}
-                    <span className="line-through text-gray-500 ml-2">
-                      $35.00
-                    </span>
+                    ${service.regularPrice}
+                    
+                    {service?.offeredPrice &&  
+                 <span className="line-through text-gray-500 ml-2 text-sm">
+                    ${service?.offeredPrice}
+                  </span>}
                   </h6>
                   <Link
                     href={`/service-details/${service.id}`}

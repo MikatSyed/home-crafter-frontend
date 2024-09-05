@@ -7,6 +7,8 @@ import { useCategoriesNameQuery } from "@/redux/api/categoryApi";
 import { useDebounced } from "@/redux/hook";
 import { useSearchParams } from "next/navigation";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import Rating from "../UI/Rating";
+import Link from "next/link";
 
 const ServicesPage = () => {
   const query: Record<string, any> = {};
@@ -51,7 +53,7 @@ const ServicesPage = () => {
 
   query["limit"] = size;
   query["page"] = page;
-  query["sortBy"] = "price"; // Default sorting field
+ 
   query["sortOrder"] = selectedOption;
 
   const debouncedSearchTerm = useDebounced({
@@ -296,7 +298,7 @@ const ServicesPage = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-4 md:col-span-3 mx-4 md:mx-0">
+          <div className="col-span-4 md:col-span-3 mx-4 my-4 md:mx-0 md:my-0">
             {services?.map((service: any) => (
               <div
                 key={service.id}
@@ -307,24 +309,19 @@ const ServicesPage = () => {
                     <img
                       className="w-full h-auto md:h-48 object-cover rounded-lg"
                       alt={service.serviceName}
-                      src={service.serviceImg[0]}
+                      src={service.serviceImg[service.serviceImg.length - 1]}
                     />
                     <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md">
-                      <a href="javascript:void(0)" className="text-red-500">
+                      <a href="" className="text-red-500">
                         <FaHeart size={20} />
                       </a>
                     </div>
                   </div>
 
-                  <div className="px-8 py-2 flex-1 flex flex-col justify-between">
-                    <div>
-                      <a
-                        href={`/service-details/${service.id}`}
-                        className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
-                      >
-                        {service.category.categoryName}
-                      </a>
-                      <h3 className="text-xl font-semibold mt-2">
+                  <div className="px-0 md:px-8  py-4 md:py-0 flex-1 flex flex-col justify-between">
+                    <div >
+                   <div className="flex justify-between">
+                   <h3 className="text-xl font-semibold mt-2">
                         <a
                           href={`/service-details/${service.id}`}
                           className="text-gray-900 hover:text-blue-500 transition-colors"
@@ -332,8 +329,15 @@ const ServicesPage = () => {
                           {service.serviceName}
                         </a>
                       </h3>
+                      <p
+                        className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
+                      >
+                        {service.category.categoryName}
+                      </p>
+                   </div>
+                   
                       <p className="text-gray-600 mt-2 flex items-center text-sm">
-                        <FaMapMarkerAlt className="mr-2" /> {service.location}
+                        <FaMapMarkerAlt className="mr-2" /> {service?.location}
                       </p>
                     </div>
 
@@ -344,16 +348,17 @@ const ServicesPage = () => {
                         alt="User"
                       />
                       <span className="text-yellow-500 flex items-center">
-                        <FaStar className="mr-1" /> 4.9
+                      <Rating rating={service?.averageRating || 0} />  ({service?.averageRating})
                       </span>
                     </div>
 
                     <div className="mt-2 flex justify-between items-center">
                       <h6 className="text-lg font-bold text-gray-900">
-                        ${service.price}.00{" "}
-                        <span className="text-gray-500 line-through text-md">
-                          ${service.price + 10}.00
-                        </span>
+                        ${service.regularPrice}.00{" "}
+                        {service?.offeredPrice &&  
+                 <span className="line-through text-gray-500 ml-2 text-sm">
+                    ${service?.offeredPrice}
+                  </span>}
                       </h6>
                       <a
                         href={`/service-details/${service.id}`}
@@ -366,13 +371,13 @@ const ServicesPage = () => {
                 </div>
               </div>
             ))}
-
-<div className="flex justify-end mt-8">
+{totalPages > 4 && (
+  <div className="flex justify-end mt-8">
           <button
             className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
               currentPage === 1
-                ? "text-gray-500 cursor-not-allowed text-sm"
-                : "text-gray-700 hover:from-blue-500 hover:to-blue-700 text-sm font-bold hover:text-[#4f46e5]"
+                ? "text-gray-500 cursor-not-allowed text-sm bg-gray-300"
+                : "text-gray-700 bg-[#f8fcfd] hover:from-blue-500 hover:to-blue-700 text-sm font-bold hover:text-[#4f46e5]"
             }`}
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
@@ -395,15 +400,16 @@ const ServicesPage = () => {
           <button
             className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
               currentPage === totalPages
-                ? "text-gray-500 cursor-not-allowed text-sm"
-                : "text-gray-700 text-sm font-bold hover:text-[#4f46e5]"
+                ? "text-gray-500 cursor-not-allowed text-sm bg-gray-300"
+                : "text-gray-700 bg-[#f8fcfd] text-sm font-bold hover:text-[#4f46e5]"
             }`}
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
             NEXT <FiArrowRight className="ml-1" />
           </button>
-        </div>
+        </div> )}
+
           </div>
 
         </div>

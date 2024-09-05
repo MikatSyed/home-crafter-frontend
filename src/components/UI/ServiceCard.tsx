@@ -6,16 +6,16 @@ import AdditionalService from './AdditionalService';
 
 
 const availability = [
-  { day: 'Monday', time: '9:30 AM - 7:00 PM' },
-  { day: 'Tuesday', time: '9:30 AM - 7:00 PM' },
-  { day: 'Wednesday', time: '9:30 AM - 7:00 PM' },
-  { day: 'Thursday', time: '9:30 AM - 7:00 PM' },
-  { day: 'Friday', time: '9:30 AM - 7:00 PM' },
-  { day: 'Saturday', time: '9:30 AM - 7:00 PM' },
+  { day: 'Monday', time: '9:00 AM - 7:00 PM' },
+  { day: 'Tuesday', time: '9:00 AM - 7:00 PM' },
+  { day: 'Wednesday', time: '9:00 AM - 7:00 PM' },
+  { day: 'Thursday', time: '9:00 AM - 7:00 PM' },
+  { day: 'Friday', time: '9:00 AM - 7:00 PM' },
+  { day: 'Saturday', time: '9:00 AM - 7:00 PM' },
   { day: 'Sunday', time: 'Closed', closed: true },
 ];
 
-const ServiceCard = ({id}:any) => {
+const ServiceCard = ({service}:any) => {
 
 
   return (
@@ -23,14 +23,20 @@ const ServiceCard = ({id}:any) => {
       <div className="p-3 rounded-lg mb-8">
         <div className="flex justify-between items-center mb-2">
           <div>
-            <h5 className="text-2xl font-bold">$150<span className="text-gray-500 line-through ml-2 text-xl">$170</span></h5>
+          {service?.offeredPrice ?   <h5 className="text-2xl font-bold">${service?.offeredPrice}
+              
+              <span className="text-gray-500 line-through ml-2 text-xl">${service?.regularPrice}</span></h5> :  
+           <h5 className="text-2xl font-bold">${service?.regularPrice}
+              
+            </h5>}
+          
             <p className="flex items-center text-yellow-500 text-sm">
               <FaStar /><span className="ml-1 text-black">4.9</span> 
               <span className="text-gray-600 ml-1">(255 reviews)</span>
             </p>
           </div>
           <div className="flex items-center">
-            <img src="/assets/avatar-02.jpg" className="w-12 h-12 rounded-full shadow-md" alt="Author" />
+            <img src={service?.provider?.profileImg[0]} className="w-12 h-12 rounded-full shadow-md" alt="Author" />
           </div>
         </div>
       </div>
@@ -38,14 +44,14 @@ const ServiceCard = ({id}:any) => {
       <div className="mb-8 p-3 bg-[#f8fcfd] rounded-lg">
         <h5 className="text-xl font-semibold py-4">Available Service Packages</h5>
         <ul className="list-inside">
-          <li className="flex items-center py-2"><FaCar className="mr-2 text-blue-500" />Full car wash and clean</li>
-          <li className="flex items-center py-2"><FaWrench className="mr-2 text-blue-500" />Auto Electrical</li>
-          <li className="flex items-center py-2"><FaClipboardCheck className="mr-2 text-blue-500" />Pre Purchase Inspection</li>
-          <li className="flex items-center py-2"><FaClipboardCheck className="mr-2 text-blue-500" />Pre Purchase Inspection</li>
+          <li className="flex items-center py-2"><FaClipboardCheck className="mr-2 text-blue-500" />{service?.keyFeature1}</li>
+          <li className="flex items-center py-2"><FaClipboardCheck className="mr-2 text-blue-500" />{service?.keyFeature2}</li>
+          <li className="flex items-center py-2"><FaClipboardCheck className="mr-2 text-blue-500" />{service?.keyFeature3}</li>
+          <li className="flex items-center py-2"><FaClipboardCheck className="mr-2 text-blue-500" />{service?.keyFeature4}</li>
         </ul>
       </div>
 
-     <AdditionalService serviceId={id} />
+     <AdditionalService serviceId={service?.id} />
       <div className="card card-available mb-8 p-6 bg-[#f8fcfd] rounded-lg">
         <h5 className="text-xl font-semibold py-4">Service Availability</h5>
         <ul>
@@ -68,7 +74,7 @@ const ServiceCard = ({id}:any) => {
       </div>
 
       <div>
-        <Link href={`/${id}/booking`} className=" bg-[#4c40ed] text-white px-4 py-3 rounded w-full block text-center">Book Service</Link>
+        <Link href={`/${service?.id}/booking`} className=" bg-[#4c40ed] text-white px-4 py-3 rounded w-full block text-center">Book Service</Link>
       </div>
     </div>
   );

@@ -68,7 +68,7 @@ const MostPopularServices = () => {
                   <Image
                     className="img-fluid w-full rounded-md transition-transform duration-300 ease-in-out h-auto  md:h-[230px]"
                     alt="Service Image"
-                    src={service.serviceImg[0]}
+                    src={service.serviceImg[service.serviceImg.length - 1]}
                     height={218}
                     width={328}
                   />
@@ -87,11 +87,11 @@ const MostPopularServices = () => {
               <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
                 <a href="providers.html" className="flex items-center">
                   <img
-                    src={service.category.categoryIcon}
+                    src={service.provider.profileImg[0]}
                     className="avatar w-10 h-10 rounded-full"
                     alt="User"
                   />
-                  <span className="ml-2 text-white">John Doe</span>
+                  <span className="ml-2 text-white">{`${service?.provider?.fName} ${service?.provider?.lName}`}</span>
                 </a>
               </div>
             </div>
@@ -104,10 +104,11 @@ const MostPopularServices = () => {
                   <FiMapPin className="mr-1" /> {service.location}
                 </p>
                 <p className="flex items-center">
-                  <h6 className="text-md font-bold">${service.price}</h6>
-                  <span className="line-through text-gray-500 ml-2 text-sm">
-                    ${service.price + 10}
-                  </span>
+                  <h6 className="text-md font-bold">${service?.regularPrice}</h6>
+                {service?.offeredPrice &&  
+                 <span className="line-through text-gray-500 ml-2 text-sm">
+                    ${service?.offeredPrice}
+                  </span>}
                 </p>
               </div>
               <div className="mt-4 flex items-center justify-between">

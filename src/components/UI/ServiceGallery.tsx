@@ -4,7 +4,7 @@ import { FaImages, FaRegHeart } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
-const ProductGallery = ({ data }: any) => {
+const ServiceGallery = ({ data }: any) => {
   console.log(data)
   const service = data?.data;
 
@@ -32,7 +32,7 @@ const ProductGallery = ({ data }: any) => {
 
   return (
     <section className="w-full">
-      <div className="mx-auto px-6 md:px-[7rem] py-8 w-full">
+      <div className="mx-auto px-6 md:px-[6rem] py-4 w-full">
         <h2 className="text-4xl font-semibold mb-4">{service.serviceName}</h2>
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-6">
@@ -155,4 +155,4 @@ const ProductGallery = ({ data }: any) => {
   );
 };
 
-export default ProductGallery;
+export default ServiceGallery;

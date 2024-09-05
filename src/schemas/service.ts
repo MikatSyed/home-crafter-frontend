@@ -5,7 +5,7 @@ const serviceSchema = yup.object().shape({
     .string()
     .required("Service Name is required"),
   
-  price: yup
+  regularPrice: yup
     .number()
     .typeError("Price must be a number")
     .required("Price is required")
@@ -30,6 +30,18 @@ const serviceSchema = yup.object().shape({
   videoUrl: yup
     .string()
     .url("Video URL must be a valid URL")
+    .nullable(),  // Optional field
+  keyFeature1: yup
+    .string()
+    .nullable(),  // Optional field
+  keyFeature2: yup
+    .string()
+    .nullable(),  // Optional field
+  keyFeature3: yup
+    .string()
+    .nullable(),  // Optional field
+  keyFeature4: yup
+    .string()
     .nullable(),  // Optional field
   
     
