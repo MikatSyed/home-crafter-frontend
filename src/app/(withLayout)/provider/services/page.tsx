@@ -9,21 +9,34 @@ import StatusModal from "@/components/UI/StatusModal";
 import ConfirmModal from "@/components/UI/ConfirmModal";
 import Loader from "@/components/UI/Loader";
 import { MdOutlineChangeCircle } from "react-icons/md";
+import ItemsPerPageSelector from "@/components/UI/ItemsPerPageSelector";
+import Pagination from "@/components/UI/Pagination";
 
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState("Active");
   const [selectedService, setSelectedService] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const { data,isLoading } = useServicesQuery(undefined);
+  const { data, isLoading } = useServicesQuery(undefined);
   const [updateService] = useUpdateServiceMutation();
   const [deleteService] = useDeleteServiceMutation();
 
-  const filteredServices = data?.data?.filter(
+  const services = data?.data || [];
+  const filteredServices = services?.filter(
     (service: any) => service.status === activeTab
   );
+
+  const totalPages = Math.ceil((data?.meta?.total || 0) / itemsPerPage);
+  const paginatedServices = filteredServices?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setItemsPerPage(Number(event.target.value));
+    setCurrentPage(1);
+  };
 
   const handleStatusClick = (service: any) => {
     setSelectedService(service);
@@ -74,8 +87,9 @@ const Services = () => {
       console.error("Failed to delete service:", error);
     }
   };
-  if(isLoading){
-    return <Loader/>
+
+  if (isLoading) {
+    return <Loader />;
   }
 
   return (
@@ -115,7 +129,7 @@ const Services = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {filteredServices?.map((service: any, index: any) => (
+        {paginatedServices?.map((service: any, index: any) => (
           <div
             key={index}
             className="border hover:shadow-md rounded-md relative overflow-hidden"
@@ -156,64 +170,63 @@ const Services = () => {
             </div>
             <div className="service-content p-4">
               <div className="flex items-center justify-between">
-              <h3 className=" text-xl font-bold">{service.serviceName}</h3>
-              <span
-                    className="text-[12px] text-[#74788d] font-normal cursor-pointer"
-                    onClick={() => handleStatusClick(service)}
-                  >
-                    {service.status === "Active" ? (
-                     <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center">
-                    
-                     <MdOutlineChangeCircle  /> <span className="px-1"> Active</span>
-                   </span>
-                   
-                    ) : (
-                      <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center ">
-                         <MdOutlineChangeCircle /> Inactive
-                      </span>
-                    )}
-                  </span>
+                <h3 className="text-xl font-bold">{service.serviceName}</h3>
+                <span
+                  className="text-[12px] text-[#74788d] font-normal cursor-pointer"
+                  onClick={() => handleStatusClick(service)}
+                >
+                  {service.status === "Active" ? (
+                    <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center">
+                      <MdOutlineChangeCircle /> <span className="px-1"> Active</span>
+                    </span>
+                  ) : (
+                    <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center ">
+                      <MdOutlineChangeCircle /> Inactive
+                    </span>
+                  )}
+                </span>
               </div>
-            
+
               <div className="flex items-center justify-between mt-2">
                 <p className="text-gray-500 flex items-center text-sm">
                   <FiMapPin className="mr-1" /> {service.location}
                 </p>
                 <p className="flex items-center">
-                  {service?.offeredPrice ? 
-                  <><h6 className="text-md font-bold"> ${service?.offeredPrice}</h6>
-                  <span className="line-through text-gray-500 ml-2 text-sm">
-                   ${service?.regularPrice}
-                  </span></>
-                   : <> <h6 className="text-md font-bold">
-                   ${service?.regularPrice}
-                  </h6></>
-                  }
+                  {service?.offeredPrice ? (
+                    <>
+                      <h6 className="text-md font-bold"> ${service?.offeredPrice}</h6>
+                      <span className="line-through text-gray-500 ml-2 text-sm">
+                        ${service?.regularPrice}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <h6 className="text-md font-bold">
+                        ${service?.regularPrice}
+                      </h6>
+                    </>
+                  )}
                 </p>
               </div>
               <div className="mt-4 flex items-center justify-between">
-  <div className="flex items-center">
-    <Link href={`/provider/services/edit/${service?.id}`} className="flex items-center mr-4">
-      <FaEdit className="text-[14px] text-[#74788d] cursor-pointer" />
-      <span className="ml-2 text-[#74788d] text-sm">Edit</span>
-    </Link>
+                <div className="flex items-center">
+                  <Link href={`/provider/services/edit/${service?.id}`} className="flex items-center mr-4">
+                    <FaEdit className="text-[14px] text-[#74788d] cursor-pointer" />
+                    <span className="ml-2 text-[#74788d] text-sm">Edit</span>
+                  </Link>
 
-  <div  onClick={() => handleDeleteClick(service)} className="cursor-pointer flex items-center ">
-  <FaTrashAlt
-      className="text-[14px] text-red-600 "
-    />
-    <span className="ml-2 text-[#74788d] text-sm">Delete</span>
-  </div>
-
-  </div>
-  <Link
-    href={`/service-details/${service.id}`}
-    className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
-  >
-    Apply Offer
-  </Link>
-</div>
-
+                  <div onClick={() => handleDeleteClick(service)} className="cursor-pointer flex items-center ">
+                    <FaTrashAlt className="text-[14px] text-red-600 " />
+                    <span className="ml-2 text-[#74788d] text-sm">Delete</span>
+                  </div>
+                </div>
+                <Link
+                  href={`/service-details/${service.id}`}
+                  className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
+                >
+                  Apply Offer
+                </Link>
+              </div>
             </div>
           </div>
         ))}
@@ -233,6 +246,19 @@ const Services = () => {
         onConfirm={handleConfirmDelete}
         message={`Are you sure you want to delete the service "${selectedService?.serviceName}"?`}
       />
+
+     <div className="flex items-center justify-end mt-10">
+     <ItemsPerPageSelector
+        itemsPerPage={itemsPerPage}
+        onItemsPerPageChange={handleItemsPerPageChange}
+      />
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
+     </div>
     </div>
   );
 };

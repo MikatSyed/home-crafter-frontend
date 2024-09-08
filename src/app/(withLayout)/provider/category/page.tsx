@@ -18,7 +18,7 @@ interface Category {
 const ProviderCategory: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(3); // Default items per page
+  const [itemsPerPage, setItemsPerPage] = useState(3); 
   const { data, isLoading }:any = useCategoriesQuery(undefined);
  
   const categories = data?.data || [];
@@ -29,7 +29,7 @@ const ProviderCategory: React.FC = () => {
 
   const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setItemsPerPage(Number(event.target.value));
-    setCurrentPage(1); // Reset to the first page whenever items per page changes
+    setCurrentPage(1); 
   };
 if(isLoading){
   return <Loader/>

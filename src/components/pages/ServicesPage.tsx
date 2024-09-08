@@ -97,6 +97,7 @@ const ServicesPage = () => {
   );
 
   const totalPages = Math.ceil(data?.meta?.total / servicesPerPage);
+  console.log(totalPages)
 
   useEffect(() => {
     if (data?.meta?.ratingCounts) {
