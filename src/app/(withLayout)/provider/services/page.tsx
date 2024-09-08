@@ -1,19 +1,25 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaEdit, FaTrashAlt } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
-import { useServicesQuery, useUpdateServiceMutation } from "@/redux/api/servicesApi";
+import { useServicesQuery, useUpdateServiceMutation, useDeleteServiceMutation } from "@/redux/api/servicesApi";
 import Link from "next/link";
 import StatusModal from "@/components/UI/StatusModal";
+import ConfirmModal from "@/components/UI/ConfirmModal";
+import Loader from "@/components/UI/Loader";
+import { MdOutlineChangeCircle } from "react-icons/md";
+
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState("Active");
   const [selectedService, setSelectedService] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const { data } = useServicesQuery(undefined);
+  const { data,isLoading } = useServicesQuery(undefined);
   const [updateService] = useUpdateServiceMutation();
+  const [deleteService] = useDeleteServiceMutation();
 
   const filteredServices = data?.data?.filter(
     (service: any) => service.status === activeTab
@@ -24,20 +30,30 @@ const Services = () => {
     setIsModalOpen(true);
   };
 
+  const handleDeleteClick = (service: any) => {
+    setSelectedService(service);
+    setIsDeleteModalOpen(true);
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedService(null);
   };
 
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedService(null);
+  };
+
   const handleConfirmStatusChange = async () => {
     if (!selectedService) return;
-  
+
     // Determine the updated status
     const updatedStatus = selectedService.status === "Active" ? "Inactive" : "Active";
-  
+
     try {
       // Pass the updated status in the payload
-      const response = await updateService({ id: selectedService.id,  body: { status: updatedStatus } }).unwrap();
+      const response = await updateService({ id: selectedService.id, body: { status: updatedStatus } }).unwrap();
       console.log('Update response:', response);
       setIsModalOpen(false);
       setSelectedService(null);
@@ -45,8 +61,23 @@ const Services = () => {
       console.error("Failed to update status:", error);
     }
   };
-  
-  
+
+  const handleConfirmDelete = async () => {
+    if (!selectedService) return;
+
+    try {
+      await deleteService(selectedService.id).unwrap();
+      console.log('Service deleted');
+      setIsDeleteModalOpen(false);
+      setSelectedService(null);
+    } catch (error) {
+      console.error("Failed to delete service:", error);
+    }
+  };
+  if(isLoading){
+    return <Loader/>
+  }
+
   return (
     <div className="mx-auto px-6 bg-white py-7">
       <div className="flex justify-between">
@@ -83,7 +114,7 @@ const Services = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {filteredServices?.map((service: any, index: any) => (
           <div
             key={index}
@@ -124,9 +155,26 @@ const Services = () => {
               </div>
             </div>
             <div className="service-content p-4">
-              <h3 className="title text-xl font-bold">
-                <Link href={`/service-details/${service.id}`}>{service.serviceName}</Link>
-              </h3>
+              <div className="flex items-center justify-between">
+              <h3 className=" text-xl font-bold">{service.serviceName}</h3>
+              <span
+                    className="text-[12px] text-[#74788d] font-normal cursor-pointer"
+                    onClick={() => handleStatusClick(service)}
+                  >
+                    {service.status === "Active" ? (
+                     <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center">
+                    
+                     <MdOutlineChangeCircle  /> <span className="px-1"> Active</span>
+                   </span>
+                   
+                    ) : (
+                      <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center ">
+                         <MdOutlineChangeCircle /> Inactive
+                      </span>
+                    )}
+                  </span>
+              </div>
+            
               <div className="flex items-center justify-between mt-2">
                 <p className="text-gray-500 flex items-center text-sm">
                   <FiMapPin className="mr-1" /> {service.location}
@@ -144,24 +192,28 @@ const Services = () => {
                 </p>
               </div>
               <div className="mt-4 flex items-center justify-between">
-                <div>
-                  <Link href={`/provider/services/edit/${service?.id}`}>
-                    <span className="text-[14px] text-[#74788d] font-semibold">Edit</span>
-                  </Link>
-                  <span
-                    className="text-[14px] text-[#74788d] font-semibold ml-4 cursor-pointer"
-                    onClick={() => handleStatusClick(service)}
-                  >
-                    {service.status}
-                  </span>
-                </div>
-                <Link
-                  href={`/service-details/${service.id}`}
-                  className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
-                >
-                  Apply Offer
-                </Link>
-              </div>
+  <div className="flex items-center">
+    <Link href={`/provider/services/edit/${service?.id}`} className="flex items-center mr-4">
+      <FaEdit className="text-[14px] text-[#74788d] cursor-pointer" />
+      <span className="ml-2 text-[#74788d] text-sm">Edit</span>
+    </Link>
+
+  <div  onClick={() => handleDeleteClick(service)} className="cursor-pointer flex items-center ">
+  <FaTrashAlt
+      className="text-[14px] text-red-600 "
+    />
+    <span className="ml-2 text-[#74788d] text-sm">Delete</span>
+  </div>
+
+  </div>
+  <Link
+    href={`/service-details/${service.id}`}
+    className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
+  >
+    Apply Offer
+  </Link>
+</div>
+
             </div>
           </div>
         ))}
@@ -173,6 +225,13 @@ const Services = () => {
         onConfirm={handleConfirmStatusChange}
         serviceName={selectedService?.serviceName || ""}
         currentStatus={selectedService?.status || ""}
+      />
+
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
+        message={`Are you sure you want to delete the service "${selectedService?.serviceName}"?`}
       />
     </div>
   );
