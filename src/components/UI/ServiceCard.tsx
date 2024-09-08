@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FaStar, FaMapPin, FaCheckCircle, FaCar, FaWrench, FaClipboardCheck } from 'react-icons/fa';
 import AdditionalService from './AdditionalService';
+import Rating from './Rating';
 
 
 const availability = [
@@ -31,8 +32,8 @@ const ServiceCard = ({service}:any) => {
             </h5>}
           
             <p className="flex items-center text-yellow-500 text-sm">
-              <FaStar /><span className="ml-1 text-black">4.9</span> 
-              <span className="text-gray-600 ml-1">(255 reviews)</span>
+            <Rating rating={service?.averageRating || 0}/><span className="ml-1 text-black">{service?.averageRating}</span> 
+              <span className="text-gray-600 ml-1">({service?.averageRating} reviews)</span>
             </p>
           </div>
           <div className="flex items-center">

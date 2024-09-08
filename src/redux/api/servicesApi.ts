@@ -84,6 +84,14 @@ export const servicesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags:[tagTypes.services]
     }),
+    updateServiceStatus: build.mutation({
+      query: (data:any) => ({
+        url : `${URL}/${data.id}/status`,
+        method: "PATCH",
+        data:data.body
+      }),
+      invalidatesTags:[tagTypes.services]
+    }),
 
     
     deleteService: build.mutation({
@@ -98,4 +106,4 @@ export const servicesApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddServiceMutation,useServicesQuery,useOverviewQuery,useAdditionalServiceQuery,useRelatedServiceQuery,useServiceQuery,useUpdateServiceMutation,useDeleteServiceMutation,useCategoriesQuery } = servicesApi;
+export const { useAddServiceMutation,useServicesQuery,useOverviewQuery,useAdditionalServiceQuery,useRelatedServiceQuery,useServiceQuery,useUpdateServiceMutation,useUpdateServiceStatusMutation,useDeleteServiceMutation,useCategoriesQuery } = servicesApi;

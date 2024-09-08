@@ -23,12 +23,12 @@ const Rating: React.FC<RatingProps> = ({ rating }) => {
         <div key={index} className="relative">
           <FaStar
             className={`mr-1 ${star === "full" ? "text-yellow-500" : "text-gray-300"}`}
-            style={{ width: "1em", height: "1em" }}
+            style={{ width: "1.2em", height: "1.2em" }}
           />
           {star === "half" && (
             <FaStar
               className="absolute top-0 left-0 text-yellow-500"
-              style={{ width: "1em", height: "1em", clipPath: "inset(0 50% 0 0)" }}
+              style={{ width: "1.2em", height: "1.2em", clipPath: "inset(0 50% 0 0)" }}
             />
           )}
         </div>

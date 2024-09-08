@@ -155,7 +155,7 @@ const ServicesPage = () => {
 
 
   return (
-    <div className="md:px-[7rem] py-6">
+    <div className="md:px-[6rem] py-6">
       <section>
         <div className="flex justify-between items-center w-full mb-4 ">
           <h2 className="text-xl font-semibold text-gray-800 ml-4 md:ml-0">Filter By</h2>
@@ -171,7 +171,7 @@ const ServicesPage = () => {
               />
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 w-48 bg-white border rounded shadow-lg">
+              <div className="absolute  w-48 bg-white border rounded shadow-lg">
                 <a
                   href="#"
                   onClick={() => handleOptionClick('asc')}
