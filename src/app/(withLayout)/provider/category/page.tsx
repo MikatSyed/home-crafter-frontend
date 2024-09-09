@@ -1,39 +1,66 @@
-"use client";
-
+"use client"
+import React, { useState } from 'react';
 import CreateCategory from '@/components/UI/CreateCategory';
+import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Loader from '@/components/UI/Loader';
+import Pagination from '@/components/UI/Pagination';
 import UpdateCategory from '@/components/UI/UpdateCategory';
-import { useCategoriesQuery } from '@/redux/api/categoryApi';
-import { useState } from 'react';
-import  { Toaster } from 'react-hot-toast';
-import { FiEdit, FiTrash, FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-
-interface Category {
-  id: string;
-  categoryName: string;
-  categoryIcon: string;
-  categoryImg: string;
-}
+import ConfirmModal from '@/components/UI/ConfirmModal'; // Ensure this component is correctly imported
+import { useCategoriesQuery, useDeleteCategoryMutation } from '@/redux/api/categoryApi';
+import { Toaster } from 'react-hot-toast';
+import { FiEdit, FiTrash } from 'react-icons/fi';
 
 const ProviderCategory: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
+  const [showUpdateModal, setShowUpdateModal] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(3); 
-  const { data, isLoading }:any = useCategoriesQuery(undefined);
- 
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [selectedCategory, setSelectedCategory] = useState<any>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const { data, isLoading }: any = useCategoriesQuery(undefined);
+  const [deleteCategory] = useDeleteCategoryMutation();
+
   const categories = data?.data || [];
   const totalPages = Math.ceil((data?.meta?.total || 0) / itemsPerPage);
-
 
   const paginatedCategories = categories.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setItemsPerPage(Number(event.target.value));
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
-if(isLoading){
-  return <Loader/>
-}
+
+  const handleEdit = (category: any) => {
+    setSelectedCategory(category);
+    setShowUpdateModal(true);
+  };
+
+  const handleDelete = (category: any) => {
+    setSelectedCategory(category);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedCategory(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (selectedCategory) {
+      try {
+        await deleteCategory(selectedCategory.id).unwrap();
+        handleCloseDeleteModal();
+      } catch (error) {
+        console.error('Failed to delete category:', error);
+      }
+    }
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
@@ -50,9 +77,8 @@ if(isLoading){
           </div>
         </div>
 
-
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {paginatedCategories.map((category:any) => (
+          {paginatedCategories.map((category: any) => (
             <div key={category.id} className="relative rounded flex items-center justify-center overflow-hidden group bg-white p-2">
               <div className="relative rounded-lg overflow-hidden border hover:shadow-md transition-shadow duration-300 w-full">
                 <div className="block image-wrapper">
@@ -74,10 +100,10 @@ if(isLoading){
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <button className="text-blue-500 hover:text-blue-700">
+                    <button className="text-blue-500 hover:text-blue-700" onClick={() => handleEdit(category)}>
                       <FiEdit size={18} />
                     </button>
-                    <button className="text-red-500 hover:text-red-700">
+                    <button className="text-red-500 hover:text-red-700" onClick={() => handleDelete(category)}>
                       <FiTrash size={18} />
                     </button>
                   </div>
@@ -87,60 +113,27 @@ if(isLoading){
           ))}
         </div>
 
-        <div className="flex justify-end mt-8">
-        <div className="">
-          <label htmlFor="itemsPerPage" className="mr-2 text-sm font-medium text-gray-700">Per Page:</label>
-          <select
-            id="itemsPerPage"
-            value={itemsPerPage}
-            onChange={handleItemsPerPageChange}
-            className="p-2 border rounded text-sm focus:outline-none focus:border-blue-600"
-          >
-            {[3, 6, 9, 12, 15, 18, 21].map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
-        </div>
-          <button
-            className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
-              currentPage === 1 ? 'text-gray-500 cursor-not-allowed text-sm' : 'text-gray-700 hover:text-[#4f46e5] text-sm font-bold'
-            }`}
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            <FiArrowLeft className="mr-1" /> PREV
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              className={`px-4 py-2 mx-1 rounded-lg transition-colors ${
-                currentPage === index + 1
-                  ? 'bg-[#4f46e5] text-white'
-                  : 'bg-[#f8fcfd] border border-gray-300 text-gray-800 hover:bg-[#4f46e5] text-sm hover:text-white'
-              }`}
-              onClick={() => setCurrentPage(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-          <button
-            className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
-              currentPage === totalPages ? 'text-gray-500 cursor-not-allowed text-sm' : 'text-gray-700 text-sm font-bold hover:text-[#4f46e5]'
-            }`}
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            NEXT <FiArrowRight className="ml-1" />
-          </button>
+        <div className="flex items-center justify-end mt-10">
+          <ItemsPerPageSelector itemsPerPage={itemsPerPage} onItemsPerPageChange={handleItemsPerPageChange} />
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </div>
 
-        <CreateCategory
-          show={showCreateModal}
-          onClose={() => setShowCreateModal(false)}
+        <CreateCategory show={showCreateModal} onClose={() => setShowCreateModal(false)} />
+
+        {selectedCategory && (
+          <UpdateCategory
+            show={showUpdateModal}
+            onClose={() => setShowUpdateModal(false)}
+            category={selectedCategory}
+          />
+        )}
+
+        <ConfirmModal
+          isOpen={isDeleteModalOpen}
+          onClose={handleCloseDeleteModal}
+          onConfirm={handleConfirmDelete}
+          message={`Are you sure you want to delete the category "${selectedCategory?.categoryName}"?`}
         />
-      
       </div>
     </>
   );

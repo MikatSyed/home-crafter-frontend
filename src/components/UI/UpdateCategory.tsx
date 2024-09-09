@@ -1,105 +1,121 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
+import Form from '../Forms/Form';
+import FormInput from '../Forms/FormInput';
+import { IoCloudUploadOutline } from 'react-icons/io5';
+import Image from 'next/image';
+import toast, { Toaster } from 'react-hot-toast';
+import { useUpdateCategoryMutation } from '@/redux/api/categoryApi';
+import { TiDeleteOutline, TiTickOutline } from 'react-icons/ti';
+import Spinner from './Spinner';
 
 interface UpdateCategoryFormProps {
   show: boolean;
   onClose: () => void;
-  onSubmit: (id: number, name: string, img: File | null, icon: File | null) => void;
   category: {
-    id: number;
-    name: string;
-    img: string;
-    icon: string;
-  };
+    id: string;
+    categoryName: string;
+    categoryIcon: string;
+    categoryImg: string;
+  } | null;
 }
 
-const UpdateCategory: React.FC<UpdateCategoryFormProps> = ({ show, onClose, onSubmit, category }) => {
-  const [name, setName] = useState<string>(category.name);
-  const [img, setImg] = useState<File | null>(null);
-  const [icon, setIcon] = useState<File | null>(null);
+const UpdateCategory: React.FC<UpdateCategoryFormProps> = ({ show, onClose, category }) => {
+  const [categoryName, setCategoryName] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+  const [updateCategory] = useUpdateCategoryMutation();
 
-  const handleImgChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setImg(e.target.files[0]);
+  useEffect(() => {
+    if (category) {
+      setCategoryName(category.categoryName);
     }
-  };
+  }, [category]);
 
-  const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setIcon(e.target.files[0]);
+  const onSubmit = async (values: any) => {
+    console.log(values)
+    try {
+      setLoading(true);
+      const res: any = await updateCategory({ id: category?.id, body:{...values} }).unwrap();
+      
+      if (res && res.data) {
+        toast("Category updated successfully", {
+          icon: <span style={{ marginRight: -8, fontSize: 22 }}><TiTickOutline /></span>,
+          style: {
+            borderRadius: "10px",
+            background: "#4f46e5",
+            color: "#fff",
+          },
+          duration: 2000,
+        });
+        onClose();
+      } else {
+        throw new Error("Unexpected response format");
+      }
+    } catch (err: any) {
+      console.error(err);
+
+      toast.error("Failed to update category", {
+        style: {
+          borderRadius: "10px",
+          background: "#e74c3c",
+          color: "#fff",
+        },
+        duration: 2000,
+      });
+    } finally {
+      setLoading(false);
     }
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    onSubmit(category.id, name, img, icon);
   };
 
   if (!show) return null;
+  const defaultValues = {
+    categoryName: categoryName || ''
+  }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-semibold">Edit Category</h3>
-          <button
-            onClick={onClose}
-            className="bg-[#4f46e5] text-white rounded-full p-2 hover:bg-opacity-90 transition"
-          >
-            <FiX size={18} />
-          </button>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Category Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={handleNameChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Upload Image</label>
-            <input
-              type="file"
-              onChange={handleImgChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              accept="image/*"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Upload Icon</label>
-            <input
-              type="file"
-              onChange={handleIconChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              accept="image/*"
-            />
-          </div>
-          <div className="flex justify-end">
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
+          <div className="flex justify-between items-center">
+            <h3 className="text-xl font-semibold mb-6">Update Category</h3>
             <button
-              type="button"
               onClick={onClose}
-              className="mr-4 px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+              className="bg-[#4f46e5] text-white rounded-full p-2 hover:bg-opacity-90 transition"
             >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-[#4f46e5] text-white rounded-md hover:bg-blue-600"
-            >
-              Update Category
+              <FiX size={18} />
             </button>
           </div>
-        </form>
+          <Form submitHandler={onSubmit}    defaultValues={defaultValues}>
+            <div className="mb-4">
+              <FormInput
+                name="categoryName"
+                label="Category Name"
+                type="text"
+              />
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={onClose}
+                className="mr-4 px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className={`text-[#4f46e5] hover:bg-[#4f46e5] hover:text-white inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5] ${loading ? 'w-[150px] bg-[#4f46e5] text-white opacity-50 cursor-not-allowed inline-flex justify-center items-center' : ''}`}
+                disabled={loading}
+              >
+                {loading ? <Spinner /> : 'Update Category'}
+              </button>
+            </div>
+          </Form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
