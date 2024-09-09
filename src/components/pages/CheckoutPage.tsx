@@ -34,7 +34,7 @@ const CheckoutPage = ({ data }: any) => {
   });
 
   const time = data?.data?.Time;
-  const total = service?.price;
+  const total = service?.offeredPrice > 0 ? service?.offeredPrice : service?.regularPrice ;
 
   const validateFields = () => {
     const newErrors = {

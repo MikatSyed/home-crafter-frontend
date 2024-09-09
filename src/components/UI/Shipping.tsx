@@ -68,7 +68,7 @@ function Shipping({ user, shippingData, errors, onShippingDataChange }: any) {
             id="name"
             type="text"
             className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 transition duration-200"
-            value={`${user?.fName} ${user?.lName} || ""`}
+            value={`${user?.fName} ${user?.lName}` || ""}
             disabled
           />
         </div>
