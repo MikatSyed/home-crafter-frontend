@@ -1,17 +1,19 @@
 "use client";
-import CreateBlog from '@/components/UI/CreateBlog';
-import Loader from '@/components/UI/Loader';
-import { useBlogsQuery } from '@/redux/api/blogApi';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import React from 'react';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
+import { useBlogsQuery, useDeleteBlogMutation } from '@/redux/api/blogApi'; 
+import Loader from '@/components/UI/Loader';
+import ConfirmModal from '@/components/UI/ConfirmModal'; 
+import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
+import Pagination from '@/components/UI/Pagination';
 
 // Define the types for Blog
 interface Blog {
   id: string;
   title: string;
   content: string;
-  blogImg: string[]; // Assuming multiple images can be stored, but you are only using one
+  blogImg: string[];
   category: {
     categoryName: string;
   };
@@ -24,11 +26,50 @@ interface Blog {
 }
 
 const ProviderBlog = () => {
-  // Pass an empty object to fetch all blogs without any filters
   const { data, isLoading } = useBlogsQuery({});
+  const [deleteBlog] = useDeleteBlogMutation();
+  const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const blogs = data?.data;
 
+  const totalPages = Math.ceil((data?.data?.length || 0) / itemsPerPage);
+  const paginatedBlogs = blogs?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setItemsPerPage(Number(event.target.value));
+    setCurrentPage(1);
+  };
+
+
+
+  
+  // Function to open the delete confirmation modal
+  const handleDeleteClick = (blog: Blog) => {
+    setSelectedBlog(blog);
+    setIsDeleteModalOpen(true);
+  };
+
+  // Function to confirm deletion
+  const handleConfirmDelete = async () => {
+    if (selectedBlog) {
+      try {
+        await deleteBlog(selectedBlog.id).unwrap();
+        setIsDeleteModalOpen(false);
+        setSelectedBlog(null);
+      } catch (error) {
+        console.error("Failed to delete blog", error);
+      }
+    }
+  };
+
+  // Function to close the delete confirmation modal
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedBlog(null);
+  };
   if (isLoading) return <Loader />;
-
   return (
     <div className="px-6 py-7">
       <div className="flex justify-between mb-8">
@@ -43,7 +84,7 @@ const ProviderBlog = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {data?.data.map((blog: Blog) => (
+        {paginatedBlogs?.map((blog: Blog) => (
           <div key={blog.id} className="border p-4 bg-white rounded-lg relative">
             <a href={`blog-details/${blog.id}`}>
               <img
@@ -84,15 +125,16 @@ const ProviderBlog = () => {
                   </span>
                 </div>
                 <div>
-                  <button
-                    // onClick={() => handleEdit(blog)}
+                 <Link href={`/provider/blog/edit/${blog?.id}`}>
+                 <button
+                  
                     className="bg-white p-1 rounded-full hover:bg-gray-200"
                     aria-label="Edit Blog"
                   >
                     <FiEdit size={18} className="text-blue-500" />
-                  </button>
+                  </button></Link>
                   <button
-                    // onClick={() => handleDelete(blog)}
+                    onClick={() => handleDeleteClick(blog)}
                     className="bg-white p-1 rounded-full hover:bg-gray-200 ml-2"
                     aria-label="Delete Blog"
                   >
@@ -104,6 +146,30 @@ const ProviderBlog = () => {
           </div>
         ))}
       </div>
+
+     
+
+      {selectedBlog && (
+        <ConfirmModal
+          isOpen={isDeleteModalOpen}
+          onClose={handleCloseDeleteModal}
+          onConfirm={handleConfirmDelete}
+          message={`Are you sure you want to delete the blog "${selectedBlog.title}"?`}
+        />
+      )}
+
+<div className="flex items-center justify-end mt-10">
+     <ItemsPerPageSelector
+        itemsPerPage={itemsPerPage}
+        onItemsPerPageChange={handleItemsPerPageChange}
+      />
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
+     </div>
     </div>
   );
 };

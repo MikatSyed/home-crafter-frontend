@@ -50,12 +50,12 @@ const ProviderBookings = () => {
   const handleSave = async () => {
     // Validation logic
     if (!selectedBookingStatus) {
-      setErrors((prevErrors) => ({ ...prevErrors, bookingStatus: "Please select a booking status." }));
+      setErrors((prevErrors:any) => ({ ...prevErrors, bookingStatus: "Please select a booking status." }));
       return;
     }
   
     if (selectedBookingStatus === "Confirmed" && !selectedWorkStatus) {
-      setErrors((prevErrors) => ({ ...prevErrors, workStatus: "Please select a work status." }));
+      setErrors((prevErrors:any) => ({ ...prevErrors, workStatus: "Please select a work status." }));
       return;
     }
   
