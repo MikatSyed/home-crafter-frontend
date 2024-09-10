@@ -1,15 +1,13 @@
 "use client"
 import { useState } from 'react';
-import { FiMenu, FiX, FiHome, FiBarChart, FiSettings, FiUser, FiMessageSquare } from 'react-icons/fi';
+import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
-import { FaBuilding, FaUser } from 'react-icons/fa6';
-import { FaCalendarAlt, FaMoneyBillAlt, FaProjectDiagram, FaRegCalendarAlt, FaRegClock, FaSuitcase, FaUserFriends } from 'react-icons/fa';
-import { MdDashboard, MdHomeRepairService, MdOutlineDashboard } from 'react-icons/md';
-import { CgLockUnlock } from 'react-icons/cg';
-import { BsClockFill, BsSuitcaseLg } from 'react-icons/bs';
+import {  FaRegCalendarAlt, FaRegClock} from 'react-icons/fa';
+import {  MdOutlineDashboard } from 'react-icons/md';
+import {  BsSuitcaseLg } from 'react-icons/bs';
 import { AiOutlineProduct } from 'react-icons/ai';
 import { IoNewspaperOutline } from 'react-icons/io5';
-
+import { CiMoneyCheck1 } from "react-icons/ci";
 interface SidebarProps {
   isOpen: boolean;
   onToggle: (isOpen: boolean) => void;
@@ -73,6 +71,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       <span>Bookings</span>
     </p>
   </Link>
+  <Link href="/provider/payout">
+    <p
+      onClick={() => handleLinkClick('provider-payout')}
+      className={getLinkClass('provider-payout')}
+    >
+      <CiMoneyCheck1  className="w-5 h-5 mr-2" />
+      <span>Payout</span>
+    </p>
+  </Link>
   <Link href="/availability">
     <p
       onClick={() => handleLinkClick('availability')}
@@ -100,16 +107,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       <span>Blog</span>
     </p>
   </Link>
-  <Link href="/settings">
-    <p
-      onClick={() => handleLinkClick('settings')}
-      className={getLinkClass('settings')}
-    >
-      <FiSettings className="w-5 h-5 mr-2" />
-      <span>Settings</span>
-    </p>
-  </Link>
-  {/* Add more links as needed */}
+
+
 </div>
       </div>
     </aside>
