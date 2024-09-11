@@ -6,22 +6,17 @@ export const payment = "/payment";
 
 const paymentApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    myPayments: build.query({
-      query: (arg: Record<string, any>) => {
+
+    payments: build.query({
+      query: () => {
         return {
-          url: `${payment}/my-semester-payments`,
-          method: "GET",
-          params: arg,
-        };
-      },
-      transformResponse: (response: any, meta: IMeta) => {
-        return {
-          myPayments: response,
-          meta,
+          url: payment,
+          method: "GET"
         };
       },
       providesTags: [tagTypes.payment],
     }),
+
     initialPayment: build.mutation({
       query: (data: any) => ({
         url: `${payment}/init`,
@@ -33,6 +28,6 @@ const paymentApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useMyPaymentsQuery, useInitialPaymentMutation } = paymentApi;
+export const { usePaymentsQuery, useInitialPaymentMutation } = paymentApi;
 
 export default paymentApi;

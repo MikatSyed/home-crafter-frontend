@@ -1,148 +1,137 @@
 "use client";
-import React, { useState } from 'react';
-import { BsTrash } from 'react-icons/bs'; // Import icons
+import React, { useState } from "react";
+import { BsEye, BsTrash } from "react-icons/bs";
+import Link from "next/link";
+import { usePaymentsQuery } from "@/redux/api/paymentApi";
+import ItemsPerPageSelector from "@/components/UI/ItemsPerPageSelector";
+import Pagination from "@/components/UI/Pagination";
 
-interface Payment {
-  id: string;
-  amount: number;
-  transactionId: string;
-  status: string;
-  booking: {
-    service: {
-      serviceName: string;
-    };
-    user: {
-      fName: string;
-      lName: string;
-    };
+
+const Payout: React.FC = () => {
+  const { data, isLoading, error } = usePaymentsQuery(undefined);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+
+  const payments = data?.data || [];
+  const totalPages = Math.ceil((payments?.length || 0) / itemsPerPage);
+
+  const paginatedPayments = payments.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setItemsPerPage(Number(event.target.value));
+    setCurrentPage(1);
   };
-  createdAt: string;
-}
 
-const paymentsData: Payment[] = [
-  {
-    id: '1',
-    amount: 150,
-    transactionId: 'TXN12345',
-    status: 'Confirmed',
-    booking: {
-      service: {
-        serviceName: '',
-      },
-      user: {
-        fName: 'John',
-        lName: 'Doe',
-      },
-    },
-    createdAt: '2024-09-09T12:00:00Z',
-  },
-  {
-    id: '2',
-    amount: 200,
-    transactionId: 'TXN67890',
-    status: 'Pending',
-    booking: {
-      service: {
-        serviceName: '',
-      },
-      user: {
-        fName: 'John',
-        lName: 'Doe',
-      },
-    },
-    createdAt: '2024-09-08T12:00:00Z',
-  },
-  // Add more static payment data here...
-];
 
-const PaymentHistory: React.FC = () => {
-  const handleDeleteClick = (id: string) => {
-    // Handle delete logic here
-    alert(`Delete payment with id: ${id}`);
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading payouts</div>;
+  }
+
 
   return (
-    <div className="px-4 py-7 sm:px-6">
-      <h2 className="text-2xl font-semibold text-[#2a2a3d] mb-8">Payment History</h2>
-      <div className="space-y-4">
-        {paymentsData.map((payment: Payment, index: number) => (
+    <div className="px-6 py-7">
+      <div className="bg-white rounded-md">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-semibold text-[#2a2a3d]">Payouts</h2>
+          <ItemsPerPageSelector
+        itemsPerPage={itemsPerPage}
+        onItemsPerPageChange={handleItemsPerPageChange}
+      />
+        </div>
+        {paginatedPayments?.map((payout: any, index: number) => (
           <div
-            key={payment.id}
-            className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-gray-50 px-4 py-6 rounded-lg space-y-4 sm:space-y-0 sm:space-x-4"
+            key={payout.id}
+            className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 p-4 bg-gray-100 rounded-md relative w-full my-2"
           >
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full">
-              {/* User Image and Name */}
-              <div className="flex items-center space-x-4 w-full sm:w-auto">
-                <img
-                  src={`https://via.placeholder.com/40`} // Replace with the actual user photo source
-                  alt={`${payment.booking.user.fName} ${payment.booking.user.lName}`}
-                  className="w-10 h-10 rounded-full"
-                />
-                <div className="flex flex-col">
-                  <p className="text-gray-800 text-sm sm:text-xs uppercase font-semibold">
-                    {payment.booking.user.fName} {payment.booking.user.lName}
+            <span className="absolute left-0 top-0 bg-green-500 text-white font-bold text-xs h-4 w-4 flex justify-center items-center rounded-tl-md">
+              {index + 1}
+            </span>
+            <div className="flex items-center gap-4 w-full md:w-1/4">
+            
+            <div className="w-12 h-12 rounded-full overflow-hidden">
+  <img
+    src={payout.booking.user.profileImg[0]}
+    alt="User Avatar"
+    className="w-full h-full object-cover"
+  />
+</div>
+
+              <div className="flex flex-col">
+                <Link href={`/user/details/${payout.booking.user.id}`}>
+                  <p className="inline-block text-gray-600 capitalize text-sm hover:text-blue-500 font-bold">
+                    {`${payout.booking.user.fName} ${payout.booking.user.lName}`}
                   </p>
-                  <span className="text-gray-500 text-sm">syed@gmail.com</span>
-                </div>
-              </div>
-
-              {/* Transaction ID */}
-              <div className="flex flex-col px-4 w-full sm:w-auto">
-                <span className="text-gray-500 text-xs uppercase font-semibold">Transaction ID</span>
-                <span className="text-gray-800 font-medium">{payment.transactionId}</span>
-              </div>
-
-              {/* Service Name */}
-              <div className="flex flex-col px-4 w-full sm:w-auto">
-                <span className="text-gray-500 text-xs uppercase font-semibold">Service Name</span>
-                <span className="text-gray-800 font-medium">Stream Car Wash</span>
-              </div>
-
-              {/* Amount */}
-              <div className="flex flex-col px-4 w-full sm:w-auto">
-                <span className="text-gray-500 text-xs uppercase font-semibold">Amount</span>
-                <span className="text-gray-800 font-medium">${payment.amount}</span>
-              </div>
-
-              {/* Payment Date */}
-              <div className="flex flex-col px-4 w-full sm:w-auto">
-                <span className="text-gray-500 text-xs uppercase font-semibold">Payment Date</span>
-                <span className="text-gray-800 font-medium">
-                  {new Date(payment.createdAt).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: '2-digit',
-                    year: 'numeric',
-                  })}
-                </span>
-              </div>
-
-              {/* Status */}
-              <div className="flex flex-col px-4 w-full sm:w-auto">
-                <span className="text-gray-500 text-xs uppercase font-semibold">Status</span>
-                <span
-                  className={`text-gray-800 font-medium ${
-                    payment.status === 'Confirmed' ? 'text-green-500' : 'text-yellow-500'
-                  }`}
-                >
-                  {payment.status}
-                </span>
+                </Link>
+                <span className="text-xs font-semibold">{payout.booking.user.email}</span>
               </div>
             </div>
 
-            {/* Action Button */}
-            <div className="w-full sm:w-auto sm:px-4 sm:mt-0 flex justify-end">
-              <button
-                onClick={() => handleDeleteClick(payment.id)}
-                className="text-red-500 hover:text-red-700 transition duration-300 transform hover:scale-110"
+            {/* Payout Amount */}
+            <div className="flex flex-col w-full md:w-1/5">
+              <span className="text-gray-600 capitalize text-sm">Amount</span>
+              <span className="text-xs font-semibold">${payout.amount}</span>
+            </div>
+
+            {/* Service */}
+            <div className="flex flex-col w-full md:w-1/5">
+              <span className="text-gray-600 capitalize text-sm">Service</span>
+              <span className="text-xs font-semibold">{payout.booking.service.serviceName}</span>
+            </div>
+
+            {/* Payout Date */}
+            <div className="flex flex-col w-full md:w-1/5">
+              <span className="text-gray-600 capitalize text-sm">Date</span>
+              <span className="text-xs font-semibold">
+                {new Date(payout.createdAt).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: '2-digit',
+                  year: 'numeric',
+                })}
+              </span>
+            </div>
+
+            {/* Payout Status */}
+            <div className="flex flex-col w-full md:w-1/5">
+              <span className="text-gray-600 capitalize text-sm">Status</span>
+              <span
+                className={`text-xs font-semibold ${
+                  payout.status === "Completed" ? "text-green-500" : "text-yellow-500"
+                }`}
               >
-                <BsTrash size={20} />
-              </button>
+                {payout.status}
+              </span>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-end w-full md:w-auto">
+            
+               
+                <button
+                  onClick={() => alert(`Delete payout with id: ${payout.id}`)}
+                  className="text-red-500 hover:text-red-700 transition duration-300 transform hover:scale-110"
+                >
+                  <BsTrash size={18} />
+                </button>
+              
             </div>
           </div>
         ))}
       </div>
+      <div className="flex items-center justify-end mt-10">
+    
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
+     </div>
     </div>
   );
 };
 
-export default PaymentHistory;
+export default Payout;
