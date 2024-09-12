@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { FaStar, FaEdit, FaTrashAlt } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
-import { useServicesQuery, useUpdateServiceMutation, useDeleteServiceMutation } from "@/redux/api/servicesApi";
+import { useServicesQuery, useUpdateServiceMutation, useDeleteServiceMutation, useApplyOfferMutation } from "@/redux/api/servicesApi";
 import Link from "next/link";
 import StatusModal from "@/components/UI/StatusModal";
 import ConfirmModal from "@/components/UI/ConfirmModal";
@@ -11,6 +11,8 @@ import Loader from "@/components/UI/Loader";
 import { MdOutlineChangeCircle } from "react-icons/md";
 import ItemsPerPageSelector from "@/components/UI/ItemsPerPageSelector";
 import Pagination from "@/components/UI/Pagination";
+import { useOffersQuery } from "@/redux/api/offerApi";
+import ApplyOfferModal from "@/components/UI/ApplyOfferModal";
 
 
 const Services = () => {
@@ -20,8 +22,14 @@ const Services = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
+const [selectedOffer, setSelectedOffer] = useState<any>(null);
+const [offerToApply, setOfferToApply] = useState<any>(null);
+
 
   const { data, isLoading } = useServicesQuery(undefined);
+  const { data: offersData, isLoading: isOffersLoading } = useOffersQuery(undefined);
+  const [applyOffer] = useApplyOfferMutation();
   const [updateService] = useUpdateServiceMutation();
   const [deleteService] = useDeleteServiceMutation();
 
@@ -87,6 +95,35 @@ const Services = () => {
       console.error("Failed to delete service:", error);
     }
   };
+
+  const handleApplyOfferClick = (service: any) => {
+    setSelectedService(service);
+    setIsOfferModalOpen(true);
+  };
+  
+  const handleCloseOfferModal = () => {
+    setIsOfferModalOpen(false);
+    setSelectedOffer(null);
+  };
+  
+  const handleOfferSelect = (offer: any) => {
+    setSelectedOffer(offer);
+  };
+  
+  const handleApplyOffer = async () => {
+    if (!selectedService || !selectedOffer) return;
+    console.log(selectedService.id,selectedOffer.id,'115')
+  
+    try {
+      await applyOffer({id: selectedService.id,body: { offerId: selectedOffer.id}}).unwrap();
+      console.log('Offer applied');
+      setIsOfferModalOpen(false);
+      setSelectedOffer(null);
+    } catch (error) {
+      console.error("Failed to apply offer:", error);
+    }
+  };
+  
 
   if (isLoading) {
     return <Loader />;
@@ -220,17 +257,26 @@ const Services = () => {
                     <span className="ml-2 text-[#74788d] text-sm">Delete</span>
                   </div>
                 </div>
-                <Link
-                  href={`/service-details/${service.id}`}
+                <button    
                   className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
+                  onClick={() => handleApplyOfferClick(service)}
                 >
                   Apply Offer
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      <ApplyOfferModal
+  isOpen={isOfferModalOpen}
+  onClose={handleCloseOfferModal}
+  onApply={handleApplyOffer}
+  offers={offersData?.data || []}
+  selectedOffer={selectedOffer}
+  onSelectOffer={handleOfferSelect}
+/>
 
       <StatusModal
         isOpen={isModalOpen}
