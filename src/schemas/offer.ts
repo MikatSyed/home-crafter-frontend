@@ -8,8 +8,7 @@ const offerSchema = yup.object().shape({
     .max(50, "Offer Name must be at most 50 characters long"),
   startDate: yup
     .date()
-    .required("Start Date is required")
-    .min(new Date(), "Start Date cannot be in the past"),
+    .required("Start Date is required"),
   endDate: yup
     .date()
     .required("End Date is required")

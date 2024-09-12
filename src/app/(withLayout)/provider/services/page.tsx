@@ -13,6 +13,8 @@ import ItemsPerPageSelector from "@/components/UI/ItemsPerPageSelector";
 import Pagination from "@/components/UI/Pagination";
 import { useOffersQuery } from "@/redux/api/offerApi";
 import ApplyOfferModal from "@/components/UI/ApplyOfferModal";
+import { TiTickOutline } from "react-icons/ti";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const Services = () => {
@@ -115,12 +117,22 @@ const [offerToApply, setOfferToApply] = useState<any>(null);
     console.log(selectedService.id,selectedOffer.id,'115')
   
     try {
-      await applyOffer({id: selectedService.id,body: { offerId: selectedOffer.id}}).unwrap();
-      console.log('Offer applied');
+      const res =  await applyOffer({id: selectedService.id,body: { offerId: selectedOffer.id}}).unwrap();
+      if(res?.data) {
+        toast('Offer Applied Successfully', {
+          icon: <span style={{ marginRight: -8, fontSize: 22 }}><TiTickOutline /></span>,
+          style: {
+            borderRadius: '10px',
+            background: '#4f46e5',
+            color: '#fff',
+          },
+          duration: 2000,
+        });
+      }
       setIsOfferModalOpen(false);
       setSelectedOffer(null);
-    } catch (error) {
-      console.error("Failed to apply offer:", error);
+    } catch (error:any) {
+      toast.error(error?.data);
     }
   };
   
@@ -130,6 +142,8 @@ const [offerToApply, setOfferToApply] = useState<any>(null);
   }
 
   return (
+   <>
+    <Toaster position="top-center" reverseOrder={false} />
     <div className="mx-auto px-6 bg-white py-7">
       <div className="flex justify-between">
         <h2 className="text-2xl font-semibold text-[#2a2a3d] mb-6">My Services</h2>
@@ -306,6 +320,7 @@ const [offerToApply, setOfferToApply] = useState<any>(null);
       />
      </div>
     </div>
+   </>
   );
 };
 
