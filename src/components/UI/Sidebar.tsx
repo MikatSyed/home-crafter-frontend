@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 import {  FaRegCalendarAlt, FaRegClock} from 'react-icons/fa';
-import {  MdOutlineDashboard } from 'react-icons/md';
+import {  MdOutlineDashboard, MdOutlineLocalOffer } from 'react-icons/md';
 import {  BsSuitcaseLg } from 'react-icons/bs';
 import { AiOutlineProduct } from 'react-icons/ai';
 import { IoNewspaperOutline } from 'react-icons/io5';
@@ -87,6 +87,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
     >
       <FaRegClock  className="w-5 h-5 mr-2" />
       <span>Availability</span>
+    </p>
+  </Link>
+  <Link href="/provider/offer">
+    <p
+      onClick={() => handleLinkClick('provider-offer')}
+      className={getLinkClass('provider-offer')}
+    >
+      <MdOutlineLocalOffer  className="w-5 h-5 mr-2" />
+      <span>Offer</span>
     </p>
   </Link>
   <Link href="/provider/category">

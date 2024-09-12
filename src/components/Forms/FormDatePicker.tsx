@@ -9,6 +9,7 @@ interface FormDatePickerProps {
   onChange?: (date: dayjs.Dayjs, formattedDate: string) => void;
   size?: string;
   className?: string;
+  minDate?: string;  
 }
 
 const FormDatePicker: React.FC<FormDatePickerProps> = ({
@@ -17,6 +18,7 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
   onChange,
   size = "large",
   className,
+  minDate,  
 }) => {
   const { control, setValue, formState: { errors } } = useFormContext();
 
@@ -48,6 +50,7 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
             value={field.value ? dayjs(field.value).format("YYYY-MM-DD") : ""}
             onChange={handleOnChange}
             className={`${className} block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#1475c6] focus:border-[#1475c6] transition ease-in duration-200 sm:text-sm`}
+            min={minDate}  
           />
         )}
       />

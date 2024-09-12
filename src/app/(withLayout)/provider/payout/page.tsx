@@ -106,18 +106,7 @@ const Payout: React.FC = () => {
               </span>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex justify-end w-full md:w-auto">
-            
-               
-                <button
-                  onClick={() => alert(`Delete payout with id: ${payout.id}`)}
-                  className="text-red-500 hover:text-red-700 transition duration-300 transform hover:scale-110"
-                >
-                  <BsTrash size={18} />
-                </button>
-              
-            </div>
+         
           </div>
         ))}
       </div>

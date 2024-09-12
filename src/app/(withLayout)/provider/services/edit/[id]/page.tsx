@@ -23,7 +23,7 @@ const EditService = ({ params }: IDProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [initialValues, setInitialValues] = useState<any>(null);
   const [discount, setDiscount] = useState<number>(0); 
-  const [discountedPrice, setDiscountedPrice] = useState<number>(0); // Track the discounted price
+  const [discountedPrice, setDiscountedPrice] = useState<number>(0); 
 
   const { data: serviceData, isLoading: isFetching } = useServiceQuery(id as string);
   const [updateService] = useUpdateServiceMutation();

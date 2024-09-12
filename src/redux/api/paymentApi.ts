@@ -17,6 +17,8 @@ const paymentApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.payment],
     }),
 
+  
+
     initialPayment: build.mutation({
       query: (data: any) => ({
         url: `${payment}/init`,
@@ -25,6 +27,7 @@ const paymentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.payment],
     }),
+
   }),
 });
 
