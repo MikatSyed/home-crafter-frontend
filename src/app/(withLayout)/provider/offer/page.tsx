@@ -1,36 +1,63 @@
-"use client";
+"use client"
 import React, { useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import CreateOffer from '@/components/UI/CreateOffer';
-import { useOffersQuery } from '@/redux/api/offerApi'; 
+import UpdateOffer from '@/components/UI/UpdateOffer';
+import { useOffersQuery, useDeleteOfferMutation } from '@/redux/api/offerApi';
 import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
-
+import ConfirmModal from '@/components/UI/ConfirmModal';
 
 const OfferPage = () => {
     const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
+    const [showEditModal, setShowEditModal] = useState<boolean>(false);
+    const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(1);
-     const [itemsPerPage, setItemsPerPage] = useState(6);
+    const [itemsPerPage, setItemsPerPage] = useState(6);
+    const [selectedOffer, setSelectedOffer] = useState<any>(null);
+    const [offerToDelete, setOfferToDelete] = useState<any>(null);
+    console.log(offerToDelete,'19')
 
     const { data, isLoading, isError } = useOffersQuery(undefined);
+    const [deleteOffer] = useDeleteOfferMutation();
     const offers = data?.data;
 
     const totalPages = Math.ceil((offers?.length || 0) / itemsPerPage);
+    const paginatedOffers = offers?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-  const paginatedOffers = offers?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setItemsPerPage(Number(event.target.value));
+        setCurrentPage(1);
+    };
 
-  const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setItemsPerPage(Number(event.target.value));
-    setCurrentPage(1);
-  };
-
-    // Helper function to format dates
     const formatDate = (dateString: any) => {
         const options: any = { day: 'numeric', month: 'short', year: 'numeric' };
         return new Date(dateString).toLocaleDateString('en-US', options);
     };
 
+    const handleEditClick = (offer: any) => {
+        setSelectedOffer(offer);
+        setShowEditModal(true);
+    };
 
+    const handleDeleteClick = (offer: any) => {
+        console.log(offer,'43')
+        setOfferToDelete(offer);
+        setShowConfirmModal(true);
+    };
+
+    const handleCloseDeleteModal = () => {
+        setShowConfirmModal(false);
+        setOfferToDelete(null);
+      };
+
+    const handleDeleteConfirm = async () => {
+        if (offerToDelete) {
+            await deleteOffer(offerToDelete.id);
+            setShowConfirmModal(false);
+            setOfferToDelete(null);
+        }
+    };
 
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error loading offers.</div>;
@@ -62,7 +89,7 @@ const OfferPage = () => {
                             </tr>
                         </thead>
                         <tbody className="text-gray-600 text-md font-light">
-                            {paginatedOffers?.map((offer:any) => (
+                            {paginatedOffers?.map((offer: any) => (
                                 <tr key={offer.id} className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-4 px-6 text-left whitespace-nowrap">
                                         <div className="flex items-center">
@@ -76,7 +103,7 @@ const OfferPage = () => {
                                         <span>{formatDate(offer.endDate)}</span>
                                     </td>
                                     <td className="py-4 px-6 text-left">
-                                        <span>{offer.discount}</span>
+                                        <span>{offer.discount}%</span>
                                     </td>
                                     <td className="py-4 px-6 text-left">
                                         <span
@@ -91,10 +118,16 @@ const OfferPage = () => {
                                     </td>
                                     <td className="py-3 px-6 text-center">
                                         <div className="flex item-center justify-center space-x-2">
-                                            <button className="text-blue-500 hover:text-blue-700 transform hover:scale-110">
+                                            <button
+                                                className="text-blue-500 hover:text-blue-700 transform hover:scale-110"
+                                                onClick={() => handleEditClick(offer)}
+                                            >
                                                 <FaEdit size={16} />
                                             </button>
-                                            <button className="text-red-500 hover:text-red-700 transform hover:scale-110">
+                                            <button
+                                                className="text-red-500 hover:text-red-700 transform hover:scale-110"
+                                                onClick={() => handleDeleteClick(offer)}
+                                            >
                                                 <FaTrash size={16} />
                                             </button>
                                         </div>
@@ -106,14 +139,32 @@ const OfferPage = () => {
                 </div>
             </div>
 
+            {/* Create Offer Modal */}
+            <CreateOffer
+                show={showCreateModal}
+                onClose={() => setShowCreateModal(false)}
+            />
 
-            <CreateOffer show={showCreateModal} onClose={() => setShowCreateModal(false)} />
+            {/* Update Offer Modal */}
+            <UpdateOffer
+                show={showEditModal}
+                onClose={() => setShowEditModal(false)}
+                offer={selectedOffer}
+            />
 
+            {/* Confirm Delete Modal */}
+            <ConfirmModal
+               isOpen={showConfirmModal}
+               onClose={handleCloseDeleteModal}
+               onConfirm={handleDeleteConfirm}
+               message={`Are you sure you want to delete the offer "${offerToDelete?.offerName}"?`}
+            />
+
+            {/* Pagination and Items Per Page */}
             <div className="flex items-center justify-end mt-10">
-          <ItemsPerPageSelector itemsPerPage={itemsPerPage} onItemsPerPageChange={handleItemsPerPageChange} />
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-        </div>
-
+                <ItemsPerPageSelector itemsPerPage={itemsPerPage} onItemsPerPageChange={handleItemsPerPageChange} />
+                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+            </div>
         </div>
     );
 };

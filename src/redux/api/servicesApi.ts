@@ -49,7 +49,7 @@ export const servicesApi = baseApi.injectEndpoints({
         method: "PATCH",
         data:data.body
       }),
-      invalidatesTags:[tagTypes.services]
+      invalidatesTags:[tagTypes.services,tagTypes.offer]
     }),
     
     additionalService: build.query({

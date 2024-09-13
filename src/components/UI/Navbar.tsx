@@ -82,22 +82,25 @@ const Navbar = () => {
             </div>
 
             {user ? (
-              <div className="flex items-center space-x-3 relative">
-                <Link href="/profile">
-                  <Image
-                    src={user?.profileImg[0]}
-                    alt="User Image"
-                    className="rounded-full shadow-md transform hover:scale-105 transition-transform duration-200"
-                    height={40}
-                    width={40}
-                  />
-                </Link>
-                <div>
-                  <div className="text-left">
-                    <p className="text-sm font-medium m-0">{`${user?.fName} ${user?.lName}`}</p>
-                  </div>
-                </div>
-              </div>
+             <div className="flex items-center space-x-3 relative">
+             <Link href="/profile">
+               <div className="w-12 h-12 overflow-hidden rounded-full shadow-md">
+                 <Image
+                   src={user?.profileImg[0]}
+                   alt="User Image"
+                   className="rounded-full transform hover:scale-105 transition-transform duration-200 object-cover"
+                   height={48}
+                   width={48}
+                 />
+               </div>
+             </Link>
+             <div>
+               <div className="text-left">
+                 <p className="text-sm font-medium m-0">{`${user?.fName} ${user?.lName}`}</p>
+               </div>
+             </div>
+           </div>
+           
             ) : (
               <Link href="/login">
                 <button className="flex items-center px-3 py-2 bg-[#4c40ed] text-white rounded-md shadow-md hover:bg-white border border-[#4c40ed] hover:text-[#4c40ed] text-md font-semibold">
