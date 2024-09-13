@@ -32,7 +32,7 @@ const ApplyOfferModal: React.FC<ApplyOfferModalProps> = ({ isOpen, onClose, onAp
         </div>
         <div className="flex justify-end">
           <button className="bg-gray-300 px-4 py-2 rounded mr-2" onClick={onClose}>Cancel</button>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={onApply}>Apply Offer</button>
+          <button className="bg-[#4f46e5] text-white px-4 py-2 rounded" onClick={onApply}>Apply Offer</button>
         </div>
       </div>
     </div>

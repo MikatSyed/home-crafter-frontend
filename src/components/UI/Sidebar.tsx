@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 import {  FaRegCalendarAlt, FaRegClock} from 'react-icons/fa';
-import {  MdOutlineDashboard, MdOutlineLocalOffer } from 'react-icons/md';
+import {  MdLocalOffer, MdOutlineDashboard, MdOutlineLocalOffer } from 'react-icons/md';
 import {  BsSuitcaseLg } from 'react-icons/bs';
 import { AiOutlineProduct } from 'react-icons/ai';
 import { IoNewspaperOutline } from 'react-icons/io5';
-import { CiMoneyCheck1 } from "react-icons/ci";
+import { CiBookmark, CiMoneyCheck1 } from "react-icons/ci";
 interface SidebarProps {
   isOpen: boolean;
   onToggle: (isOpen: boolean) => void;
@@ -78,6 +78,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
     >
       <CiMoneyCheck1  className="w-5 h-5 mr-2" />
       <span>Payout</span>
+    </p>
+  </Link>
+  <Link href="/provider/offered-service">
+    <p
+      onClick={() => handleLinkClick('offered-service')}
+      className={getLinkClass('offered-service')}
+    >
+      <CiBookmark  className="w-5 h-5 mr-2" />
+      <span>Offered Service</span>
     </p>
   </Link>
   <Link href="/availability">

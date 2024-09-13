@@ -79,7 +79,7 @@ const OfferPage = () => {
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white border border-gray-200 rounded-md">
                         <thead className=" text-gray-600 uppercase text-md ">
-                            <tr>
+                            <tr className='border-b border-gray-200 '>
                                 <th className="py-4 px-6 text-left">Offer Name</th>
                                 <th className="py-4 px-6 text-left">Start Date</th>
                                 <th className="py-4 px-6 text-left">End Date</th>
