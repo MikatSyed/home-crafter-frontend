@@ -36,7 +36,7 @@ export const adminApi = baseApi.injectEndpoints({
     loggedUser: build.query({
       query: () => {
         return {
-          url: "/profile",
+          url: "/profile/provider",
           method: "GET"
         };
       },

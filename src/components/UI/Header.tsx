@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useLoggedUserQuery } from '@/redux/api/userApi';
 import { signOut } from 'next-auth/react';
 import { useClickAway } from 'react-use';
+
 interface HeaderProps {
   isSidebarOpen: boolean;
   onToggleSidebar: () => void;
@@ -32,7 +33,6 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
 
   const user = data?.data;
 
-
   return (
     <header className="z-10 shadow-md">
       <div className="container flex items-center justify-between mx-2 text-blue-600 py-4">
@@ -40,7 +40,6 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
           <button className="mr-3 md:hidden" onClick={onToggleSidebar}>
             {isSidebarOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
           </button>
-          {/* <Image src={logo} alt="Logo" height={100} width={250} /> */}
         </div>
         <div className="flex items-center space-x-3">
           <Link href="/">
@@ -59,13 +58,15 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
               className="flex items-center space-x-2 focus:outline-none"
               tabIndex={0}
             >
-              <Image
-                src={user?.profileImg[0]}
-                alt="User Image"
-                className="rounded-full shadow-md transform hover:scale-105 transition-transform duration-200"
-                height={40}
-                width={40}
-              />
+              <div className="w-11 h-11 relative rounded-full overflow-hidden">
+                <Image
+                  src={user?.profileImg[user?.profileImg.length - 1]}
+                  alt="User Image"
+                  layout="fill"  
+                  objectFit="cover"  
+                  className="rounded-full"  
+                />
+              </div>
               <div className="hidden md:block">
                 {isLoading ? (
                   <p className="text-sm font-medium">Loading...</p>
