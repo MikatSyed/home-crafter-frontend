@@ -3,7 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend, LabelList,
 
 const BarChartComponent = ({ revenueData }:any) => {
   return (
-    <div className="h-96 w-full ml-[-30px]">
+    <div className="h-96 w-full ml-[-30px] ">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={revenueData}

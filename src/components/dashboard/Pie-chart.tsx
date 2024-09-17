@@ -40,7 +40,7 @@ const PieChart: React.FC<PieChartProps> = ({ categoryData }) => {
   }, [categoryData]);
 
   return (
-    <div className="w-full h-96 p-6 rounded-lg">
+    <div className="w-full h-96 p-6 rounded-lg ">
       <Pie
         data={chartData}
         options={{
