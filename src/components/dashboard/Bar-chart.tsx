@@ -1,81 +1,50 @@
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend, LabelList, ResponsiveContainer } from 'recharts';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
-const BarChart = () => {
-    const [chartData, setChartData] = useState<{
-        labels: string[];
-        datasets: {
-          data: number[];
-          backgroundColor: string;
-        }[];
-      }>({
-        labels: [],
-        datasets: [
-          {
-            data: [],
-            backgroundColor: '#3b82f6', // Blue color
-          },
-        ],
-      });
-
-  useEffect(() => {
-    // Generate sample data
-    const sampleData = [
-      { label: 'Jan', value: 50 },
-      { label: 'Feb', value: 75 },
-      { label: 'Mar', value: 100 },
-      { label: 'Apr', value: 80 },
-      { label: 'May', value: 90 },
-      { label: 'Jun', value: 85 },
-    ];
-
-    setChartData({
-      labels: sampleData.map((item) => item.label),
-      datasets: [
-        {
-          data: sampleData.map((item) => item.value),
-          backgroundColor: '#3b82f6', // Blue color
-        },
-      ],
-    });
-  }, []);
-
+const BarChartComponent = ({ revenueData }:any) => {
   return (
-    <div className="w-full h-96 p-6  rounded-lg">
-      <Bar
-        data={chartData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: {
-              grid: {
-                display: false,
-              },
-            },
-            y: {
-              grid: {
-                display: false,
-              },
-            },
-          },
-          plugins: {
-            title: {
-              display: true,
-              text: 'Dynamic Bar Chart',
-              font: {
-                size: 18,
-                weight: 'bold',
-              },
-            },
-          },
-        }}
-      />
+    <div className="h-96 w-full ml-[-30px]">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          data={revenueData}
+          className='p-6'
+        >
+          <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+          <XAxis
+            dataKey="name"
+            tick={{ fill: '#333', fontSize: 12, fontWeight: 500 }}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fill: '#333', fontSize: 12, fontWeight: 500 }}
+            tickLine={false}
+            axisLine={{ stroke: '#333' }}
+          />
+          <Tooltip
+            contentStyle={{ backgroundColor: '#333', color: '#fff', borderRadius: 4 }}
+            cursor={{ fill: 'transparent' }} // Custom cursor style
+          />
+          <Legend
+            wrapperStyle={{ marginBottom: 20 }}
+          />
+          <Bar
+            dataKey="earning"
+            fill="#4c40ed"
+            barSize={60} // Adjust bar size for wider bars
+            radius={[10, 10, 0, 0]} // Rounded corners on top of the bars
+          >
+            <LabelList
+              dataKey="earning"
+              position="top"
+              fill="#333"
+              fontSize={12}
+              fontWeight={500}
+            />
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };
 
-export default BarChart;
+export default BarChartComponent;

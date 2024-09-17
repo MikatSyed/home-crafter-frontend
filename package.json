@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,6 +14,7 @@
     "aos": "^2.3.4",
     "axios": "^1.7.3",
     "chart.js": "^4.4.3",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "dayjs": "^1.11.13",
     "jsonwebtoken": "^9.0.2",
     "next": "14.2.4",
@@ -36,6 +37,7 @@
     "react-star-ratings": "^2.3.0",
     "react-time-picker": "^7.0.0",
     "react-use": "^17.5.1",
+    "recharts": "^2.12.7",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.4",
     "yup": "^1.4.0"

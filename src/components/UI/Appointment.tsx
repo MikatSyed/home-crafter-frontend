@@ -18,6 +18,7 @@ const Appointment= () => {
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
     const { data, isLoading, refetch } = useAvailbilitiesQuery(undefined);
     const { data: userData } = useLoggedUserQuery(undefined);
+    console.log(userData,'21')
     const [addBooking] = useAddBookingMutation();
     const formattedDate = formatDateToISO(date);
     const { data: checkAvailableSlotData } = useCheckAvailableSlotQuery(formattedDate);
