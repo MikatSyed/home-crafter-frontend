@@ -4,13 +4,16 @@ import BarChart from '@/components/dashboard/Bar-chart';
 import PieChart from '@/components/dashboard/Pie-chart';
 import { FiBarChart, FiPieChart, FiUsers, FiTool } from 'react-icons/fi';
 import React from 'react';
-import Link from 'next/link';
+import { GrUserWorker } from 'react-icons/gr';
+
 
 const AdminDashboard = ({ data }: any) => {
+  console.log(data,'10')
   const totalProvider = data?.totalProviders || 0;
+  const totalUsers = data?.totalUsers || 0;
   const totalServices = data?.totalServices || 0;
   const totalRevenue = data?.totalEarnings?.totalPayments || 0;
-  const totalEarning = data?.totalEarnings?.earning || 0;
+  const totalEarning = data?.totalEarnings?.amount || 0;
   const lastFivePayments = data?.lastFivePayments || [];
 
   return (
@@ -33,11 +36,11 @@ const AdminDashboard = ({ data }: any) => {
         <div className="border rounded-lg p-6">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">Total Revenue</h3>
-              <p className="text-4xl font-bold text-yellow-600">${totalRevenue}</p>
+              <h3 className="text-lg font-semibold text-gray-800">Total User</h3>
+              <p className="text-4xl font-bold text-yellow-600">${totalUsers}</p>
             </div>
             <div className="bg-yellow-100 p-3 rounded-full">
-              <FiBarChart className="text-yellow-600 h-6 w-6" />
+              <FiUsers className="text-yellow-600 h-6 w-6" />
             </div>
           </div>
         </div>
@@ -50,7 +53,7 @@ const AdminDashboard = ({ data }: any) => {
               <p className="text-4xl font-bold text-blue-600">{totalProvider}</p>
             </div>
             <div className="bg-blue-100 p-3 rounded-full">
-              <FiUsers className="text-blue-600 h-6 w-6" />
+              <GrUserWorker className="text-blue-600 h-6 w-6" />
             </div>
           </div>
         </div>

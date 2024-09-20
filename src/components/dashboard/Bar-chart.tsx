@@ -41,6 +41,7 @@ const BarChartComponent = ({ revenueData }:any) => {
               fontWeight={500}
             />
           </Bar>
+    
         </BarChart>
       </ResponsiveContainer>
     </div>

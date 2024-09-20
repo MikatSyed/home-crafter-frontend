@@ -2,32 +2,19 @@ import {  IMeta } from "@/types";
 import { baseApi } from "./baseApi";
 import { tagTypes } from "../tag-types";
 
-const  USER_URL = "/users";
+const  USER_URL = "/user";
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
 
-    create: build.mutation({
-      query: (data) => ({
-        url : `${USER_URL}/create`,
-        method: "POST",
-        data
-      }),
-      invalidatesTags:[tagTypes.user]
-    }),
+
 
     users: build.query({
-      query: (arg: Record<string, any>) => {
+      query: () => {
         return {
           url: USER_URL,
           method: "GET",
-          params: arg,
-        };
-      },
-      transformResponse: (response: any[], meta: IMeta) => {
-        return {
-          users: response,
-          meta,
+        
         };
       },
       providesTags: [tagTypes.user],
@@ -74,4 +61,4 @@ export const adminApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useUsersQuery,useCreateMutation,useUserByIdQuery,useUpdateUserMutation,useDeleteUserMutation,useLoggedUserQuery } = adminApi;
+export const { useUsersQuery,useUserByIdQuery,useUpdateUserMutation,useDeleteUserMutation,useLoggedUserQuery } = adminApi;

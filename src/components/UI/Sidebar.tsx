@@ -2,13 +2,14 @@
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
-import { FaRegCalendarAlt, FaRegClock } from 'react-icons/fa';
+import { FaRegCalendarAlt, FaRegClock, FaUserTie } from 'react-icons/fa';
 import { MdOutlineDashboard, MdOutlineLocalOffer } from 'react-icons/md';
 import { BsSuitcaseLg } from 'react-icons/bs';
 import { AiOutlineProduct } from 'react-icons/ai';
-import { IoNewspaperOutline } from 'react-icons/io5';
+import { IoNewspaperOutline, IoPeopleOutline } from 'react-icons/io5';
 import { CiBookmark, CiMoneyCheck1 } from "react-icons/ci";
-
+import { PiUsers } from "react-icons/pi";
+import { GrUserWorker } from "react-icons/gr";
 interface SidebarProps {
   isOpen: boolean;
   onToggle: (isOpen: boolean) => void;
@@ -64,6 +65,27 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, data }) => {
               <span>My Services</span>
             </p>
           </Link>
+          {role === 'admin' && (
+            <Link href={`/${role}/user`}>
+              <p
+                onClick={() => handleLinkClick('provider-user')}
+                className={getLinkClass('provider-user')}
+              >
+                <PiUsers className="w-5 h-5 mr-2" />
+                <span>User</span>
+              </p>
+            </Link>
+          )}  {role === 'admin' && (
+            <Link href={`/${role}/provider`}>
+              <p
+                onClick={() => handleLinkClick('provider')}
+                className={getLinkClass('provider')}
+              >
+                <GrUserWorker className="w-5 h-5 mr-2" />
+                <span>Provider</span>
+              </p>
+            </Link>
+          )}
           <Link href={`/${role}/bookings`}>
             <p
               onClick={() => handleLinkClick('provider-bookings')}
@@ -109,7 +131,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, data }) => {
               <span>Offer</span>
             </p>
           </Link>
-          {/* Show category link only for admin role */}
+        
           {role === 'admin' && (
             <Link href={`/${role}/category`}>
               <p
