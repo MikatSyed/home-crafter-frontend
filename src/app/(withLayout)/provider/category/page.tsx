@@ -5,7 +5,7 @@ import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Loader from '@/components/UI/Loader';
 import Pagination from '@/components/UI/Pagination';
 import UpdateCategory from '@/components/UI/UpdateCategory';
-import ConfirmModal from '@/components/UI/ConfirmModal'; // Ensure this component is correctly imported
+import ConfirmModal from '@/components/UI/ConfirmModal';
 import { useCategoriesQuery, useDeleteCategoryMutation } from '@/redux/api/categoryApi';
 import { Toaster } from 'react-hot-toast';
 import { FiEdit, FiTrash } from 'react-icons/fi';
@@ -77,46 +77,54 @@ const ProviderCategory: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {paginatedCategories.map((category: any) => (
-            <div key={category.id} className="relative rounded flex items-center justify-center overflow-hidden group bg-white p-2">
-              <div className="relative rounded-lg overflow-hidden border hover:shadow-md transition-shadow duration-300 w-full">
-                <div className="block image-wrapper">
-                  <img
-                    src={category.categoryImg}
-                    alt={category.categoryName}
-                    className="w-full h-[250px] object-cover transition-transform duration-300 ease-in-out"
-                  />
-                </div>
-                <div className="p-4 flex items-center justify-between">
-                  <div className="flex items-center">
-                    <a href="#" className="rounded transition flex flex-col items-center justify-center text-center">
-                      <span className="inline-block p-2 bg-gray-100 rounded-full mr-2">
-                        <img src={category.categoryIcon} alt="icon" className="w-6 h-6" />
-                      </span>
-                    </a>
-                    <div className="ml-1">
-                      <h5 className="text-md font-bold text-gray-800">{category.categoryName}</h5>
-                    </div>
+        {paginatedCategories.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {paginatedCategories.map((category: any) => (
+              <div key={category.id} className="relative rounded flex items-center justify-center overflow-hidden group bg-white p-2">
+                <div className="relative rounded-lg overflow-hidden border hover:shadow-md transition-shadow duration-300 w-full">
+                  <div className="block image-wrapper">
+                    <img
+                      src={category.categoryImg}
+                      alt={category.categoryName}
+                      className="w-full h-[250px] object-cover transition-transform duration-300 ease-in-out"
+                    />
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <button className="text-blue-500 hover:text-blue-700" onClick={() => handleEdit(category)}>
-                      <FiEdit size={18} />
-                    </button>
-                    <button className="text-red-500 hover:text-red-700" onClick={() => handleDelete(category)}>
-                      <FiTrash size={18} />
-                    </button>
+                  <div className="p-4 flex items-center justify-between">
+                    <div className="flex items-center">
+                      <a href="#" className="rounded transition flex flex-col items-center justify-center text-center">
+                        <span className="inline-block p-2 bg-gray-100 rounded-full mr-2">
+                          <img src={category.categoryIcon} alt="icon" className="w-6 h-6" />
+                        </span>
+                      </a>
+                      <div className="ml-1">
+                        <h5 className="text-md font-bold text-gray-800">{category.categoryName}</h5>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <button className="text-blue-500 hover:text-blue-700" onClick={() => handleEdit(category)}>
+                        <FiEdit size={18} />
+                      </button>
+                      <button className="text-red-500 hover:text-red-700" onClick={() => handleDelete(category)}>
+                        <FiTrash size={18} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500 mt-6">
+            No categories available.
+          </div>
+        )}
 
-        <div className="flex items-center justify-end mt-10">
-          <ItemsPerPageSelector itemsPerPage={itemsPerPage} onItemsPerPageChange={handleItemsPerPageChange} />
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-        </div>
+        {paginatedCategories.length > 0 && (
+          <div className="flex items-center justify-end mt-10">
+            <ItemsPerPageSelector itemsPerPage={itemsPerPage} onItemsPerPageChange={handleItemsPerPageChange} />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+          </div>
+        )}
 
         <CreateCategory show={showCreateModal} onClose={() => setShowCreateModal(false)} />
 

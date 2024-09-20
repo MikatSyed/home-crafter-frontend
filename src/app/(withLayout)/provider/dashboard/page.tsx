@@ -7,12 +7,15 @@ import { FiBarChart, FiPieChart, FiUsers, FiShoppingCart, FiActivity, FiTool } f
 import React from 'react';
 import AdminDashboard from '@/components/UI/AdminDashboard';
 import ProviderDashboard from '@/components/UI/ProviderDashboard';
+import Loader from '@/components/UI/Loader';
 
 const Dashboard = () => {
-  const { data } = useOverviewQuery(undefined);
+  const { data,isLoading } = useOverviewQuery(undefined);
   const role = data?.data?.role;
  
-  
+  if(isLoading){
+    return <div><Loader/></div>
+  }
   
   return (
     <div>

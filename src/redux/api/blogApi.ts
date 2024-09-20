@@ -24,6 +24,14 @@ export const blogApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.blog],
     }),
 
+    providerBlogs: build.query({
+      query: () => ({
+        url : `${URL}/provider`,
+        method: "GET"
+       
+      }),
+      providesTags:[tagTypes.blog]
+    }),
     blog: build.query({
       query: (id) => ({
         url : `${URL}/${id}`,
@@ -86,4 +94,4 @@ export const blogApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useBlogsQuery,useBlogQuery,useLatestBlogsQuery,useSimilarBlogsQuery,useAddBlogMutation,useUpdateBlogMutation,useDeleteBlogMutation } = blogApi;
+export const { useBlogsQuery,useBlogQuery,useProviderBlogsQuery,useLatestBlogsQuery,useSimilarBlogsQuery,useAddBlogMutation,useUpdateBlogMutation,useDeleteBlogMutation } = blogApi;

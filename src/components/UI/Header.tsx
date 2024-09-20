@@ -10,10 +10,13 @@ import { useClickAway } from 'react-use';
 interface HeaderProps {
   isSidebarOpen: boolean;
   onToggleSidebar: () => void;
+  data:any;
+  isLoading:boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
-  const { data, isLoading } = useLoggedUserQuery(undefined);
+const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar,data,isLoading }) => {
+
+ 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileButtonRef = useRef<HTMLButtonElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -83,7 +86,9 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar }) => {
                 ref={profileMenuRef}
                 className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg animate-slide-down"
               >
-                <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
+                <Link href="/provider/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsProfileOpen(false)}>
+                  Profile
+                </Link>
                 <div className="border-t border-gray-200"></div>
                 <p onClick={handleSignOut} className="block px-4 py-2 text-sm cursor-pointer text-red-600 hover:bg-gray-100">Logout</p>
               </div>

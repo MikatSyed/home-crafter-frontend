@@ -8,7 +8,6 @@ import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
 import ConfirmModal from '@/components/UI/ConfirmModal';
 import { useApplyOfferMutation, useDeleteOfferServiceMutation, useOfferServicesQuery } from '@/redux/api/servicesApi';
-import StatusModal from '@/components/UI/StatusModal';
 import ApplyOfferModal from '@/components/UI/ApplyOfferModal';
 import toast, { Toaster } from 'react-hot-toast';
 import { TiTickOutline } from 'react-icons/ti';

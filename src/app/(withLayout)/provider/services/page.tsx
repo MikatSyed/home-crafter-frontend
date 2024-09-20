@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { FaStar, FaEdit, FaTrashAlt } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
-import { useServicesQuery, useUpdateServiceMutation, useDeleteServiceMutation, useApplyOfferMutation } from "@/redux/api/servicesApi";
+import { useServicesQuery, useUpdateServiceMutation, useDeleteServiceMutation, useApplyOfferMutation, useProviderServicesQuery } from "@/redux/api/servicesApi";
 import Link from "next/link";
 import StatusModal from "@/components/UI/StatusModal";
 import ConfirmModal from "@/components/UI/ConfirmModal";
@@ -29,7 +29,8 @@ const [selectedOffer, setSelectedOffer] = useState<any>(null);
 const [offerToApply, setOfferToApply] = useState<any>(null);
 
 
-  const { data, isLoading } = useServicesQuery(undefined);
+  // const { data, isLoading } = useServicesQuery(undefined);
+  const { data, isLoading } = useProviderServicesQuery(undefined);
   const { data: offersData, isLoading: isOffersLoading } = useOffersQuery(undefined);
   const [applyOffer] = useApplyOfferMutation();
   const [updateService] = useUpdateServiceMutation();
@@ -178,110 +179,112 @@ const [offerToApply, setOfferToApply] = useState<any>(null);
           Inactive Services
         </button>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {paginatedServices?.map((service: any, index: any) => (
-          <div
-            key={index}
-            className="border hover:shadow-md rounded-md relative overflow-hidden"
-            data-aos="fade-up"
-          >
-            <div className="relative">
-              <Link href={`/service-details/${service.id}`} className="block relative">
-                <div className="image-wrapper">
-                  <Image
-                    className="img-fluid w-full  transition-transform duration-300 ease-in-out h-auto md:h-[230px]"
-                    alt="Service Image"
-                    src={service.serviceImg[service.serviceImg.length - 1]}
-                    height={218}
-                    width={328}
-                  />
-                </div>
-              </Link>
-              <div className="fav-item absolute top-0 left-0 p-4 flex justify-between w-full">
-                <span className="text-sm bg-white px-3 py-1 hover:text-white text-[#665cf0] hover:bg-[#665cf0] rounded flex items-center">
-                  {service.category.categoryName}
-                </span>
-                <div className="flex items-center">
-                  <span className="rate ml-4 flex items-center bg-white px-3 py-1 rounded">
-                    <FaStar className="filled text-yellow-500 mr-1" /> {service?.averageRating}
-                  </span>
-                </div>
-              </div>
-              <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
-                <Link href={`/providers/${service.provider.id}`} className="flex items-center">
-                  <img
-                    src={service.provider.profileImg[0]}
-                    className="avatar w-10 h-10 rounded-full"
-                    alt="User"
-                  />
-                  <span className="ml-2 text-white">{`${service?.provider?.fName} ${service?.provider?.lName}`}</span>
+      {filteredServices.length === 0 ? (
+          <p className="text-center text-gray-600">No {activeTab} services found.</p>
+        ) : (  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {paginatedServices?.map((service: any, index: any) => (
+            <div
+              key={index}
+              className="border hover:shadow-md rounded-md relative overflow-hidden"
+              data-aos="fade-up"
+            >
+              <div className="relative">
+                <Link href={`/service-details/${service.id}`} className="block relative">
+                  <div className="image-wrapper">
+                    <Image
+                      className="img-fluid w-full  transition-transform duration-300 ease-in-out h-auto md:h-[230px]"
+                      alt="Service Image"
+                      src={service.serviceImg[service.serviceImg.length - 1]}
+                      height={218}
+                      width={328}
+                    />
+                  </div>
                 </Link>
-              </div>
-            </div>
-            <div className="service-content p-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold">{service.serviceName}</h3>
-                <span
-                  className="text-[12px] text-[#74788d] font-normal cursor-pointer"
-                  onClick={() => handleStatusClick(service)}
-                >
-                  {service.status === "Active" ? (
-                    <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center">
-                      <MdOutlineChangeCircle /> <span className="px-1"> Active</span>
+                <div className="fav-item absolute top-0 left-0 p-4 flex justify-between w-full">
+                  <span className="text-sm bg-white px-3 py-1 hover:text-white text-[#665cf0] hover:bg-[#665cf0] rounded flex items-center">
+                    {service.category.categoryName}
+                  </span>
+                  <div className="flex items-center">
+                    <span className="rate ml-4 flex items-center bg-white px-3 py-1 rounded">
+                      <FaStar className="filled text-yellow-500 mr-1" /> {service?.averageRating}
                     </span>
-                  ) : (
-                    <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center ">
-                      <MdOutlineChangeCircle /> Inactive
-                    </span>
-                  )}
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between mt-2">
-                <p className="text-gray-500 flex items-center text-sm">
-                  <FiMapPin className="mr-1" /> {service.location}
-                </p>
-                <p className="flex items-center">
-                  {service?.offeredPrice ? (
-                    <>
-                      <h6 className="text-md font-bold"> ${service?.offeredPrice}</h6>
-                      <span className="line-through text-gray-500 ml-2 text-sm">
-                        ${service?.regularPrice}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <h6 className="text-md font-bold">
-                        ${service?.regularPrice}
-                      </h6>
-                    </>
-                  )}
-                </p>
-              </div>
-              <div className="mt-4 flex items-center justify-between">
-                <div className="flex items-center">
-                  <Link href={`/provider/services/edit/${service?.id}`} className="flex items-center mr-4">
-                    <FaEdit className="text-[14px] text-[#74788d] cursor-pointer" />
-                    <span className="ml-2 text-[#74788d] text-sm">Edit</span>
-                  </Link>
-
-                  <div onClick={() => handleDeleteClick(service)} className="cursor-pointer flex items-center ">
-                    <FaTrashAlt className="text-[14px] text-red-600 " />
-                    <span className="ml-2 text-[#74788d] text-sm">Delete</span>
                   </div>
                 </div>
-                <button    
-                  className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
-                  onClick={() => handleApplyOfferClick(service)}
-                >
-                  Apply Offer
-                </button>
+                <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
+                  <Link href={`/providers/${service.provider.id}`} className="flex items-center">
+                    <img
+                      src={service.provider.profileImg[0]}
+                      className="avatar w-10 h-10 rounded-full"
+                      alt="User"
+                    />
+                    <span className="ml-2 text-white">{`${service?.provider?.fName} ${service?.provider?.lName}`}</span>
+                  </Link>
+                </div>
+              </div>
+              <div className="service-content p-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold">{service.serviceName}</h3>
+                  <span
+                    className="text-[12px] text-[#74788d] font-normal cursor-pointer"
+                    onClick={() => handleStatusClick(service)}
+                  >
+                    {service.status === "Active" ? (
+                      <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center">
+                        <MdOutlineChangeCircle /> <span className="px-1"> Active</span>
+                      </span>
+                    ) : (
+                      <span className="text-[14px] text-[#74788d] cursor-pointer flex items-center ">
+                        <MdOutlineChangeCircle /> Inactive
+                      </span>
+                    )}
+                  </span>
+                </div>
+  
+                <div className="flex items-center justify-between mt-2">
+                  <p className="text-gray-500 flex items-center text-sm">
+                    <FiMapPin className="mr-1" /> {service.location}
+                  </p>
+                  <p className="flex items-center">
+                    {service?.offeredPrice ? (
+                      <>
+                        <h6 className="text-md font-bold"> ${service?.offeredPrice}</h6>
+                        <span className="line-through text-gray-500 ml-2 text-sm">
+                          ${service?.regularPrice}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <h6 className="text-md font-bold">
+                          ${service?.regularPrice}
+                        </h6>
+                      </>
+                    )}
+                  </p>
+                </div>
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <Link href={`/provider/services/edit/${service?.id}`} className="flex items-center mr-4">
+                      <FaEdit className="text-[14px] text-[#74788d] cursor-pointer" />
+                      <span className="ml-2 text-[#74788d] text-sm">Edit</span>
+                    </Link>
+  
+                    <div onClick={() => handleDeleteClick(service)} className="cursor-pointer flex items-center ">
+                      <FaTrashAlt className="text-[14px] text-red-600 " />
+                      <span className="ml-2 text-[#74788d] text-sm">Delete</span>
+                    </div>
+                  </div>
+                  <button    
+                    className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
+                    onClick={() => handleApplyOfferClick(service)}
+                  >
+                    Apply Offer
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div> )}
+    
 
       <ApplyOfferModal
   isOpen={isOfferModalOpen}
@@ -307,7 +310,7 @@ const [offerToApply, setOfferToApply] = useState<any>(null);
         message={`Are you sure you want to delete the service "${selectedService?.serviceName}"?`}
       />
 
-     <div className="flex items-center justify-end mt-10">
+{paginatedServices.length > 0 &&  <div className="flex items-center justify-end mt-10">
      <ItemsPerPageSelector
         itemsPerPage={itemsPerPage}
         onItemsPerPageChange={handleItemsPerPageChange}
@@ -318,7 +321,8 @@ const [offerToApply, setOfferToApply] = useState<any>(null);
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
-     </div>
+     </div>}
+    
     </div>
    </>
   );
