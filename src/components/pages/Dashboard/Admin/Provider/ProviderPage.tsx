@@ -4,21 +4,20 @@ import { FaTrash, FaEye } from 'react-icons/fa';
 import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
 import ConfirmModal from '@/components/UI/ConfirmModal';
-import { useDeleteUserMutation } from '@/redux/api/userApi';
-import { useProvidersQuery, useUpdateProviderStatusMutation } from '@/redux/api/providerApi';
-import { TiTickOutline } from 'react-icons/ti';
+import { useDeleteProviderMutation, useProvidersQuery, useUpdateProviderStatusMutation } from '@/redux/api/providerApi';
 import { ShowToast } from '@/components/UI/ShowToast';
 import { Toaster } from 'react-hot-toast';
+import Link from 'next/link';
 
 const ProviderPage = () => {
     const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(6);
-    const [userToDelete, setUserToDelete] = useState<any>(null);
+    const [providerToDelete, setProviderToDelete] = useState<any>(null);
 
     // Fetching providers data using the useProvidersQuery hook
     const { data, isLoading, isError }: any = useProvidersQuery(undefined);
-    const [deleteUser] = useDeleteUserMutation();
+    const [deleteProvider] = useDeleteProviderMutation();
     const [updateProviderStatus] = useUpdateProviderStatusMutation(); // Mutation for updating status
     const providers = data?.data; // Assuming data contains the list of providers
 
@@ -30,26 +29,31 @@ const ProviderPage = () => {
         setCurrentPage(1);
     };
 
-    const formatDate = (dateString: any) => {
-        const options: any = { day: 'numeric', month: 'short', year: 'numeric' };
-        return new Date(dateString).toLocaleDateString('en-US', options);
-    };
+    // const formatDate = (dateString: any) => {
+    //     const options: any = { day: 'numeric', month: 'short', year: 'numeric' };
+    //     return new Date(dateString).toLocaleDateString('en-US', options);
+    // };
 
     const handleDeleteClick = (provider: any) => {
-        setUserToDelete(provider);
+        setProviderToDelete(provider);
         setShowConfirmModal(true);
     };
 
     const handleCloseDeleteModal = () => {
         setShowConfirmModal(false);
-        setUserToDelete(null);
+        setProviderToDelete(null);
     };
 
     const handleDeleteConfirm = async () => {
-        if (userToDelete) {
-            await deleteUser(userToDelete?.id);
+        if (providerToDelete) {
+           const res =  await deleteProvider(providerToDelete?.id).unwrap();
+           if(res?.data) {
+            ShowToast({
+                message: res?.message,
+              });
+          }
             setShowConfirmModal(false);
-            setUserToDelete(null);
+            setProviderToDelete(null);
         }
     };
 
@@ -92,7 +96,7 @@ const ProviderPage = () => {
                                         <th className="py-4 px-6 text-left">Email</th>
                                         <th className="py-4 px-6 text-left">Phone</th>
                                         <th className="py-4 px-6 text-left">Gender</th>
-                                        <th className="py-4 px-6 text-left">Date of Join</th>
+                                      
                                         <th className="py-4 px-6 text-left">Approval Status</th>
                                         <th className="py-4 px-6 text-center">Actions</th>
                                     </tr>
@@ -119,9 +123,7 @@ const ProviderPage = () => {
                                             <td className="py-4 px-6 text-left">
                                                 <span>{provider.gender}</span>
                                             </td>
-                                            <td className="py-4 px-6 text-left">
-                                                <span>{formatDate(provider.createdAt)}</span>
-                                            </td>
+                                           
                                             <td className="py-4 px-6 text-left">
                                                 <select
                                                     value={provider.approvalStatus}
@@ -135,9 +137,11 @@ const ProviderPage = () => {
                                             </td>
                                             <td className="py-3 px-6 text-center">
                                                 <div className="flex item-center justify-center space-x-4">
-                                                    <button className="text-blue-600 hover:text-gray-700 transform hover:scale-110">
+                                                   <Link href={`/provider/${provider?.id}`}>
+                                                   <button className="text-blue-600 hover:text-gray-700 transform hover:scale-110">
                                                         <FaEye size={16} />
                                                     </button>
+                                                   </Link>
                                                     <button
                                                         className="text-red-500 hover:text-red-700 transform hover:scale-110"
                                                         onClick={() => handleDeleteClick(provider)}
@@ -175,7 +179,7 @@ const ProviderPage = () => {
                 isOpen={showConfirmModal}
                 onClose={handleCloseDeleteModal}
                 onConfirm={handleDeleteConfirm}
-                message={`Are you sure you want to delete the provider "${userToDelete?.fName} ${userToDelete?.lName}"?`}
+                message={`Are you sure you want to delete the provider "${providerToDelete?.fName} ${providerToDelete?.lName}"?`}
             />
         </div>
       </>

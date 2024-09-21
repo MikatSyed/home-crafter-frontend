@@ -79,8 +79,13 @@ const UserPage = () => {
                                 <tbody className="text-gray-600 text-md font-light">
                                     {paginatedUsers?.map((user: any) => (
                                         <tr key={user.id} className="border-b border-gray-200 hover:bg-gray-100">
-                                            <td className="py-4 px-6 text-left whitespace-nowrap">
+                                             <td className="py-4 px-6 text-left whitespace-nowrap">
                                                 <div className="flex items-center">
+                                                    <img
+                                                        className="w-8 h-8 rounded-full mr-3"
+                                                        src={user.profileImg[0]}
+                                                        alt={`${user.fName} ${user.lName}`}
+                                                    />
                                                     <span className="font-medium">{`${user.fName} ${user.lName}`}</span>
                                                 </div>
                                             </td>

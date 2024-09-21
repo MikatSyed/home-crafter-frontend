@@ -44,9 +44,18 @@ export const providerApi = baseApi.injectEndpoints({
       invalidatesTags:[tagTypes.provider]
     }),
 
+    deleteProvider: build.mutation({
+      query: (id) => ({
+        url : `${URL}/${id}`,
+        method: "DELETE"
+       
+      }),
+      invalidatesTags:[tagTypes.provider]
+    }),
+
    
 
   }),
 });
 
-export const {useProvidersQuery,useProviderByIdQuery,useUpdateProviderMutation,useUpdateProviderStatusMutation} = providerApi;
+export const {useProvidersQuery,useProviderByIdQuery,useUpdateProviderMutation,useUpdateProviderStatusMutation,useDeleteProviderMutation} = providerApi;
