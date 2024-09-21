@@ -1,10 +1,10 @@
 import React from 'react';
 import { FiMapPin, FiSearch } from 'react-icons/fi';
 import { FaSuitcase } from "react-icons/fa6";
-import suitcase from "../../../public/assets/suitcase.svg"
+import suitcase from "../../../../../public/assets/suitcase.svg"
 import Image from 'next/image';
 
-const HeroSectionSeven = () => {
+const HeroSection = () => {
     return (
         <div className="mx-auto px-6 md:px-[6rem] bg-indigo-900 py-14">
             <div className="max-w-7xl mx-auto">
@@ -83,4 +83,4 @@ const HeroSectionSeven = () => {
     );
 };
 
-export default HeroSectionSeven;
+export default HeroSection;

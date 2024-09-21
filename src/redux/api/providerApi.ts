@@ -16,6 +16,14 @@ export const providerApi = baseApi.injectEndpoints({
       }),
       providesTags:[tagTypes.provider]
     }),
+    providersForAdmin: build.query({
+      query: () => ({
+        url : `${URL}/admin`,
+        method: "GET"
+       
+      }),
+      providesTags:[tagTypes.provider]
+    }),
 
     providerById: build.query({
       query: (id) => ({
@@ -58,4 +66,4 @@ export const providerApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useProvidersQuery,useProviderByIdQuery,useUpdateProviderMutation,useUpdateProviderStatusMutation,useDeleteProviderMutation} = providerApi;
+export const {useProvidersQuery,useLazyProvidersForAdminQuery,useProviderByIdQuery,useUpdateProviderMutation,useUpdateProviderStatusMutation,useDeleteProviderMutation} = providerApi;

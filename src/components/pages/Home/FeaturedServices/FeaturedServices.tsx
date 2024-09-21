@@ -1,19 +1,19 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { FiMapPin } from "react-icons/fi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+
 import { useServicesQuery } from "@/redux/api/servicesApi";
 import Link from "next/link";
-import Loader from "./Loader";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import Rating from "./Rating";
+import Loader from "@/components/UI/Loader";
+import Rating from "@/components/UI/Rating";
 
-const MostPopularServices = () => {
+
+const FeaturedServices = () => {
   const [swiper, setSwiper] = useState<any | null>(null);
 
   const handleSwiper = (swiper: any) => {
@@ -34,11 +34,9 @@ const MostPopularServices = () => {
   const { data,isLoading } = useServicesQuery(undefined);
   const services = data?.data;
   if (isLoading) {
-    return (
-        <div >
-            <Loader/>
-        </div>
-    );
+    return  <Loader/>
+     
+   
 }
 
   return (
@@ -165,4 +163,4 @@ const MostPopularServices = () => {
   );
 };
 
-export default MostPopularServices;
+export default FeaturedServices;

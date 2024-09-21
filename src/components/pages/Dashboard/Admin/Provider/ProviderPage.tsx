@@ -4,7 +4,7 @@ import { FaTrash, FaEye } from 'react-icons/fa';
 import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
 import ConfirmModal from '@/components/UI/ConfirmModal';
-import { useDeleteProviderMutation, useProvidersQuery, useUpdateProviderStatusMutation } from '@/redux/api/providerApi';
+import { useDeleteProviderMutation, useLazyProvidersForAdminQuery, useUpdateProviderStatusMutation } from '@/redux/api/providerApi';
 import { ShowToast } from '@/components/UI/ShowToast';
 import { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ const ProviderPage = () => {
     const [providerToDelete, setProviderToDelete] = useState<any>(null);
 
     // Fetching providers data using the useProvidersQuery hook
-    const { data, isLoading, isError }: any = useProvidersQuery(undefined);
+    const { data, isLoading, isError }: any = useLazyProvidersForAdminQuery(undefined);
     const [deleteProvider] = useDeleteProviderMutation();
     const [updateProviderStatus] = useUpdateProviderStatusMutation(); // Mutation for updating status
     const providers = data?.data; // Assuming data contains the list of providers

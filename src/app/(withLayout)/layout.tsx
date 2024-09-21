@@ -3,6 +3,7 @@
 import Header from '@/components/UI/Header';
 import Sidebar from '@/components/UI/Sidebar';
 import { useLoggedUserQuery } from '@/redux/api/userApi';
+import { getSession, useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 

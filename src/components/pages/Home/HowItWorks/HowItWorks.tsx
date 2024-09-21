@@ -1,7 +1,7 @@
 import React from 'react';
-import icon1 from '../../../public/assets/work-icon.svg';
-import icon2 from '../../../public/assets/find-icon.svg';
-import icon3 from '../../../public/assets/place-icon.svg';
+import icon1 from '../../../../../public/assets/work-icon.svg';
+import icon2 from '../../../../../public/assets/find-icon.svg';
+import icon3 from '../../../../../public/assets/place-icon.svg';
 import Image from 'next/image';
 
 const HowItWorks = () => {

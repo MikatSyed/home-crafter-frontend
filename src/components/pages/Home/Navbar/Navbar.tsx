@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FiMenu, FiX, FiChevronDown, FiLogIn } from "react-icons/fi"; // Importing icons from react-icons
-import logo from "../../../public/assets/LOGO (1).png";
+import logo from "../../../../../public/assets/LOGO (1).png";
 import Image from "next/image";
 import Link from "next/link";
 import { useLoggedUserQuery } from "@/redux/api/userApi";

@@ -90,7 +90,7 @@ const ProviderDashboard = ({ data }: any) => {
       <div className="pt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="rounded-lg">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Revenue by Day (Last 7 Days)</h3>
-          <div className="shadow-md">
+          <div className="border">
             <BarChart revenueData={data?.formattedRevenueData || []} />
           </div>
         </div>

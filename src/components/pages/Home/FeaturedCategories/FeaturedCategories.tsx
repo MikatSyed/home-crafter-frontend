@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useCategoriesQuery } from '@/redux/api/categoryApi';
 import Link from 'next/link';
-import Loader from './Loader';
+
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import Loader from '@/components/UI/Loader';
 
 const FeaturedCategories = () => {
     const pathname = usePathname();
