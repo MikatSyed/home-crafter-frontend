@@ -33,7 +33,15 @@ export const providerApi = baseApi.injectEndpoints({
         method: "PATCH",
         data:data.body
       }),
-      invalidatesTags:[tagTypes.provider,tagTypes.user]
+      invalidatesTags:[tagTypes.provider]
+    }),
+    updateProviderStatus: build.mutation({
+      query: (data) => ({
+        url : `${URL}/${data.id}/status`,
+        method: "PATCH",
+        data:data.body
+      }),
+      invalidatesTags:[tagTypes.provider]
     }),
 
    
@@ -41,4 +49,4 @@ export const providerApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useProvidersQuery,useProviderByIdQuery,useUpdateProviderMutation} = providerApi;
+export const {useProvidersQuery,useProviderByIdQuery,useUpdateProviderMutation,useUpdateProviderStatusMutation} = providerApi;

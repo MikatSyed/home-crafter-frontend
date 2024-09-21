@@ -5,7 +5,10 @@ import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
 import ConfirmModal from '@/components/UI/ConfirmModal';
 import { useDeleteUserMutation } from '@/redux/api/userApi';
-import { useProvidersQuery } from '@/redux/api/providerApi';
+import { useProvidersQuery, useUpdateProviderStatusMutation } from '@/redux/api/providerApi';
+import { TiTickOutline } from 'react-icons/ti';
+import { ShowToast } from '@/components/UI/ShowToast';
+import { Toaster } from 'react-hot-toast';
 
 const ProviderPage = () => {
     const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
@@ -16,6 +19,7 @@ const ProviderPage = () => {
     // Fetching providers data using the useProvidersQuery hook
     const { data, isLoading, isError }: any = useProvidersQuery(undefined);
     const [deleteUser] = useDeleteUserMutation();
+    const [updateProviderStatus] = useUpdateProviderStatusMutation(); // Mutation for updating status
     const providers = data?.data; // Assuming data contains the list of providers
 
     const totalPages = Math.ceil((providers?.length || 0) / itemsPerPage);
@@ -49,16 +53,28 @@ const ProviderPage = () => {
         }
     };
 
-    const handleApprovalStatusChange = (providerId: string, event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleApprovalStatusChange = async (providerId: string, event: React.ChangeEvent<HTMLSelectElement>) => {
         const newStatus = event.target.value;
-        // Implement the logic to update the provider's approval status in your backend
-        console.log(`Updating provider ${providerId} approval status to ${newStatus}`);
+        try {
+          const res =   await updateProviderStatus({ id: providerId,body:{ approvalStatus: newStatus} }).unwrap(); 
+          console.log(res,'60')
+          if(res?.data) {
+            ShowToast({
+                message: res?.message,
+              });
+          }
+  
+        } catch (error) {
+            console.error('Error updating approval status:', error);
+        }
     };
 
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error loading providers.</div>;
 
     return (
+      <>
+         <Toaster position="top-center" reverseOrder={false} />
         <div className="px-6 py-7">
             <div className="flex justify-between mb-8">
                 <h2 className="text-2xl font-semibold text-[#2a2a3d]">Provider Listing</h2>
@@ -75,6 +91,7 @@ const ProviderPage = () => {
                                         <th className="py-4 px-6 text-left">Name</th>
                                         <th className="py-4 px-6 text-left">Email</th>
                                         <th className="py-4 px-6 text-left">Phone</th>
+                                        <th className="py-4 px-6 text-left">Gender</th>
                                         <th className="py-4 px-6 text-left">Date of Join</th>
                                         <th className="py-4 px-6 text-left">Approval Status</th>
                                         <th className="py-4 px-6 text-center">Actions</th>
@@ -100,6 +117,9 @@ const ProviderPage = () => {
                                                 <span>{provider.contactNo}</span>
                                             </td>
                                             <td className="py-4 px-6 text-left">
+                                                <span>{provider.gender}</span>
+                                            </td>
+                                            <td className="py-4 px-6 text-left">
                                                 <span>{formatDate(provider.createdAt)}</span>
                                             </td>
                                             <td className="py-4 px-6 text-left">
@@ -114,8 +134,8 @@ const ProviderPage = () => {
                                                 </select>
                                             </td>
                                             <td className="py-3 px-6 text-center">
-                                                <div className="flex item-center justify-center space-x-2">
-                                                    <button className="text-gray-500 hover:text-gray-700 transform hover:scale-110">
+                                                <div className="flex item-center justify-center space-x-4">
+                                                    <button className="text-blue-600 hover:text-gray-700 transform hover:scale-110">
                                                         <FaEye size={16} />
                                                     </button>
                                                     <button
@@ -158,6 +178,7 @@ const ProviderPage = () => {
                 message={`Are you sure you want to delete the provider "${userToDelete?.fName} ${userToDelete?.lName}"?`}
             />
         </div>
+      </>
     );
 };
 
