@@ -8,33 +8,14 @@ export const providerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
 
   
-
-    // users: build.query({
-    //   query: (arg: Record<string, any>) => {
-    //     return {
-    //       url: USER_URL,
-    //       method: "GET",
-    //       params: arg,
-    //     };
-    //   },
-    //   transformResponse: (response: any[], meta: IMeta) => {
-    //     return {
-    //       users: response,
-    //       meta,
-    //     };
-    //   },
-    //   providesTags: [tagTypes.user],
-    // }),
-
-    // loggedUser: build.query({
-    //   query: () => {
-    //     return {
-    //       url: "/profile/provider",
-    //       method: "GET"
-    //     };
-    //   },
-    //   providesTags: [tagTypes.user],
-    // }),
+    providers: build.query({
+      query: () => ({
+        url : `${URL}`,
+        method: "GET"
+       
+      }),
+      providesTags:[tagTypes.provider]
+    }),
 
     providerById: build.query({
       query: (id) => ({
@@ -55,17 +36,9 @@ export const providerApi = baseApi.injectEndpoints({
       invalidatesTags:[tagTypes.provider,tagTypes.user]
     }),
 
-    
-    // deleteUser: build.mutation({
-    //   query: (id) => ({
-    //     url : `${URL}/${id}`,
-    //     method: "DELETE"
-       
-    //   }),
-    //   invalidatesTags:[tagTypes.user]
-    // }),
+   
 
   }),
 });
 
-export const {useProviderByIdQuery,useUpdateProviderMutation} = providerApi;
+export const {useProvidersQuery,useProviderByIdQuery,useUpdateProviderMutation} = providerApi;
