@@ -18,7 +18,6 @@ interface ProductImage {
 const ProfilePage = () => {
   const { data, isLoading } = useLoggedUserQuery(undefined);
   const [images, setImages] = useState<ProductImage[]>([]);
-  console.log(images[0]?.url);
   const [imagesPreview, setImagesPreview] = useState<string[]>([]);
   const [updatedImage, setUpdatedImage] = useState("");
   const [loading, setLoading] = useState(false);

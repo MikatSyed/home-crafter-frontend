@@ -21,7 +21,9 @@ const FormTextArea: React.FC<FormTextAreaProps> = ({
     control,
     formState: { errors },
   } = useFormContext();
+  console.log(errors,'24')
   const errorMessage = getErrorMessageByPropertyName(errors, name);
+  console.log(errorMessage,'25')
 
   const [isFocused, setIsFocused] = useState(false);
 
@@ -55,7 +57,7 @@ const FormTextArea: React.FC<FormTextAreaProps> = ({
         )}
       />
       {errorMessage && (
-        <small className="text-red-500 mt-1">{errorMessage}</small>
+        <p className="text-red-500 my-2">{errorMessage}</p>
       )}
     </>
   );

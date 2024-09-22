@@ -38,6 +38,15 @@ export const reviewApi = baseApi.injectEndpoints({
         }),
         invalidatesTags:[tagTypes.review]
       }),
+ 
+    addProviderReview: build.mutation({
+        query: (data) => ({
+          url : `${URL}/provider`,
+          method: "POST",
+          data
+        }),
+        invalidatesTags:[tagTypes.review]
+      }),
 
   
 
@@ -47,4 +56,4 @@ export const reviewApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddReviewMutation,useReviewsQuery,useReviewByServiceIdQuery } = reviewApi;
+export const { useAddReviewMutation,useAddProviderReviewMutation,useReviewsQuery,useReviewByServiceIdQuery } = reviewApi;

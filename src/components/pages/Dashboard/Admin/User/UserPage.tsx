@@ -16,7 +16,7 @@ const UserPage = () => {
     const { data, isLoading, isError }:any = useUsersQuery(undefined);
     const [deleteUser] = useDeleteUserMutation();
     const users = data?.data;
-    console.log(users,'24')
+   
 
     const totalPages = Math.ceil((users?.length || 0) / itemsPerPage);
     const paginatedUsers = users?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);

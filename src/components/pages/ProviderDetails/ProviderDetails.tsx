@@ -15,6 +15,7 @@ import {
 } from 'react-icons/fi';
 import FeaturedServices from '../Home/FeaturedServices/FeaturedServices';
 import ProviderServices from './ProviderServices';
+import ProviderReview from './ProviderReview';
 
 const ProviderDetails = ({ id }: any) => {
   const { data, isLoading } = useProviderByIdQuery(id);
@@ -169,8 +170,9 @@ const ProviderDetails = ({ id }: any) => {
           </div>
         </div>
       </div>
-    </div>
     <ProviderServices services={services} category={category} profileImg={profileImg} fName={fName} lName={lName}/>
+    <ProviderReview providerId={id}/>
+    </div>
  </>
   );
 };

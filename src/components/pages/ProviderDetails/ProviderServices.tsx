@@ -36,7 +36,7 @@ const ProviderServices = ({services,category,profileImg,fName,lName}:any) => {
 
 
   return (
-    <div className="mx-auto px-6 md:px-[6rem] bg-white py-14">
+    <div className="py-14">
       <div className="section-heading mb-8">
         <div className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2" data-aos="fade-up">
