@@ -1,5 +1,6 @@
+import TopProviders from '@/components/pages/Home/TopProviders/TopProviders';
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
-import TopProviders from '@/components/UI/TopProviders';
+
 import React from 'react';
 
 const Provider = () => {
