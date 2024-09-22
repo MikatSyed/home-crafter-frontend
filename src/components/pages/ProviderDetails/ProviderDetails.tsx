@@ -2,20 +2,22 @@
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
 import { useProviderByIdQuery } from '@/redux/api/providerApi';
 import React from 'react';
-import { FaRegHeart, FaStar } from 'react-icons/fa6';
+import {  FaStar } from 'react-icons/fa6';
 import {
-  FiInstagram,
-  FiLinkedin,
+  FiCalendar,
+  FiClock,
   FiMail,
   FiMapPin,
   FiPhone,
-  FiTwitter,
+  
   FiUser,
-  FiYoutube
+  
 } from 'react-icons/fi';
 import FeaturedServices from '../Home/FeaturedServices/FeaturedServices';
 import ProviderServices from './ProviderServices';
 import ProviderReview from './ProviderReview';
+import Loader from '@/components/UI/Loader';
+import ProviderReviewCard from './ProviderReviewCard';
 
 const ProviderDetails = ({ id }: any) => {
   const { data, isLoading } = useProviderByIdQuery(id);
@@ -23,7 +25,7 @@ const ProviderDetails = ({ id }: any) => {
 
   // Check if data is loading or not available
   if (isLoading) {
-    return <div className="text-center py-10">Loading...</div>;
+    return <Loader/>
   }
 
   if (!provider) {
@@ -43,8 +45,8 @@ const ProviderDetails = ({ id }: any) => {
     email,
     contactNo,
     services,
-    rating = 4.9, // Use fallback rating
-    reviews = 255 // Use fallback number of reviews
+    rating = 4.9, 
+    reviews = 255 
   } = provider;
 
   console.log(services,'49')
@@ -88,90 +90,91 @@ const ProviderDetails = ({ id }: any) => {
 
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            
-              <div className="flex items-center p-4 rounded-lg">
-                <span className="text-xl text-blue-500 block p-4 rounded-full bg-blue-100">
-                  <FiUser />
-                </span>
-                <div className="ml-4">
-                  <h6 className="text-lg font-semibold text-gray-700 mb-1">Gender</h6>
-                  <p className="text-md text-gray-600 font-normal">{gender}</p>
-                </div>
-              </div>
+  {/* Gender */}
+  <div className="flex items-center p-4 rounded-lg">
+    <span className="text-xl text-pink-500 block p-4 rounded-full bg-[#f8fcfd]">
+      <FiUser />
+    </span>
+    <div className="ml-4">
+      <h6 className="text-lg font-semibold text-gray-700 mb-1">Gender</h6>
+      <p className="text-md text-gray-600 font-normal">{gender}</p>
+    </div>
+  </div>
 
-        
-              <div className="flex items-center p-4 rounded-lg">
-                <span className="text-xl text-blue-500 block p-4 rounded-full bg-blue-100">
-                  <FiUser />
-                </span>
-                <div className="ml-4">
-                  <h6 className="text-lg font-semibold text-gray-700 mb-1">Date of birth</h6>
-                  <p className="text-md text-gray-600 font-normal">
-                    {`${new Date(dob).toLocaleDateString('en-GB', {
-                      day: 'numeric',
-                      month: 'long',
-                      year: 'numeric',
-                    }).replace(/(\d{1,2} \w+)\s(\d{4})/, '$1, $2')}`}
-                  </p>
-                </div>
-              </div>
+  {/* Date of Birth */}
+  <div className="flex items-center p-4 rounded-lg">
+    <span className="text-xl text-yellow-500 block p-4 rounded-full bg-[#f8fcfd]">
+      <FiCalendar />
+    </span>
+    <div className="ml-4">
+      <h6 className="text-lg font-semibold text-gray-700 mb-1">Date of Birth</h6>
+      <p className="text-md text-gray-600 font-normal">
+        {`${new Date(dob).toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        }).replace(/(\d{1,2} \w+)\s(\d{4})/, '$1, $2')}`}
+      </p>
+    </div>
+  </div>
 
-        
-              <div className="flex items-center p-4 rounded-lg">
-                <span className="text-xl text-indigo-500 block p-4 rounded-full bg-indigo-100">
-                  <FiMail />
-                </span>
-                <div className="ml-4">
-                  <h6 className="text-lg font-semibold text-gray-700 mb-1">Email</h6>
-                  <p className="text-md text-gray-600 font-normal">{email || 'N/A'}</p>
-                </div>
-              </div>
+  {/* Email */}
+  <div className="flex items-center p-4 rounded-lg">
+    <span className="text-xl text-blue-500 block p-4 rounded-full bg-[#f8fcfd]">
+      <FiMail />
+    </span>
+    <div className="ml-4">
+      <h6 className="text-lg font-semibold text-gray-700 mb-1">Email</h6>
+      <p className="text-md text-gray-600 font-normal">{email || 'N/A'}</p>
+    </div>
+  </div>
 
-            
-              <div className="flex items-center p-4 rounded-lg mt-4">
-                <span className="text-xl text-red-500 block p-4 rounded-full bg-red-100">
-                  <FiPhone />
-                </span>
-                <div className="ml-4">
-                  <h6 className="text-lg font-semibold text-gray-700 mb-1">Phone</h6>
-                  <p className="text-md text-gray-600 font-normal">{contactNo || 'N/A'}</p>
-                </div>
-              </div>
+  {/* Phone */}
+  <div className="flex items-center p-4 rounded-lg mt-4">
+    <span className="text-xl text-red-500 block p-4 rounded-full bg-[#f8fcfd]">
+      <FiPhone />
+    </span>
+    <div className="ml-4">
+      <h6 className="text-lg font-semibold text-gray-700 mb-1">Phone</h6>
+      <p className="text-md text-gray-600 font-normal">{contactNo || 'N/A'}</p>
+    </div>
+  </div>
 
-            
-              <div className="flex items-center p-4 rounded-lg">
-                <span className="text-xl text-green-500 block p-4 rounded-full bg-green-100">
-                  <FiMapPin />
-                </span>
-                <div className="ml-4">
-                  <h6 className="text-lg font-semibold text-gray-700 mb-1">Address</h6>
-                  <p className="text-md text-gray-600 font-normal">{address || 'N/A'}</p>
-                </div>
-              </div>
+  {/* Address */}
+  <div className="flex items-center p-4 rounded-lg">
+    <span className="text-xl text-green-500 block p-4 rounded-full bg-[#f8fcfd]">
+      <FiMapPin />
+    </span>
+    <div className="ml-4">
+      <h6 className="text-lg font-semibold text-gray-700 mb-1">Address</h6>
+      <p className="text-md text-gray-600 font-normal">{address || 'N/A'}</p>
+    </div>
+  </div>
 
+  {/* Date of Join */}
+  <div className="flex items-center p-4 rounded-lg">
+    <span className="text-xl text-purple-500 block p-4 rounded-full bg-[#f8fcfd]">
+      <FiClock />
+    </span>
+    <div className="ml-4">
+      <h6 className="text-lg font-semibold text-gray-700 mb-1">Date of Join</h6>
+      <p className="text-md text-gray-600 font-normal">
+        {`${new Date(createdAt).toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        }).replace(/(\d{1,2} \w+)\s(\d{4})/, '$1, $2')}`}
+      </p>
+    </div>
+  </div>
+</div>
 
-              <div className="flex items-center p-4 rounded-lg">
-                <span className="text-xl text-green-500 block p-4 rounded-full bg-green-100">
-                  <FiMapPin />
-                </span>
-                <div className="ml-4">
-                  <h6 className="text-lg font-semibold text-gray-700 mb-1">Date of join</h6>
-                  <p className="text-md text-gray-600 font-normal"> {`${new Date(createdAt).toLocaleDateString('en-GB', {
-                      day: 'numeric',
-                      month: 'long',
-                      year: 'numeric',
-                    }).replace(/(\d{1,2} \w+)\s(\d{4})/, '$1, $2')}`}</p>
-                </div>
-              </div>
-
-           
-            
-            </div>
           </div>
         </div>
       </div>
     <ProviderServices services={services} category={category} profileImg={profileImg} fName={fName} lName={lName}/>
     <ProviderReview providerId={id}/>
+    <ProviderReviewCard providerId={id}/>
     </div>
  </>
   );

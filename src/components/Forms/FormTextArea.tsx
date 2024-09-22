@@ -21,9 +21,9 @@ const FormTextArea: React.FC<FormTextAreaProps> = ({
     control,
     formState: { errors },
   } = useFormContext();
-  console.log(errors,'24')
+
   const errorMessage = getErrorMessageByPropertyName(errors, name);
-  console.log(errorMessage,'25')
+
 
   const [isFocused, setIsFocused] = useState(false);
 

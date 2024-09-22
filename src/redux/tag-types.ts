@@ -11,7 +11,8 @@ export enum tagTypes {
     comment = "comment",
     payment = "payment",
     provider = "provider",
-    offer= "offer"
+    offer= "offer",
+    providerReview = "providerReview"
   
   }
   
@@ -28,6 +29,7 @@ export enum tagTypes {
     tagTypes.comment,
     tagTypes.payment,
     tagTypes.provider,
-    tagTypes.offer
+    tagTypes.offer,
+    tagTypes.providerReview
   ];
   

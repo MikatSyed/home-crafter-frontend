@@ -25,13 +25,14 @@ const ProviderReview: React.FC<ServiceCardProps> = ({ providerId }) => {
   const [addProviderReview] = useAddProviderReviewMutation();
   const [loading, setLoading] = useState<boolean>(false);
   const [ratingError, setRatingError] = useState<string | null>(null);
+  console.log(ratingError,'28')
 
   const onSubmit = async (values: any) => {
+    console.log(rating,'31')
     if (rating === 0) {
       setRatingError("Please select a rating.");
       return;
     }
-
     const reviewData = { rating, comment: values.comment, providerId };
     const toastId = toast.loading("Posting...");
 

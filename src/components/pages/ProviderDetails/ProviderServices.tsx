@@ -47,24 +47,44 @@ const ProviderServices = ({services,category,profileImg,fName,lName}:any) => {
               Explore the greatest of our services. You won’t be disappointed
             </p>
           </div>
-          {services?.length > 3 && ( 
-            <div className="w-full md:w-1/2 text-right">
-              <div className="inline-flex items-center space-x-4">
-                <button
-                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
-                  onClick={handlePrevious}
-                >
-                  <IoIosArrowBack className="w-5 h-5" />
-                </button>
-                <button
-                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
-                  onClick={handleNext}
-                >
-                  <IoIosArrowForward className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-          )}
+       
+         {services?.length > 3 && (
+  <div className="w-full text-right hidden md:block">
+    <div className="inline-flex items-center space-x-4">
+      <button
+        className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+        onClick={handlePrevious}
+      >
+        <IoIosArrowBack className="w-5 h-5" />
+      </button>
+      <button
+        className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+        onClick={handleNext}
+      >
+        <IoIosArrowForward className="w-5 h-5" />
+      </button>
+    </div>
+  </div>
+)}
+         {services?.length > 1 && (
+  <div className="w-full text-right block md:hidden">
+    <div className="inline-flex items-center space-x-4">
+      <button
+        className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+        onClick={handlePrevious}
+      >
+        <IoIosArrowBack className="w-5 h-5" />
+      </button>
+      <button
+        className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+        onClick={handleNext}
+      >
+        <IoIosArrowForward className="w-5 h-5" />
+      </button>
+    </div>
+  </div>
+)}    
+
         </div>
       </div>
       <Swiper
