@@ -32,8 +32,8 @@ const ServiceCard = ({service}:any) => {
             </h5>}
           
             <p className="flex items-center text-yellow-500 text-sm">
-            <Rating rating={service?.averageRating || 0}/><span className="ml-1 text-black">{service?.averageRating}</span> 
-              <span className="text-gray-600 ml-1">({service?.averageRating} reviews)</span>
+            <Rating rating={service?.averageServiceRating || 0}/><span className="ml-1 text-black">{service?.averageServiceRating}</span> 
+              <span className="text-gray-600 ml-1">({service?.totalServiceReviews} reviews)</span>
             </p>
           </div>
           <div className="flex items-center">
@@ -75,7 +75,7 @@ const ServiceCard = ({service}:any) => {
       </div>
 
       <div>
-        <Link href={`/${service?.id}/booking`} className=" bg-[#4c40ed] text-white px-4 py-3 rounded w-full block text-center">Book Service</Link>
+        <Link href={`/${service?.id}/booking`} className=" bg-indigo-600 text-white px-4 py-3 rounded w-full block text-center">Book Service</Link>
       </div>
     </div>
   );

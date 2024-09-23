@@ -18,6 +18,7 @@ import ProviderServices from './ProviderServices';
 import ProviderReview from './ProviderReview';
 import Loader from '@/components/UI/Loader';
 import ProviderReviewCard from './ProviderReviewCard';
+import Rating from '@/components/UI/Rating';
 
 const ProviderDetails = ({ id }: any) => {
   const { data, isLoading } = useProviderByIdQuery(id);
@@ -45,8 +46,8 @@ const ProviderDetails = ({ id }: any) => {
     email,
     contactNo,
     services,
-    rating = 4.9, 
-    reviews = 255 
+    averageRating, 
+    totalReviews 
   } = provider;
 
   console.log(services,'49')
@@ -80,18 +81,17 @@ const ProviderDetails = ({ id }: any) => {
               <h5 className="text-3xl font-bold text-gray-900">{fName} {lName}</h5>
 
              
-              <div className="flex items-center text-lg px-4">
-                <FaStar className="text-yellow-500 mr-1" />
-                <span className="text-gray-900 font-bold">{rating}</span>
-                <span className="text-gray-500 ml-2">({reviews} reviews)</span>
+              <div className="flex items-center text-md px-4">
+              <Rating rating={averageRating || 0}/><span className="ml-1 text-gray-800">{averageRating}</span> 
+                <span className="text-gray-500 ml-2">({totalReviews} reviews)</span>
               </div>
             </div>
             <p className="font-medium mb-2">{bio}</p>
 
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-  {/* Gender */}
-  <div className="flex items-center p-4 rounded-lg">
+
+  <div className="flex items-center py-4 pr-4 rounded-lg">
     <span className="text-xl text-pink-500 block p-4 rounded-full bg-[#f8fcfd]">
       <FiUser />
     </span>
@@ -101,8 +101,8 @@ const ProviderDetails = ({ id }: any) => {
     </div>
   </div>
 
-  {/* Date of Birth */}
-  <div className="flex items-center p-4 rounded-lg">
+
+  <div className="flex items-center py-4 pr-4 rounded-lg">
     <span className="text-xl text-yellow-500 block p-4 rounded-full bg-[#f8fcfd]">
       <FiCalendar />
     </span>
@@ -118,8 +118,8 @@ const ProviderDetails = ({ id }: any) => {
     </div>
   </div>
 
-  {/* Email */}
-  <div className="flex items-center p-4 rounded-lg">
+
+  <div className="flex items-center py-4 pr-4 rounded-lg">
     <span className="text-xl text-blue-500 block p-4 rounded-full bg-[#f8fcfd]">
       <FiMail />
     </span>
@@ -129,8 +129,8 @@ const ProviderDetails = ({ id }: any) => {
     </div>
   </div>
 
-  {/* Phone */}
-  <div className="flex items-center p-4 rounded-lg mt-4">
+ 
+  <div className="flex items-center py-4 pr-4 rounded-lg mt-4">
     <span className="text-xl text-red-500 block p-4 rounded-full bg-[#f8fcfd]">
       <FiPhone />
     </span>
@@ -140,8 +140,7 @@ const ProviderDetails = ({ id }: any) => {
     </div>
   </div>
 
-  {/* Address */}
-  <div className="flex items-center p-4 rounded-lg">
+  <div className="flex items-center py-4 pr-4 rounded-lg">
     <span className="text-xl text-green-500 block p-4 rounded-full bg-[#f8fcfd]">
       <FiMapPin />
     </span>

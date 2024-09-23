@@ -46,7 +46,7 @@ export const reviewApi = baseApi.injectEndpoints({
           method: "POST",
           data
         }),
-        invalidatesTags:[tagTypes.review]
+        invalidatesTags:[tagTypes.review,tagTypes.services]
       }),
  
     addProviderReview: build.mutation({
@@ -55,7 +55,7 @@ export const reviewApi = baseApi.injectEndpoints({
           method: "POST",
           data
         }),
-        invalidatesTags:[tagTypes.providerReview]
+        invalidatesTags:[tagTypes.providerReview,tagTypes.provider]
       }),
 
   

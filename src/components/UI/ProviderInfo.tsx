@@ -8,6 +8,8 @@ import {
   FiTwitter,
   FiYoutube,
   FiLinkedin,
+  FiClock,
+  FiCalendar,
 } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
 
@@ -20,18 +22,31 @@ interface ProviderInfoProps {
     contactNo: string;
     address: string;
     profileImg: string[];
+    averageRating: number;
+    totalReviews: number;
+    createdAt: string;
   };
-
 }
 
 const ProviderInfo: React.FC<ProviderInfoProps> = ({ provider }) => {
-  const providerName = `${provider?.fName} ${provider?.lName}`;
+  // const providerName = `${provider?.fName} ${provider?.lName}`;
+  const {
+    fName,
+    lName,
+    address,
+    createdAt,
+    email,
+    contactNo,
+    averageRating,
+    totalReviews,
+  } = provider;
 
   return (
     <div className="py-6">
       <h5 className="text-2xl font-semibold mb-4">Service Provider</h5>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="flex">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
+        <div className="flex items-center py-4 pr-4 rounded-lg">
           <div>
             <img
               src={provider?.profileImg[0]}
@@ -40,108 +55,90 @@ const ProviderInfo: React.FC<ProviderInfoProps> = ({ provider }) => {
             />
           </div>
           <div className="ml-3">
-            <h6 className="text-lg font-semibold mb-2">Rating</h6>
+            <h6 className="text-lg font-semibold text-gray-700 mb-1">Rating</h6>
             <div className="text-yellow-500 text-sm">
-              <FaStar className="inline" />{" "}
-              <span className="text-gray-700">4.9</span>{" "}
-              <span className="text-gray-500">(255 reviews)</span>
+              <FaStar className="inline " />{" "}
+              <span className="text-gray-700 text-md font-normal">
+                {averageRating || 0}
+              </span>{" "}
+              <span className="text-gray-500 text-md font-normal">
+                ({totalReviews || 0} reviews)
+              </span>
             </div>
           </div>
         </div>
 
-        <div className="flex">
-          <div>
-            <span className="text-md text-gray-700 block p-4 rounded-full bg-[#f8fcfd]">
-              <FiUser />
-            </span>
-          </div>
-          <div className="ml-3">
-            <h6 className="text-lg font-semibold mb-2">Provider</h6>
-            <p className="text-sm text-gray-500 font-normal">{providerName}</p>
-          </div>
-        </div>
-
-        <div className="flex">
-          <div>
-            <span className="text-md text-gray-700 block p-4 rounded-full bg-[#f8fcfd]">
-              <FiMapPin />
-            </span>
-          </div>
-          <div className="ml-3">
-            <h6 className="text-lg font-semibold mb-2">Address</h6>
-            <p className="text-sm text-gray-500 font-normal">{provider?.address}</p>
-          </div>
-        </div>
-
-        <div className="flex mt-4">
-          <div>
-            <span className="text-md text-gray-700 block p-4 rounded-full bg-[#f8fcfd]">
-              <FiMail />
-            </span>
-          </div>
-          <div className="ml-3">
-            <h6 className="text-lg font-semibold mb-2">Email</h6>
-            <p className="text-sm text-gray-500 font-normal">
-              {provider?.email}
+        <div className="flex items-center py-4 pr-4 rounded-lg">
+          <span className="text-xl text-pink-500 block p-4 rounded-full bg-[#f8fcfd]">
+            <FiUser />
+          </span>
+          <div className="ml-4">
+            <h6 className="text-lg font-semibold text-gray-700 mb-1">
+              Provider
+            </h6>
+            <p className="text-md text-gray-600 font-normal">
+              {fName} {lName}
             </p>
           </div>
         </div>
 
-        <div className="flex mt-4">
-          <div>
-            <span className="text-md text-gray-700 block p-4 rounded-full bg-[#f8fcfd]">
-              <FiPhone />
-            </span>
-          </div>
-          <div className="ml-3">
-            <h6 className="text-lg font-semibold mb-2">Phone</h6>
-            <p className="text-sm text-gray-500 font-normal">
-              {provider?.contactNo}
+        <div className="flex items-center py-4 pr-4 rounded-lg">
+          <span className="text-xl text-blue-500 block p-4 rounded-full bg-[#f8fcfd]">
+            <FiMail />
+          </span>
+          <div className="ml-4">
+            <h6 className="text-lg font-semibold text-gray-700 mb-1">Email</h6>
+            <p className="text-md text-gray-600 font-normal">
+              {email || "N/A"}
             </p>
           </div>
         </div>
 
-        <div className="mt-4 flex md:justify-center items-center">
-          <ul className="flex space-x-4">
-            <li>
-              <a
-                href="#"
-                target="_blank"
-                className="text-lg text-gray-700 block p-4 rounded-full bg-[#f8fcfd]"
-              >
-                <FiInstagram />
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                target="_blank"
-                className="text-lg text-gray-700 block p-4 rounded-full bg-[#f8fcfd]"
-              >
-                <FiTwitter />
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                target="_blank"
-                className="text-lg text-gray-700 block p-4 rounded-full bg-[#f8fcfd]"
-              >
-                <FiYoutube />
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                target="_blank"
-                className="text-lg text-gray-700 block p-4 rounded-full bg-[#f8fcfd]"
-              >
-                <FiLinkedin />
-              </a>
-            </li>
-          </ul>
+        <div className="flex items-center py-4 pr-4 rounded-lg mt-4">
+          <span className="text-xl text-red-500 block p-4 rounded-full bg-[#f8fcfd]">
+            <FiPhone />
+          </span>
+          <div className="ml-4">
+            <h6 className="text-lg font-semibold text-gray-700 mb-1">Phone</h6>
+            <p className="text-md text-gray-600 font-normal">
+              {contactNo || "N/A"}
+            </p>
+          </div>
         </div>
-        
+
+        <div className="flex items-center py-4 pr-4 rounded-lg">
+          <span className="text-xl text-green-500 block p-4 rounded-full bg-[#f8fcfd]">
+            <FiMapPin />
+          </span>
+          <div className="ml-4">
+            <h6 className="text-lg font-semibold text-gray-700 mb-1">
+              Address
+            </h6>
+            <p className="text-md text-gray-600 font-normal">
+              {address || "N/A"}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center py-4 pr-4 rounded-lg">
+          <span className="text-xl text-purple-500 block p-4 rounded-full bg-[#f8fcfd]">
+            <FiClock />
+          </span>
+          <div className="ml-4">
+            <h6 className="text-lg font-semibold text-gray-700 mb-1">
+              Date of Join
+            </h6>
+            <p className="text-md text-gray-600 font-normal">
+              {`${new Date(createdAt)
+                .toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })
+                .replace(/(\d{1,2} \w+)\s(\d{4})/, "$1, $2")}`}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

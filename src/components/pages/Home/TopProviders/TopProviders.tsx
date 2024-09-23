@@ -6,6 +6,9 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { useProvidersQuery } from '@/redux/api/providerApi';
 import Image from 'next/image';
+import Rating from '@/components/UI/Rating';
+import { FaStar } from 'react-icons/fa6';
+import Link from 'next/link';
 
 const TopProviders = () => {
     const pathname = usePathname();
@@ -41,12 +44,12 @@ const TopProviders = () => {
                                 <p className="text-gray-300">Sed ut perspiciatis unde omnis iste natus error</p>
                             </div>
                         </div>
-                        <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
-                            <a href="/providers" className="inline-flex items-center bg-[#4f46e5] text-white px-4 py-2 rounded">
+                     {providers?.length > 4 &&    <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
+                            <Link href="/providers" className="inline-flex items-center bg-indigo-600 text-white px-5 py-3 rounded-full">
                                 View All
                                 <i className="ml-2 feather-arrow-right-circle"></i>
-                            </a>
-                        </div>
+                            </Link>
+                        </div> }
                     </div>
                 )}
 
@@ -58,32 +61,58 @@ const TopProviders = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="flex flex-wrap -mx-4" {...(pathname === '/' ? { 'data-aos': 'fade-up' } : {})} >
-                            {displayedProviders?.map((provider: any, index: number) => (
-                                <div key={index} className="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
-                                    <div className="bg-white border rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
-                                        <div className="p-4">
-                                            <a href={`/provider-details/${provider.id}`}>
-                                                <Image src={provider?.profileImg[0]} height={190} width={250} alt="Provider" className="w-full h-48 object-cover rounded-md" />
-                                            </a>
-                                        </div>
-                                        <div className="p-4 flex flex-col justify-between flex-1">
-                                            <div className="mb-4">
-                                                <div className="flex items-center">
-                                                    <h4 className="text-xl font-semibold flex items-center">
-                                                        <a href={`/provider-details/${provider?.id}`} className="hover:underline">
-                                                            {provider?.fName} {provider?.lName}
-                                                        </a>
-                                                        <FaCheckCircle className="text-green-500 ml-2" />
-                                                    </h4>
-                                                    <span className="text-gray-500 ml-5">{provider?.category?.categoryName}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+        <div className="flex flex-wrap -mx-4" {...(pathname === '/' ? { 'data-aos': 'fade-up' } : {})}>
+  {displayedProviders?.map((provider: any, index: number) => (
+    <div key={index} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8">
+      <div className="bg-white border rounded-lg hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+        
+       
+        <div className="p-4">
+          
+            <Image
+              src={provider?.profileImg[0]}
+              height={195}
+              width={220}
+              alt="Provider"
+              className="w-full h-48 object-cover rounded-md"
+            />
+          
+        </div>
+
+        <div className="px-4 pb-4 flex flex-col justify-between flex-1">
+          <div className="mb-4">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xl font-semibold text-gray-800 flex items-center ">
+                <a href={`/provider-details/${provider?.id}`} className="hover:underline text-indigo-600">
+                  {provider?.fName} {provider?.lName}
+                </a>
+                <FaCheckCircle className="text-green-500 ml-2" />
+              </h4>
+              <span className="text-gray-600 text-md">{provider?.category?.categoryName}</span>
+            </div>
+          </div>
+        
+       
+          <div className="flex items-center justify-between mt-auto pt-4">
+          <div className="flex items-center">
+              <FaStar className='text-yellow-500 h-[1.2em] w-[1.2em]' />
+              <span className="text-gray-500 ml-2">({provider?.totalReviews})</span>
+            </div>
+           <Link href={`/provider-details/${provider.id}`}>
+           <button
+              className="ml-4 text-white hover:text-indigo-600 py-2 px-4 rounded-full border border-indigo-600 bg-indigo-600 hover:bg-white  transition-colors duration-300">
+              View Details
+            </button>
+           </Link>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  ))}
+</div>
+
+
 
                         {/* Show pagination only if there are providers */}
                         {pathname === '/providers' && providers.length > 0 && (

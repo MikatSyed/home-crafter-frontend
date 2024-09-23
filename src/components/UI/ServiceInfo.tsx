@@ -22,6 +22,7 @@ interface ServiceData {
   keyFeature2:string;
   keyFeature3:string;
   keyFeature4:string;
+  
   provider: {
     fName: string;
     lName: string;
@@ -29,6 +30,10 @@ interface ServiceData {
     contactNo: string;
     address: string;
     profileImg: string[];
+    averageRating:number;
+    totalReviews:number;
+    createdAt:string;
+
   };
   categoryId: string;
 }
@@ -55,7 +60,7 @@ const ServiceInfo: React.FC<ProviderInfoProps> = ({ data }) => {
               <h5 className="text-2xl font-semibold mb-4">Service Details</h5>
               <p className="text-gray-700">{service?.description}</p>
             </div>
-            {/* Provider Info Component */}
+          
             <ProviderInfo provider={service?.provider} />
             <Gallery images={images} />
             <VideoComponent videoUrl={videoUrl || ''} />
