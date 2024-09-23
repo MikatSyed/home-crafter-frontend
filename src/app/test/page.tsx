@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
 import { FiMenu, FiX, FiChevronDown } from "react-icons/fi"; // Importing icons from react-icons
-import logo from "../../../../../public/assets/LOGO (1).png";
+import logo from "../../../public/assets/home (3).png";
 import Image from "next/image";
 import Link from "next/link";
-const Nav = () => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<{ [key: number]: boolean }>(
     {}
@@ -162,4 +162,4 @@ const Nav = () => {
     </nav>
   );
 };
-export default Nav;
+export default Navbar;

@@ -6,7 +6,7 @@ import React from 'react';
 const Provider = () => {
     return (
         <div>
-            <BreadcrumbBar name="Providers" subtitle=""/>
+            <BreadcrumbBar header="Our Providers" name="Providers" subtitle=""/>
             <TopProviders/>
         </div>
     );

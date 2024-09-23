@@ -6,7 +6,7 @@ import Footer from "./Footer/Footer";
 import HeroSection from "./HeroSection/HeroSection";
 import HowItWorks from "./HowItWorks/HowItWorks";
 import MostPopularServices from "./MostPopularServices/MostPopularServices";
-import Navbar from "./Navbar/Navbar";
+import MainNavbar from "./Nav/MainNavbar";
 import Partners from "./Partners/Partners";
 import PricingPlan from "./PricingPlan/PricingPlan";
 import Testimonial from "./Testimonial/Testimonial";
@@ -17,7 +17,7 @@ import TopProviders from "./TopProviders/TopProviders";
 const HomePage = () => {
     return (
         <>
-            <Navbar/>
+            <MainNavbar />
             <HeroSection/>
             <FeaturedCategories/>
             <FeaturedServices/>
