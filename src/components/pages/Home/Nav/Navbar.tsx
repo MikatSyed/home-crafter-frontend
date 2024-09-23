@@ -27,7 +27,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="mx-auto px-6 md:px-[6rem] shadow-md">
+    <nav className="mx-auto px-6 md:px-[6rem] hidden md:block">
       <div className="md:mx-0">
         <div className="flex items-center justify-between h-16">
           <div className="hidden md:flex flex-1 justify-start">
@@ -69,8 +69,9 @@ const Navbar = () => {
             </ul>
           </div>
           
-          {/* Provider and User Links */}
-          <div className="flex items-center space-x-5">
+
+       <div className="hidden md:block">
+       <div className="flex items-center space-x-5 ">
             <Link href="/provider/signup">
               <p className="text-md font-medium m-0 text-[#4c40ed] hover:text-blue-500">
                 Become A Provider
@@ -82,6 +83,7 @@ const Navbar = () => {
               </p>
             </Link>
           </div>
+       </div>
         </div>
       </div>
     </nav>

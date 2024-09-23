@@ -9,6 +9,7 @@ import { signOut } from "next-auth/react";
 import { useClickAway } from "react-use";
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import MobileMenu from "./MobileMenu";
 
 const TopHeader = () => {
     const pathname = usePathname();
@@ -112,7 +113,7 @@ const TopHeader = () => {
                   {isProfileOpen && (
                     <div
                       ref={profileMenuRef}
-                      className="absolute top-12 right-0 w-48 bg-white border border-gray-300 rounded-lg shadow-xl z-50 p-4"
+                      className="absolute top-12 left-2 w-48 bg-white border border-gray-300 rounded-lg shadow-xl z-50 p-4"
                     >
                       {profileDropdownItems.map((item, idx) => (
                         <div key={idx} className="border-b border-gray-200 last:border-0">
@@ -152,6 +153,9 @@ const TopHeader = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="md:hidden">
+      <MobileMenu user={user} />
       </div>
     </>
   );

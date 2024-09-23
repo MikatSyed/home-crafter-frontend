@@ -9,7 +9,7 @@ const MainNavbar = () => {
     <>
       <TopHeader />
       <Navbar />
-      <MobileMenu />
+     
     </>
   );
 };
