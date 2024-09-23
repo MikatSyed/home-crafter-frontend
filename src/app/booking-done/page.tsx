@@ -4,6 +4,9 @@ import React from "react";
 import PaymentSuccess from '@/components/pages/PaymentSuccess';
 import Stepper from "@/components/UI/Stepper";
 import { useRouter, usePathname } from "next/navigation";
+import { FaCalendarAlt } from "react-icons/fa";
+import { LuBriefcase } from "react-icons/lu";
+import { TiTickOutline } from "react-icons/ti";
 
 const BookingDone = () => {
   const router = useRouter();
@@ -14,14 +17,17 @@ const BookingDone = () => {
     {
       title: "Appointment",
       description: "Choose time & date for the service",
+      icon: <FaCalendarAlt />
     },
     {
       title: "Payment",
       description: "Confirm Payment",
+      icon: <LuBriefcase />
     },
     {
       title: "Done",
       description: "Completion of Booking",
+      icon: <TiTickOutline  />
     },
   ];
 

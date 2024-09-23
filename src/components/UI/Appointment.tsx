@@ -9,24 +9,25 @@ import { useAddBookingMutation, useCheckAvailableSlotQuery } from '@/redux/api/b
 
 
 
-const Appointment= () => {
+const Appointment= ({providerId}:any) => {
+    console.log(providerId,'13')
     const {push} = useRouter();
     const pathname = usePathname();
     const todayDate = new Date();
     const [date, setDate] = useState<Date>(todayDate);
     const [availableTimes, setAvailableTimes] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
-    const { data, isLoading, refetch } = useAvailbilitiesQuery(undefined);
+    const { data, isLoading, refetch } = useAvailbilitiesQuery(providerId);
     const { data: userData } = useLoggedUserQuery(undefined);
-    console.log(userData,'21')
     const [addBooking] = useAddBookingMutation();
     const formattedDate = formatDateToISO(date);
     const { data: checkAvailableSlotData } = useCheckAvailableSlotQuery(formattedDate);
 
     const serviceId = pathname?.split('/')[1]; 
     const userId = userData?.data?.id;
+    console.log(userId,'28')
 
-    // Extract booked times from API response
+    
     const bookedTimes = checkAvailableSlotData?.data?.map((slot: any) => slot.Time) || [];
 
     useEffect(() => {
@@ -67,11 +68,10 @@ const Appointment= () => {
                 const res = await addBooking({ bookingDate: selectedDate, day: dayOfWeek, time: selectedTime, serviceId, userId }).unwrap();
         
                 if (res?.data) {
-                    // Redirect to checkout page with booking ID
+                   
                     push(`/checkout/${res?.data?.id}`);
                 }
-                // onNext()
-            
+              
             } catch (error) {
                 console.error('Error booking appointment:', error);
             }

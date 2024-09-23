@@ -131,7 +131,7 @@ const BookingPage = () => {
 
         </div>
       </div>
-      <Appointment />
+      <Appointment  providerId ={provider?.id} />
     </div>
   );
 };

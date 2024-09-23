@@ -5,6 +5,9 @@ import Stepper from "@/components/UI/Stepper";
 import { useRouter, usePathname } from "next/navigation";
 import { useBookingQuery } from "@/redux/api/bookingApi";
 import Loader from "@/components/UI/Loader";
+import { FaCalendarAlt } from "react-icons/fa";
+import { LuBriefcase } from "react-icons/lu";
+import { TiTickOutline } from "react-icons/ti";
 
 type IDProps = {
   params: any;
@@ -23,14 +26,17 @@ const Checkout = ({ params }: IDProps) => {
     {
       title: "Appointment",
       description: "Choose time & date for the service",
+      icon: <FaCalendarAlt />
     },
     {
       title: "Payment",
       description: "Confirm Payment",
+      icon: <LuBriefcase />
     },
     {
       title: "Done",
       description: "Completion of Booking",
+      icon: <TiTickOutline  />
     },
   ];
 

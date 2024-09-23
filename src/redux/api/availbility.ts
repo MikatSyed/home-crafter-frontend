@@ -8,9 +8,9 @@ export const availbilityApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
 
     availbilities: build.query({
-      query: () => {
+      query: (id) => {
         return {
-          url: URL,
+          url: `${URL}/all?providerId=${id}`,
           method: "GET",      
         };
       },

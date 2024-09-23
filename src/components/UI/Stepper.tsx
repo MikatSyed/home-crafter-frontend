@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaCheck, FaCog } from "react-icons/fa"; // Import your icons
 
-// Define the type for a single step
+// Define the type for a single step, now with an icon property
 interface Step {
   title: string;
   description: string;
+  icon: React.ReactNode; // Icon can be any valid React node (e.g., an icon component)
 }
 
 // Define the props for the Stepper component
@@ -23,7 +24,7 @@ const Stepper: React.FC<StepperProps> = ({ steps, currentStep, onStepClick }) =>
         return (
           <button
             key={index}
-            // onClick={() => onStepClick(index + 1)}
+            onClick={() => onStepClick(index + 1)} // Enable step clicking
             className={`flex items-center p-4 w-full ${
               isActive
                 ? "border-b-4 border-[#4c40ed]"
@@ -35,11 +36,10 @@ const Stepper: React.FC<StepperProps> = ({ steps, currentStep, onStepClick }) =>
                 isActive ? "bg-[#4c40ed]" : "bg-gray-300"
               }`}
             >
-              <FaCalendarAlt
-                className={`${
-                  isActive ? "text-white" : "text-gray-500"
-                } text-xl`}
-              />
+              {/* Render the step's specific icon */}
+              <div className={`${isActive ? "text-white" : "text-gray-500"} text-xl`}>
+                {step.icon}
+              </div>
             </div>
             <div className="ml-4 text-left">
               <h1 className="text-lg font-semibold">{step.title}</h1>
