@@ -1,4 +1,5 @@
-import ProfilePage from "@/components/UI/ProfilePage";
+import ProviderProfilePage from "@/components/pages/Dashboard/Provider/ProviderProfile/ProviderProfile";
+
 
 
 
@@ -7,7 +8,7 @@ const Profile = () => {
   return (
     <>
       
-    <ProfilePage/>
+    <ProviderProfilePage/>
     </>
   );
 };

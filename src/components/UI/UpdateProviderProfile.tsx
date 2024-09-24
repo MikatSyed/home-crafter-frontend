@@ -55,7 +55,7 @@ const UpdateProviderProfile = ({id}:any) => {
           duration: 2000,
         });
        setTimeout(()=>{
-        push('/profile')
+        push('/provider/profile')
        },2000)
       }
     } catch (err: any) {
@@ -121,12 +121,12 @@ const UpdateProviderProfile = ({id}:any) => {
             <div className="mb-6">
               <button
                 type="submit"
-                className={`w-full flex justify-center items-center bg-[#4c40ed] text-white p-3 rounded-lg font-semibold cursor-pointer hover:bg-white  border border-[#4c40ed] hover:text-[#4c40ed] ${
+                className={`w-full flex justify-center items-center bg-indigo-600 text-white p-3 rounded-lg font-semibold cursor-pointer hover:bg-white  border border-[#4c40ed] hover:text-[#4c40ed] ${
                   loading ? "text-white opacity-50 cursor-not-allowed inline-flex justify-center items-center" : ""
                 }`}
                 disabled={loading}
               >
-                {loading ? <Spinner /> : "Update"}
+                {loading ? <Spinner /> : "Save Changes"}
               </button>
             </div>
           </Form>
