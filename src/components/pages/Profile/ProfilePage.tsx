@@ -93,11 +93,6 @@ const ProfilePage = () => {
             </button>
           </Link>
 
-
-            <button className="flex items-center text-red-500 hover:text-red-700">
-              <FiLock className="mr-2" />
-              Forget Password
-            </button>
           </div>
         </div>
       </div>

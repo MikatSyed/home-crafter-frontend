@@ -7,7 +7,15 @@ body{
   box-sizing: border-box;
   font-family: "Gill Sans", sans-serif;
 }
-
+.login-bg {
+  background-image: url('../../public/assets/mourizal-zativa-90JFNMyBeek-unsplash.jpg'); /* Path to your image */
+  background-size: cover; /* Ensures the image covers the entire div */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  min-height: 100vh; /* Makes sure the background covers the full height of the viewport */
+  
+  
+}
 .breadcrumb-bar {
   background-image: url(../../public//assets/bg.png);
   text-align: center;
