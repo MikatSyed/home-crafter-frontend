@@ -4,15 +4,15 @@ import { useLoggedUserQuery } from '@/redux/api/userApi';
 import toast, { Toaster } from 'react-hot-toast';
 import FormInput from '@/components/Forms/FormInput';
 import Form from '@/components/Forms/Form';
-import {  useForgetPasswordMutation } from '@/redux/api/authApi';
+import {  useForgotPasswordMutation } from '@/redux/api/authApi';
 import { ShowToast } from '@/components/UI/ShowToast';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Spinner from '@/components/UI/Spinner';
 import forgetPasswordSchema from '@/schemas/forget-password';
 
-const ForgetPassword = () => {
+const ForgotPassword = () => {
   const [loading,setLoading] = useState(false)
-  const [forgetPassword] = useForgetPasswordMutation();
+  const [forgotPassword] = useForgotPasswordMutation();
   const { data } = useLoggedUserQuery(undefined);
 
   const user = data?.data;
@@ -23,7 +23,7 @@ const ForgetPassword = () => {
     const toastId = toast.loading("Updating...")
     setLoading(false)
     try {
-      const res = await forgetPassword({ id:user?.id, body: values }).unwrap();
+      const res = await forgotPassword({ body: values }).unwrap();
       setTimeout(()=>{
         ShowToast({
             message:res?.message
@@ -82,4 +82,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default ForgotPassword;
