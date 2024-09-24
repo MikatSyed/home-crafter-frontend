@@ -86,10 +86,13 @@ const ProfilePage = () => {
               Edit Profile
             </button>
 
-            <button className="flex items-center text-indigo-600 hover:text-indigo-500">
+          <Link href="/change-password">
+          <button className="flex items-center text-indigo-600 hover:text-indigo-500">
               <FiLock className="mr-2" />
               Change Password
             </button>
+          </Link>
+
 
             <button className="flex items-center text-red-500 hover:text-red-700">
               <FiLock className="mr-2" />
