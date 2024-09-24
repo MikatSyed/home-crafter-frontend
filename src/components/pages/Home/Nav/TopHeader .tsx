@@ -31,9 +31,9 @@ const TopHeader = () => {
   const profileDropdownItems =
     userRole === "User"
       ? [
-          { title: "Profile", href: "/profile/user", icon: <FaUser /> },
-          { title: "Booking", href: "/profile/booking", icon: <FaCalendarCheck /> },
-          { title: "Favourites", href: "/profile/favourites", icon: <FaHeart /> },
+          { title: "Profile", href: "/profile/", icon: <FaUser /> },
+          { title: "Booking", href: "/booking", icon: <FaCalendarCheck /> },
+          { title: "Favourites", href: "/favourites", icon: <FaHeart /> },
           { title: "Logout", action: handleSignOut, icon: <FaSignOutAlt /> },
         ]
       : [
