@@ -34,9 +34,18 @@ export const servicesApi = baseApi.injectEndpoints({
         
         providesTags:[tagTypes.services]
       }),
+    offerServicesProvider: build.query({
+        query: (arg) => ({
+          url : `${URL}/offer-service/provider`,
+          method: "GET" ,
+          params: arg
+        }),
+        
+        providesTags:[tagTypes.services]
+      }),
     offerServices: build.query({
         query: (arg) => ({
-          url : `${URL}/offer-service`,
+          url : `${URL}/offer-service/`,
           method: "GET" ,
           params: arg
         }),
@@ -142,4 +151,4 @@ export const servicesApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddServiceMutation,useServicesQuery,useProviderServicesQuery,useOfferServicesQuery,useDeleteOfferServiceMutation,useApplyOfferMutation,useOverviewQuery,useAdditionalServiceQuery,useRelatedServiceQuery,useServiceQuery,useUpdateServiceMutation,useUpdateServiceStatusMutation,useDeleteServiceMutation,useCategoriesQuery } = servicesApi;
+export const { useAddServiceMutation,useServicesQuery,useProviderServicesQuery,useOfferServicesProviderQuery,useOfferServicesQuery,useDeleteOfferServiceMutation,useApplyOfferMutation,useOverviewQuery,useAdditionalServiceQuery,useRelatedServiceQuery,useServiceQuery,useUpdateServiceMutation,useUpdateServiceStatusMutation,useDeleteServiceMutation,useCategoriesQuery } = servicesApi;

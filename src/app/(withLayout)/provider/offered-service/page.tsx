@@ -7,7 +7,7 @@ import { useOffersQuery } from '@/redux/api/offerApi';
 import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
 import ConfirmModal from '@/components/UI/ConfirmModal';
-import { useApplyOfferMutation, useDeleteOfferServiceMutation, useOfferServicesQuery } from '@/redux/api/servicesApi';
+import { useApplyOfferMutation, useDeleteOfferServiceMutation, useOfferServicesProviderQuery } from '@/redux/api/servicesApi';
 import ApplyOfferModal from '@/components/UI/ApplyOfferModal';
 import toast, { Toaster } from 'react-hot-toast';
 import { TiTickOutline } from 'react-icons/ti';
@@ -24,7 +24,7 @@ const OfferServicePage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
 
-    const { data, isLoading, isError } = useOfferServicesQuery(undefined);
+    const { data, isLoading, isError } = useOfferServicesProviderQuery(undefined);
     const [applyOffer] = useApplyOfferMutation();
     const [deleteOfferService] = useDeleteOfferServiceMutation();
     const { data: offersData, isLoading: isOffersLoading } = useOffersQuery(undefined);

@@ -25,8 +25,8 @@ const Services = () => {
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
-const [selectedOffer, setSelectedOffer] = useState<any>(null);
-const [offerToApply, setOfferToApply] = useState<any>(null);
+  const [selectedOffer, setSelectedOffer] = useState<any>(null);
+
 
 
   // const { data, isLoading } = useServicesQuery(undefined);

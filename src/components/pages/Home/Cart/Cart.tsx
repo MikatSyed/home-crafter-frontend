@@ -4,6 +4,7 @@ import { FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import { useAppDispatch } from "@/redux/hook";
 import { removeFavourite } from "@/redux/features/favouritesSlice";
+import Link from "next/link";
 
 interface Service {
   id: number;
@@ -36,7 +37,8 @@ const Cart: React.FC<CartProps> = ({ services, onClose }) => {
       <div className="p-4 flex-grow"> {/* Use flex-grow to fill available space */}
         {services.length > 0 ? (
           services.map((service) => (
-            <div
+       <Link href={`service-details/${service?.id}`}>
+             <div
               key={service.id}
               className="flex items-center justify-between border-t border-b py-4"
             >
@@ -49,7 +51,7 @@ const Cart: React.FC<CartProps> = ({ services, onClose }) => {
                   className="w-[100px] h-[60px] rounded-lg object-cover"
                 />
                 <div>
-                  <h3 className="font-semibold text-gray-800">{service.serviceName}</h3>
+                  <h3 className="font-semibold text-gray-800 hover:text-indigo-600">{service.serviceName}</h3>
                   <p className="text-sm text-gray-500">${service.regularPrice}</p>
                 </div>
               </div>
@@ -60,6 +62,7 @@ const Cart: React.FC<CartProps> = ({ services, onClose }) => {
                 <FaTimes />
               </button>
             </div>
+       </Link>
           ))
         ) : (
           <div className="flex flex-col items-center justify-center h-full">

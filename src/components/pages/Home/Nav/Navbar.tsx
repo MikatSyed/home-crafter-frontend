@@ -17,6 +17,15 @@ const Navbar = () => {
     setSidebarOpen(!sidebarOpen); 
   };
 
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Service" },
+    { href: "/providers", label: "Providers" },
+    { href: "/blogs", label: "Blogs" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ];
+
   return (
     <>
       <nav className="mx-auto px-6 md:px-[6rem] hidden md:block">
@@ -25,21 +34,13 @@ const Navbar = () => {
             {/* Navigation Links */}
             <div className="hidden md:flex flex-1 justify-start">
               <ul className="flex space-x-6 font-medium">
-                <li>
-                  <Link href="/" className="text-black hover:text-indigo-500 py-2">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services" className="text-black hover:text-indigo-500 py-2">
-                    Service
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/providers" className="text-black hover:text-indigo-500 py-2">
-                    Providers
-                  </Link>
-                </li>
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-black hover:text-indigo-500 py-2">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
