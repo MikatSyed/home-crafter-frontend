@@ -1,20 +1,35 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FaRegHeart } from "react-icons/fa6";
+import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { FiMapPin } from "react-icons/fi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-
 import { useServicesQuery } from "@/redux/api/servicesApi";
 import Link from "next/link";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Loader from "@/components/UI/Loader";
 import Rating from "@/components/UI/Rating";
-
+import { addFavourite, removeFavourite } from "@/redux/features/favouritesSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { RootState } from "@reduxjs/toolkit/query";
 
 const FeaturedServices = () => {
   const [swiper, setSwiper] = useState<any | null>(null);
+  const dispatch = useAppDispatch();
+  const favouriteServices:any = useAppSelector((state: any) => state.favourites.favouriteServices);
+
+  const isServiceFavourite = (serviceId: number) => {
+    return favouriteServices.some((service:any) => service.id === serviceId);
+  };
+
+  const handleFavouriteClick = (service: any) => {
+    if (isServiceFavourite(service.id)) {
+      dispatch(removeFavourite(service.id));
+    } else {
+      dispatch(addFavourite(service));
+    }
+  };
 
   const handleSwiper = (swiper: any) => {
     setSwiper(swiper);
@@ -109,9 +124,17 @@ const FeaturedServices = () => {
                   <span className="flex items-center justify-center text-sm bg-white p-2 hover:text-white text-[#665cf0] hover:bg-[#665cf0] rounded">
                     {service?.category?.categoryName}
                   </span>
-                  <div className="flex items-center justify-center border rounded-full text-black hover:text-white bg-white w-10 h-10 hover:bg-blue-600">
-                    <FaRegHeart className="w-4 h-4" />
-                  </div>
+                  <div
+  className="flex items-center justify-center cursor-pointer border rounded-full text-black hover:text-white bg-white  w-10 h-10 "
+  onClick={() => handleFavouriteClick(service)}
+>
+  {isServiceFavourite(service.id) ? (
+    <FaHeart className="text-indigo-600 " />
+  ) : (
+    <FaRegHeart className="text-gray-500 " />
+  )}
+</div>
+
                 </div>
                 <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
                   <a href="providers.html" className="flex items-center">
