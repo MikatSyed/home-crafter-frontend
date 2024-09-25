@@ -16,7 +16,7 @@ interface LoginProps {
 const LoginPage = ({ callbackUrl }: any) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const pathName = "/login"; // Update this path based on your route
+
 
   const onSubmit = async (data: any) => {
     setLoading(true);
@@ -24,7 +24,6 @@ const LoginPage = ({ callbackUrl }: any) => {
       await signIn("home-crafter", {
         ...data,
         callbackUrl,
-        pathName,
       });
       setLoading(false);
     } catch (err: any) {
@@ -44,7 +43,7 @@ const LoginPage = ({ callbackUrl }: any) => {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-center items-center">
         <div className="flex flex-col md:flex-row justify-center md:w-[80%] mt-4 shadow-lg rounded-lg bg-white overflow-hidden">
-          {/* Left Side - Welcome Message */}
+      
           <div className="hidden md:flex flex-col justify-center items-center bg-indigo-600 text-white p-8 w-1/2">
             <h1 className="text-4xl font-bold mb-4">Welcome Back!</h1>
             <p className="text-lg mb-6">
@@ -57,7 +56,7 @@ const LoginPage = ({ callbackUrl }: any) => {
             />
           </div>
 
-          {/* Right Side - Form */}
+      
           <div className="flex justify-center self-center md:w-1/2 p-6 bg-white">
             <div className="mx-auto rounded-3xl w-full  p-8">
               <div className="flex flex-col items-center mb-7">
@@ -113,7 +112,7 @@ const LoginPage = ({ callbackUrl }: any) => {
                 <p className="text-sm">
                   Don't have an account?{" "}
                   <Link
-                    href="/signup"
+                    href="/choose-signup"
                     className="text-gray-700 hover:text-gray-900 ml-1"
                   >
                     Sign up
@@ -122,11 +121,11 @@ const LoginPage = ({ callbackUrl }: any) => {
               </div>
               <div className="flex flex-col space-y-4 mt-6">
   <button className="flex items-center justify-center bg-indigo-600 text-white p-3 rounded-lg hover:bg-gray-800 transition duration-300">
-    <FaUserTie className="mr-2" /> {/* Provider icon */}
+    <FaUserTie className="mr-2" />
     Login as Provider
   </button>
   <button className="flex items-center justify-center bg-indigo-600 text-white p-3 rounded-lg hover:bg-gray-800 transition duration-300">
-    <FaUserShield className="mr-2" /> {/* Admin icon */}
+    <FaUserShield className="mr-2" /> 
     Login as Admin
   </button>
 </div>

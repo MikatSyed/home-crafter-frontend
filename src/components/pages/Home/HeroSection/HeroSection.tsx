@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const HeroSection = () => {
     return (
-        <div className="mx-auto px-6 md:px-[6rem] bg-indigo-900 py-14">
+        <div className="mx-auto px-6 md:px-[6rem] bg-indigo-700 py-14">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-wrap items-center w-full">
                     <div className="lg:w-6/12 w-full">
@@ -72,7 +72,7 @@ const HeroSection = () => {
                             </div>
                         </div>
                         <div className="w-full md:w-auto lg:w-auto flex items-center mt-6 md:mt-8 lg:mt-0">
-                            <button type="submit" className="bg-indigo-600 text-white px-6 py-3 rounded-md shadow-lg hover:bg-indigo-700 transition duration-300">
+                            <button type="submit" className="bg-indigo-700 text-white px-6 py-3  shadow-md hover:bg-indigo-700 transition duration-300 rounded-full">
                                 Search
                             </button>
                         </div>

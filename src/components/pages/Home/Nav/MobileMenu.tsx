@@ -174,7 +174,7 @@ const MobileMenu = ({ user }: { user: any }) => {
               <div className="flex justify-between items-center">
                 <Link
                   href={item.href}
-                  className="text-black hover:text-blue-500 block px-3 py-2 rounded-md text-base font-medium"
+                  className="hover:text-blue-500  px-3 py-2 rounded-md font-medium"
                 >
                   {item.title}
                 </Link>
@@ -213,8 +213,8 @@ const MobileMenu = ({ user }: { user: any }) => {
             <></>
           ) : (
             <div className="flex items-center space-x-2">
-              <Link href="/register">
-                <button className="flex items-center px-4 py-2 mt-4 bg-indigo-600 text-white rounded-full shadow-md text-md">
+              <Link href="/choose-signup">
+                <button className="flex items-center px-4 py-2 mt-4 bg-indigo-600 text-white rounded-full  text-md">
                   <FiUserPlus className="mr-2" />
                   Register
                 </button>
