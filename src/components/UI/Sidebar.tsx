@@ -10,6 +10,7 @@ import { IoNewspaperOutline, IoPeopleOutline } from 'react-icons/io5';
 import { CiBookmark, CiMoneyCheck1 } from "react-icons/ci";
 import { PiUsers } from "react-icons/pi";
 import { GrUserWorker } from "react-icons/gr";
+import { GoStar } from "react-icons/go";
 interface SidebarProps {
   isOpen: boolean;
   onToggle: (isOpen: boolean) => void;
@@ -131,6 +132,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, data }) => {
               <span>Offer</span>
             </p>
           </Link>
+
+          {role === 'admin' && (
+            <Link href={`/${role}/reviews`}>
+              <p
+                onClick={() => handleLinkClick('reviews')}
+                className={getLinkClass('reviews')}
+              >
+                <GoStar className="w-5 h-5 mr-2" />
+                <span>Reviews</span>
+              </p>
+            </Link>
+          )} 
         
           {role === 'admin' && (
             <Link href={`/${role}/category`}>
