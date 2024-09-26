@@ -12,6 +12,7 @@ import Loader from "@/components/UI/Loader";
 
 import { Toaster } from "react-hot-toast";
 import { useFavourites } from "@/redux/hook";
+import Rating from "@/components/UI/Rating";
 
 const MostPopularServices = () => {
   const [swiper, setSwiper] = useState<any | null>(null);
@@ -174,21 +175,19 @@ const MostPopularServices = () => {
                   </p>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
-                  <h6 className="text-lg font-bold">
-                    ${service.regularPrice}
-                    {service?.offeredPrice && (
-                      <span className="line-through text-gray-500 ml-2 text-sm">
-                        ${service?.offeredPrice}
-                      </span>
-                    )}
-                  </h6>
-                  <Link
-                    href={`/service-details/${service.id}`}
-                    className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
-                  >
-                    Book Now
-                  </Link>
-                </div>
+
+  <div className="flex items-center">
+    <Rating rating={service?.averageRating || 0} />
+    <span className="ml-2 text-gray-500">({service?.totalReviews})</span>
+  </div>
+  <Link
+    href={`/service-details/${service.id}`}
+    className="bg-[#f7f7ff] text-[#6240ed] border border-transparent hover:border-[#6240ed] px-4 py-2 rounded text-sm font-semibold hover:bg-white"
+  >
+    Book Now
+  </Link>
+</div>
+
               </div>
             </div>
           </SwiperSlide>

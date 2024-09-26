@@ -1,36 +1,17 @@
-"use client";
-import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
-import Loader from '@/components/UI/Loader';
-import ProductGallery from '@/components/UI/ServiceGallery';
-import ServiceInfo from '@/components/UI/ServiceInfo';
-import { useServiceQuery } from '@/redux/api/servicesApi';
+import ServiceDetails from '@/components/pages/ServiceDetails/main';
 import React from 'react';
 
 type IDProps = {
     params: any;
 };
 
-const ServiceDetails = ({ params }: IDProps) => {
-    const { id } = params;
-    const { data, isLoading } = useServiceQuery(id);
-
-    if (isLoading) {
-        return (
-            <div >
-                <Loader/>
-            </div>
-        );
-    }
-
-    
-
+const page = ({params}:IDProps) => {
+    const {id} = params;
     return (
-        <div>
-            <BreadcrumbBar name="Service" subtitle="Service Details" />
-            <ProductGallery data={data} />
-            <ServiceInfo data={data} />
-        </div>
+        <>
+            <ServiceDetails id={id}/>
+        </>
     );
 };
 
-export default ServiceDetails;
+export default page;

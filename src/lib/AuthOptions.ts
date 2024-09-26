@@ -19,30 +19,36 @@ export const authOptions: AuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials, req) {
-              
                 try {
-                    const res = await fetch(apiUrl, {
-                        method: "POST",
-                        body: JSON.stringify(credentials),
-                        headers: { "Content-Type": "application/json" }
-                    })
-                    
-                    const  data  = await res.json();
-                    const verifiedToken: any = jwtHelpers.verifyToken(
-                        data?.token,
-                        process.env.JWT_SECRET!)
-                    // console.log(data, "auth option")
-                    if (res.ok && data) {
-                        return {
-                            ...data,
-                            ...verifiedToken
-                        }
-                    }
+                  const res = await fetch(apiUrl, {
+                    method: "POST",
+                    body: JSON.stringify(credentials),
+                    headers: { "Content-Type": "application/json" },
+                  });
+              
+                  // Check if response is not ok (e.g., status 400, 401)
+                  if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData?.message || "Login failed. Please check your credentials.");
+                  }
+              
+                  const data = await res.json();
+                  const verifiedToken: any = jwtHelpers.verifyToken(
+                    data?.token,
+                    process.env.JWT_SECRET!
+                  );
+              
+                  if (data && verifiedToken) {
+                    return {
+                      ...data,
+                      ...verifiedToken,
+                    };
+                  }
                 } catch (error: any) {
-                    // console.log(error);
-                    throw new Error(error.message)
+                  throw new Error(error.message);
                 }
-            }
+              }
+              
         })
     ],
     callbacks: {

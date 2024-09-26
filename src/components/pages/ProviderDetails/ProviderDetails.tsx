@@ -162,7 +162,7 @@ const ProviderDetails = ({ id }: any) => {
                   </div>
                 </div>
 
-                {/* Date of Join */}
+            
                 <div className="flex items-center p-4 rounded-lg">
                   <span className="text-xl text-purple-500 block p-4 rounded-full bg-[#f8fcfd]">
                     <FiClock />

@@ -23,7 +23,7 @@ interface ServiceCardProps {
   serviceId: string;
 }
 
-const ReviewComponent: React.FC<ServiceCardProps> = ({ serviceId }) => {
+const ReviewCard: React.FC<ServiceCardProps> = ({ serviceId }) => {
   const { data } = useReviewByServiceIdQuery(serviceId);
   const [showAll, setShowAll] = useState(false);
 
@@ -102,4 +102,4 @@ const ReviewComponent: React.FC<ServiceCardProps> = ({ serviceId }) => {
   );
 };
 
-export default ReviewComponent;
+export default ReviewCard;

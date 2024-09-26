@@ -8,12 +8,14 @@ import toast, { Toaster } from "react-hot-toast";
 import Spinner from "../UI/Spinner";
 import Link from "next/link";
 import { FaUserShield, FaUserTie } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 interface LoginProps {
   callbackUrl?: string;
 }
 
 const LoginPage = ({ callbackUrl }: any) => {
+  const {push} = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -21,22 +23,33 @@ const LoginPage = ({ callbackUrl }: any) => {
   const onSubmit = async (data: any) => {
     setLoading(true);
     try {
-      await signIn("home-crafter", {
+      const result = await signIn("home-crafter", {
         ...data,
+        redirect: false, 
         callbackUrl,
       });
+  
+   
+      if (result?.error) {
+        toast.error(`Error: ${result.error}`, {
+          icon: <span style={{ color: "white" }}>❌</span>,
+          style: {
+            borderRadius: "10px",
+            background: "red",
+            color: "#fff",
+          },
+        });
+      } else {
+       
+        push(callbackUrl || "/");
+      }
+    } catch (result:any) {
+      toast.error(`${result.error}`);
+    } finally {
       setLoading(false);
-    } catch (err: any) {
-      toast.error(err?.data, {
-        icon: <span style={{ color: "white" }}>❌</span>,
-        style: {
-          borderRadius: "10px",
-          background: "red",
-          color: "#fff",
-        },
-      });
     }
   };
+  
 
   return (
     <div className="">

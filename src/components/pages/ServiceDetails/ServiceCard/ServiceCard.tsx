@@ -2,11 +2,11 @@
 import Link from 'next/link';
 import React from 'react';
 import { FaStar, FaMapPin, FaCheckCircle, FaCar, FaWrench, FaClipboardCheck } from 'react-icons/fa';
-import AdditionalService from './AdditionalService';
-import Rating from './Rating';
 import { useLoggedUserQuery } from '@/redux/api/userApi';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import Rating from '@/components/UI/Rating';
+import AdditionalService from '@/components/UI/AdditionalService';
 
 const availability = [
   { day: 'Monday', time: '9:00 AM - 7:00 PM' },

@@ -1,11 +1,11 @@
 import React from "react";
-import Gallery from "./Gallery";
-import VideoComponent from "./VideoComponent";
-import ReviewComponent from "./ReviewComponent";
-import RelatedServices from "./RelatedService";
-import ServiceCard from "./ServiceCard";
-import Review from "./Review";
-import ProviderInfo from "./ProviderInfo";
+import Gallery from "../Gallery/Gallery";
+import VideoComponent from "../VideoComponent/VideoComponent";
+import ReviewCard from "../ReviewCard/ReviewCard";
+import RelatedServices from "../RelatedServices/RelatedServices";
+import ServiceCard from "../ServiceCard/ServiceCard";
+import Review from "../Review/Review";
+import ProviderInfo from "../ProviderInfo/ProviderInfo";
 import { useLoggedUserQuery } from "@/redux/api/userApi";
 
 
@@ -69,7 +69,7 @@ const ServiceInfo: React.FC<ProviderInfoProps> = ({ data }) => {
             <Gallery images={images} />
             <VideoComponent videoUrl={videoUrl || ''} />
             <Review serviceId={serviceId} role={role}/>
-            <ReviewComponent serviceId={serviceId} />
+            <ReviewCard serviceId={serviceId} />
             <RelatedServices categoryId={categoryId} serviceId={serviceId} />
           </div>
 

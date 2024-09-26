@@ -25,10 +25,10 @@ const ProviderReview: React.FC<ServiceCardProps> = ({ providerId }) => {
   const [addProviderReview] = useAddProviderReviewMutation();
   const [loading, setLoading] = useState<boolean>(false);
   const [ratingError, setRatingError] = useState<string | null>(null);
-  console.log(ratingError,'28')
+
 
   const onSubmit = async (values: any) => {
-    console.log(rating,'31')
+   
     if (rating === 0) {
       setRatingError("Please select a rating.");
       return;
@@ -60,10 +60,10 @@ const ProviderReview: React.FC<ServiceCardProps> = ({ providerId }) => {
     }
   };
 
-  // Effect to clear the rating error when the rating changes
+  
   useEffect(() => {
     if (rating > 0) {
-      setRatingError(null); // Clear error if a valid rating is selected
+      setRatingError(null); 
     }
   }, [rating]);
 

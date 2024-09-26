@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import Form from '../Forms/Form';
 import toast, { Toaster } from 'react-hot-toast';
 import { TiTickOutline } from 'react-icons/ti';
-import FormTextArea from '../Forms/FormTextArea';
 import { useAddReviewMutation } from '@/redux/api/reviewApi';
-import Spinner from './Spinner';
+import Form from '@/components/Forms/Form';
+import FormTextArea from '@/components/Forms/FormTextArea';
+import Spinner from '@/components/UI/Spinner';
+import { yupResolver } from '@hookform/resolvers/yup';
+import reviewSchema from '@/schemas/review';
+
 
 interface Review {
   rating: number;
@@ -24,6 +27,7 @@ const Review: React.FC<ServiceCardProps> = ({serviceId,role}) => {
   const [hover, setHover] = useState(0);
   const [addReview] = useAddReviewMutation();
   const [loading, setLoading] = useState<boolean>(false);  
+  const [ratingError, setRatingError] = useState<string | null>(null);
 
   const onSubmit = async (values: any) => {
     if (role === 'Provider' || role === 'Admin') {
@@ -33,8 +37,13 @@ const Review: React.FC<ServiceCardProps> = ({serviceId,role}) => {
       setRating(0);
       return; 
     }
-    if (rating > 0 && values.comment.trim() !== '') {
+    if (rating === 0) {
+      setRatingError("Please select a rating.");
+      return;
+    }
+   
       const reviewData = { rating, comment: values.comment,serviceId };
+      const toastId = toast.loading('Posting')
       try {
         setLoading(true);  
         const res: any = await addReview(reviewData).unwrap();
@@ -57,9 +66,16 @@ const Review: React.FC<ServiceCardProps> = ({serviceId,role}) => {
         toast.error(err?.data, {
          duration: 2000,
         });
+      }finally{
+        toast.dismiss(toastId)
       }
-    }
   };
+
+  useEffect(() => {
+    if (rating > 0) {
+      setRatingError(null); 
+    }
+  }, [rating]);
 
   return (
    <div>
@@ -67,7 +83,7 @@ const Review: React.FC<ServiceCardProps> = ({serviceId,role}) => {
      <div className="mt-8">
       <h5 className="text-2xl font-semibold mb-4">Reviews</h5>
 
-      <Form submitHandler={onSubmit}>
+      <Form submitHandler={onSubmit} resolver={yupResolver(reviewSchema)}>
         <div className="flex items-center mb-4">
           {[...Array(5)].map((_, index) => {
             const ratingValue = index + 1;
@@ -91,20 +107,21 @@ const Review: React.FC<ServiceCardProps> = ({serviceId,role}) => {
             );
           })}
         </div>
-
+        {ratingError && <p className="text-red-500 my-2">{ratingError}</p>}
         <FormTextArea name="comment" rows={5} placeholder="Add a comment" />
 
         <button
-          type="submit"
-          className={` text-white  bg-[#4f46e5] inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5] ${
-            loading
-              ? 'w-[150px]   opacity-50 cursor-not-allowed inline-flex justify-center items-center'
-              : ''
-          }`}
-          disabled={loading}
-        >
-           {loading ? <Spinner /> : 'Submit Review'} 
-        </button>
+  type="submit"
+  className={`inline-flex items-center justify-center px-4 py-2 rounded-full text-md border ${
+    loading
+      ? 'w-[150px] bg-indigo-700 text-white opacity-50 cursor-not-allowed px-4 py-2' 
+      : 'text-indigo-700 bg-white hover:bg-indigo-700 hover:text-white border-indigo-700 px-4 py-2' 
+  }`}
+  disabled={loading}
+>
+  {loading ? <Spinner /> : 'Submit Review'}
+</button>
+
       </Form>
     </div>
    </div>
