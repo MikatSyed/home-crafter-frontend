@@ -42,7 +42,7 @@ const ProviderReview: React.FC<ServiceCardProps> = ({ providerId }) => {
       if (res && res.data) {
         ShowToast({ message: res?.message });
         setReviews([...reviews, reviewData]);
-        setRating(0); // Reset rating after submission
+        setRating(0); 
       }
     } catch (err: any) {
       console.error(err);

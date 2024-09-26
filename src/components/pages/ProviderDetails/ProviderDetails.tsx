@@ -22,7 +22,7 @@ const ProviderDetails = ({ id }: any) => {
   const { data, isLoading } = useProviderByIdQuery(id);
   const provider = data?.data;
 
-  // Check if data is loading or not available
+ 
   if (isLoading) {
     return <Loader />;
   }

@@ -1,6 +1,7 @@
 
 import { baseApi } from "./baseApi";
 import { tagTypes } from "../tag-types";
+import { table } from "console";
 
 const  URL = "/provider";
 
@@ -41,7 +42,7 @@ export const providerApi = baseApi.injectEndpoints({
         method: "PATCH",
         data:data.body
       }),
-      invalidatesTags:[tagTypes.provider]
+      invalidatesTags:[tagTypes.provider,tagTypes.user]
     }),
     updateProviderStatus: build.mutation({
       query: (data) => ({
