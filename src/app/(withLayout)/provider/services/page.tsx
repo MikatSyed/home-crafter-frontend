@@ -15,6 +15,7 @@ import { useOffersQuery } from "@/redux/api/offerApi";
 import ApplyOfferModal from "@/components/UI/ApplyOfferModal";
 import { TiTickOutline } from "react-icons/ti";
 import toast, { Toaster } from "react-hot-toast";
+import { ShowToast } from "@/components/UI/ShowToast";
 
 
 const Services = () => {
@@ -120,15 +121,9 @@ const Services = () => {
     try {
       const res =  await applyOffer({id: selectedService.id,body: { offerId: selectedOffer.id}}).unwrap();
       if(res?.data) {
-        toast('Offer Applied Successfully', {
-          icon: <span style={{ marginRight: -8, fontSize: 22 }}><TiTickOutline /></span>,
-          style: {
-            borderRadius: '10px',
-            background: '#4f46e5',
-            color: '#fff',
-          },
-          duration: 2000,
-        });
+     ShowToast({
+      message:'Offer Applied Successfully'
+     })
       }
       setIsOfferModalOpen(false);
       setSelectedOffer(null);

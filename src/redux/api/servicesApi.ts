@@ -110,7 +110,17 @@ export const servicesApi = baseApi.injectEndpoints({
     
       providesTags: [tagTypes.services],
     }),
+    popularServices: build.query({
+      query: () => {
+        return {
+          url:  `${URL}/popular-service`,
+          method: "GET",      
+        };
+      },
     
+      providesTags: [tagTypes.services],
+    }),
+
 
     addService: build.mutation({
         query: (data:any) => ({
@@ -151,4 +161,4 @@ export const servicesApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddServiceMutation,useServicesQuery,useProviderServicesQuery,useOfferServicesProviderQuery,useOfferServicesQuery,useDeleteOfferServiceMutation,useApplyOfferMutation,useOverviewQuery,useAdditionalServiceQuery,useRelatedServiceQuery,useServiceQuery,useUpdateServiceMutation,useUpdateServiceStatusMutation,useDeleteServiceMutation,useCategoriesQuery } = servicesApi;
+export const { useAddServiceMutation,useServicesQuery,useProviderServicesQuery,useOfferServicesProviderQuery,useOfferServicesQuery,useDeleteOfferServiceMutation,useApplyOfferMutation,useOverviewQuery,useAdditionalServiceQuery,useRelatedServiceQuery,usePopularServicesQuery,useServiceQuery,useUpdateServiceMutation,useUpdateServiceStatusMutation,useDeleteServiceMutation,useCategoriesQuery } = servicesApi;

@@ -54,10 +54,9 @@ const OfferedServices = () => {
     }
   };
 
-  const { data, isLoading, isError } = useOfferServicesQuery(undefined);
+  const { data, isLoading } = useOfferServicesQuery(undefined);
   const services = data?.data;
-  console.log(services,'59')
-  // Check if loading
+
   if (isLoading) {
     return <Loader />;
   }
@@ -75,6 +74,24 @@ const OfferedServices = () => {
           </div>
           {services?.length > 3 && (
             <div className="w-full md:w-1/2 text-right hidden md:block">
+              <div className="inline-flex items-center space-x-4">
+                <button
+                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+                  onClick={handlePrevious}
+                >
+                  <IoIosArrowBack className="w-5 h-5" />
+                </button>
+                <button
+                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+                  onClick={handleNext}
+                >
+                  <IoIosArrowForward className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          )}
+          {services?.length > 1 && (
+            <div className="w-full md:w-1/2 text-right block md:hidden">
               <div className="inline-flex items-center space-x-4">
                 <button
                   className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
@@ -148,7 +165,7 @@ const OfferedServices = () => {
                   </div>
 
                   <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-between w-full">
-                    <div>
+                    <div className="flex items-center justify-center">
                      
                       <img
                         src={service.provider.profileImg[0]}
@@ -180,11 +197,21 @@ const OfferedServices = () => {
                       <FiMapPin className="mr-1" /> {service.location}
                     </p>
                     <p className="flex items-center">
-                      <span className="rate ml-4 flex items-center">
-                        <Rating rating={service?.averageRating || 0} /> (
-                        {service?.averageRating})
-                      </span>
-                    </p>
+                    {service?.offeredPrice ? (
+                      <>
+                        <h6 className="text-md font-bold"> ${service?.offeredPrice}</h6>
+                        <span className="line-through text-gray-500 ml-2 text-sm">
+                          ${service?.regularPrice}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <h6 className="text-md font-bold">
+                          ${service?.regularPrice}
+                        </h6>
+                      </>
+                    )}
+                  </p>
                   </div>
 
                   <div className="mt-4 flex items-center justify-between">

@@ -7,6 +7,7 @@ import HeroSection from "./HeroSection/HeroSection";
 import HowItWorks from "./HowItWorks/HowItWorks";
 import MostPopularServices from "./MostPopularServices/MostPopularServices";
 import MainNavbar from "./Nav/MainNavbar";
+import Offer from "./OfferCard/OfferCard";
 import OfferedServices from "./OfferedServices/OfferedServices";
 import Partners from "./Partners/Partners";
 import PricingPlan from "./PricingPlan/PricingPlan";
@@ -24,10 +25,11 @@ const HomePage = () => {
             <FeaturedServices/>
             <TopProviders/>
             <HowItWorks/>
+            {/* <Offer/> */}
             <OfferedServices/>
-            <MostPopularServices/>
             <PricingPlan/>
             <Testimonial/>
+            <MostPopularServices/>
             <Blog/>
             <Partners/>
             <Footer/>
