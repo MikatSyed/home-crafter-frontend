@@ -12,11 +12,13 @@ interface Review {
   comment: string;
 }
 interface ServiceCardProps {
-    serviceId: string; // 
+    serviceId: string; //
+    role:string; 
   }
   
 
-const Review: React.FC<ServiceCardProps> = ({serviceId}) => {
+const Review: React.FC<ServiceCardProps> = ({serviceId,role}) => {
+  console.log(role,'21')
   const [reviews, setReviews] = useState<Review[]>([]);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -24,10 +26,15 @@ const Review: React.FC<ServiceCardProps> = ({serviceId}) => {
   const [loading, setLoading] = useState<boolean>(false);  
 
   const onSubmit = async (values: any) => {
+    if (role === 'Provider' || role === 'Admin') {
+      toast.error('Review feature is only available for Users.', {
+        duration: 2000,
+      });
+      setRating(0);
+      return; 
+    }
     if (rating > 0 && values.comment.trim() !== '') {
       const reviewData = { rating, comment: values.comment,serviceId };
-      
-     console.log(reviewData,'24')
       try {
         setLoading(true);  
         const res: any = await addReview(reviewData).unwrap();
@@ -47,24 +54,10 @@ const Review: React.FC<ServiceCardProps> = ({serviceId}) => {
         }
       } catch (err: any) {
         console.error(err);
-        toast.error("Failed to submit review", {
-          style: {
-            borderRadius: "10px",
-            background: "#e74c3c",
-            color: "#fff",
-          },
-          duration: 2000,
+        toast.error(err?.data, {
+         duration: 2000,
         });
       }
-    } else {
-      toast.error("Please add a rating and comment", {
-        style: {
-          borderRadius: "10px",
-          background: "#e74c3c",
-          color: "#fff",
-        },
-        duration: 2000,
-      });
     }
   };
 

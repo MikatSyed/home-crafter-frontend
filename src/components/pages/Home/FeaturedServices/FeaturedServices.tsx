@@ -9,27 +9,14 @@ import { useServicesQuery } from "@/redux/api/servicesApi";
 import Link from "next/link";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Loader from "@/components/UI/Loader";
-import Rating from "@/components/UI/Rating";
-import { addFavourite, removeFavourite } from "@/redux/features/favouritesSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { RootState } from "@reduxjs/toolkit/query";
+import { useFavourites } from "@/redux/hook";
+import { Toaster } from "react-hot-toast";
+
+
 
 const FeaturedServices = () => {
   const [swiper, setSwiper] = useState<any | null>(null);
-  const dispatch = useAppDispatch();
-  const favouriteServices:any = useAppSelector((state: any) => state.favourites.favouriteServices);
-
-  const isServiceFavourite = (serviceId: number) => {
-    return favouriteServices.some((service:any) => service.id === serviceId);
-  };
-
-  const handleFavouriteClick = (service: any) => {
-    if (isServiceFavourite(service.id)) {
-      dispatch(removeFavourite(service.id));
-    } else {
-      dispatch(addFavourite(service));
-    }
-  };
+  const { isServiceFavourite, handleFavouriteClick } = useFavourites();
 
   const handleSwiper = (swiper: any) => {
     setSwiper(swiper);
@@ -55,6 +42,8 @@ const FeaturedServices = () => {
 }
 
   return (
+   <>
+     <Toaster position="top-center" reverseOrder={false} />
     <div className="mx-auto px-6 md:px-[6rem] bg-white py-14">
       <div className="section-heading mb-8">
         <div className="flex flex-wrap items-center">
@@ -212,6 +201,7 @@ const FeaturedServices = () => {
         ))}
       </Swiper>
     </div>
+   </>
   );
 };
 

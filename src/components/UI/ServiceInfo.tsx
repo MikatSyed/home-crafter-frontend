@@ -6,6 +6,7 @@ import RelatedServices from "./RelatedService";
 import ServiceCard from "./ServiceCard";
 import Review from "./Review";
 import ProviderInfo from "./ProviderInfo";
+import { useLoggedUserQuery } from "@/redux/api/userApi";
 
 
 // Define the types for the service data
@@ -45,6 +46,9 @@ interface ProviderInfoProps {
 }
 
 const ServiceInfo: React.FC<ProviderInfoProps> = ({ data }) => {
+  const { data:userData } = useLoggedUserQuery(undefined);
+  const user = userData?.data;
+  const role = user?.role;
   const service = data?.data;
   const images = service?.serviceImg || [];
   const videoUrl = service?.videoUrl;
@@ -64,13 +68,13 @@ const ServiceInfo: React.FC<ProviderInfoProps> = ({ data }) => {
             <ProviderInfo provider={service?.provider} />
             <Gallery images={images} />
             <VideoComponent videoUrl={videoUrl || ''} />
-            <Review serviceId={serviceId} />
+            <Review serviceId={serviceId} role={role}/>
             <ReviewComponent serviceId={serviceId} />
             <RelatedServices categoryId={categoryId} serviceId={serviceId} />
           </div>
 
           <div className="lg:w-1/3 w-full lg:pl-8 right md:h-[1700px]">
-            <ServiceCard service={service} />
+            <ServiceCard service={service} role={role}/>
           </div>
         </div>
       </div>

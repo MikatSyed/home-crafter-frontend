@@ -1,4 +1,4 @@
-// components/Navbar.tsx
+
 "use client";
 
 import Link from "next/link";
@@ -44,7 +44,7 @@ const Navbar = () => {
               </ul>
             </div>
 
-            {/* Favorite Section */}
+          
             <div className="hidden md:flex items-center space-x-6">
               <div
                 className="relative flex items-center p-3 bg-[#f8fcfd] rounded-full cursor-pointer"
@@ -72,7 +72,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Cart Sidebar */}
+    
       {sidebarOpen && (
         <>
           <Cart services={favouriteServices} onClose={toggleSidebar} />

@@ -1,13 +1,15 @@
 "use client";
+import { useFavourites } from "@/redux/hook";
 import React, { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { FaImages, FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const ServiceGallery = ({ data }: any) => {
-  console.log(data)
+  const { isServiceFavourite, handleFavouriteClick } = useFavourites();
   const service = data?.data;
-
   const [showSlider, setShowSlider] = useState(false);
   const [sliderImages, setSliderImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,6 +33,8 @@ const ServiceGallery = ({ data }: any) => {
   }
 
   return (
+   <>
+     <Toaster position="top-center" reverseOrder={false} />
     <section className="w-full">
       <div className="mx-auto px-6 md:px-[6rem] py-4 w-full">
         <h2 className="text-4xl font-semibold mb-4">{service.serviceName}</h2>
@@ -44,9 +48,16 @@ const ServiceGallery = ({ data }: any) => {
               {service.location}
             </div>
           </div>
-          <div className="border rounded-full text-black hover:text-white bg-white p-4 hover:bg-blue-600">
-            <FaRegHeart />
-          </div>
+          <div
+  className="flex items-center justify-center cursor-pointer border rounded-full text-black hover:text-white bg-white  w-14 h-14 "
+  onClick={() => handleFavouriteClick(service)}
+>
+  {isServiceFavourite(service.id) ? (
+    <FaHeart className="text-indigo-600 " size={20} />
+  ) : (
+    <FaRegHeart className="text-gray-500 " size={20}/>
+  )}
+</div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
           <div className="col-span-1 sm:col-span-1 md:col-span-2 rounded-lg w-full">
@@ -152,6 +163,7 @@ const ServiceGallery = ({ data }: any) => {
         )}
       </div>
     </section>
+   </>
   );
 };
 
