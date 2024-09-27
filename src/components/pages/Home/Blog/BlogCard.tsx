@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const BlogCard = ({blog}:any) => {
-  const {id,title,blogImg,category,user,createdAt} = blog;
+  const {id,title,blogImg,category,provider,createdAt} = blog;
     return (
         <div>
              <div
@@ -11,7 +11,7 @@ const BlogCard = ({blog}:any) => {
             // data-aos="fade-up"
           >
             <div className="image-wrapper">
-              <img className="w-full h-48 object-cover  transition-transform duration-300 ease-in-out" alt={title} src={blogImg[0]} />
+              <img className="w-full h-48 object-cover rounded-md transition-transform duration-300 ease-in-out" alt={title} src={blogImg[0]} />
             </div>
             <div className="p-4">
               <div className="service-bottom-seven flex items-center justify-between mb-2">
@@ -33,11 +33,11 @@ const BlogCard = ({blog}:any) => {
               <div className="usefull-bottom flex items-center justify-between mt-5">
                 <div className="useful-img flex items-center">
                   <img
-                    src={user?.profileImg[0]}
-                    alt={user?.fName}
+                    src={provider?.profileImg[0]}
+                    alt={provider?.fName}
                     className="w-8 h-8 rounded-full mr-2"
                   />
-                  <span>{user?.fName} {user?.lName}</span>
+                  <span>{provider?.fName} {provider?.lName}</span>
                 </div>
                 <Link href={`/blog-details/${id}`} className="text-blue-500 hover:text-blue-400">
                   Read More

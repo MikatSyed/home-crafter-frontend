@@ -33,13 +33,13 @@ const TopProviders = () => {
           (currentPage - 1) * providersPerPage,
           currentPage * providersPerPage
         );
-  console.log(displayedProviders, "29");
+ 
   // Calculate the total number of pages for pagination
   const totalPages = Math.ceil(providers.length / providersPerPage);
   console.log(totalPages, "32");
   return (
-    <section className="mx-auto px-6 md:px-[6rem] bg-white py-14">
-      <div className="container mx-auto px-6">
+    <section className=" px-6 md:px-[6rem] bg-white py-14">
+      <div className="">
         {pathname !== "/providers" && (
           <div className="flex flex-wrap items-center mb-8">
             <div className="w-full mb-6 md:mb-0" data-aos="fade-up">
@@ -76,15 +76,15 @@ const TopProviders = () => {
         ) : (
           <>
             <div
-              className="flex flex-wrap -mx-4"
+              className="flex flex-wrap "
               {...(pathname === "/" ? { "data-aos": "fade-up" } : {})}
             >
               {displayedProviders?.map((provider: any, index: number) => (
                 <div
                   key={index}
-                  className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8"
+                  className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-8 "
                 >
-                  <div className="bg-white border rounded-lg hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+                  <div className="bg-white shadow-md rounded-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
                     <div className="p-4">
                       <Image
                         src={provider?.profileImg[0]}
@@ -121,7 +121,7 @@ const TopProviders = () => {
                           </span>
                         </div>
                         <Link href={`/provider-details/${provider.id}`}>
-                          <button className="ml-4 text-white hover:text-indigo-600 py-2 px-4 rounded-full border border-indigo-600 bg-indigo-600 hover:bg-white  transition-colors duration-300">
+                          <button className="ml-4  text-indigo-600 py-2 px-4 rounded-full border border-indigo-600 hover:bg-indigo-600 bg-white  hover:text-white  duration-300">
                             View Details
                           </button>
                         </Link>

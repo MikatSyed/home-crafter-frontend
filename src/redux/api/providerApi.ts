@@ -67,4 +67,4 @@ export const providerApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useProvidersQuery,useLazyProvidersForAdminQuery,useProviderByIdQuery,useUpdateProviderMutation,useUpdateProviderStatusMutation,useDeleteProviderMutation} = providerApi;
+export const {useProvidersQuery,useProvidersForAdminQuery,useProviderByIdQuery,useUpdateProviderMutation,useUpdateProviderStatusMutation,useDeleteProviderMutation} = providerApi;

@@ -5,48 +5,52 @@ import logo from '../../../../../public/assets/home (5).png';
 
 const Footer = () => {
   return (
-    <footer className="mx-auto px-6 md:px-[6rem] py-14 bg-[#f8fcfd] text-gray-900">
-      <div className="footer-top">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Logo Section */}
+    <footer className="mx-auto px-6 md:px-[6rem] py-14 bg-[#f8fcfd]">
+      <div>
+        <div className=" mx-auto ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+         
             <div className="md:col-span-1 lg:col-span-1">
-              <div className="footer-widget">
-                <div className="mt-[-80px]">
-                  <a href="index.html">
-                    <Image src={logo} alt="logo" height={200} width={200} />
-                  </a>
-                </div>
-                <div className="footer-content mt-[-20px]">
-                  <p>Lorem ipsum dolor sit consectetur adipiscing elit, sed do eiusmod tempor commodo consequat.</p>
+              <div className=''>
+              <div className="flex items-center justify-center space-x-3 ml-[-30px]">
+  <div className="p-2 bg-indigo-700 rounded-full text-white">
+    <Image src="/assets/logo.png" alt="Logo" height={40} width={40} className="p-1"/>
+  </div>
+  <h1 className="text-2xl font-bold text-indigo-700">
+    Home <span className="text-gray-900">Crafter</span>
+  </h1>
+</div>
+
+                <div className="mt-4">
+                  <p className="text-gray-600 text-sm">
+                    We are dedicated to providing the best house repair and renovation services. Quality service and client satisfaction are our top priorities.
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Quick Links Section */}
             <div className="md:col-span-1 lg:col-span-1">
-              <div className="footer-widget footer-menu">
-                <h2 className="footer-title text-lg mb-4 text-black">Quick Links</h2>
-                <ul>
-                  <li><a href="about-us.html" className="hover:text-gray-400">About Us</a></li>
-                  <li><a href="blog-grid.html" className="hover:text-gray-400">Blogs</a></li>
-                  <li><a href="contact-us.html" className="hover:text-gray-400">Contact Us</a></li>
-                  <li><a href="provider-signup.html" className="hover:text-gray-400">Become a Professional</a></li>
-                  <li><a href="user-signup.html" className="hover:text-gray-400">Become a User</a></li>
+              <div className="footer-widget">
+                <h2 className="footer-title text-lg mb-4 font-semibold text-indigo-900">Quick Links</h2>
+                <ul className="space-y-2">
+                  <li><a href="about-us.html" className="hover:text-indigo-500 transition">About Us</a></li>
+                  <li><a href="blog-grid.html" className="hover:text-indigo-500 transition">Blogs</a></li>
+                  <li><a href="contact-us.html" className="hover:text-indigo-500 transition">Contact Us</a></li>
+                  <li><a href="provider-signup.html" className="hover:text-indigo-500 transition">Become a Professional</a></li>
+                  <li><a href="user-signup.html" className="hover:text-indigo-500 transition">Become a User</a></li>
                 </ul>
               </div>
             </div>
 
             {/* Contact Us Section */}
             <div className="md:col-span-1 lg:col-span-1">
-              <div className="footer-widget footer-contact">
-                <h2 className="footer-title text-lg mb-4 text-black">Contact Us</h2>
-                <div className="footer-contact-info">
-                  <div className="footer-address mb-2">
-                    <p><span><i className="feather-map-pin mr-2"></i></span> 367 Hillcrest Lane, Irvine, California, United States</p>
-                  </div>
-                  <p><span><i className="feather-phone mr-2"></i></span> 321 546 8764</p>
-                  <p className="mb-0"><span><i className="feather-mail mr-2"></i></span> truelysell@example.com</p>
+              <div className="footer-widget">
+                <h2 className="footer-title text-lg mb-4 font-semibold text-indigo-900">Contact Us</h2>
+                <div className="space-y-2 text-sm text-gray-600">
+                  <p><span><i className="feather-map-pin mr-2"></i></span> 367 Hillcrest Lane, Irvine, California, United States</p>
+                  <p><span><i className="feather-phone mr-2"></i></span> +1 (321) 546 8764</p>
+                  <p><span><i className="feather-mail mr-2"></i></span> support@homecrafter.com</p>
                 </div>
               </div>
             </div>
@@ -54,23 +58,15 @@ const Footer = () => {
             {/* Follow Us Section */}
             <div className="md:col-span-1 lg:col-span-1">
               <div className="footer-widget">
-                <h2 className="footer-title text-lg mb-4 text-black">Follow Us</h2>
-                <div className="social-icon mb-4">
-                  <ul className="flex space-x-4">
-                    <li><a href="https://www.facebook.com" className="text-xl text-gray-900 hover:text-gray-400"><FaFacebook /></a></li>
-                    <li><a href="https://www.twitter.com" className="text-xl text-gray-900 hover:text-gray-400"><FaTwitter /></a></li>
-                    <li><a href="https://www.instagram.com" className="text-xl text-gray-900 hover:text-gray-400"><FaInstagram /></a></li>
-                    <li><a href="https://www.linkedin.com" className="text-xl text-gray-900 hover:text-gray-400"><FaLinkedin /></a></li>
-                    <li><a href="https://www.youtube.com" className="text-xl text-gray-900 hover:text-gray-400"><FaYoutube /></a></li>
-                  </ul>
+                <h2 className="footer-title text-lg mb-4 font-semibold text-indigo-900">Follow Us</h2>
+                <div className="flex space-x-4 mb-6 text-indigo-700">
+                  <a href="https://www.facebook.com" className="hover:text-indigo-500 transition"><FaFacebook className="text-2xl" /></a>
+                  <a href="https://www.twitter.com" className="hover:text-indigo-500 transition"><FaTwitter className="text-2xl" /></a>
+                  <a href="https://www.instagram.com" className="hover:text-indigo-500 transition"><FaInstagram className="text-2xl" /></a>
+                  <a href="https://www.linkedin.com" className="hover:text-indigo-500 transition"><FaLinkedin className="text-2xl" /></a>
+                  <a href="https://www.youtube.com" className="hover:text-indigo-500 transition"><FaYoutube className="text-2xl" /></a>
                 </div>
-                <h2 className="footer-subtitle text-lg mb-2 text-black">Newsletter Signup</h2>
-                <div className="subscribe-form flex">
-                  <input type="email" className="form-control p-2 flex-grow rounded-l-md bg-gray-200 text-gray-900" placeholder="Enter Email Address" />
-                  <button type="submit" className="btn footer-btn p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600">
-                    <i className="feather-send"></i>
-                  </button>
-                </div>
+               
               </div>
             </div>
           </div>
@@ -78,27 +74,25 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom Section */}
-      <div className="footer-bottom mt-12">
-        <div className="container mx-auto px-4">
-          <div className="border-t border-gray-700 py-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-              <div className="text-center md:text-left">
-                <p className="mb-0">&copy; 2024. All Rights Reserved. @Mikat Syed</p>
-              </div>
-              <div className="payment-image text-center">
-                <ul className="flex justify-center space-x-4">
-                  <li><a href="javascript:void(0);"><img src="assets/img/payment/visa.png" alt="Visa" className="h-8" /></a></li>
-                  <li><a href="javascript:void(0);"><img src="assets/img/payment/mastercard.png" alt="Mastercard" className="h-8" /></a></li>
-                  <li><a href="javascript:void(0);"><img src="assets/img/payment/stripe.png" alt="Stripe" className="h-8" /></a></li>
-                  <li><a href="javascript:void(0);"><img src="assets/img/payment/discover.png" alt="Discover" className="h-8" /></a></li>
-                </ul>
-              </div>
-              <div className="text-center md:text-right">
-                <ul className="flex justify-center md:justify-end space-x-4">
-                  <li><a href="privacy-policy.html" className="hover:text-gray-400">Privacy Policy</a></li>
-                  <li><a href="terms-condition.html" className="hover:text-gray-400">Terms &amp; Conditions</a></li>
-                </ul>
-              </div>
+      <div className="footer-bottom mt-16 border-t border-gray-300 py-6">
+        <div className="container mx-auto">
+          <div className="flex flex-wrap items-center justify-between">
+            <div className="text-center md:text-left text-sm text-gray-600">
+              <p className="mb-0">&copy;All Rights Reserved by @Mikat Syed.</p>
+            </div>
+            <div className="flex justify-center mt-4 md:mt-0">
+              <ul className="flex space-x-4">
+                <li><a href="#"><img src="assets/img/payment/visa.png" alt="Visa" className="h-8" /></a></li>
+                <li><a href="#"><img src="assets/img/payment/mastercard.png" alt="Mastercard" className="h-8" /></a></li>
+                <li><a href="#"><img src="assets/img/payment/stripe.png" alt="Stripe" className="h-8" /></a></li>
+                <li><a href="#"><img src="assets/img/payment/discover.png" alt="Discover" className="h-8" /></a></li>
+              </ul>
+            </div>
+            <div className="text-center md:text-right text-sm text-gray-600 mt-4 md:mt-0">
+              <ul className="flex space-x-4">
+                <li><a href="privacy-policy.html" className="hover:text-indigo-500 transition">Privacy Policy</a></li>
+                <li><a href="terms-condition.html" className="hover:text-indigo-500 transition">Terms &amp; Conditions</a></li>
+              </ul>
             </div>
           </div>
         </div>

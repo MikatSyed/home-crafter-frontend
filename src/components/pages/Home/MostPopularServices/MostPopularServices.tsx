@@ -42,8 +42,8 @@ const MostPopularServices = () => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-    <div className="mx-auto px-6 md:px-[6rem] bg-white py-14">
-      <div className="section-heading mb-8">
+    <div className="bg-white py-10 md:py-14">
+      <div className="mb-8 mx-auto px-6 md:px-[6rem]">
         <div className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2" data-aos="fade-up">
             <h2 className="text-4xl font-bold ">Most Popular Services</h2>
@@ -52,47 +52,46 @@ const MostPopularServices = () => {
             </p>
           </div>
           {services?.length > 3 && (
-            <div className="w-full md:w-1/2 text-right hidden md:block">
-              <div className="inline-flex items-center space-x-4">
-                <button
-                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
-                  onClick={handlePrevious}
-                >
-                  <IoIosArrowBack className="w-5 h-5" />
-                </button>
-                <button
-                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
-                  onClick={handleNext}
-                >
-                  <IoIosArrowForward className="w-5 h-5" />
-                </button>
+              <div className="w-full md:w-1/2 text-right hidden md:block">
+                <div className="inline-flex items-center space-x-4">
+                  <button
+                    className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
+                    onClick={handlePrevious}
+                  >
+                    <IoIosArrowBack className="w-5 h-5" />
+                  </button>
+                  <button
+                    className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
+                    onClick={handleNext}
+                  >
+                    <IoIosArrowForward className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-          {services?.length > 1 && (
-            <div className="w-full md:w-1/2 text-right block md:hidden">
-              <div className="inline-flex items-center space-x-4">
-                <button
-                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
-                  onClick={handlePrevious}
-                >
-                  <IoIosArrowBack className="w-5 h-5" />
-                </button>
-                <button
-                  className="rounded-full bg-[#4c40ed] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
-                  onClick={handleNext}
-                >
-                  <IoIosArrowForward className="w-5 h-5" />
-                </button>
+            )}
+             {services?.length > 1 && (
+              <div className="w-full md:w-1/2 text-right block md:hidden">
+                <div className="inline-flex items-center space-x-4">
+                  <button
+                    className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
+                    onClick={handlePrevious}
+                  >
+                    <IoIosArrowBack className="w-5 h-5" />
+                  </button>
+                  <button
+                    className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
+                    onClick={handleNext}
+                  >
+                    <IoIosArrowForward className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </div>
-      <Swiper
+      <div className="px-5 md:px-[5rem]">  <Swiper
         onSwiper={handleSwiper}
         loop={true}
-        spaceBetween={20}
         slidesPerView={1}
         breakpoints={{
           640: {
@@ -108,19 +107,20 @@ const MostPopularServices = () => {
       >
         {services?.map((service: any, index: number) => (
           <SwiperSlide key={index}>
+            
             <div
-              className="border shadow-md rounded-md transition-transform transform hover:scale-105 hover:shadow-lg duration-300"
+              className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ml-1 md:ml-4 mr-1 mb-1 md:mb-4"
               data-aos="fade-up"
             >
               <div className="relative">
                 <div className="image-wrapper">
-                  <Image
-                    className="img-fluid w-full rounded-md transition-transform duration-300 ease-in-out h-auto  md:h-[220px]"
-                    alt="Service Image"
-                    src={service.serviceImg[service.serviceImg.length - 1]}
-                    height={218}
-                    width={328}
-                  />
+                <Image
+                      className=" w-full rounded-md transition-transform duration-300 ease-in-out h-[230px]"
+                      alt="Service Image"
+                      src={service.serviceImg[service.serviceImg.length - 1]}
+                      height={230}
+                      width={328}
+                    />
                 </div>
 
                 <div className="fav-item absolute top-0 left-0 p-4 flex justify-between w-full">
@@ -174,7 +174,7 @@ const MostPopularServices = () => {
                     )}
                   </p>
                 </div>
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-4  mb-2 flex items-center justify-between">
 
   <div className="flex items-center">
     <Rating rating={service?.averageRating || 0} />
@@ -192,7 +192,8 @@ const MostPopularServices = () => {
             </div>
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper></div>
+    
     </div>
     </>
   );

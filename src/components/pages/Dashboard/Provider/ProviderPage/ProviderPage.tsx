@@ -4,7 +4,7 @@ import { FaTrash, FaEye } from 'react-icons/fa';
 import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
 import ConfirmModal from '@/components/UI/ConfirmModal';
-import { useDeleteProviderMutation, useLazyProvidersForAdminQuery, useUpdateProviderStatusMutation } from '@/redux/api/providerApi';
+import { useDeleteProviderMutation, useProvidersForAdminQuery, useUpdateProviderStatusMutation } from '@/redux/api/providerApi';
 import { ShowToast } from '@/components/UI/ShowToast';
 import { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
@@ -15,11 +15,12 @@ const ProviderPage = () => {
     const [itemsPerPage, setItemsPerPage] = useState(6);
     const [providerToDelete, setProviderToDelete] = useState<any>(null);
 
-    // Fetching providers data using the useProvidersQuery hook
-    const { data, isLoading, isError }: any = useLazyProvidersForAdminQuery(undefined);
+    
+    const { data, isLoading, isError }: any = useProvidersForAdminQuery(undefined);
     const [deleteProvider] = useDeleteProviderMutation();
-    const [updateProviderStatus] = useUpdateProviderStatusMutation(); // Mutation for updating status
-    const providers = data?.data; // Assuming data contains the list of providers
+    const [updateProviderStatus] = useUpdateProviderStatusMutation(); 
+    const providers = data?.data; 
+    console.log(providers,'23')
 
     const totalPages = Math.ceil((providers?.length || 0) / itemsPerPage);
     const paginatedProviders = providers?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -115,7 +116,7 @@ const ProviderPage = () => {
                                                 </div>
                                             </td>
                                             <td className="py-4 px-6 text-left">
-                                                <span>{provider.email}</span>
+                                                <span>{provider?.email}</span>
                                             </td>
                                             <td className="py-4 px-6 text-left">
                                                 <span>{provider.contactNo}</span>

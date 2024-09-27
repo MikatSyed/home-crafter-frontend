@@ -1,4 +1,5 @@
-import Blog from '@/components/UI/Blog';
+
+import Blog from '@/components/pages/Home/Blog/Blog';
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
 import React from 'react';
 

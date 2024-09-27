@@ -48,8 +48,8 @@ const OfferedServices = () => {
   return (
     <>
      <Toaster position="top-center" reverseOrder={false} />
-    <div className="mx-auto px-6 md:px-[6rem] bg-white py-14">
-      <div className="section-heading mb-8">
+    <div className="bg-white py-10 md:py-14">
+      <div className="mb-8 mx-auto px-6 md:px-[6rem]">
         <div className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2" data-aos="fade-up">
             <h2 className="text-4xl font-bold">Offered Services</h2>
@@ -98,10 +98,10 @@ const OfferedServices = () => {
         </div>
       </div>
 
+      <div  className="px-5 md:px-[5rem]">
       <Swiper
         onSwiper={handleSwiper}
         loop={true}
-        spaceBetween={20}
         slidesPerView={1}
         breakpoints={{
           640: {
@@ -121,16 +121,16 @@ const OfferedServices = () => {
           return (
             <SwiperSlide key={index}>
               <div
-                className="border shadow-md rounded-md transition-transform transform hover:scale-105 hover:shadow-lg duration-300"
+                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ml-1 md:ml-4 mr-1 mb-1 md:mb-4"
                 data-aos="fade-up"
               >
                 <div className="relative">
                   <div className="image-wrapper">
-                    <Image
-                      className="img-fluid w-full rounded-md transition-transform duration-300 ease-in-out h-auto md:h-[220px]"
+                  <Image
+                      className=" w-full rounded-md transition-transform duration-300 ease-in-out h-[230px]"
                       alt="Service Image"
                       src={service.serviceImg[service.serviceImg.length - 1]}
-                      height={218}
+                      height={230}
                       width={328}
                     />
                   </div>
@@ -201,7 +201,7 @@ const OfferedServices = () => {
                   </p>
                   </div>
 
-                  <div className="mt-4 flex items-center justify-between">
+                  <div className="mt-4 mb-2 flex items-center justify-between">
 
 <div className="flex items-center">
   <Rating rating={service?.averageRating || 0} />
@@ -222,6 +222,7 @@ const OfferedServices = () => {
           );
         })}
       </Swiper>
+      </div>
     </div>
     </>
   );

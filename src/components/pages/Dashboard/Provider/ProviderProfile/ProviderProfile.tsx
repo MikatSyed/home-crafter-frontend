@@ -18,13 +18,10 @@ interface ProductImage {
 }
 const ProviderProfilePage = () => {
   const { data, isLoading } = useLoggedUserQuery(undefined);
-  const [images, setImages] = useState<ProductImage[]>([]);
-  const [imagesPreview, setImagesPreview] = useState<string[]>([]);
   const [updatedImage, setUpdatedImage] = useState("");
 
   const user = data?.data;
-  const [updateUser] = useUpdateProviderMutation();
-
+  
   const latestProfileImg = user?.profileImg?.slice(-1)[0] || null;
 
 
@@ -177,16 +174,12 @@ const ProviderProfilePage = () => {
 
               <div className="bg-white ">
                 <h3 className="text-lg font-bold mb-5">Account Settings</h3>
-                <div>
+                <Link href="/change-password">
                   <button className="mb-3 text-gray-700 hover:text-blue-600">
                     Change Password
                   </button>
-                </div>
-                <div>
-                  <button className="text-gray-700 hover:text-blue-600">
-                    Forgot Password
-                  </button>
-                </div>
+                </Link>
+             
               </div>
             </div>
           </div>

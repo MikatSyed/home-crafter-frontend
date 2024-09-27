@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const HeroSection = () => {
     return (
-        <div className="mx-auto px-6 md:px-[6rem] bg-indigo-700 py-14">
+        <div className="mx-auto px-6 md:px-[6rem]  bg-gradient-to-r from-indigo-700 via-purple-600 to-blue-500 py-14">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-wrap items-center w-full">
                     <div className="lg:w-6/12 w-full">

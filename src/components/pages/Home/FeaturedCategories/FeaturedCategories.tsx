@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useCategoriesQuery } from '@/redux/api/categoryApi';
 import Link from 'next/link';
 
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiArrowRightCircle } from 'react-icons/fi';
 import Loader from '@/components/UI/Loader';
 
 const FeaturedCategories = () => {
@@ -36,15 +36,15 @@ const FeaturedCategories = () => {
                 <div className="section-heading mb-8">
                     <div className="flex flex-wrap items-center">
                         <div className="w-full md:w-1/2" data-aos="fade-up">
-                            <h2 className="text-4xl font-bold text-indigo-900 leading-tight">Featured Categories</h2>
+                            <h2 className="text-4xl font-bold text-gray-900 leading-tight">Featured Categories</h2>
                             <p className="text-gray-400 mt-4">What do you need to find?</p>
                         </div>
                         <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
-                          <Link href="/categories">
-                          <button className="bg-[#4f46e5] inline-flex items-center text-white px-4 py-2 rounded ">
-                                View All
-                                <i className="ml-2 feather-arrow-right-circle"></i>
-                            </button></Link>
+                    {displayCategories?.length > 4 &&       <Link href="/categories">
+                          <button className="text-indigo-600 border border-indigo-600  inline-flex items-center bg-white px-4 py-2 rounded-full hover:bg-indigo-600 hover:text-white transition duration-300">
+      View All
+      <FiArrowRightCircle className="ml-2" size={20} />
+    </button></Link>}
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ const FeaturedCategories = () => {
              
             <div className={`grid ${pathname === '/categories' ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'} gap-2 md:gap-2 lg:gap-4`}>
                 {displayCategories?.map((category: any) => (
-                    <div key={category.id} className="relative rounded flex items-center justify-center overflow-hidden group bg-white p-2">
+                    <div key={category.id} className="relative rounded flex items-center justify-center overflow-hidden group bg-white p-2"  data-aos="fade-up">
                         {pathname === '/categories' ? (
                             <Link href={`/services?categoryId=${category.id}`}>
                                 <div className="relative rounded-lg overflow-hidden border h-[350px]">

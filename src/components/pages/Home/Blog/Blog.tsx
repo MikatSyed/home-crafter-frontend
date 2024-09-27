@@ -29,6 +29,7 @@ const Blog = () => {
 
 
   const blogs = data?.data;
+  console.log({blogs})
 
   useEffect(() => {
     AOS.init({
@@ -49,15 +50,15 @@ const Blog = () => {
   const totalPages = Math.ceil(blogs?.length / blogsPerPage);
 
   return (
-    <div className="mx-auto px-6 md:px-[6rem] py-20">
+    <div className="mx-auto px-6 md:px-[6rem] py-10 md:py-14">
       {pathname !== "/blogs" && (
         <div className="text-center mb-8">
           <div
-            className="section-heading section-heading-seven"
+           
             data-aos="fade-up"
           >
             <h2 className="text-3xl font-semibold">Our Recent Blog</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+            <p className="text-gray-400 mt-4">Discover useful guides and expert advice to help you maintain and enhance your living spaces</p>
           </div>
         </div>
       )}

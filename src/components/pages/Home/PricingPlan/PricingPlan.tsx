@@ -7,32 +7,25 @@ import pricingImg3 from '../../../public/assets/pricing-seven-3.svg';
 
 const PricingPlan = () => {
   return (
-    <div className="mx-auto px-6 md:px-[6rem] py-16 ">
-      <div className="text-center mb-12">
+    <div className="mx-auto px-6 md:px-[6rem] py-10 md:py-16 ">
+      <div className="text-center ">
         <div className="section-heading section-heading-seven" data-aos="fade-up">
-          <h2 className="text-4xl font-bold text-indigo-900 leading-tight">Pricing Plan</h2>
-          <p className="text-gray-500 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          <h2 className="text-4xl font-bold text-gray-900 leading-tight">Pricing Plan</h2>
+          <p className="text-gray-400 mt-4"> Choose the best plan that fits your needs and budget. Get more value with our flexible pricing options</p>
         </div>
       </div>
-      <div className="price-toggle price-toggle-seven mb-10 text-center">
-        <div className="status-toggle toggle-pink inline-flex items-center">
-          <span className="mr-2 text-gray-700">Bill Monthly</span>
-          <input type="checkbox" id="status_1" className="check hidden" />
-          <label htmlFor="status_1" className="checktoggle inline-block bg-gray-300 w-12 h-6 rounded-full cursor-pointer"></label>
-          <span className="ml-2 text-gray-700">Bill Annually</span>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" data-aos="fade-up">
-        {/* Pricing Plan 1 */}
-        <div className="pricing-plans price-new pricing-plans-seven bg-white p-8 rounded-xl shadow-md hover:shadow-2xl transition-shadow duration-300">
+   
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-20" data-aos="fade-up">
+       
+        {/* <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
           <div className="flex justify-center mb-6">
            
           </div>
-          <div className="pricing-planshead text-center mb-6">
+          <div className=" text-center mb-6">
             <h5 className="text-4xl font-bold text-indigo-600">Basic</h5>
             <h6 className="text-2xl font-extrabold text-gray-800"><span>$</span>10.00</h6>
           </div>
-          <div className="pricing-planscontent pricing-planscontent-seven mb-6">
+          <div className=" mb-6">
             <ul className="space-y-3">
               <li className="flex items-center text-gray-700">
                 <FiCheck className="mr-3 text-indigo-600" />
@@ -57,90 +50,129 @@ const PricingPlan = () => {
             </ul>
           </div>
           <div className="text-center">
-            <a href="search.html" className="bg-[#3730a3] text-white font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+            <a href="search.html" className="bg-white text-indigo-600 border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
             </a>
           </div>
+        </div> */}
+            <div className="bg-white py-8 px-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div className="flex justify-center mb-6">
+           
+          </div>
+          <div className=" text-center mb-6">
+            <h5 className="text-4xl font-bold text-indigo-600">Basic</h5>
+          
+          </div>
+          <div className=" mb-6">
+            <ul className="space-y-3">
+              <li className="flex items-center text-gray-700">
+                <FiCheck className="mr-3 text-indigo-600" />
+                3 Essential Services Included
+              </li>
+              <li className="flex items-center text-gray-700">
+                <FiCheck className="mr-3 text-indigo-600" />
+                Affordable & Cost-Effective
+              </li>
+              <li className="flex items-center text-gray-700">
+                <FiCheck className="mr-3 text-indigo-600" />
+                Available on weekends and evenings with prior scheduling.
+              </li>
+              <li className="flex items-center text-gray-700">
+                <FiCheck className="mr-3 text-indigo-600" />
+                Individuals, small families, and those needing basic upkeep
+              </li>
+              <li className="flex items-center text-gray-700">
+                <FiCheck className="mr-3 text-indigo-600" />
+                6 month Validity with Service Rollovers
+              </li>
+             
+            </ul>
+          </div>
+          <div className="text-center">
+            <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+              Choose Plan
+            </button>
+          </div>
         </div>
-        {/* Pricing Plan 2 */}
-        <div className="pricing-plans price-new pricing-plans-seven bg-indigo-600 text-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 relative transform lg:scale-105 lg:translate-y-[-10px]">
+       
+        <div className=" price-new  bg-indigo-600 text-white py-8 px-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 relative transform lg:scale-105 lg:translate-y-[-10px]">
           <div className="price-block absolute top-0 right-0 bg-red-500 text-white px-2 py-1 rounded-bl-lg">
             <span className="text-sm font-bold">MOST POPULAR</span>
           </div>
           <div className="flex justify-center mb-6">
            
           </div>
-          <div className="pricing-planshead text-center mb-6">
+          <div className="text-center mb-6">
             <h5 className="text-4xl font-bold">Standard</h5>
-            <h6 className="text-2xl font-extrabold"><span>$</span>70.00</h6>
+          
           </div>
-          <div className="pricing-planscontent pricing-planscontent-seven mb-6">
+          <div className=" mb-6">
             <ul className="space-y-3">
               <li className="flex items-center">
                 <FiCheck className="mr-3" />
-                1 Bathroom cleaning
+                5 Comprehensive Services Included
               </li>
               <li className="flex items-center">
                 <FiCheck className="mr-3" />
-                Up to 3 bedrooms cleaning
+                Best Balance of Value and Coverage
               </li>
               <li className="flex items-center">
                 <FiCheck className="mr-3" />
-                1 Livingroom cleaning
+                Medium-sized homes, rental properties, or customers looking for regular maintenance.
               </li>
               <li className="flex items-center">
                 <FiCheck className="mr-3" />
-                Small kitchen (0 - 150 ft²)
+                Available 5 days a week, with priority scheduling options for regular customers.
               </li>
               <li className="flex items-center">
                 <FiCheck className="mr-3" />
-                Up to 2 additional rooms cleaning
+                1 Years Service Validity
               </li>
             </ul>
           </div>
           <div className="text-center">
-            <a href="search.html" className="bg-white text-[#3730a3] font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+            <a href="search.html" className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
             </a>
           </div>
         </div>
         {/* Pricing Plan 3 */}
-        <div className="pricing-plans price-new pricing-plans-seven bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div className="pricing-plans price-new pricing-plans-seven bg-white py-8 px-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
           <div className="flex justify-center mb-6">
           
           </div>
-          <div className="pricing-planshead text-center mb-6">
+          <div className=" text-center mb-6">
             <h5 className="text-4xl font-bold text-indigo-600">Premium</h5>
-            <h6 className="text-2xl font-extrabold text-gray-800"><span>$</span>100.00</h6>
+           
           </div>
-          <div className="pricing-planscontent pricing-planscontent-seven mb-6">
+          <div className=" mb-6">
             <ul className="space-y-3">
               <li className="flex items-center text-gray-700">
                 <FiCheck className="mr-3 text-indigo-600" />
-                1 Bathroom cleaning
+                7 All-Inclusive Services Included
               </li>
               <li className="flex items-center text-gray-700">
                 <FiCheck className="mr-3 text-indigo-600" />
-                Up to 3 bedrooms cleaning
+                Ultimate Plan with Maximum Benefits
               </li>
-              <li className="flex items-center text-gray-400">
-                <FiCheck className="mr-3" />
-                1 Livingroom cleaning
+              <li className="flex items-center text-gray-700">
+                <FiCheck className="mr-3 text-indigo-600" />
+                Large families, estates, or individuals seeking comprehensive property management
               </li>
-              <li className="flex items-center text-gray-400">
-                <FiCheck className="mr-3" />
-                Small kitchen (0 - 150 ft²)
+              <li className="flex items-center text-gray-700">
+                <FiCheck className="mr-3 text-indigo-600" />
+                Available 24/7 with emergency support and priority scheduling for all requests
               </li>
-              <li className="flex items-center text-gray-400">
-                <FiCheck className="mr-3" />
-                Up to 2 additional rooms cleaning
+              <li className="flex items-center text-gray-700">
+                <FiCheck className="mr-3 text-indigo-600" />
+                2 Years Service Validity
               </li>
             </ul>
           </div>
           <div className="text-center">
-            <a href="search.html" className="bg-[#3730a3] text-white font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+          <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
-            </a>
+            </button>
           </div>
         </div>
       </div>

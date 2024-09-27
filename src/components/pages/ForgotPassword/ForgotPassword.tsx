@@ -69,7 +69,7 @@ const ForgotPassword = () => {
         
         <button
           type="submit"
-          className={` bg-indigo-600 border border-indigo-600 text-white hover:text-indigo-600 py-2 px-4 rounded hover:bg-white transition ${loading ? 'text-indigo-600 opacity-50 cursor-not-allowed inline-flex justify-center items-center' : ''}}`}
+          className={`bg-white hover:bg-indigo-700 border border-indigo-700 hover:text-white text-indigo-600 py-2 px-4 rounded  transition ${loading ? 'text-indigo-700 opacity-50 cursor-not-allowed inline-flex justify-center items-center' : ''}}`}
           disabled={loading}
         >
        {loading ? <Spinner/> :' Forget Password'}
