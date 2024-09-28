@@ -26,12 +26,12 @@ const BlogCard = ({blog}:any) => {
                 <h6 className="text-gray-500">{category?.categoryName}</h6>
               </div>
               <h3 className="title text-lg font-semibold mb-2">
-                <a href="blog-details.html" className="text-gray-800 hover:text-gray-600">
+                <Link href={`/blog-details/${id}`} className="text-gray-800 hover:text-indigo-600">
                   {title}
-                </a>
+                </Link>
               </h3>
-              <div className="usefull-bottom flex items-center justify-between mt-5">
-                <div className="useful-img flex items-center">
+              <div className="flex items-center justify-between mt-5">
+                <div className=" flex items-center">
                   <img
                     src={provider?.profileImg[0]}
                     alt={provider?.fName}

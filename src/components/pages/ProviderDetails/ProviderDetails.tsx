@@ -57,9 +57,10 @@ const ProviderDetails = ({ id }: any) => {
         <div className="flex flex-wrap lg:flex-nowrap rounded-lg">
           <div className="lg:w-1/3 w-full mb-8 lg:mb-0">
             <div className="relative rounded-lg shadow-lg">
-              <div className="absolute top-2 left-2 bg-white hover:text-white text-[#665cf0] hover:bg-[#665cf0] text-sm px-3 py-1 rounded">
-                {category?.categoryName}
-              </div>
+            <div className="absolute top-2 left-2 bg-white hover:text-white text-[#665cf0] hover:bg-[#665cf0] text-sm px-3 py-1 rounded">
+  {/* Check if category and categoryName are available */}
+  {/* {category?.categoryName || "Unknown Category"} */}
+</div>
               <img
                 src={profileImg[0]}
                 alt={`${fName} ${lName}`}
@@ -187,11 +188,8 @@ const ProviderDetails = ({ id }: any) => {
           </div>
         </div>
         <ProviderServices
-          services={services}
-          category={category}
-          profileImg={profileImg}
-          fName={fName}
-          lName={lName}
+        providerId={id}
+        
         />
         <ProviderReview providerId={id} />
         <ProviderReviewCard providerId={id} />

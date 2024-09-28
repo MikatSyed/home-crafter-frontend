@@ -48,7 +48,7 @@ const Navbar = () => {
             <div className="hidden md:flex items-center space-x-6">
               <div
                 className="relative flex items-center p-3 bg-[#f8fcfd] rounded-full cursor-pointer"
-                onClick={toggleSidebar} // Toggle sidebar on click
+                onClick={toggleSidebar} 
               >
                {favouriteServices.length === 0 ?  <FaRegHeart className="text-indigo-600 text-xl hover:scale-105 transition-transform" />:  <FaHeart className="text-indigo-600 text-xl hover:scale-105 transition-transform" />}
                 <span className="absolute -top-2 -right-3 bg-indigo-600 text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
