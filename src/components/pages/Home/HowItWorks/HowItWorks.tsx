@@ -30,11 +30,11 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="mx-auto py-10 bg-[#f8fcfd]">
+    <div className="mx-auto py-10 md:py-14 bg-[#f8fcfd]">
       <div className="text-center mb-10  px-6 md:px-[6rem]">
-        <div data-aos="fade-up">
+        <div ata-aos="fade-up">
           <h2 className="text-4xl font-extrabold text-gray-900 leading-tight">How It Works</h2>
-          <p className="text-gray-400 text-lg mt-4"> Discover our simple process to get started quickly and enjoy the best services we offer.</p>
+          <p className="text-gray-400  mt-4"> Discover our simple process to get started qui`kly and enjoy the best services we offer.</p>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 
-import Blog from "./Blog/Blog";
+import Blog from "./Blog/Main";
 import FeaturedCategories from "./FeaturedCategories/FeaturedCategories";
 import FeaturedServices from "./FeaturedServices/FeaturedServices";
 import Footer from "./Footer/Footer";

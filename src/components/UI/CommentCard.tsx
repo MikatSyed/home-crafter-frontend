@@ -30,7 +30,7 @@ const CommentCard: React.FC<ServiceCardProps> = ({ blogId }) => {
     );
   }
 
-  // Determine which comments to show based on the showAll state
+  
   const commentsToShow = showAll ? data.data : data.data.slice(0, 3);
 
   return (

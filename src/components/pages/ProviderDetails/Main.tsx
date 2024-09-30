@@ -12,10 +12,10 @@ import {
   FiUser,
 } from "react-icons/fi";
 import FeaturedServices from "../Home/FeaturedServices/FeaturedServices";
-import ProviderServices from "./ProviderServices";
-import ProviderReview from "./ProviderReview";
+import ProviderServices from "./ProviderServices/ProviderServices";
+import ProviderReview from "./ProviderReview/ProviderReview";
 import Loader from "@/components/UI/Loader";
-import ProviderReviewCard from "./ProviderReviewCard";
+import ProviderReviewCard from "./ProviderReviewCard/ProviderReviewCard";
 import Rating from "@/components/UI/Rating";
 
 const ProviderDetails = ({ id }: any) => {
@@ -187,13 +187,17 @@ const ProviderDetails = ({ id }: any) => {
             </div>
           </div>
         </div>
+        </div>
         <ProviderServices
         providerId={id}
         
         />
+        <div className="mx-auto px-6 md:px-[6rem] py-8">
         <ProviderReview providerId={id} />
         <ProviderReviewCard providerId={id} />
-      </div>
+        </div>
+       
+   
     </>
   );
 };

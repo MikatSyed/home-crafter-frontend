@@ -5,11 +5,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useBlogsQuery } from "@/redux/api/blogApi";
-import BlogCard from "./BlogCard";
+import BlogCard from "./BlogCard/BlogCard";
 import { Swiper, SwiperSlide, Swiper as SwiperType } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
-const Blog = () => {
+const Main = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,7 +50,7 @@ const Blog = () => {
   const totalPages = Math.ceil(blogs?.length / blogsPerPage);
 
   return (
-    <div className="mx-auto px-6 md:px-[6rem] py-10 md:py-14">
+    <div className="mx-auto px-6 md:px-[5rem] py-10 md:py-14">
       {pathname !== "/blogs" && (
         <div className="text-center mb-8">
           <div
@@ -138,4 +138,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default Main;

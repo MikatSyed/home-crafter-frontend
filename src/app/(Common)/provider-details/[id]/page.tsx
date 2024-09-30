@@ -1,4 +1,4 @@
-import ProviderDetails from '@/components/pages/ProviderDetails/ProviderDetails';
+import Main from '@/components/pages/ProviderDetails/Main';
 import React from 'react';
 
 type IDProps = {
@@ -9,7 +9,7 @@ const page = ({ params }: IDProps) => {
     const { id } = params;
     return (
         <>
-        <ProviderDetails id={id}/>
+        <Main id={id}/>
         </>
     );
 };

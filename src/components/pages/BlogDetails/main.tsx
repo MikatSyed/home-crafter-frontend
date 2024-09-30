@@ -22,7 +22,7 @@ const Main = ({id}:any) => {
   }
   return (
     <div>
-      <BreadcrumbBar name="Blog" subtitle="Blog Details" />
+     
       <div className="mx-auto px-6 md:px-[7rem] py-6">
         <div className="flex flex-wrap lg:flex-nowrap pb-4">
           <div className="lg:w-2/3 w-full mb-8 lg:mb-0 md:h-[1560px] overflow-y-auto scrollbar-hide">
@@ -83,7 +83,7 @@ const Main = ({id}:any) => {
               </p>
               <Link
                 href={`/provider-details/${blog?.provider?.id}`}
-                className="text-indigo-600 border border-indigo-600 bg-white  inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5]"
+                className="text-indigo-600 border border-indigo-600 bg-white hover:bg-indigo-600 hover:text-white inline-flex  items-center justify-center px-4 py-2 rounded-full text-md border border-[#4f46e5]"
               >
                 About Author
               </Link>

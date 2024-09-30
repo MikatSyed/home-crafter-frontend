@@ -4,6 +4,7 @@ import Image from 'next/image';
 import pricingImg1 from '../../../public/assets/pricing-seven-1.svg';
 import pricingImg2 from '../../../public/assets/pricing-seven-2.svg';
 import pricingImg3 from '../../../public/assets/pricing-seven-3.svg';
+import Link from 'next/link';
 
 const PricingPlan = () => {
   return (
@@ -89,9 +90,11 @@ const PricingPlan = () => {
             </ul>
           </div>
           <div className="text-center">
-            <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+           <Link href="/combo-pack/basic">
+           <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
             </button>
+           </Link>
           </div>
         </div>
        
@@ -131,9 +134,12 @@ const PricingPlan = () => {
             </ul>
           </div>
           <div className="text-center">
-            <a href="search.html" className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+          <Link href="/combo-pack/standard">
+          <button  className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
-            </a>
+            </button>
+          </Link>
+           
           </div>
         </div>
         {/* Pricing Plan 3 */}
@@ -170,9 +176,12 @@ const PricingPlan = () => {
             </ul>
           </div>
           <div className="text-center">
-          <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+          <Link href="/combo-pack/premium"> 
+           <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
             </button>
+            </Link>
+         
           </div>
         </div>
       </div>

@@ -7,6 +7,9 @@ import FormTextArea from '../Forms/FormTextArea';
 import { useAddReviewMutation } from '@/redux/api/reviewApi';
 import Spinner from './Spinner';
 import { useAddCommentMutation } from '@/redux/api/commentApi';
+import { ShowToast } from './ShowToast';
+import reviewSchema from '@/schemas/review';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface BlogProps {
   blogId: string; 
@@ -18,21 +21,15 @@ const Comment: React.FC<BlogProps> = ({ blogId }) => {
 
   const onSubmit = async (values: { comment: string }) => {
     const commentData = { comment: values.comment, blogId }; // Include blogId in the payload
-
+    const toastId = toast.loading('Posting...')
     try {
       setLoading(true);
       const res: any = await addComment(commentData).unwrap();
       if (res && res.data) {
         setLoading(false);
-        toast("Comment submitted successfully", {
-          icon: <span style={{ marginRight: -8, fontSize: 22 }}><TiTickOutline /></span>,
-          style: {
-            borderRadius: "10px",
-            background: "#4f46e5",
-            color: "#fff",
-          },
-          duration: 2000,
-        });
+       ShowToast({
+        message: "Comment submitted successfully"
+       })
       }
     } catch (err: any) {
       console.error(err);
@@ -45,6 +42,8 @@ const Comment: React.FC<BlogProps> = ({ blogId }) => {
         },
         duration: 2000,
       });
+    }finally{
+      toast.dismiss(toastId);
     }
   };
 
@@ -54,17 +53,18 @@ const Comment: React.FC<BlogProps> = ({ blogId }) => {
       <div className="mt-8">
         <h5 className="text-xl font-semibold mb-4">Write a Comment</h5>
 
-        <Form submitHandler={onSubmit}>
+        <Form submitHandler={onSubmit} resolver={yupResolver(reviewSchema)}>
           <FormTextArea name="comment" rows={5} placeholder="Add a comment" />
           <button
-            type="submit"
-            className={`text-white bg-[#4f46e5] inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5] ${
-              loading ? 'w-[150px] opacity-50 cursor-not-allowed inline-flex justify-center items-center' : ''
-            }`}
-            disabled={loading}
-          >
-            {loading ? <Spinner /> : 'Post Comment'}
-          </button>
+  type="submit"
+  className={`text-indigo-600 bg-white hover:bg-indigo-600 hover:text-white inline-flex items-center justify-center px-4 py-2 rounded-full text-md border border-[#4f46e5] 
+    ${loading ? 'w-[150px] bg-indigo-600 opacity-50 cursor-not-allowed' : 'bg-white w-[150px]hover:bg-indigo-600 hover:text-white'}`
+  }
+  disabled={loading}
+>
+  {loading ? <Spinner /> : 'Post Comment'}
+</button>
+
         </Form>
       </div>
     </div>
