@@ -3,7 +3,6 @@ import { FiMenu, FiX, FiBell } from 'react-icons/fi';
 import Image from 'next/image';
 import { TfiWorld } from 'react-icons/tfi';
 import Link from 'next/link';
-import { useLoggedUserQuery } from '@/redux/api/userApi';
 import { signOut } from 'next-auth/react';
 import { useClickAway } from 'react-use';
 

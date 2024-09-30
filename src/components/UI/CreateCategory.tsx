@@ -128,16 +128,16 @@ const CreateCategory: React.FC<CreateCategoryFormProps> = ({ show, onClose }) =>
             <h3 className="text-xl font-semibold">Add New Category</h3>
             <button
               onClick={onClose}
-              className="bg-[#4f46e5] text-white rounded-full p-2 hover:bg-opacity-90 transition"
+              className="text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white rounded-full p-2 hover:bg-opacity-90 transition"
             >
               <FiX size={18} />
             </button>
           </div>
           <Form submitHandler={onSubmit}>
             <div className="mb-4">
-              <FormInput
+            <FormInput
                 name="categoryName"
-                label="Category Name"
+               label="Category Name"
                 type="text"
               />
             </div>
