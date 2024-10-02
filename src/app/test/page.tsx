@@ -1,165 +1,88 @@
-"use client";
-import { useState } from "react";
-import { FiMenu, FiX, FiChevronDown } from "react-icons/fi"; // Importing icons from react-icons
-import logo from "../../../public/assets/home (3).png";
-import Image from "next/image";
-import Link from "next/link";
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState<{ [key: number]: boolean }>(
-    {}
-  );
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
+// ServiceComboPack.js
+import React from 'react';
+import ComboPackCard from './ComboPackCard';
+
+const ServiceComboPack = () => {
+  // Static data for each service category
+  const comboPacks = {
+    Electrician: [
+      {
+        plan: 'Basic',
+        services: ['Wiring Check', 'Light Installation'],
+        providerImage: "",
+        providerName: 'John Doe',
+        providerInfo: 'Electronic',
+        price: 23,
+      },
+      {
+        plan: 'Standard',
+        services: ['Electrical Inspection', 'Ceiling Fan Installation', 'Emergency Repairs'],
+        providerImage: "",
+        providerName: 'John Doe Electricals',
+        providerInfo: 'Offers reliable electrical services with warranty.',
+        price: 45,
+      },
+      {
+        plan: 'Premium',
+        services: ['Home Automation Setup', 'Full House Rewiring', '24/7 Emergency Support'],
+        providerImage: "",
+        providerName: 'John Doe Electricals',
+        providerInfo: 'Comprehensive electrical solutions for large properties.',
+        price: 75,
+      },
+    ],
+    Plumber: [
+      {
+        plan: 'Basic',
+        services: ['Leak Detection', 'Faucet Replacement'],
+        providerImage: "",
+        providerName: 'WaterFlow Plumbing',
+        providerInfo: 'Professional plumbing services at affordable rates.',
+        price: 20,
+      },
+      {
+        plan: 'Standard',
+        services: ['Pipe Installation', 'Water Heater Repair', 'Bathroom Fitting'],
+        providerImage: "",
+        providerName: 'WaterFlow Plumbing',
+        providerInfo: 'Experienced team with guaranteed work satisfaction.',
+        price: 50,
+      },
+      {
+        plan: 'Premium',
+        services: ['Sewer Line Replacement', 'Waterproofing Solutions', 'Emergency Plumbing', 'Leak Repair'],
+        providerImage: "",
+        providerName: 'WaterFlow Plumbing',
+        providerInfo: 'Premium solutions for complex plumbing needs.',
+        price: 80,
+      },
+    ],
   };
-  const toggleDropdown = (linkIndex: number) => {
-    setDropdownOpen((prevState) => ({
-      ...prevState,
-      [linkIndex]: !prevState[linkIndex] || false,
-    }));
-  };
-  const closeDropdown = () => {
-    setDropdownOpen({});
-  };
-  const navItems: any = [
-    // Array of items with sub-items (replace with your data)
-    {
-      title: "Home",
-      href: "/home",
-    },
-    {
-      title: "Service",
-      href: "/service",
-    },
-    {
-      title: "Providers",
-      href: "/providers",
-    },
-    {
-      title: "Blog",
-      href: "/blog",
-    },
-    {
-      title: "About",
-      href: "/about",
-    },
-    {
-      title: "Contact",
-      href: "/contact",
-    },
-  ];
+
   return (
-    <nav className="mx-auto px-6 md:px-[6rem] shadow-md">
-      <div className="max-w-7xl py-4  md:mx-0">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 mr-8 mt-2">
-              <Image src={logo} alt="Logo" height={250} width={250} />
-            </div>
-          </div>
-          <div className="hidden md:block flex-1">
-            <ul className="flex justify-center space-x-6 text-[#747481] font-medium">
-              {navItems.map((item: any, index: number) => (
-                <li key={index} className="relative">
-                  <Link
-                    href={item.href}
-                    className="text-black hover:text-blue-500 py-2 rounded-md text-sm flex items-center"
-                    onMouseEnter={() => toggleDropdown(index)}
-                    onMouseLeave={closeDropdown}
-                  >
-                    {item.title}
-                  </Link>
-                  {item.subItems && item.subItems.length > 0 && (
-                    <ul
-                      className={`${
-                        dropdownOpen[index]
-                          ? "absolute shadow-md z-50 bg-white rounded-md py-1"
-                          : "hidden"
-                      }`}
-                      onMouseEnter={() => toggleDropdown(index)}
-                      onMouseLeave={closeDropdown}
-                    >
-                      {item.subItems.map((subItem: any, subIndex: any) => (
-                        <li key={subIndex} className="py-2 px-3 w-[200px]">
-                          <Link
-                            href={subItem.href}
-                            className="text-sm text-black hover:text-blue-500"
-                          >
-                            {subItem.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex items-center">
-            <button
-              className="block md:hidden text-black hover:text-blue-500 focus:outline-none"
-              onClick={toggleNavbar}
-            >
-              {/* Hamburger menu icon */}
-              <FiMenu className={`${isOpen ? "hidden" : "block"} h-6 w-6`} />
-              {/* Close menu icon */}
-              <FiX className={`${isOpen ? "block" : "hidden"} h-6 w-6`} />
-            </button>
-          </div>
-          <div className="hidden md:flex items-center space-x-2">
-        
-            <button className="text-[#565666]  font-bold py-2 px-4 rounded">
-              Register
-            </button>
-            <button className="bg-[#4c40ed] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Login
-            </button>
+    <div className="mx-auto px-6 md:px-[6rem] py-10">
+      <h1 className="text-4xl font-bold text-center text-gray-900 leading-tight mb-16">Our Service Combo Packs</h1>
+      {/* Display Combo Packs for Each Category */}
+      {Object.keys(comboPacks).map((category) => (
+        <div key={category} className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-800 mb-8">{category} Combo Packs</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {comboPacks[category].map((pack, index) => (
+              <ComboPackCard
+                key={index}
+                plan={pack.plan}
+                services={pack.services}
+                providerImage={pack.providerImage}
+                providerName={pack.providerName}
+                providerInfo={pack.providerInfo}
+                price={pack.price}  // Pass price as a prop
+              />
+            ))}
           </div>
         </div>
-      </div>
-      {/* Mobile menu, toggle classes based on menu state */}
-      <div className={`${isOpen ? "block" : "hidden"} md:hidden`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navItems.map((item: any, index: number) => (
-            <div key={index}>
-              <div className="flex justify-between items-center">
-                <Link
-                  href={item.href}
-                  className="text-black hover:text-blue-500 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  {item.title}
-                </Link>
-                {item.subItems && item.subItems.length > 0 && (
-                  <button
-                    className="text-white hover:text-blue-500 focus:outline-none"
-                    onClick={() => toggleDropdown(index)}
-                  >
-                    <FiChevronDown
-                      className={`h-5 w-5 ml-2 transform ${
-                        dropdownOpen[index] ? "rotate-180" : "rotate-0"
-                      }`}
-                    />
-                  </button>
-                )}
-              </div>
-              {dropdownOpen[index] && (
-                <div className="pl-4">
-                  {item?.subItems?.map((subItem: any, subIndex: any) => (
-                    <Link
-                      key={subIndex}
-                      href={subItem.href}
-                      className="text-white hover:text-blue-500 block px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      {subItem.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </nav>
+      ))}
+    </div>
   );
 };
-export default Navbar;
+
+export default ServiceComboPack;

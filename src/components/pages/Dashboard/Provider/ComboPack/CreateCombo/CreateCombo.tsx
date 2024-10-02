@@ -20,13 +20,13 @@ interface CreateCategoryFormProps {
 const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [mode, setMode] = useState("");
+  const [plan, setPlan] = useState("");
   const [selectedServices, setSelectedServices] = useState<
     { id: number; serviceName: string; offeredPrice: number; regularPrice: number }[]
   >([]);
-  
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [discount, setDiscount] = useState<string>("");
+  const [baseTotalPrice, setBaseTotalPrice] = useState(0); // New state for total price without discount
+  const [totalPrice, setTotalPrice] = useState(0); // Total after applying discount
+  const [discount, setDiscount] = useState<string>("0");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [modeError, setModeError] = useState<boolean>(false);
 
@@ -39,7 +39,7 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
   const validateServiceCount = () => {
     let requiredServiceCount = 0;
 
-    switch (mode) {
+    switch (plan) {
       case 'Basic':
         requiredServiceCount = 3;
         break;
@@ -58,7 +58,7 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
 
   // Form submission handler
   const onSubmit = async (values: any) => {
-    if (!mode) {
+    if (!plan) {
       setModeError(true);
       return;
     } else {
@@ -66,34 +66,36 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
     }
 
     if (!validateServiceCount()) {
-      toast.error(`Please select at least ${mode === 'Basic' ? 3 : mode === 'Standard' ? 5 : 7} services for ${mode} mode.`);
+      toast.error(`Please select at least ${plan === 'Basic' ? 3 : plan === 'Standard' ? 5 : 7} services for ${plan} mode.`);
       return;
     }
 
     const selectedServiceIds = selectedServices.map((service) => service.id);
-    values.mode = mode;
+    values.plan = plan;
     values.selectedServices = selectedServiceIds;
-    values.amount = totalPrice;
-
+    values.amount = parseInt(baseTotalPrice.toFixed(0)); // Use base total price without discount
+    values.discountAmount = parseInt(totalPrice.toFixed(0)); // Total amount after applying discount
+    values.discount = parseInt(discount);
+   
     setLoading(true);
     const toastId = toast.loading('Posting...');
 
     try {
-      const res =  await addCombo(values).unwrap();
-      if(res?.data){
+      const res = await addCombo(values).unwrap();
+      if (res?.data) {
         ShowToast({
-            message: res?.message
-           })
-           setTimeout(()=>{
-            onClose();
-           },2000)
-           
+          message: res?.message,
+        });
+        setTimeout(() => {
+          onClose();
+        }, 2000);
       }
 
       // Reset form state
       setSelectedServices([]);
-      setMode('');
+      setPlan('');
       setDiscount('');
+      setBaseTotalPrice(0);
       setTotalPrice(0);
     } catch (err: any) {
       console.error(err);
@@ -111,15 +113,18 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
     }
   };
 
-  // Calculate total price based on selected services and discount
-  const calculateTotalPrice = (services: any[], currentDiscount: number): number => {
-    const totalServicePrice = services.reduce((total, service) => {
+  // Calculate base total price based on selected services
+  const calculateBaseTotalPrice = (services: any[]): number => {
+    return services.reduce((total, service) => {
       const price = service.offeredPrice > 0 ? service.offeredPrice : service.regularPrice;
-      return total + (price || 0); // Use 0 if price is undefined or invalid
+      return total + (price || 0);
     }, 0);
+  };
 
-    const discountAmount = totalServicePrice * (currentDiscount / 100);
-    return totalServicePrice - discountAmount;
+  // Calculate total price after discount
+  const calculateTotalPriceWithDiscount = (basePrice: number, discount: number): number => {
+    const discountAmount = (basePrice * discount) / 100;
+    return basePrice - discountAmount;
   };
 
   // Update total price and discount
@@ -128,14 +133,13 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
 
     if (value === "") {
       setDiscount("");
-      setTotalPrice(calculateTotalPrice(selectedServices, 0));
+      setTotalPrice(calculateTotalPriceWithDiscount(baseTotalPrice, 0)); // Reset to base price
     } else {
       const discountValue = parseFloat(value);
       if (!isNaN(discountValue) && discountValue >= 0) {
         setDiscount(value);
-        setTotalPrice(calculateTotalPrice(selectedServices, discountValue));
+        setTotalPrice(calculateTotalPriceWithDiscount(baseTotalPrice, discountValue)); // Update with discount
       } else {
-        // Handle invalid discount value
         toast.error("Please enter a valid discount percentage.");
       }
     }
@@ -152,19 +156,23 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
     }
 
     setSelectedServices(updatedServices);
-    // Calculate total price immediately after selection
-    setTotalPrice(calculateTotalPrice(updatedServices, parseFloat(discount) || 0)); // Default to 0 if discount is NaN
+
+    // Calculate base total price
+    const newBaseTotalPrice = calculateBaseTotalPrice(updatedServices);
+    setBaseTotalPrice(newBaseTotalPrice);
+
+    // Calculate total price immediately after selection with discount
+    setTotalPrice(calculateTotalPriceWithDiscount(newBaseTotalPrice, parseFloat(discount) || 0));
   };
 
   const handleModeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setMode(event.target.value);
+    setPlan(event.target.value);
     setModeError(false); // Hide error when mode changes
   };
 
   if (!show) return null;
 
-  // Determine the required service count based on the mode
-  const requiredServiceCount = mode === 'Basic' ? 3 : mode === 'Standard' ? 5 : mode === 'Premium' ? 7 : 0;
+  const requiredServiceCount = plan === 'Basic' ? 3 : plan === 'Standard' ? 5 : plan === 'Premium' ? 7 : 0;
 
   return (
     <>
@@ -172,7 +180,7 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
           <div className="flex justify-between items-center">
-            <h3 className="text-xl font-semibold">Add New Combo</h3>
+            <h3 className="text-xl font-semibold mb-2">Add New Combo Pack</h3>
             <button
               onClick={onClose}
               className="text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white rounded-full p-2 hover:bg-opacity-90 transition"
@@ -180,31 +188,32 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
               <FiX size={18} />
             </button>
           </div>
+
           <Form submitHandler={onSubmit} resolver={yupResolver(comboSchema)}>
             <div className="mb-4">
               <FormInput name="comboName" label="Combo Name" type="text" />
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Select Mode</label>
+              <label className="block text-sm font-medium text-gray-700">Select Plan</label>
               <select
                 className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                value={mode}
-                onChange={handleModeChange} // Updated event handler
+                value={plan}
+                onChange={handleModeChange}
               >
-                <option value="">Select Mode</option>
+                <option value="">Select Plan</option>
                 <option value="Basic">Basic</option>
                 <option value="Standard">Standard</option>
                 <option value="Premium">Premium</option>
               </select>
             </div>
-            {/* Show error message if mode is not selected */}
+         
             {modeError && (
               <div className="mb-4 text-sm text-red-600">
-                Mode is Required
+                Plan is Required
               </div>
             )}
-            {/* Custom Dropdown with Checkboxes */}
+
             <div className="mb-4">
               <h4 className="font-semibold">Select Services</h4>
               <div className="relative" ref={dropdownRef}>
@@ -214,7 +223,7 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
                 >
                   <span>
                     {selectedServices.length > 0
-                      ? selectedServices.map((s) => s.serviceName).join(", ")
+                      ? selectedServices?.map((s) => s.serviceName).join(", ")
                       : "Select Services"}
                   </span>
                   <span className="ml-2">
@@ -232,10 +241,7 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
                           onChange={(e) => handleServiceChange(service, e.target.checked)}
                           className="mr-2"
                         />
-                        <label
-                          htmlFor={service.name}
-                          className="text-gray-700 flex justify-between w-full"
-                        >
+                        <label htmlFor={service.name} className="text-gray-700 flex justify-between w-full">
                           <span>{service.serviceName}</span>
                           <span className="font-semibold text-gray-900">
                             ${service.offeredPrice ? service.offeredPrice : service.regularPrice}
@@ -248,58 +254,43 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
               </div>
             </div>
 
-            {/* Show the message only if selected services are less than required */}
-            {mode && selectedServices.length < requiredServiceCount && (
+            {plan && selectedServices.length < requiredServiceCount && (
               <div className="mb-4 text-sm text-gray-900">
-                Please select at least {requiredServiceCount} services for the {mode} mode.
+                Please select at least {requiredServiceCount} services for the {plan} mode.
               </div>
             )}
-
+        
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
-                Total Price
+                Total Price 
               </label>
               <input
                 type="text"
-                value={totalPrice.toFixed(2)}
-                readOnly
+                value={totalPrice.toFixed(0)}
+                disabled
                 className="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100"
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Discount Percentage
-              </label>
+                {/* Discount Percentage Input */}
+                <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">Discount Percentage</label>
               <input
-                type="number"
+                type="text"
                 value={discount}
                 onChange={handleDiscountChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                placeholder="Enter discount percentage"
               />
             </div>
 
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={onClose}
-                className="mr-4 px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={`text-[#4f46e5] hover:bg-[#4f46e5] hover:text-white inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5] ${
-                  loading
-                    ? "w-[150px] bg-[#4f46e5] text-white opacity-50 cursor-not-allowed inline-flex justify-center items-center"
-                    : ""
-                }`}
-                disabled={loading}
-              >
-                {loading ? <Spinner /> : "Create Category"}
-              </button>
-            </div>
+
+            <button
+              type="submit"
+              className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+              disabled={loading}
+            >
+              {loading ? <Spinner /> : "Add Combo Pack"}
+            </button>
           </Form>
         </div>
       </div>

@@ -18,6 +18,17 @@ export const comboPackApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.combo],
     }),
 
+    combo: build.query({
+      query: (id) => {
+        return {
+          url: `${URL}/${id}`,
+          method: "GET",      
+        };
+      },
+    
+      providesTags: [tagTypes.combo],
+    }),
+
     addCombo: build.mutation({
         query: (data) => ({
           url : `${URL}`,
@@ -26,9 +37,16 @@ export const comboPackApi = baseApi.injectEndpoints({
         }),
         invalidatesTags:[tagTypes.combo]
       }),
- 
+   updateCombo: build.mutation({
+        query: (data) => ({
+          url : `${URL}/${data.id}`,
+          method: "PATCH",
+          data:data.body
+        }),
+        invalidatesTags:[tagTypes.combo]
+      }),
 
   }),
 });
 
-export const {useCombosQuery,useAddComboMutation } = comboPackApi;
+export const {useCombosQuery,useComboQuery,useAddComboMutation,useUpdateComboMutation } = comboPackApi;

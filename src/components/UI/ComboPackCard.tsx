@@ -3,11 +3,11 @@ import React from 'react';
 import Image from 'next/image';
 import { FiCheck } from 'react-icons/fi';
 
-const ComboPackCard = ({ plan, services, providerImage, providerName, providerInfo, price }) => {
+const ComboPackCard = ({ name, services, providerImage, providerName, providerInfo, price }) => {
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 h-auto">
       {/* Plan Title */}
-      <h3 className="text-3xl font-bold text-gray-900 mb-4">{plan} Combo Pack</h3>
+      <h3 className="text-2xl font-bold text-gray-900 mb-4">{name} </h3>
       
       {/* Price Design */}
       <div className="flex justify-center items-center mb-6 p-3">
