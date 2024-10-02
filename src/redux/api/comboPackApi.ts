@@ -45,8 +45,16 @@ export const comboPackApi = baseApi.injectEndpoints({
         }),
         invalidatesTags:[tagTypes.combo]
       }),
+   deleteCombo: build.mutation({
+        query: (id) => ({
+          url : `${URL}/delete/${id}`,
+          method: "DELETE",
+          
+        }),
+        invalidatesTags:[tagTypes.combo]
+      }),
 
   }),
 });
 
-export const {useCombosQuery,useComboQuery,useAddComboMutation,useUpdateComboMutation } = comboPackApi;
+export const {useCombosQuery,useComboQuery,useAddComboMutation,useUpdateComboMutation,useDeleteComboMutation } = comboPackApi;
