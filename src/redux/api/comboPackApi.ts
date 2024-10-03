@@ -7,6 +7,16 @@ const  URL = "/combo-pack";
 export const comboPackApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
 
+    combosForProvider: build.query({
+      query: () => {
+        return {
+          url: URL,
+          method: "GET",      
+        };
+      },
+    
+      providesTags: [tagTypes.combo],
+    }),
     combos: build.query({
       query: () => {
         return {
@@ -57,4 +67,4 @@ export const comboPackApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useCombosQuery,useComboQuery,useAddComboMutation,useUpdateComboMutation,useDeleteComboMutation } = comboPackApi;
+export const {useCombosQuery,useCombosForProviderQuery,useComboQuery,useAddComboMutation,useUpdateComboMutation,useDeleteComboMutation } = comboPackApi;

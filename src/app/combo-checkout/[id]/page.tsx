@@ -1,13 +1,15 @@
 "use client";
 import React from "react";
-import CheckoutPage from "@/components/pages/CheckoutPage";
-import Stepper from "@/components/UI/Stepper";
-import { useRouter, usePathname } from "next/navigation";
-import { useBookingQuery } from "@/redux/api/bookingApi";
 import Loader from "@/components/UI/Loader";
+import Main from "@/components/pages/ComboCheckout/Main";
+import { useComboBookingQuery } from "@/redux/api/comboBooking";
 import { FaCalendarAlt } from "react-icons/fa";
 import { LuBriefcase } from "react-icons/lu";
 import { TiTickOutline } from "react-icons/ti";
+import Stepper from "@/components/UI/Stepper";
+import { usePathname, useRouter } from "next/navigation";
+
+
 
 type IDProps = {
   params: any;
@@ -16,18 +18,16 @@ type IDProps = {
 
 const Checkout = ({ params }: IDProps) => {
   const { id } = params;
-  console.log(id,'16')
   const router = useRouter();
   const pathname = usePathname();
   const dynamicId = pathname?.split('/')[2]; 
- 
-  const {data,isLoading} = useBookingQuery(id);
+  
+
+  const {data,isLoading} = useComboBookingQuery(id);
+  const comboBookind = data?.data;
+
   const steps = [
-    {
-      title: "Appointment",
-      description: "Choose time & date for the service",
-      icon: <FaCalendarAlt />
-    },
+  
     {
       title: "Payment",
       description: "Confirm Payment",
@@ -43,21 +43,22 @@ const Checkout = ({ params }: IDProps) => {
  
   const handleStepChange = (step: number) => {
     if (step === 1) {
-      router.push(`/${dynamicId}/booking`);
-    } else if (step === 2) {
+     
       router.push(`/checkout/${dynamicId}`);
-    } else if (step === 3) {
+    } else if (step === 2) {
       router.push(`/success`);
     }
   };
+
+ 
 
   if(isLoading){
     return <Loader/>
   }
   return (
     <div className="max-w-full px-12 py-6 md:px-[8rem]">
-      <Stepper steps={steps} currentStep={2} onStepClick={handleStepChange} />
-      <CheckoutPage data={data} />
+        <Stepper steps={steps} currentStep={1} onStepClick={handleStepChange} />
+      <Main data={comboBookind} />
     </div>
   );
 };

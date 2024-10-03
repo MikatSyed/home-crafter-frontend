@@ -36,6 +36,14 @@ export const bookingApi = baseApi.injectEndpoints({
         }),
         invalidatesTags:[tagTypes.availbility,tagTypes.booking]
       }),
+    addComboBooking: build.mutation({
+        query: (data) => ({
+          url : `/combo-booking`,
+          method: "POST",
+          data
+        }),
+        invalidatesTags:[tagTypes.comboBooking]
+      }),
 
     updateBooking: build.mutation({
       query: (data) => ({
@@ -77,4 +85,4 @@ export const bookingApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useBookingsQuery,useBookingQuery,useAddBookingMutation,useUpdateBookingMutation,useDeleteBookingMutation,useCheckAvailableSlotQuery,useGetStatisticsQuery } = bookingApi;
+export const { useBookingsQuery,useBookingQuery,useAddBookingMutation,useAddComboBookingMutation,useUpdateBookingMutation,useDeleteBookingMutation,useCheckAvailableSlotQuery,useGetStatisticsQuery } = bookingApi;

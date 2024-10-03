@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import CreateCombo from './CreateCombo/CreateCombo';
-import { useCombosQuery, useDeleteComboMutation } from '@/redux/api/comboPackApi';
+import { useCombosForProviderQuery, useDeleteComboMutation } from '@/redux/api/comboPackApi';
 import ComboPackCard from './ComboCard/ComboCard';
 import Loader from '@/components/UI/Loader';
 import ConfirmModal from '@/components/UI/ConfirmModal'; // Import a confirmation modal component
@@ -17,7 +17,7 @@ const Main = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3); // Track the selected combo pack for deletion
 
-  const { data, isLoading } = useCombosQuery(undefined);
+  const { data, isLoading } = useCombosForProviderQuery(undefined);
   const combos = data?.data;
 
   const totalPages = Math.ceil((combos?.length || 0) / itemsPerPage);

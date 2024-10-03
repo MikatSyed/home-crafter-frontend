@@ -13,7 +13,8 @@ export enum tagTypes {
     provider = "provider",
     offer= "offer",
     providerReview = "providerReview",
-    combo = "combo"
+    combo = "combo",
+    comboBooking = "comboBooking"
   }
   
   export const tagTypesList = [
@@ -31,6 +32,7 @@ export enum tagTypes {
     tagTypes.provider,
     tagTypes.offer,
     tagTypes.providerReview,
-    tagTypes.combo
+    tagTypes.combo,
+    tagTypes.comboBooking
   ];
   

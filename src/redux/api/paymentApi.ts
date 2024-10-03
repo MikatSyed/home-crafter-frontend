@@ -28,9 +28,18 @@ const paymentApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.payment],
     }),
 
+    initialPaymentForCombo: build.mutation({
+      query: (data: any) => ({
+        url: `${payment}/init/combo`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [tagTypes.payment],
+    }),
+
   }),
 });
 
-export const { usePaymentsQuery, useInitialPaymentMutation } = paymentApi;
+export const { usePaymentsQuery, useInitialPaymentMutation,useInitialPaymentForComboMutation } = paymentApi;
 
 export default paymentApi;

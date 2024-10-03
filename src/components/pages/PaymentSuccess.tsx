@@ -16,21 +16,21 @@ const PaymentSuccess = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center md:justify-start mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
-  <button
+<Link href="/">  <button
     className="bg-[#4c40ed] text-semibold text-white border border-[#4c40ed] py-3 px-6 rounded-lg flex items-center justify-center hover:scale-105 transition-all duration-300 ease-in-out w-full sm:w-auto text-center"
   >
     <FaHome className="mr-2 text-lg" />
     <span className="inline">Go to Home</span>
   
-  </button>
+  </button></Link>
   
-  <button
+ <Link href="/booking"> <button
     className="bg-[#f8fcfd] text-[#4c40ed] text-semibold text-sm border border-[#4c40ed] py-3 px-6 rounded-lg flex items-center justify-center hover:scale-105 transition-all duration-300 ease-in-out w-full sm:w-auto text-center"
   >
     <FaHistory className="mr-2 text-lg" />
     <span className="inline">Booking History</span>
   
-  </button>
+  </button></Link>
 </div>
 
 

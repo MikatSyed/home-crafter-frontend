@@ -125,7 +125,7 @@ const Appointment= ({providerId}:any) => {
                             onClick={handleBooking}
                             className={`py-3 px-4 rounded-md shadow-sm ${
                                 date && selectedTime
-                                    ? 'bg-[#4c40ed] text-white hover:bg-blue-600 cursor-pointer'
+                                    ? 'text-indigo-600 border border-indigo-600 bg-white hover:bg-indigo-600 hover:text-white cursor-pointer'
                                     : 'bg-gray-400 text-gray-200 cursor-not-allowed'
                             }`}
                             disabled={!date || !selectedTime}
