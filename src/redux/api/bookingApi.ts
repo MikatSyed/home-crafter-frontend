@@ -18,6 +18,16 @@ export const bookingApi = baseApi.injectEndpoints({
     
       providesTags: [tagTypes.availbility,tagTypes.booking],
     }),
+    bookingsForUser: build.query({
+      query: () => {
+        return {
+          url: `${URL}/user`,
+          method: "GET",      
+        };
+      },
+    
+      providesTags: [tagTypes.booking],
+    }),
 
     booking: build.query({
       query: (id) => ({
@@ -85,4 +95,4 @@ export const bookingApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useBookingsQuery,useBookingQuery,useAddBookingMutation,useAddComboBookingMutation,useUpdateBookingMutation,useDeleteBookingMutation,useCheckAvailableSlotQuery,useGetStatisticsQuery } = bookingApi;
+export const { useBookingsQuery,useBookingsForUserQuery,useBookingQuery,useAddBookingMutation,useAddComboBookingMutation,useUpdateBookingMutation,useDeleteBookingMutation,useCheckAvailableSlotQuery,useGetStatisticsQuery } = bookingApi;

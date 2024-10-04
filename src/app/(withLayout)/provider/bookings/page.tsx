@@ -7,7 +7,6 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FiX } from "react-icons/fi";
 
 const ProviderBookings = () => {
-  const { data, isLoading, isError } = useBookingsQuery(undefined);
   const [updateBooking] = useUpdateBookingMutation();
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
   const [selectedBookingStatus, setSelectedBookingStatus] = useState("");
@@ -16,6 +15,8 @@ const ProviderBookings = () => {
   const [errors, setErrors] = useState<any>({});
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeTab, setActiveTab] = useState("Active");
+  const { data, isLoading, isError } = useBookingsQuery(undefined);
 
   const bookings = data?.data;
 
@@ -109,6 +110,28 @@ const ProviderBookings = () => {
   return (
     <div className="mx-auto px-4 sm:px-6 lg:px-8 bg-white py-7">
       <h2 className="text-2xl font-semibold text-[#2a2a3d] mb-6">Booking List</h2>
+      <div className="mb-6">
+          <button
+            onClick={() => setActiveTab("Active")}
+            className={`px-4 py-2 ${
+              activeTab === "Active"
+                ? "bg-[#4f46e5] text-white"
+                : "bg-white text-blue-600"
+            } border rounded-l-md`}
+          >
+           Regular Booking
+          </button>
+          <button
+            onClick={() => setActiveTab("Inactive")}
+            className={`px-4 py-2 ml-2 ${
+              activeTab === "Inactive"
+                ? "bg-[#4f46e5] text-white"
+                : "bg-white text-blue-600"
+            } border rounded-r-md`}
+          >
+            Combo Booking
+          </button>
+        </div>
       <div>
         {paginatedBookings?.map((booking: any) => (
           <div
