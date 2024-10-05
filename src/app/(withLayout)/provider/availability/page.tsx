@@ -25,7 +25,7 @@ const Availability: React.FC = () => {
         Sunday: [],
         "All day": []
     });
-    console.log(availability);
+    // console.log(availability);
     
     const [selectedDay, setSelectedDay] = useState<Day | null>(null);
     const [inputValues, setInputValues] = useState<{ [key in Day]?: string }>({});
@@ -121,7 +121,7 @@ const Availability: React.FC = () => {
             
             // Make the API call to add availability
             try {
-                console.log(postData, '105');
+                // console.log(postData, '105');
                 await addAvailbility(postData).unwrap();
                 handleAddSlot(day);
             } catch (error) {

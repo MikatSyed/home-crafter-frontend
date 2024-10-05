@@ -1,5 +1,6 @@
+import FeaturedCategories from '@/components/pages/Home/FeaturedCategories/FeaturedCategories';
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
-import FeaturedCategories from '@/components/UI/FeaturedCategories';
+
 import React from 'react';
 
 const Categories = () => {

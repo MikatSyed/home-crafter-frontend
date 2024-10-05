@@ -20,7 +20,7 @@ const ProviderPage = () => {
     const [deleteProvider] = useDeleteProviderMutation();
     const [updateProviderStatus] = useUpdateProviderStatusMutation(); 
     const providers = data?.data; 
-    console.log(providers,'23')
+    // console.log(providers,'23')
 
     const totalPages = Math.ceil((providers?.length || 0) / itemsPerPage);
     const paginatedProviders = providers?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -62,7 +62,7 @@ const ProviderPage = () => {
         const newStatus = event.target.value;
         try {
           const res =   await updateProviderStatus({ id: providerId,body:{ approvalStatus: newStatus} }).unwrap(); 
-          console.log(res,'60')
+        //   console.log(res,'60')
           if(res?.data) {
             ShowToast({
                 message: res?.message,

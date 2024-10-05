@@ -12,7 +12,7 @@ const CategoryField = ({ name, label }: CategoryFieldProps) => {
     limit: 100,
     page: 1,
   });
-  console.log(data);
+  // console.log(data);
   const Categories = data?.data;
   const CategoryOptions = Categories?.map((category: any) => {
     

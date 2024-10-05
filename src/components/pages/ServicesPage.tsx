@@ -1,6 +1,6 @@
 "use client";
 import { useServicesQuery } from "@/redux/api/servicesApi";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { FaChevronDown, FaHeart, FaMapMarkerAlt, FaRegStar, FaStar } from "react-icons/fa";
 import Loader from "../UI/Loader";
 import { useCategoriesNameQuery } from "@/redux/api/categoryApi";
@@ -89,7 +89,7 @@ const ServicesPage = () => {
     ...selectedFilters,
     price_gte: sliderValue,
   });
-  console.log(data)
+  // console.log(data)
 
   const services = data?.data?.slice(
     (currentPage - 1) * servicesPerPage,
@@ -97,7 +97,7 @@ const ServicesPage = () => {
   );
 
   const totalPages = Math.ceil(data?.meta?.total / servicesPerPage);
-  console.log(totalPages)
+  // console.log(totalPages)
 
   useEffect(() => {
     if (data?.meta?.ratingCounts) {
@@ -156,6 +156,7 @@ const ServicesPage = () => {
 
 
   return (
+   <>
     <div className="md:px-[6rem] py-6">
       <section>
         <div className="flex justify-between items-center w-full mb-4 ">
@@ -416,6 +417,7 @@ const ServicesPage = () => {
         </div>
       </section>
     </div>
+   </>
   );
 };
 

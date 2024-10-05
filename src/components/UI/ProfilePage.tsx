@@ -41,7 +41,7 @@ const ProfilePage = () => {
         id: user?.id,
         body: { profileImg: imageUrl },
       });
-      console.log("Image update response:", res);
+      // console.log("Image update response:", res);
 
       // Show a success message
       toast.success("Photo Updated Successfully", {

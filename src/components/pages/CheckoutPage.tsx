@@ -58,12 +58,12 @@ const CheckoutPage = ({ data }: any) => {
       };
 
       const res = await initialPayment(checkoutData).unwrap();
-      console.log(res)
+      // console.log(res)
       if(res?.data){
         push(res?.data);
       }
     } else {
-      console.log("Please fill out all the fields.");
+      // console.log("Please fill out all the fields.");
     }
   };
 

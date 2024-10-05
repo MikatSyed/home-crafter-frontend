@@ -6,7 +6,7 @@ const Tags = () => {
     const {data}:any = useCategoriesNameQuery(undefined);
  
     const categories = data?.data;
-    console.log(categories)
+    // console.log(categories)
 
     return (
         <div>

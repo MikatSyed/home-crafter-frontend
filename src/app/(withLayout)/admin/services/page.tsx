@@ -78,7 +78,7 @@ const [offerToApply, setOfferToApply] = useState<any>(null);
     try {
       // Pass the updated status in the payload
       const response = await updateService({ id: selectedService.id, body: { status: updatedStatus } }).unwrap();
-      console.log('Update response:', response);
+      // console.log('Update response:', response);
       setIsModalOpen(false);
       setSelectedService(null);
     } catch (error) {
@@ -91,7 +91,7 @@ const [offerToApply, setOfferToApply] = useState<any>(null);
 
     try {
       await deleteService(selectedService.id).unwrap();
-      console.log('Service deleted');
+      // console.log('Service deleted');
       setIsDeleteModalOpen(false);
       setSelectedService(null);
     } catch (error) {

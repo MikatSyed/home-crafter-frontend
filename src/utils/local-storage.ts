@@ -6,7 +6,7 @@ export const setToLocalStorage = (key: string, token: string) => {
 }
 
 export const getFromLocalStorage = (key: string) => {
-    console.log(key)
+    // console.log(key)
     if (!key || typeof window === "undefined") {
         return ""
     }

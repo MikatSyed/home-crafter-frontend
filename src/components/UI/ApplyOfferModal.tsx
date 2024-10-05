@@ -18,7 +18,7 @@ const ApplyOfferModal: React.FC<ApplyOfferModalProps> = ({
   onSelectOffer,
 }) => {
   if (!isOpen) return null;
-   console.log(offers,'21')
+  //  console.log(offers,'21')
   // Filter active offers
   const activeOffers = offers.filter((offer) => offer.status === 'Active');
   const isApplyDisabled = !selectedOffer || activeOffers.length === 0;

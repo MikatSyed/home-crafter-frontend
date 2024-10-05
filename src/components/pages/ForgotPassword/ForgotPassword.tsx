@@ -16,7 +16,7 @@ const ForgotPassword = () => {
   const { data } = useLoggedUserQuery(undefined);
 
   const user = data?.data;
-  console.log(user?.role,'24')
+  // console.log(user?.role,'24')
   
 
   const onSubmit = async (values: any) => {

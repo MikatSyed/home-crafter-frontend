@@ -26,7 +26,7 @@ const SignupPage = () => {
     try {
       setLoading(true);
       const res: any = await signup(values).unwrap();
-      console.log(res);
+      // console.log(res);
 
       if (res && res.data) {
         toast("User created successfully", {

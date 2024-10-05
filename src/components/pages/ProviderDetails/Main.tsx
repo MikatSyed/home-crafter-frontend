@@ -48,7 +48,7 @@ const ProviderDetails = ({ id }: any) => {
     totalReviews,
   } = provider;
 
-  console.log(services, "49");
+  // console.log(services, "49");
 
   return (
     <>

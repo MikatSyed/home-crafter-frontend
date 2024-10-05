@@ -29,7 +29,8 @@ export const authOptions: AuthOptions = {
                   // Check if response is not ok (e.g., status 400, 401)
                   if (!res.ok) {
                     const errorData = await res.json();
-                    throw new Error(errorData?.message || "Login failed. Please check your credentials.");
+                    console.log(errorData,'32')
+                    throw new Error(errorData?.message );
                   }
               
                   const data = await res.json();

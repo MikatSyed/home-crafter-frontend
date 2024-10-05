@@ -8,7 +8,7 @@ import { GrUserWorker } from 'react-icons/gr';
 
 
 const AdminDashboard = ({ data }: any) => {
-  console.log(data,'10')
+  // console.log(data,'10')
   const totalProvider = data?.totalProviders || 0;
   const totalUsers = data?.totalUsers || 0;
   const totalServices = data?.totalServices || 0;

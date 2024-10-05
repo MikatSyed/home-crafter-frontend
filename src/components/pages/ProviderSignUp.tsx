@@ -31,7 +31,7 @@ const ProviderSignupPage = () => {
 
   const onSubmit = async (values: any) => {
     const dateOfBirth = new Date(values.dob);
-    console.log(values)
+    // console.log(values)
     if (profileImg) {
       values.profileImg = profileImg.url;
     }
@@ -40,7 +40,7 @@ const ProviderSignupPage = () => {
     try {
       setLoading(true);
       const res: any = await providerSignup(values).unwrap();
-      console.log(res,'38')
+      // console.log(res,'38')
       if (res && res?.data) {
         toast.success(res?.message, {
           

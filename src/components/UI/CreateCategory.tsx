@@ -41,7 +41,7 @@ const CreateCategory: React.FC<CreateCategoryFormProps> = ({ show, onClose }) =>
     try {
       setLoading(true);
       const res: any = await addCategory(values).unwrap();
-      console.log(res);
+      // console.log(res);
 
       if (res && res.data) {
         setLoading(false);

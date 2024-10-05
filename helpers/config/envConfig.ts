@@ -3,10 +3,10 @@ export const getBaseUrl = (): any => {
 
     switch (environment) {
         case 'development':
-            return 'http://localhost:6060/api/v1'; // Replace with your development API URL
+            return 'http://localhost:6060/api/v1'; 
         case 'production':
-            return 'http://localhost:6060/api/v1';// Replace with your production API URL
+            return 'http://localhost:6060/api/v1';
         default:
-            return 'http://localhost:6060/api/v1'; // Replace with a default API URL
+            return 'http://localhost:6060/api/v1'; 
     }
 };

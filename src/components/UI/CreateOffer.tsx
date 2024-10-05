@@ -30,12 +30,12 @@ const CreateOffer: React.FC<CreateOfferFormProps> = ({ show, onClose }) => {
     values.startDate = dayjs(values.startDate).startOf('day').toISOString();
     values.endDate = dayjs(values.endDate).endOf('day').toISOString(); // End of the day
   
-    console.log(values, '27');
+    // console.log(values, '27');
   
     try {
       setLoading(true);
       const res: any = await addOffer(values).unwrap();
-      console.log(res);
+      // console.log(res);
   
       if (res && res.data) {
         setLoading(false);

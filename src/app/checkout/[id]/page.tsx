@@ -16,7 +16,7 @@ type IDProps = {
 
 const Checkout = ({ params }: IDProps) => {
   const { id } = params;
-  console.log(id,'16')
+  // console.log(id,'16')
   const router = useRouter();
   const pathname = usePathname();
   const dynamicId = pathname?.split('/')[2]; 

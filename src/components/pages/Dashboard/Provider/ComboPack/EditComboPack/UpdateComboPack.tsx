@@ -130,14 +130,14 @@ const calculateTotalPrice = (services: any[], currentDiscount: number): number =
         return total + (price || 0);
     }, 0);
 
-    console.log("Total Service Price:", totalServicePrice); // Log total service price for debugging
+    // console.log("Total Service Price:", totalServicePrice); // Log total service price for debugging
 
     // Calculate the discount amount
     const discountAmount = (totalServicePrice * currentDiscount) / 100;
     const finalPrice = totalServicePrice - discountAmount; // Calculate final price after discount
 
-    console.log("Discount Amount:", discountAmount); // Log discount amount
-    console.log("Final Price After Discount:", finalPrice); // Log final price after discount
+    // console.log("Discount Amount:", discountAmount); // Log discount amount
+    // console.log("Final Price After Discount:", finalPrice); // Log final price after discount
 
     return finalPrice < 0 ? 0 : finalPrice; // Ensure the total price is not negative
 };
@@ -152,7 +152,7 @@ const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
       setDiscount("");
       // Calculate total price with zero discount
       const newTotalPrice = calculateTotalPrice(selectedServices, 0) + (comboData?.data?.amount || 0);
-      console.log("Total Price Reset to Base Amount:", newTotalPrice); // Log the new total price
+      // console.log("Total Price Reset to Base Amount:", newTotalPrice); // Log the new total price
       setTotalPrice(newTotalPrice);
   } else {
     const discountValue = parseFloat(value);
@@ -161,7 +161,7 @@ const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
       const discountAmount = (totalPrice * (discountValue / 100));
       // Calculate new total price after applying discount
        const newTotalPrice = Math.ceil(totalPrice - discountAmount); 
-          console.log("Total Price with Discount:", newTotalPrice); // Log the new total price
+          // console.log("Total Price with Discount:", newTotalPrice); // Log the new total price
          setTotalPrice(newTotalPrice);
       } else {
           toast.error("Please enter a valid discount percentage (0-100).");
@@ -174,7 +174,7 @@ const lastRemovedServiceRef = useRef<string | null>(null);
 
 const handleServiceChange = (service: any, isChecked: boolean): void => {
   // Log the initial total price for debugging
-  console.log(`Initial Total Price: ${totalPrice}`);
+  // console.log(`Initial Total Price: ${totalPrice}`);
 
   setSelectedServices((prevServices) => {
     // Determine whether to add or remove the service based on isChecked
@@ -184,7 +184,7 @@ const handleServiceChange = (service: any, isChecked: boolean): void => {
 
     // Only update the total if the previous state is different
     if (previousCheckedState.current[service.id] === isChecked) {
-      console.log(`Service ${service.serviceName} is already in the desired state, skipping update...`);
+      // console.log(`Service ${service.serviceName} is already in the desired state, skipping update...`);
       return updatedServices;
     }
 
@@ -202,10 +202,7 @@ const handleServiceChange = (service: any, isChecked: boolean): void => {
       const finalTotal = newTotal < 0 ? 0 : newTotal;
 
       // Log the details of the service addition/removal and new total price
-      console.log(
-        `Service ${isChecked ? `${service.serviceName} added: Total ${finalTotal} - ${servicePrice}` : `${service.serviceName} removed`}: Price: $${servicePrice}`
-      );
-      console.log(`Recalculated Total Price (after adjustment):`, finalTotal);
+    
 
       return finalTotal;
     });

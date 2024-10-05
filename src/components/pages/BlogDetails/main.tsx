@@ -15,7 +15,7 @@ const Main = ({id}:any) => {
   const { data, isLoading } = useBlogQuery(id);
   const blog = data?.data;
   const categoryId = blog?.categoryId;
-  console.log(categoryId);
+  // console.log(categoryId);
 
   if (isLoading) {
     return <Loader />;

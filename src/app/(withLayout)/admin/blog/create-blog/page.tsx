@@ -32,7 +32,7 @@ const CreateBlog = () => {
     try {
       setLoading(true);  
       const res: any = await addBlog(values).unwrap();
-      console.log(res);
+      // console.log(res);
      
       if (res && res.data) {
         setLoading(false);

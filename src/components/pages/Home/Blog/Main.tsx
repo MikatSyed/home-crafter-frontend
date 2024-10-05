@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
@@ -9,6 +9,7 @@ import BlogCard from "./BlogCard/BlogCard";
 import { Swiper, SwiperSlide, Swiper as SwiperType } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
+import Loader from "@/components/UI/Loader";
 const Main = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -29,7 +30,7 @@ const Main = () => {
 
 
   const blogs = data?.data;
-  console.log({blogs})
+  // console.log({blogs})
 
   useEffect(() => {
     AOS.init({
@@ -50,6 +51,7 @@ const Main = () => {
   const totalPages = Math.ceil(blogs?.length / blogsPerPage);
 
   return (
+    <Suspense fallback={<Loader />}>
     <div className="mx-auto px-6 md:px-[5rem] py-10 md:py-14">
       {pathname !== "/blogs" && (
         <div className="text-center mb-8">
@@ -135,6 +137,7 @@ const Main = () => {
         </div>
       )}
     </div>
+    </Suspense>
   );
 };
 

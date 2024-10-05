@@ -21,7 +21,7 @@ interface ServiceCardProps {
   
 
 const Review: React.FC<ServiceCardProps> = ({serviceId,role}) => {
-  console.log(role,'21')
+  // console.log(role,'21')
   const [reviews, setReviews] = useState<Review[]>([]);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);

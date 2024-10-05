@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useLoggedUserQuery } from '@/redux/api/userApi';
 import toast, { Toaster } from 'react-hot-toast';
 import FormInput from '@/components/Forms/FormInput';
@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import Spinner from '@/components/UI/Spinner';
 import { useSearchParams } from 'next/navigation'; 
 import resetPasswordSchema from '@/schemas/reset-password';
+import Loader from '@/components/UI/Loader';
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ const ResetPassword = () => {
   const token = searchParams.get('token'); 
 
   const user = data?.data;
-  console.log(user?.role, '24');
+  // console.log(user?.role, '24');
 
   const onSubmit = async (values: any) => {
     values.token = token; // Attach the token to the values
@@ -37,11 +38,11 @@ const ResetPassword = () => {
         });
      
 
-      if (res?.statusCode === 200) {
+      
        setTimeout(()=>{
         router.push('/login'); 
        },2000)
-      }
+      
     } catch (error: any) {
       toast.error(error?.data);
     } finally {
@@ -101,7 +102,7 @@ const ResetPassword = () => {
             <div className="flex justify-center items-center mt-6 hover:text-indigo-600">
               <button
                 type="submit"
-                className={`bg-indigo-600 border border-indigo-600 text-white hover:text-indigo-600 py-2 px-4 rounded hover:bg-white transition ${loading ? 'text-indigo-600 opacity-50 cursor-not-allowed inline-flex justify-center items-center' : ''}`}
+                className={`bg-indigo-600 border border-indigo-600 text-white hover:text-indigo-600 py-2 px-4 rounded hover:bg-white transition ${loading ? 'text-white bg-indigo-600 w-[150px] opacity-50 cursor-not-allowed inline-flex justify-center items-center' : ''}`}
                 disabled={loading}
               >
                 {loading ? <Spinner /> : 'Reset Password'}

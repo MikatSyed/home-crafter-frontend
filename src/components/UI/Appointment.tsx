@@ -10,7 +10,7 @@ import { useAddBookingMutation, useCheckAvailableSlotQuery } from '@/redux/api/b
 
 
 const Appointment= ({providerId}:any) => {
-    console.log(providerId,'13')
+    // console.log(providerId,'13')
     const {push} = useRouter();
     const pathname = usePathname();
     const todayDate = new Date();
@@ -25,7 +25,7 @@ const Appointment= ({providerId}:any) => {
 
     const serviceId = pathname?.split('/')[1]; 
     const userId = userData?.data?.id;
-    console.log(userId,'28')
+    // console.log(userId,'28')
 
     
     const bookedTimes = checkAvailableSlotData?.data?.map((slot: any) => slot.Time) || [];
@@ -43,7 +43,7 @@ const Appointment= ({providerId}:any) => {
     const onChange = (newDate:any) => {
         setDate(newDate);
         const dayOfWeek = newDate.toLocaleDateString('en-US', { weekday: 'long' });
-        console.log(`Selected Date: ${formatDateToISO(newDate)}, Day: ${dayOfWeek}`);
+        // console.log(`Selected Date: ${formatDateToISO(newDate)}, Day: ${dayOfWeek}`);
     };
 
     const onTimeSelect = (time: string) => {
@@ -63,7 +63,7 @@ const Appointment= ({providerId}:any) => {
         if (date && selectedTime) {
             const selectedDate = formatDateToISO(date);
             const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
-            console.log(`Booking Appointment - Date: ${selectedDate}, Day: ${dayOfWeek}, Time: ${selectedTime}`);
+          
             try {
                 const res = await addBooking({ bookingDate: selectedDate, day: dayOfWeek, time: selectedTime, serviceId, userId }).unwrap();
         

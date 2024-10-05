@@ -18,7 +18,7 @@ const TopProviders = () => {
   const { data, isLoading } = useProvidersQuery(undefined);
 
   // Log the API data for debugging
-  console.log(data?.data, "API Data");
+  // console.log(data?.data, "API Data");
 
   const providersPerPage = 8;
 
@@ -36,7 +36,7 @@ const TopProviders = () => {
  
   // Calculate the total number of pages for pagination
   const totalPages = Math.ceil(providers.length / providersPerPage);
-  console.log(totalPages, "32");
+  // console.log(totalPages, "32");
   return (
     <section className=" px-6 md:px-[6rem] bg-white py-14">
       <div className="">

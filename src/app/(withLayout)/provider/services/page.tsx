@@ -105,7 +105,7 @@ const Services = () => {
 
     try {
       await deleteService(selectedService.id).unwrap();
-      console.log("Service deleted");
+      // console.log("Service deleted");
       setIsDeleteModalOpen(false);
       setSelectedService(null);
     } catch (error) {
@@ -129,7 +129,7 @@ const Services = () => {
 
   const handleApplyOffer = async () => {
     if (!selectedService || !selectedOffer) return;
-    console.log(selectedService.id, selectedOffer.id, "115");
+    // console.log(selectedService.id, selectedOffer.id, "115");
 
     try {
       const res = await applyOffer({

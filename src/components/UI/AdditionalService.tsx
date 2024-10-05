@@ -8,7 +8,7 @@ interface AdditionalServiceProps {
   }
 const AdditionalService: React.FC<AdditionalServiceProps> = ({serviceId}) => {
     const { data } = useAdditionalServiceQuery(serviceId);
-    console.log(data)
+    // console.log(data)
     const services = data?.data;
     const [showAll, setShowAll] = useState(false); 
   

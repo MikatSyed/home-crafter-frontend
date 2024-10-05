@@ -11,25 +11,32 @@ interface FavouritesState {
   favouriteServices: FavouriteService[];
 }
 
+// Helper function to check if code is running on the client-side
+const isBrowser = typeof window !== "undefined";
+
 // Helper function to load favorites from localStorage
 const loadFavouritesFromLocalStorage = (): FavouriteService[] => {
   try {
-    const serializedState = localStorage.getItem("favouriteServices");
-    if (serializedState === null) {
-      return []; // Return an empty array if no favorites are found
+    if (isBrowser) {
+      const serializedState = localStorage.getItem("favouriteServices");
+      if (serializedState === null) {
+        return []; // Return an empty array if no favorites are found
+      }
+      return JSON.parse(serializedState);
     }
-    return JSON.parse(serializedState);
   } catch (error) {
     console.error("Could not load favorite services from localStorage", error);
-    return [];
   }
+  return [];
 };
 
 // Helper function to save favorites to localStorage
 const saveFavouritesToLocalStorage = (favourites: FavouriteService[]) => {
   try {
-    const serializedState = JSON.stringify(favourites);
-    localStorage.setItem("favouriteServices", serializedState);
+    if (isBrowser) {
+      const serializedState = JSON.stringify(favourites);
+      localStorage.setItem("favouriteServices", serializedState);
+    }
   } catch (error) {
     console.error("Could not save favorite services to localStorage", error);
   }

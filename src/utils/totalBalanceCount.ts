@@ -3,6 +3,6 @@ export const totalBalance = (data: any[]) => {
     for (let index = 0; index < data?.length; index++) {
         count = count + data[index]?.amount
     }
-    console.log({ count })
+    // console.log({ count })
     return count;
 }
