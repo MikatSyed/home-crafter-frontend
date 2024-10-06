@@ -71,8 +71,8 @@ const HeroSection = () => {
                                 />
                             </div>
                         </div>
-                        <div className="w-full md:w-auto lg:w-auto flex items-center mt-6 md:mt-8 lg:mt-0">
-                            <button type="submit" className="bg-indigo-700 text-white px-6 py-3  shadow-md hover:bg-indigo-700 transition duration-300 rounded-full">
+                        <div className="w-full md:w-auto lg:w-auto flex items-center mt-6">
+                            <button type="submit" className="bg-white border border-indigo-600 text-indigo-600 px-6 py-2  shadow-md hover:bg-indigo-600 hover:text-white rounded-md">
                                 Search
                             </button>
                         </div>

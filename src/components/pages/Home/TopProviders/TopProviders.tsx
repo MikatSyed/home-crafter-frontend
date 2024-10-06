@@ -55,7 +55,7 @@ const TopProviders = () => {
               <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
                 <Link
                   href="/providers"
-                  className="inline-flex items-center bg-indigo-600 text-white px-5 py-3 rounded-full"
+                  className="inline-flex items-center bg-indigo-600 text-white px-5 py-3 rounded-md"
                 >
                   View All
                   <i className="ml-2 feather-arrow-right-circle"></i>
@@ -121,7 +121,7 @@ const TopProviders = () => {
                           </span>
                         </div>
                         <Link href={`/provider-details/${provider.id}`}>
-                          <button className="ml-4  text-indigo-600 py-2 px-4 rounded-full border border-indigo-600 hover:bg-indigo-600 bg-white  hover:text-white  duration-300">
+                          <button className="ml-4  text-indigo-600 py-2 px-4 rounded-md border border-indigo-600 hover:bg-indigo-600 bg-white  hover:text-white  duration-300">
                             View Details
                           </button>
                         </Link>

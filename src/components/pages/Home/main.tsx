@@ -1,5 +1,6 @@
 
 import Blog from "./Blog/Main";
+import Faq from "./Faq/Faq";
 import FeaturedCategories from "./FeaturedCategories/FeaturedCategories";
 import FeaturedServices from "./FeaturedServices/FeaturedServices";
 import Footer from "./Footer/Footer";
@@ -31,6 +32,7 @@ const HomePage = () => {
             <Testimonial/>
             <MostPopularServices/>
             <Blog/>
+            <Faq/>
             <Partners/>
             <Footer/>
         </>

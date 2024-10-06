@@ -41,7 +41,7 @@ const FeaturedCategories = () => {
                         </div>
                         <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
                     {displayCategories?.length > 4 &&       <Link href="/categories">
-                          <button className="text-indigo-600 border border-indigo-600  inline-flex items-center bg-white px-4 py-2 rounded-full hover:bg-indigo-600 hover:text-white transition duration-300">
+                          <button className="text-indigo-600 border border-indigo-600  inline-flex items-center bg-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition duration-300">
       View All
       <FiArrowRightCircle className="ml-2" size={20} />
     </button></Link>}

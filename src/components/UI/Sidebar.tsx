@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, data }) => {
         isOpen ? 'translate-x-0 bg-white h-full' : '-translate-x-full'
       } md:relative md:translate-x-0 rounded-lg md:rounded-none`}
     >
-      <div className="p-4">
+      <div className="p-4 h-full">
         {/* Sidebar Toggle Button */}
         <button
           className="absolute top-4 right-4 md:hidden text-gray-800 hover:text-gray-900"
@@ -53,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, data }) => {
         </button>
 
         {/* Sidebar Menu Items */}
-        <div className={`mt-6 md:mt-0 ${isOpen ? 'block' : 'hidden'} md:block w-[250px]`}>
+        <div className={`mt-6 md:mt-0 ${isOpen ? 'block' : 'hidden'} md:block overflow-y-auto h-[calc(100vh-3rem)] w-[250px]`}>
           <Link href={`/${role}/dashboard`}>
             <p onClick={() => handleLinkClick('dashboard')} className={getLinkClass('dashboard')}>
               <MdOutlineDashboard className="w-5 h-5 mr-2 text-gray-800" />

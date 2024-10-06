@@ -167,7 +167,7 @@ const TopHeader = () => {
   </div>
 ) : (
   <Link href="/login">
-    <button className="flex items-center px-5 py-2 border border-indigo-700 text-indigo-600 hover:text-white hover:bg-indigo-700 rounded-full text-md">
+    <button className="flex items-center px-5 py-2 border border-indigo-700 text-indigo-600 hover:text-white hover:bg-indigo-700 rounded-md text-md">
       <FiLogIn className="mr-2" />
       Login
     </button>

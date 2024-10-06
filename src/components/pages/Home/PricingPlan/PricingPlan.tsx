@@ -51,7 +51,7 @@ const PricingPlan = () => {
             </ul>
           </div>
           <div className="text-center">
-            <a href="search.html" className="bg-white text-indigo-600 border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+            <a href="search.html" className="bg-white text-indigo-600 border border-indigo-600 font-semibold px-6 py-3 rounded-md shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
             </a>
           </div>
@@ -91,7 +91,7 @@ const PricingPlan = () => {
           </div>
           <div className="text-center">
            <Link href="/combo-pack/basic">
-           <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+           <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-md shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
             </button>
            </Link>
@@ -135,7 +135,7 @@ const PricingPlan = () => {
           </div>
           <div className="text-center">
           <Link href="/combo-pack/standard">
-          <button  className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+          <button  className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-md shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
             </button>
           </Link>
@@ -177,7 +177,7 @@ const PricingPlan = () => {
           </div>
           <div className="text-center">
           <Link href="/combo-pack/premium"> 
-           <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:shadow-lg transition-shadow duration-300">
+           <button  className="bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white border border-indigo-600 font-semibold px-6 py-3 rounded-md shadow hover:shadow-lg transition-shadow duration-300">
               Choose Plan
             </button>
             </Link>

@@ -5,8 +5,8 @@ export const getBaseUrl = (): any => {
         case 'development':
             return 'http://localhost:6060/api/v1'; 
         case 'production':
-            return 'http://localhost:6060/api/v1';
+            return 'https://home-crafter-backend.vercel.app/api/v1';
         default:
-            return 'http://localhost:6060/api/v1'; 
+            return 'https://home-crafter-backend.vercel.app/api/v1'; 
     }
 };

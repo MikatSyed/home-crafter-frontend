@@ -11,6 +11,7 @@ import FormTextArea from '@/components/Forms/FormTextArea';
 import Spinner from '@/components/UI/Spinner';
 import serviceSchema from '@/schemas/service';
 import MultipleImageUpload from '@/components/UI/MultipleImageUpload';
+import { ShowToast } from '@/components/UI/ShowToast';
 
 interface ServiceImage {
   id: number;
@@ -35,32 +36,26 @@ const CreateService = () => {
     if (serviceImgs.length > 0) {
       values.serviceImg = serviceImgs.map(img => img.url);
     }
-
+    const toastId = toast.loading('Posting...')
     try {
       setLoading(true);
       const res = await addService(values).unwrap();
 
       if (res) {
         setLoading(false);
-        toast('Services Created Successfully', {
-          icon: <span style={{ marginRight: -8, fontSize: 22 }}><TiTickOutline /></span>,
-          style: {
-            borderRadius: '10px',
-            background: '#4f46e5',
-            color: '#fff',
-          },
-          duration: 2000,
-        });
+        ShowToast({
+          message:res?.message
+        })
 
         setServiceImgs([]);
-      } else {
-        throw new Error('Unexpected response format');
       }
     } catch (err: any) {
       // console.log(err, '64');
       setServiceImgs([]);
       toast.error(err?.data);
       setLoading(false);
+    }finally{
+      toast.dismiss(toastId)
     }
   };
 

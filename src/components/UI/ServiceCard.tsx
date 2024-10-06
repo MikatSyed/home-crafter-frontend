@@ -88,12 +88,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
                           height={230}
                           width={328}
                         />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-
-                  {/* Favourite and Category Information */}
-                  <div className="fav-item absolute top-0 left-0 p-4 flex justify-between w-full">
+                         <div className="fav-item absolute top-0 left-0 p-4 flex justify-between w-full">
                     <span className="flex items-center justify-center text-sm bg-white p-2 hover:text-white text-[#665cf0] hover:bg-[#665cf0] rounded">
                       {service?.category?.categoryName}
                     </span>
@@ -109,7 +104,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
                     </div>
                   </div>
 
-                  {/* Provider Information */}
+                 
                   <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
                     <Link href={`/service-details/${service.provider.id}`} className="flex items-center">
                       <img
@@ -120,6 +115,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
                       <span className="ml-2 text-white">{`${service?.provider?.fName} ${service?.provider?.lName}`}</span>
                     </Link>
                   </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+
+                
+                 
                 </div>
 
                 {/* Service Details and Rating */}
