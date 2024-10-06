@@ -285,12 +285,16 @@ const CreateCombo: React.FC<CreateCategoryFormProps> = ({ show, onClose }) => {
 
 
             <button
-              type="submit"
-              className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
-              disabled={loading}
-            >
-              {loading ? <Spinner /> : "Add Combo Pack"}
-            </button>
+                type="submit"
+                className={`w-full text-[#4f46e5] hover:bg-[#4f46e5] hover:text-white inline-flex items-center justify-center px-4 py-2 rounded text-md border border-[#4f46e5] ${
+                  loading
+                    ? "w-full bg-[#4f46e5] text-white opacity-50 cursor-not-allowed inline-flex justify-center items-center"
+                    : ""
+                }`}
+                disabled={loading}
+              >
+                {loading ? <Spinner /> : "Add New Combo"}
+              </button>
           </Form>
         </div>
       </div>

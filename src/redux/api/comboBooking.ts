@@ -7,7 +7,24 @@ const  URL = "/combo-booking";
 export const comboBookingApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
 
-
+    
+    comboBookings: build.query({
+      query: () => ({
+        url : `${URL}`,
+        method: "GET"
+       
+      }),
+      providesTags:[tagTypes.comboBooking]
+    }),
+    comboBookingsForProvider: build.query({
+      query: () => ({
+        url : `${URL}`,
+        method: "GET"
+       
+      }),
+      providesTags:[tagTypes.comboBooking]
+    }),
+    
     comboBooking: build.query({
       query: (id) => ({
         url : `${URL}/${id}`,
@@ -32,4 +49,4 @@ export const comboBookingApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddComboBookingMutation,useComboBookingQuery } = comboBookingApi;
+export const { useAddComboBookingMutation,useComboBookingQuery,useComboBookingsQuery,useComboBookingsForProviderQuery } = comboBookingApi;

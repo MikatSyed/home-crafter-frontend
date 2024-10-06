@@ -101,7 +101,7 @@ const ComboPackCard: React.FC<ComboPackCardProps> = ({
 
       
       <div className="mt-6 text-center">
-       <button onClick={handleComboBooking} className="text-indigo-600 bg-white border border-indigo-600 px-6 py-3 rounded-full shadow hover:bg-indigo-700 hover:text-white transition duration-300">
+       <button onClick={handleComboBooking} className="text-indigo-600 bg-white border border-indigo-600 px-6 py-3 rounded-md shadow hover:bg-indigo-700 hover:text-white transition duration-300">
           Book Now
         </button>
       </div>
