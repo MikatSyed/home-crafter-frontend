@@ -64,7 +64,7 @@ const TopHeader = () => {
     { title: "Home", href: "/" },
     { title: "Service", href: "/services" },
     { title: "Providers", href: "/providers" },
-    { title: "Blog", href: "/blog" },
+    { title: "Blog", href: "/blogs" },
     { title: "About", href: "/about" },
     { title: "Contact", href: "/contact" },
   ];

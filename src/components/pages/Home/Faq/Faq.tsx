@@ -57,7 +57,7 @@ const Faq = () => {
   };
 
   return (
-    <section className="py-10 md:py-16 px-6 md:px-16 ">
+    <section className="py-10 md:py-14 px-6 md:px-16 ">
       <div className="max-w-5xl mx-auto">
         {/* FAQ Header Section */}
         <div className="text-center mb-12">

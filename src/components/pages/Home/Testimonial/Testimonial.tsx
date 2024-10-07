@@ -49,7 +49,7 @@ const Testimonial: React.FC = () => {
   })) || [];
 
   return (
-    <div className="mx-auto px-6 md:px-[6rem] bg-[#f8fcfd] py-20 relative" data-aos="fade-up">
+    <div className="mx-auto px-6 md:px-[6rem] bg-[#f8fcfd] py-10  md:py-14 relative" data-aos="fade-up">
       <div className="text-center mb-16">
         <div className="section-heading">
           <h2 className="text-4xl font-bold text-indigo-900"> Hear From Our Valued Clients</h2>

@@ -1,12 +1,12 @@
 import React from 'react';
 import { FiMapPin, FiSearch } from 'react-icons/fi';
-import { FaSuitcase } from "react-icons/fa6";
-import suitcase from "../../../../../public/assets/suitcase.svg"
+import { FaShieldAlt, FaHandsHelping, FaDollarSign } from "react-icons/fa"; // Example icons for cards
 import Image from 'next/image';
+import suitcase from "../../../../../public/assets/suitcase.svg";
 
 const HeroSection = () => {
     return (
-        <div className="mx-auto px-6 md:px-[6rem]  bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-500 py-14">
+        <div className="mx-auto px-6 md:px-[6rem] bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-500 pt-14">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-wrap items-center w-full">
                     <div className="lg:w-6/12 w-full">
@@ -47,36 +47,50 @@ const HeroSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-10 bg-white p-8 rounded-xl shadow-xl">
-                    <form action="search.html" className="flex flex-wrap items-center space-x-4">
-                        <div className="flex items-center w-full md:w-auto lg:flex-grow">
-                            <FiMapPin className="text-2xl text-gray-400 mr-2 mt-6" />
-                            <div className="flex-1">
-                                <label className="block mb-1 text-gray-700">Your Location</label>
-                                <input
-                                    type="text"
-                                    className="form-control w-full px-4 py-2 border rounded-md"
-                                    placeholder="America"
-                                />
-                            </div>
+                
+                {/* Premium Cards Section */}
+                <div className="mt-10 mb-[-8rem] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Premium Card 1 */}
+                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
+                            <FaShieldAlt className="text-3xl"/>
                         </div>
-                        <div className="flex items-center w-full md:w-auto lg:flex-grow">
-                            <FiSearch className="text-2xl text-gray-400 mr-2 mt-6" />
-                            <div className="flex-1">
-                                <label className="block mb-1 text-gray-700">What are you looking for?</label>
-                                <input
-                                    type="text"
-                                    className="form-control w-full px-4 py-2 border rounded-md"
-                                    placeholder="Car Repair Services"
-                                />
-                            </div>
+                        <h3 className="text-2xl font-bold text-indigo-800 mb-4 text-center">Quality Assurance</h3>
+                        <p className="text-gray-700 text-center mb-6">
+                            Get top-notch service with our verified professionals, ensuring you receive the highest quality for every task.
+                        </p>
+                        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 mx-auto block">
+                            Learn More
+                        </button>
+                    </div>
+
+                    {/* Premium Card 2 */}
+                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
+                            <FaHandsHelping className="text-3xl"/>
                         </div>
-                        <div className="w-full md:w-auto lg:w-auto flex items-center mt-6">
-                            <button type="submit" className="bg-white border border-indigo-600 text-indigo-600 px-6 py-2  shadow-md hover:bg-indigo-600 hover:text-white rounded-md">
-                                Search
-                            </button>
+                        <h3 className="text-2xl font-bold text-indigo-800 mb-4 text-center">Customer Support</h3>
+                        <p className="text-gray-700 text-center mb-6">
+                            Our dedicated support team is available 24/7 to assist with any queries, ensuring a smooth experience.
+                        </p>
+                        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 mx-auto block">
+                            Get Support
+                        </button>
+                    </div>
+
+                    {/* Premium Card 3 */}
+                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                        <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
+                            <FaDollarSign className="text-3xl"/>
                         </div>
-                    </form>
+                        <h3 className="text-2xl font-bold text-indigo-800 mb-4 text-center">Affordable Packages</h3>
+                        <p className="text-gray-700 text-center mb-6">
+                            Choose from a variety of affordable packages tailored to fit your needs, offering great value for money.
+                        </p>
+                        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 mx-auto block">
+                            View Plans
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

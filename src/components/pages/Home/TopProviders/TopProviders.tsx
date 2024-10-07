@@ -9,6 +9,7 @@ import Image from "next/image";
 import Rating from "@/components/UI/Rating";
 import { FaStar } from "react-icons/fa6";
 import Link from "next/link";
+import Loader from "@/components/UI/Loader";
 
 const TopProviders = () => {
   const pathname = usePathname();
@@ -66,7 +67,7 @@ const TopProviders = () => {
         )}
 
         {isLoading ? (
-          <p>Loading providers...</p>
+          <Loader/>
         ) : displayedProviders.length === 0 ? (
           <div className="text-center mt-8">
             <p className="text-lg text-gray-500">
@@ -133,7 +134,7 @@ const TopProviders = () => {
             </div>
 
             {/* Show pagination only if there are providers */}
-            {pathname === "/providers" && providers.length > 0 && (
+            {pathname === "/providers" && providers.length > 3 && (
               <div className="flex justify-center mt-8">
                 <button
                   className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${

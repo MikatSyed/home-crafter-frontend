@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 const PricingPlan = () => {
   return (
-    <div className="mx-auto px-6 md:px-[6rem] py-10 md:py-16 ">
+    <div className="mx-auto px-6 md:px-[6rem] py-10 md:py-14 ">
       <div className="text-center ">
         <div className="section-heading section-heading-seven" data-aos="fade-up">
           <h2 className="text-4xl font-bold text-gray-900 leading-tight">Pricing Plan</h2>

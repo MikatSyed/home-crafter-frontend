@@ -91,7 +91,7 @@ const ComboBooking = () => {
   if (isLoading) return <Loader/>;
   if (isError) return <p>Error loading combo bookings.</p>;
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-lg ">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">Combo Booking List</h2>
       {paginatedBookings?.length === 0 ? (
         <p className="text-gray-600">No combo bookings available.</p>
@@ -101,20 +101,20 @@ const ComboBooking = () => {
             key={booking.bookingId}
             className="relative bg-white rounded-lg border p-6 mb-6 flex flex-col md:flex-row items-start md:items-center"
           >
-            {/* Edit Button at the Top Right */}
+           
             <button
               className="absolute top-4 right-4 text-indigo-600 hover:text-indigo-700 transform hover:scale-110 flex items-center justify-center text-md"
-              onClick={() => openModal(booking)} // Pass the booking to openModal
+              onClick={() => openModal(booking)} 
             >
               <FaEdit />
             </button>
 
-            {/* Booking Details Section */}
+          
             <div className="flex-grow md:flex md:items-center">
-              {/* Provider Image */}
+            
               {booking.comboPack?.providerImage?.length > 0 && (
                 <img
-                  src={booking.comboPack.providerImage[0]} // Safely access the provider's profile image
+                  src={booking.comboPack.providerImage[0]} 
                   alt={`${booking.comboPack.providerName}'s Profile`}
                   className="w-24 h-24 rounded-full mb-4 md:mb-0 md:mr-6"
                 />
@@ -139,7 +139,7 @@ const ComboBooking = () => {
                     </span>
                   </div>
                 </div>
-                {/* Display booking details */}
+               
                 <p className="text-gray-700 mb-1">
                   <span className="font-semibold">Plan:</span> {booking.comboPack.plan}
                 </p>

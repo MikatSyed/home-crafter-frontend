@@ -27,16 +27,9 @@ const Main = () => {
     setCurrentPage(1);
   }, [categoryId, month, year]);
 
-
-
   const blogs = data?.data;
-  // console.log({blogs})
+ 
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-    });
-  }, []);
 
   // Calculate the displayed blogs based on the current page and pathname
   const displayedBlogs =
@@ -50,8 +43,12 @@ const Main = () => {
   // Calculate the total number of pages for pagination
   const totalPages = Math.ceil(blogs?.length / blogsPerPage);
 
+  if(isLoading){
+    return  <Loader/>
+  }
+
   return (
-    <Suspense fallback={<Loader />}>
+    <>
     <div className="mx-auto px-6 md:px-[5rem] py-10 md:py-14">
       {pathname !== "/blogs" && (
         <div className="text-center mb-8">
@@ -137,7 +134,7 @@ const Main = () => {
         </div>
       )}
     </div>
-    </Suspense>
+    </>
   );
 };
 

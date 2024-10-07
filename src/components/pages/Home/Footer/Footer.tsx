@@ -5,7 +5,7 @@ import logo from '../../../../../public/assets/home (5).png';
 
 const Footer = () => {
   return (
-    <footer className="mx-auto px-6 md:px-[6rem] py-14 bg-[#f8fcfd]">
+    <footer className="mx-auto px-6 md:px-[6rem] py-10 md:py-14 bg-[#f8fcfd]">
       <div>
         <div className=" mx-auto ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">

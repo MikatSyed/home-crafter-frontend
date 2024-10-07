@@ -7,7 +7,7 @@ const Blogs = () => {
 
     return (
         <div>
-               <BreadcrumbBar name="Blog" subtitle=""/>
+               <BreadcrumbBar header="Our Blogs" name="Blogs"/>
             <Main/>
         </div>
     );
