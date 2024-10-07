@@ -18,7 +18,7 @@ export const comboBookingApi = baseApi.injectEndpoints({
     }),
     comboBookingsForProvider: build.query({
       query: () => ({
-        url : `${URL}`,
+        url : `${URL}/provider`,
         method: "GET"
        
       }),
@@ -44,9 +44,17 @@ export const comboBookingApi = baseApi.injectEndpoints({
         invalidatesTags:[tagTypes.comboBooking]
       }),
 
+      updateComboBooking: build.mutation({
+        query: (data) => ({
+          url : `${URL}/${data.id}`,
+          method: "PATCH",
+          data:data.body
+        }),
+        invalidatesTags:[ tagTypes.comboBooking]
+      }),
   
 
   }),
 });
 
-export const { useAddComboBookingMutation,useComboBookingQuery,useComboBookingsQuery,useComboBookingsForProviderQuery } = comboBookingApi;
+export const { useAddComboBookingMutation,useComboBookingQuery,useComboBookingsQuery,useComboBookingsForProviderQuery,useUpdateComboBookingMutation} = comboBookingApi;

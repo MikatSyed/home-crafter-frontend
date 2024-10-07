@@ -10,14 +10,14 @@ import Pagination from '@/components/UI/Pagination';
 
 const Main = () => {
   const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState("Basic"); // Track the active tab (plan type)
+  const [activeTab, setActiveTab] = useState("Basic"); 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
 
   const { data, isLoading } = useCombosForProviderQuery(undefined);
   const combos = data?.data;
 
-  // Filter the combo packs based on the selected plan (active tab)
+  
   const filteredCombos = combos?.filter((combo:any) => combo.plan === activeTab);
 
   const totalPages = Math.ceil((filteredCombos?.length || 0) / itemsPerPage);
