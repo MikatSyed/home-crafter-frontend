@@ -47,8 +47,9 @@ const UserBooking = () => {
   };
 
   return (
-    <div className="mx-auto px-6 md:px-[6rem] py-10">
-      {/* Navigation Buttons */}
+    <div className="mt-[-2rem]">
+     
+      <div className="flex justify-end">
       <div className="flex space-x-4 py-2">
         <Link href="/">
           <button className="text-gray-500 hover:text-blue-500">
@@ -62,26 +63,7 @@ const UserBooking = () => {
           <FiArrowLeftCircle className="h-6 w-6" />
         </button>
       </div>
-
-      <div className="flex justify-between">
-        <h2 className="text-2xl font-semibold text-[#2a2a3d] mb-6">My Bookings</h2>
-        {bookings && bookings.length > 0 && (
-          <div className="flex items-center space-x-4">
-            {/* Booking Type Selector */}
-            <select
-              value={bookingType}
-              onChange={(e) => setBookingType(e.target.value as "All" | "Service" | "Combo")}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="All">All</option>
-              <option value="Service">Service Bookings</option>
-              <option value="Combo">Combo Bookings</option>
-            </select>
-
-            {/* Items Per Page Selector */}
-            <ItemsPerPageSelector itemsPerPage={itemsPerPage} onItemsPerPageChange={handleItemsPerPageChange} />
-          </div>
-        )}
+        
       </div>
 
       <div>
@@ -167,8 +149,8 @@ const UserBooking = () => {
                         <p className="text-md font-semibold text-gray-800">
                           {`${booking?.service?.provider?.fName} ${booking?.service?.provider?.lName}`}
                         </p>
-                        <p className="text-gray-500">{booking?.provider?.email}</p>
-                        <p className="text-gray-500">{booking?.provider?.contactNo}</p>
+                        <p className="text-gray-800">{booking?.service?.provider?.category?.categoryName}</p>
+                        <p className="text-gray-500">{booking?.service?.provider?.email}</p>
                       </div>
                     </div>
                   </div>
@@ -181,9 +163,13 @@ const UserBooking = () => {
         )}
       </div>
 
-      {/* Pagination Controls */}
       {bookings && bookings.length > 0 && (
         <div className="flex items-center justify-end mt-10">
+          {bookings && bookings.length > 0 && (
+          <div className="flex items-center ">
+            <ItemsPerPageSelector itemsPerPage={itemsPerPage} onItemsPerPageChange={handleItemsPerPageChange} />
+          </div>
+        )}
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

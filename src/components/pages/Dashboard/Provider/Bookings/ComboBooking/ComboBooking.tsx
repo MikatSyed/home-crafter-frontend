@@ -1,4 +1,5 @@
 import ItemsPerPageSelector from "@/components/UI/ItemsPerPageSelector";
+import Loader from "@/components/UI/Loader";
 import Pagination from "@/components/UI/Pagination";
 import { useComboBookingsForProviderQuery, useUpdateComboBookingMutation } from "@/redux/api/comboBooking";
 import React, { useState } from "react";
@@ -15,8 +16,7 @@ const ComboBooking = () => {
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
 
-  if (isLoading) return <p>Loading combo bookings...</p>;
-  if (isError) return <p>Error loading combo bookings.</p>;
+
 
   const comboBookings = data?.data;
 
@@ -88,7 +88,8 @@ const ComboBooking = () => {
     setCurrentPage(1);
   };
 
-
+  if (isLoading) return <Loader/>;
+  if (isError) return <p>Error loading combo bookings.</p>;
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">Combo Booking List</h2>
@@ -200,7 +201,7 @@ const ComboBooking = () => {
               <h2 className="text-xl font-bold mb-4">Edit Booking</h2>
               <button
                 onClick={closeModal}
-                className="bg-[#4f46e5] text-white rounded-full p-2 hover:bg-opacity-90 transition"
+                className="bg-white text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white rounded-full p-2 hover:bg-opacity-90 transition"
               >
                 <FiX size={18} />
               </button>
@@ -233,7 +234,7 @@ const ComboBooking = () => {
               </button>
               <button
                 onClick={handleSave}
-                className="bg-indigo-500 text-white px-4 py-2 rounded-md"
+                className="bg-white text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white px-4 py-2 rounded-md"
               >
                 Save
               </button>

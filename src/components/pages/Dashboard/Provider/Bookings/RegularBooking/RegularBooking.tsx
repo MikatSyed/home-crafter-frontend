@@ -1,9 +1,11 @@
 "use client";
 import ItemsPerPageSelector from "@/components/UI/ItemsPerPageSelector";
+import Loader from "@/components/UI/Loader";
 import Pagination from "@/components/UI/Pagination";
 import { useBookingsQuery, useUpdateBookingMutation } from "@/redux/api/bookingApi";
 import React, { useState } from "react";
 import { FaEdit, FaMapMarkerAlt } from "react-icons/fa";
+import { FiX } from "react-icons/fi";
 
 const RegularBooking = () => {
   const [updateBooking] = useUpdateBookingMutation();
@@ -14,7 +16,6 @@ const RegularBooking = () => {
   const [errors, setErrors] = useState<any>({});
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
-  const [activeTab, setActiveTab] = useState("Active");
   const { data, isLoading, isError } = useBookingsQuery(undefined);
 
   const bookings = data?.data;
@@ -76,7 +77,7 @@ const RegularBooking = () => {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader/>;
   if (isError) return <p>Error loading bookings.</p>;
 
   // Helper function to get color class based on status
@@ -213,6 +214,75 @@ const RegularBooking = () => {
           </div>
         </div>
       ))}
+
+{isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg w-full max-w-lg mx-4 md:mx-0">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold mb-4">Edit Booking</h2>
+              <button
+                onClick={closeModal}
+                className="bg-white text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white rounded-full p-2 hover:bg-opacity-90 transition"
+              >
+                <FiX size={18} />
+              </button>
+            </div>
+            <div className="">
+              <div className="w-full">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Booking Status
+                </label>
+                <select
+                  value={selectedBookingStatus}
+                  onChange={handleBookingStatusChange}
+                  className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-gray-200"
+                >
+                  <option value="">Select Status</option>
+                  <option value="Confirmed">Confirmed</option>
+                  <option value="Canceled">Canceled</option>
+                </select>
+                {errors.bookingStatus && (
+                  <p className="text-red-500 text-sm mt-2">{errors.bookingStatus}</p>
+                )}
+              </div>
+              {selectedBookingStatus === "Confirmed" && (
+                <div className="w-full mt-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Work Status
+                  </label>
+                  <select
+  value={selectedWorkStatus}
+  onChange={handleWorkStatusChange}
+  className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out bg-gradient-to-r from-white to-gray-100 hover:from-gray-100 hover:to-gray-200"
+>
+  <option value="InProgress">In Progress</option>
+  <option value="Completed">Completed</option>
+  <option value="Canceled">Canceled</option>
+</select>
+                  {errors.workStatus && (
+                    <p className="text-red-500 text-sm mt-2">{errors.workStatus}</p>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={closeModal}
+                className="bg-gray-500 text-white px-4 py-2 rounded-md mr-2"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                className="bg-white text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white px-4 py-2 rounded-md"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {paginatedBookings.length > 0 && (
         <div className="flex items-center justify-end mt-10">
           <ItemsPerPageSelector

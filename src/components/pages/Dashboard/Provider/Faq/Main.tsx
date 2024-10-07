@@ -73,9 +73,9 @@ const Main = () => {
 
   const getItems = () => {
     return paginatedFaqs?.map((faq: any) => (
-      <div key={faq?.id} className="mb-4 rounded-lg">
+      <div key={faq?.id} className="mb-4 border rounded-lg">
         <div
-          className="flex justify-between items-center p-4 cursor-pointer bg-gray-100"
+          className="flex  justify-between items-center p-4 cursor-pointer bg-gray-100"
           onClick={() => togglePanel(faq?.id)}
         >
           <span className="font-normal text-md">{faq?.question}</span>
@@ -117,7 +117,7 @@ const Main = () => {
         <div>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="text-[#4f46e5] hover:bg-[#4f46e5] inline-flex items-center hover:text-white px-4 py-2 rounded text-md border border-[#4f46e5]"
+            className="text-[#4f46e5]  hover:bg-[#4f46e5] inline-flex items-center hover:text-white px-4 py-2 rounded text-md border border-[#4f46e5]"
           >
             Add Faq
           </button>

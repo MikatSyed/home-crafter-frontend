@@ -1,10 +1,11 @@
-import UserBooking from '@/components/pages/UserBooking/UserBooking';
+import Main from '@/components/pages/Booking/Main';
 import React from 'react';
 
 const page = () => {
   return (
     <>
-     <UserBooking/>
+    
+     <Main/>
     </>
   );
 };
