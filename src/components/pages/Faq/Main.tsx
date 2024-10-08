@@ -59,7 +59,7 @@ const Faq = () => {
   return (
   <>
   <BreadcrumbBar header="FAQ" name="faqs"/>
-    <section className="py-10 md:py-16 px-6 md:px-16 ">
+    <section className="py-10 md:py-16 px-6 md:px-[6rem]">
       <div className="max-w-5xl mx-auto">
         {/* FAQ Header Section */}
         {/* <div className="text-center mb-12">

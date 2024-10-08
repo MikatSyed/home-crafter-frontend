@@ -11,7 +11,6 @@ import {
   FiPhone,
   FiUser,
 } from "react-icons/fi";
-import FeaturedServices from "../Home/FeaturedServices/FeaturedServices";
 import ProviderServices from "./ProviderServices/ProviderServices";
 import ProviderReview from "./ProviderReview/ProviderReview";
 import Loader from "@/components/UI/Loader";

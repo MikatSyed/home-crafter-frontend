@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useRef, useState } from 'react';
 import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
 import Image from 'next/image';
@@ -11,7 +11,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const Contact = () => {
   const form = useRef<HTMLFormElement | null>(null);
   
-  // State for managing error messages
+ 
   const [errors, setErrors] = useState({
     name: '',
     email: '',
@@ -19,67 +19,77 @@ const Contact = () => {
     message: ''
   });
 
-  // Function to validate the form
+
   const validateForm = () => {
     let isValid = true;
     const newErrors = { name: '', email: '', subject: '', message: '' };
 
-    // Check each field for validity
-    if (!form.current?.name?.value) {
-      newErrors.name = 'Name is required.';
-      isValid = false;
-    }
-    
-    if (!form.current?.email.value) {
-      newErrors.email = 'Email is required.';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(form.current.email.value)) {
-      newErrors.email = 'Email address is invalid.';
-      isValid = false;
-    }
-    
-    if (!form.current?.subject.value) {
-      newErrors.subject = 'Subject is required.';
-      isValid = false;
-    }
-    
-    if (!form.current?.message.value) {
-      newErrors.message = 'Message is required.';
-      isValid = false;
-    }
+  
+    const formElements = form.current; 
 
-    setErrors(newErrors); // Update the error state
-    return isValid; // Return whether the form is valid
-  };
+    if (formElements) {
+      const name = formElements.elements.namedItem("name") as HTMLInputElement;
+      const email = formElements.elements.namedItem("email") as HTMLInputElement;
+      const subject = formElements.elements.namedItem("subject") as HTMLInputElement;
+      const message = formElements.elements.namedItem("message") as HTMLTextAreaElement;
 
-  // Step 2: Send email and show toast message on success or failure
-  const sendEmail = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (validateForm()) { // Validate form before sending email
-      if (form.current) {
-        emailjs
-          .sendForm(
-            "service_tqg42mt",
-            "template_x5scdsa",
-            form.current,
-            "w42JSKaCIDmd4nI7o"
-          )
-          .then(
-            (result) => {
-              console.log("Email sent successfully:", result.text);
-              ShowToast({ message: 'Email Sent Successfully' });
-              e.currentTarget.reset(); // Reset the form after successful submission
-              setErrors({ name: '', email: '', subject: '', message: '' }); // Clear errors
-            },
-            (error) => {
-              console.error("Failed to send email:", error.text);
-              toast.error("Failed to send email.");
-            }
-          );
+      if (!name.value) {
+        newErrors.name = 'Name is required.';
+        isValid = false;
+      }
+      
+      if (!email.value) {
+        newErrors.email = 'Email is required.';
+        isValid = false;
+      } else if (!/\S+@\S+\.\S+/.test(email.value)) {
+        newErrors.email = 'Email address is invalid.';
+        isValid = false;
+      }
+      
+      if (!subject.value) {
+        newErrors.subject = 'Subject is required.';
+        isValid = false;
+      }
+      
+      if (!message.value) {
+        newErrors.message = 'Message is required.';
+        isValid = false;
       }
     }
+
+    setErrors(newErrors); 
+    return isValid; 
   };
+
+ 
+ 
+const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  if (validateForm()) { 
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "service_tqg42mt",
+          "template_x5scdsa",
+          form.current,
+          "w42JSKaCIDmd4nI7o"
+        )
+        .then(
+          (result) => {
+            console.log("Email sent successfully:", result.text);
+            ShowToast({ message: 'Email Sent Successfully' });
+            (e.currentTarget as HTMLFormElement).reset(); // Cast currentTarget to HTMLFormElement to access reset
+            setErrors({ name: '', email: '', subject: '', message: '' }); // Clear errors
+          },
+          (error) => {
+            console.error("Failed to send email:", error.text);
+            toast.error("Failed to send email.");
+          }
+        );
+    }
+  }
+};
 
   return (
     <>
@@ -148,7 +158,6 @@ const Contact = () => {
                     name="name"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="John Doe"
-                
                   />
                   {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>} {/* Error Message */}
                 </div>
@@ -160,7 +169,6 @@ const Contact = () => {
                     name="email"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="john@example.com"
-               
                   />
                   {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>} {/* Error Message */}
                 </div>
@@ -173,7 +181,6 @@ const Contact = () => {
                   name="subject"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                   placeholder="Subject"
-            
                 />
                 {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>} {/* Error Message */}
               </div>
@@ -184,7 +191,6 @@ const Contact = () => {
                   name="message"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 h-40"
                   placeholder="Your message..."
-             
                 />
                 {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>} {/* Error Message */}
               </div>

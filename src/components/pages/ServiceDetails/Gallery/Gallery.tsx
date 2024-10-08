@@ -34,13 +34,13 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
         <h5 className="text-2xl font-semibold">Gallery</h5>
         <div className="flex space-x-2">
           <button
-            className=" rounded-full bg-[#4f46e5] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+            className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
             onClick={handlePrevious}
           >
             <IoIosArrowBack className="w-5 h-5" />
           </button>
           <button
-            className="rounded-full bg-[#4f46e5] hover:bg-white text-white hover:text-[#4f46e5] p-3 shadow-lg hover:shadow-xl border-transparent hover:border-[#4f46e5] border"
+            className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
             onClick={handleNext}
           >
             <IoIosArrowForward className="w-5 h-5" />

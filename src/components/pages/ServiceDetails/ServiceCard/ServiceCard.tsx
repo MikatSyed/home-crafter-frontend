@@ -113,7 +113,7 @@ const ServiceCard = ({ service,role }: any) => {
         {/* Updated `button` with event handler */}
         <button
           onClick={(e) => handleBookService(e)}
-          className="bg-indigo-700 hover:bg-white border border-indigo-700 text-white hover:text-indigo-700 px-4 py-3 rounded-full w-full block text-center"
+          className="bg-white hover:bg-indigo-600 border border-indigo-600 text-indigo-600 hover:text-white px-4 py-3 rounded-md w-full block text-center"
         >
           Book Service
         </button>

@@ -155,11 +155,11 @@ const CheckoutPage = ({ data }: any) => {
           <div className="flex my-5">
             <button
               onClick={handleCheckOut}
-              className="bg-[#4c40ed] text-semibold text-white border border-[#4c40ed] py-3 px-10 rounded-lg flex items-center justify-center hover:scale-105 transition-all duration-300 ease-in-out w-full sm:w-auto text-center mr-4"
+              className="text-indigo-600 border border-indigo-600 bg-white hover:bg-indigo-600 hover:text-white text-semibold py-3 px-10 rounded-lg flex items-center justify-center w-full sm:w-auto text-center mr-4"
             >
               Proceed to Pay ${total}
             </button>
-            <button className="bg-[#f8fcfd] text-[#4c40ed] text-bold text-sm border border-[#4c40ed] py-3 px-8 rounded-lg flex items-center justify-center hover:scale-105 transition-all duration-300 ease-in-out w-full sm:w-auto text-center">
+            <button className="bg-gray-200 text-gray-700 py-2 px-6 rounded-md shadow-sm hover:bg-gray-300">
               Skip
             </button>
           </div>

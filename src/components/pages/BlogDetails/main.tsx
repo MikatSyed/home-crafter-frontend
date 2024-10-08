@@ -43,11 +43,11 @@ const Main = ({id}:any) => {
                 </span>
                 <div className="flex items-center space-x-2">
                   <img
-                    src={blog?.user?.profileImg[0]}
+                    src={blog?.provider?.profileImg[0]}
                     alt="Post Author"
                     className="w-8 h-8 rounded-full"
                   />
-                  <span>{blog?.user?.role}</span>
+                  <span>{blog?.provider?.role}</span>
                 </div>
               </div>
             </div>
@@ -83,7 +83,7 @@ const Main = ({id}:any) => {
               </p>
               <Link
                 href={`/provider-details/${blog?.provider?.id}`}
-                className="text-indigo-600 border border-indigo-600 bg-white hover:bg-indigo-600 hover:text-white inline-flex  items-center justify-center px-4 py-2 rounded-full text-md border border-[#4f46e5]"
+                className="text-indigo-600 border border-indigo-600 bg-white hover:bg-indigo-600 hover:text-white inline-flex  items-center justify-center px-4 py-2 rounded-md text-md border border-[#4f46e5]"
               >
                 About Author
               </Link>

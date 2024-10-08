@@ -108,7 +108,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
                   <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
                     <Link href={`/service-details/${service.provider.id}`} className="flex items-center">
                       <img
-                        src={service.provider.profileImg[0] || "/default-profile.png"} // Fallback for missing images
+                        src={service.provider.profileImg[0] || "/default-profile.png"} 
                         className="avatar w-10 h-10 rounded-full"
                         alt="User"
                       />
@@ -123,7 +123,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
                  
                 </div>
 
-                {/* Service Details and Rating */}
                 <div className="service-content p-4">
                   <h3 className="title text-xl font-bold">
                     <Link href={`/service-details/${service.id}`}>{service.serviceName}</Link>

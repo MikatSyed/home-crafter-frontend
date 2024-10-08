@@ -39,7 +39,7 @@ const CommentCard: React.FC<ServiceCardProps> = ({ blogId }) => {
       <ul className="space-y-4">
         {commentsToShow.map((comment:any) => (
           <li key={comment.id}>
-            <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="bg-white p-4 rounded-lg shadow-sm border">
               <div className="flex items-center mb-4">
                 <img
                   src={comment.user.profileImg[0] || "https://via.placeholder.com/150"}
@@ -58,10 +58,10 @@ const CommentCard: React.FC<ServiceCardProps> = ({ blogId }) => {
 })}
                   </p>
                 </div>
-                <a href="#" className="ml-auto text-blue-500">
+                {/* <a href="#" className="ml-auto text-blue-500">
                   <FaReply className="inline-block mr-2" />
                   Reply
-                </a>
+                </a> */}
               </div>
               <p className="text-gray-700 mb-4">{comment.comment}</p>
             </div>

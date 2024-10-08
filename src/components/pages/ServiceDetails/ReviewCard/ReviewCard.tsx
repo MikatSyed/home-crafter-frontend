@@ -72,7 +72,7 @@ const ReviewCard: React.FC<ServiceCardProps> = ({ serviceId }) => {
             <p className="mb-4 text-gray-700">{review.comment}</p>
             <div className="flex justify-end items-center">
              
-              <div className="recommend-info flex items-center space-x-2">
+              {/* <div className="recommend-info flex items-center space-x-2">
                 <p className="text-gray-700">Recommend?</p>
                 <a href="#" className="flex items-center space-x-1 text-green-600">
                   <FaThumbsUp />
@@ -82,7 +82,7 @@ const ReviewCard: React.FC<ServiceCardProps> = ({ serviceId }) => {
                   <FaThumbsDown />
                   <span>No</span>
                 </a>
-              </div>
+              </div> */}
             </div>
           </li>
         ))}
@@ -90,7 +90,7 @@ const ReviewCard: React.FC<ServiceCardProps> = ({ serviceId }) => {
       <div className="text-center mt-6">
         <button
           onClick={() => setShowAll(!showAll)}
-          className="text-white bg-[#4f46e5] inline-flex items-center justify-center px-4 py-2 rounded text-sm border border-[#4f46e5]"
+          className="text-white bg-[#4f46e5] inline-flex items-center justify-center px-4 py-2 rounded-md text-sm border border-[#4f46e5]"
         >
           {showAll ? 'Show Less' : 'View All Reviews'}
         </button>

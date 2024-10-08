@@ -72,7 +72,7 @@ const ProviderReviewCard: React.FC<ServiceCardProps> = ({ providerId }) => {
             <p className="mb-4 text-gray-700">{review.comment}</p>
             <div className="flex justify-end items-center">
               
-              <div className="recommend-info flex items-center space-x-2">
+              {/* <div className="recommend-info flex items-center space-x-2">
                 <p className="text-gray-700">Recommend?</p>
                 <a href="#" className="flex items-center space-x-1 text-green-600">
                   <FaThumbsUp />
@@ -82,7 +82,7 @@ const ProviderReviewCard: React.FC<ServiceCardProps> = ({ providerId }) => {
                   <FaThumbsDown />
                   <span>No</span>
                 </a>
-              </div>
+              </div> */}
             </div>
           </li>
         ))}

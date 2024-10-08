@@ -33,8 +33,8 @@ const AdditionalService: React.FC<AdditionalServiceProps> = ({serviceId}) => {
                   </div>
                 </div>
               </div>
-              <div className="add-serv-amt">
-                <h6 className="text-sm font-medium">${service.price}</h6>
+              <div >
+                <h6 className="text-sm font-medium">${service?.offeredPrice > 0  ? service?.offeredPrice : service?.regularPrice}</h6>
               </div>
             </li>
           ))}
