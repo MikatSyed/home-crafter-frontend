@@ -70,10 +70,10 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     if (form.current) {
       emailjs
         .sendForm(
-          "service_tqg42mt",
-          "template_x5scdsa",
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',  
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '', 
           form.current,
-          "w42JSKaCIDmd4nI7o"
+          process.env.NEXT_PUBLIC_EMAILJS_USER_ID || ''      
         )
         .then(
           (result) => {

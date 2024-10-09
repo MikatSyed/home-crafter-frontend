@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePaymentsQuery } from "@/redux/api/paymentApi";
 import ItemsPerPageSelector from "@/components/UI/ItemsPerPageSelector";
 import Pagination from "@/components/UI/Pagination";
+import Loader from "@/components/UI/Loader";
 
 
 const Payout: React.FC = () => {
@@ -23,9 +24,7 @@ const Payout: React.FC = () => {
   };
 
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return <Loader/>;
 
   if (error) {
     return <div>Error loading payouts</div>;

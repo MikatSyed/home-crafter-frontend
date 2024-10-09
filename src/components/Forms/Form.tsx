@@ -18,6 +18,7 @@ type FormProps = {
   description?: string;
   content?:string;
   comment?:string;
+  bio?:string;
 
   // Added className prop for dynamic class
 } & FormConfig;
@@ -42,7 +43,8 @@ const Form = ({
     reset({
       description: "",
       content:"",
-      comment:""
+      comment:"",
+      bio:""
     });
   };
 

@@ -70,7 +70,7 @@ const TopHeader = () => {
 
   const navItems = [
     { title: "Home", href: "/" },
-    { title: "Service", href: "/services" },
+    { title: "Services", href: "/services" },
     { title: "Providers", href: "/providers" },
     { title: "Blog", href: "/blogs" },
     { title: "About", href: "/about" },

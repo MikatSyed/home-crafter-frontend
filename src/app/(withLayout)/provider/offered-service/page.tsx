@@ -11,6 +11,7 @@ import { useApplyOfferMutation, useDeleteOfferServiceMutation, useOfferServicesP
 import ApplyOfferModal from '@/components/UI/ApplyOfferModal';
 import toast, { Toaster } from 'react-hot-toast';
 import { TiTickOutline } from 'react-icons/ti';
+import Loader from '@/components/UI/Loader';
 
 const OfferServicePage = () => {
     const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
@@ -98,7 +99,7 @@ const OfferServicePage = () => {
         }
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loader/>;
     if (isError) return <div>Error loading offers.</div>;
 
     return (

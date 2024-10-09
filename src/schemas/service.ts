@@ -32,17 +32,17 @@ const serviceSchema = yup.object().shape({
     .url("Video URL must be a valid URL")
     .nullable(),  // Optional field
   keyFeature1: yup
-    .string()
-    .nullable(),  // Optional field
+    .string(),
+   
   keyFeature2: yup
-    .string()
-    .nullable(),  // Optional field
+    .string(),
+   
   keyFeature3: yup
-    .string()
-    .nullable(),  // Optional field
+    .string(),
+  
   keyFeature4: yup
     .string()
-    .nullable(),  // Optional field
+  
   
     
 });

@@ -14,8 +14,13 @@ import { genderOptions } from "@/constants/global";
 import FormDatePicker from "../Forms/FormDatePicker";
 import CategoryField from "../Forms/CategoryField";
 import FormTextArea from "../Forms/FormTextArea";
+import { yupResolver } from "@hookform/resolvers/yup";
+import signupForProviderSchema from "@/schemas/signup-provider";
+import { ShowToast } from "../UI/ShowToast";
+import { useRouter } from "next/navigation";
 
 const ProviderSignupPage = () => {
+  const {push} = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [profileImg, setProfileImg] = useState<{
     id: number;
@@ -23,7 +28,7 @@ const ProviderSignupPage = () => {
   } | null>(null);
   const [imgPreview, setImgPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [imageError, setImageError] = useState<string>("");
   const [providerSignup] = useProviderSignupMutation();
 
 
@@ -31,30 +36,30 @@ const ProviderSignupPage = () => {
 
   const onSubmit = async (values: any) => {
     const dateOfBirth = new Date(values.dob);
-    // console.log(values)
+ 
     if (profileImg) {
       values.profileImg = profileImg.url;
+    } else if (!profileImg) {
+      setImageError("Profile image is required"); 
+      return;
     }
-    values.dob = dateOfBirth.toISOString();
 
+    values.dob = dateOfBirth.toISOString();
+    const toastId = toast.loading("Posting...")
     try {
       setLoading(true);
       const res: any = await providerSignup(values).unwrap();
       // console.log(res,'38')
       if (res && res?.data) {
-        toast.success(res?.message, {
-          
-          style: {
-            borderRadius: "10px",
-            background: "#4f46e5",
-            color: "#fff",
-          },
-          duration: 3000,
-        });
-
-        // Clear the selected profile image after successful signup
+     ShowToast({
+      message:res?.message
+     })
+     setTimeout(()=>{
+     push('/')
+     },2000)
+   
         setProfileImg(null);
-        setImgPreview(null); // Clear the preview image as well
+        setImgPreview(null); 
       } else {
         throw new Error("Unexpected response format");
       }
@@ -70,6 +75,7 @@ const ProviderSignupPage = () => {
         duration: 2000,
       });
     } finally {
+      toast.dismiss(toastId)
       setLoading(false);
     }
   };
@@ -83,7 +89,7 @@ const ProviderSignupPage = () => {
           <h3 className="text-3xl font-semibold text-gray-800 mb-8 ">
             Provider Signup
           </h3>
-          <Form submitHandler={onSubmit}>
+          <Form submitHandler={onSubmit} resolver={yupResolver(signupForProviderSchema)}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <FormInput name="fName" label="First Name" type="text" />
               <FormInput name="lName" label="Last Name" type="text" />
@@ -153,13 +159,22 @@ const ProviderSignupPage = () => {
               />
             </div>
 
+            {imageError && (
+                <div className="text-red-600 text-sm mb-4">
+                  {imageError}
+                </div>
+              )}
+
             <div className="mb-6">
               <button
                 type="submit"
-                className={`w-full flex justify-center items-center bg-[#1475c6] text-white p-3 rounded-lg font-semibold cursor-pointer transition duration-300 ease-in-out hover:bg-[#0d5b9a] ${
-                  loading ? "opacity-50 cursor-not-allowed" : ""
+                className={`w-full flex justify-center items-center border border-indigo-600 p-3 rounded-lg font-semibold cursor-pointer transition ease-in duration-300 ${
+                  loading
+                    ? "bg-indigo-600 text-white opacity-50 cursor-not-allowed"
+                    : "bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white"
                 }`}
                 disabled={loading}
+               
               >
                 {loading ? <Spinner /> : "Register"}
               </button>

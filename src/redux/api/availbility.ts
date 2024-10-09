@@ -16,6 +16,15 @@ export const availbilityApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.availbility],
     }),
+    availbilitiesForProvider: build.query({
+      query: () => {
+        return {
+          url: `${URL}`,
+          method: "GET",      
+        };
+      },
+      providesTags: [tagTypes.availbility],
+    }),
 
 
 
@@ -42,4 +51,4 @@ export const availbilityApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAvailbilitiesQuery,useAddAvailbilityMutation,useDeleteAvailbilityMutation } = availbilityApi;
+export const { useAvailbilitiesQuery,useAvailbilitiesForProviderQuery,useAddAvailbilityMutation,useDeleteAvailbilityMutation } = availbilityApi;

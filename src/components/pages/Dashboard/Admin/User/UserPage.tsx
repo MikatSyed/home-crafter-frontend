@@ -5,6 +5,7 @@ import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
 import ConfirmModal from '@/components/UI/ConfirmModal';
 import { useDeleteUserMutation, useUsersQuery } from '@/redux/api/userApi';
+import Loader from '@/components/UI/Loader';
 
 const UserPage = () => {
  
@@ -51,7 +52,7 @@ const UserPage = () => {
         }
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loader/>;
     if (isError) return <div>Error loading offers.</div>;
 
     return (

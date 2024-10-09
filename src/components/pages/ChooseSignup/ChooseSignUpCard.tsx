@@ -20,7 +20,7 @@ const ChooseSignUpCard = ({ data }: any) => {
           />
         </div>
 
-        <button className="bg-indigo-700 text-white px-5 py-1 rounded-full font-normal text-[16px] mt-6 ">
+        <button className="text-indigo-600 border border-indigo-600 bg-white hover:bg-indigo-600 hover:text-white px-5 py-1 rounded-md font-normal text-[16px] mt-6 ">
           Sign Up
         </button>
       </div>

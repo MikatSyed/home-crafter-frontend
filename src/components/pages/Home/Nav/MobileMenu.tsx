@@ -59,9 +59,9 @@ const MobileMenu = ({ user }: { user: any }) => {
 
   const navItems = [
     { title: "Home", href: "/home" },
-    { title: "Service", href: "/service" },
+    { title: "Services", href: "/services" },
     { title: "Providers", href: "/providers" },
-    { title: "Blog", href: "/blog" },
+    { title: "Blog", href: "/blogs" },
     { title: "About", href: "/about" },
     { title: "Contact", href: "/contact" },
   ];

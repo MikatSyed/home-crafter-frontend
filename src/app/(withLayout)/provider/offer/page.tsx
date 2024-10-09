@@ -7,6 +7,7 @@ import { useOffersQuery, useDeleteOfferMutation } from '@/redux/api/offerApi';
 import ItemsPerPageSelector from '@/components/UI/ItemsPerPageSelector';
 import Pagination from '@/components/UI/Pagination';
 import ConfirmModal from '@/components/UI/ConfirmModal';
+import Loader from '@/components/UI/Loader';
 
 const OfferPage = () => {
     const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
@@ -57,7 +58,7 @@ const OfferPage = () => {
         }
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loader/>;
     if (isError) return <div>Error loading offers.</div>;
 
     return (

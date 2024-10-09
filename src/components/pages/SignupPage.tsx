@@ -9,40 +9,45 @@ import { useSignupMutation } from "@/redux/api/authApi";
 import { TiTickOutline } from "react-icons/ti";
 import Spinner from "@/components/UI/Spinner";
 import SingleImageUpload from "../UI/SingleImageUpload";
+import signupSchema from "@/schemas/signup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ShowToast } from "../UI/ShowToast";
+import { useRouter } from "next/navigation";
 
 const SignupPage = () => {
+  const {push} = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [profileImg, setProfileImg] = useState<{ id: number; url: string } | null>(null);
-  const [imgPreview, setImgPreview] = useState<string | null>(null); 
+  const [imgPreview, setImgPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [imageError, setImageError] = useState<string>(""); 
+
 
   const [signup] = useSignupMutation();
 
   const onSubmit = async (values: any) => {
-    if (profileImg) {
-      values.profileImg = profileImg.url;
+    if (!profileImg) {
+      setImageError("Profile image is required"); 
+      return;
     }
+
+    setImageError(""); 
+    values.profileImg = profileImg.url;
+    const toastId = toast.loading("Posting...")
 
     try {
       setLoading(true);
       const res: any = await signup(values).unwrap();
-      // console.log(res);
 
       if (res && res.data) {
-        toast("User created successfully", {
-          icon: <span style={{ marginRight: -8, fontSize: 22 }}><TiTickOutline /></span>,
-          style: {
-            borderRadius: "10px",
-            background: "#4f46e5",
-            color: "#fff",
-          },
-          duration: 2000,
-        });
-
-        // Clear the selected profile image after successful signup
+       ShowToast({
+        message:res?.message
+       })
         setProfileImg(null);
-        setImgPreview(null); // Clear the preview image as well
-
+        setImgPreview(null);
+        setTimeout(()=>{
+        push('/login')
+        },2000)
       } else {
         throw new Error("Unexpected response format");
       }
@@ -58,6 +63,7 @@ const SignupPage = () => {
         duration: 2000,
       });
     } finally {
+      toast.dismiss(toastId)
       setLoading(false);
     }
   };
@@ -65,14 +71,14 @@ const SignupPage = () => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      
+
       <div className="flex justify-center items-center min-h-screen relative">
         <div className="w-full max-w-xl flex justify-center items-center">
           <div className="p-12 bg-white rounded-3xl w-full">
             <div className="mb-7">
               <h3 className="font-semibold text-3xl text-gray-800">Signup</h3>
             </div>
-            <Form submitHandler={onSubmit}>
+            <Form submitHandler={onSubmit} resolver={yupResolver(signupSchema)}>
               <div className="flex flex-col sm:flex-row sm:space-x-4 mb-4">
                 <FormInput name="fName" label="First Name" type="text" />
                 <FormInput name="lName" label="Last Name" type="text" />
@@ -80,6 +86,7 @@ const SignupPage = () => {
 
               <FormInput name="email" label="Email" type="email" />
               <FormInput name="contactNo" label="Phone Number" type="number" />
+
               <div className="relative mb-5">
                 <FormInput
                   name="password"
@@ -97,19 +104,31 @@ const SignupPage = () => {
 
               <SingleImageUpload
                 label="Upload Profile"
-                imgPreview={imgPreview} 
-                setImgPreview={setImgPreview} 
+                imgPreview={imgPreview}
+                setImgPreview={setImgPreview}
                 onImageChange={setProfileImg}
               />
 
+            
+              {imageError && (
+                <div className="text-red-600 text-sm mt-2">
+                  {imageError}
+                </div>
+              )}
+
               <div className="mt-5">
-                <button
-                  type="submit"
-                  className={`w-full flex justify-center items-center bg-[#1475c6] text-white p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  disabled={loading}
-                >
-                   {loading ? <Spinner /> : 'Register'} 
-                </button>
+           <button
+  type="submit"
+  className={`w-full flex justify-center items-center border border-indigo-600 p-3 rounded-lg font-semibold cursor-pointer transition ease-in duration-300 ${
+    loading
+      ? "bg-indigo-600 text-white opacity-50 cursor-not-allowed"
+      : "bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white"
+  }`}
+  disabled={loading}
+>
+  {loading ? <Spinner /> : "Register"}
+</button>
+
               </div>
             </Form>
             <div className="flex items-center justify-between mt-5">

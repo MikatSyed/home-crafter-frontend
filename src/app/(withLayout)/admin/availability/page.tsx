@@ -1,6 +1,6 @@
 "use client";
 import Loader from '@/components/UI/Loader';
-import { useAddAvailbilityMutation, useAvailbilitiesQuery, useDeleteAvailbilityMutation } from '@/redux/api/availbility';
+import { useAddAvailbilityMutation, useAvailbilitiesForProviderQuery, useDeleteAvailbilityMutation } from '@/redux/api/availbility';
 import React, { useState, useEffect, FormEvent, ChangeEvent, FocusEvent } from 'react';
 
 // Define types for the state and slot
@@ -11,7 +11,7 @@ type AvailabilityState = {
 
 const Availability: React.FC = () => {
     const [addAvailbility] = useAddAvailbilityMutation(); // API mutation hook
-    const { data, isLoading } = useAvailbilitiesQuery(undefined);
+    const { data, isLoading } = useAvailbilitiesForProviderQuery(undefined);
     const [deleteAvailbility] = useDeleteAvailbilityMutation();
 
   

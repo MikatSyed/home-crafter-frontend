@@ -9,12 +9,10 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FiArrowLeftCircle, FiHome } from "react-icons/fi";
 
 const UserBooking = () => {
-  const router = useRouter(); // Initialize the router
+  const router = useRouter(); 
   const { data, isLoading, isError } = useBookingsForUserQuery(undefined);
-  const [bookingType, setBookingType] = useState<"All" | "Service" | "Combo">("All");
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
-
   const bookings = data?.data;
 
   if (isLoading) return <p>Loading...</p>;
@@ -28,7 +26,7 @@ const UserBooking = () => {
     setCurrentPage(1);
   };
 
-  // Helper function to get color class based on status
+  
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Pending":
