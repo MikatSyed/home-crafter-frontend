@@ -51,32 +51,32 @@ const HeroSection = () => {
                     </div>
                 </div>
                 
-                {/* Premium Cards Section */}
+             
                 <div className="mt-10 mb-[-8rem] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {/* Premium Card 1 */}
+                
                     <div className="bg-white p-8 rounded-lg shadow-lg">
                         <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
                             <FaShieldAlt className="text-3xl"/>
                         </div>
-                        <h3 className="text-2xl font-bold text-indigo-800 mb-4 text-center">Quality Assurance</h3>
+                        <h3 className="text-2xl font-bold text-indigo-600 mb-4 text-center">Quality Assurance</h3>
                         <p className="text-gray-700 text-center mb-6">
                             Get top-notch service with our verified professionals, ensuring you receive the highest quality for every task.
                         </p>
-                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 hover:text-white mx-auto block">
+                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-600 hover:text-white mx-auto block">
                             Learn More
                         </button>
                     </div>
 
-                    {/* Premium Card 2 */}
+                  
                     <div className="bg-white p-8 rounded-lg shadow-lg">
                         <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
                             <FaHandsHelping className="text-3xl"/>
                         </div>
-                        <h3 className="text-2xl font-bold text-indigo-800 mb-4 text-center">Customer Support</h3>
+                        <h3 className="text-2xl font-bold text-indigo-600 mb-4 text-center">Customer Support</h3>
                         <p className="text-gray-700 text-center mb-6">
                             Our dedicated support team is available 24/7 to assist with any queries, ensuring a smooth experience.
                         </p>
-                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 hover:text-white mx-auto block">
+                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-600 hover:text-white mx-auto block">
                             Get Support
                         </button>
                     </div>
@@ -86,11 +86,11 @@ const HeroSection = () => {
                         <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
                             <FaDollarSign className="text-3xl"/>
                         </div>
-                        <h3 className="text-2xl font-bold text-indigo-800 mb-4 text-center">Affordable Packages</h3>
+                        <h3 className="text-2xl font-bold text-indigo-600 mb-4 text-center">Affordable Packages</h3>
                         <p className="text-gray-700 text-center mb-6">
                             Choose from a variety of affordable packages tailored to fit your needs, offering great value for money.
                         </p>
-                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 hover:text-white mx-auto block">
+                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-600 hover:text-white mx-auto block">
                             View Plans
                         </button>
                     </div>

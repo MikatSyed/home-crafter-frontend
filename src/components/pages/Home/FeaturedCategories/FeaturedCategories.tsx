@@ -31,7 +31,7 @@ const FeaturedCategories = () => {
     }
 
     return (
-        <div className={`mx-auto px-6 md:px-[6rem] ${pathname === '/categories' ? 'bg-white' : 'bg-[#f8fcfd]'} py-10 md:pb-14 md:pt-52`}>
+        <div className={`mx-auto px-6 md:px-[6rem] ${pathname === '/categories' ? 'bg-white' : 'bg-[#f8fcfd] pt-52'} py-10 md:pb-14`}>
             {pathname !== '/categories' ? (
                 <div className="section-heading mb-8">
                     <div className="flex flex-wrap items-center">

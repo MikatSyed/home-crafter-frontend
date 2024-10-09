@@ -5,6 +5,7 @@ import {
   FaCalendarCheck,
   FaHeart,
   FaTachometerAlt,
+  FaRegHeart,
 } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,15 +19,26 @@ import {
   FiUserPlus,
   FiX,
 } from "react-icons/fi";
+import { useAppSelector } from "@/redux/hook";
+import Cart from "../Cart/Cart";
 
 const MobileMenu = ({ user }: { user: any }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [dropdownOpen, setDropdownOpen] = useState<{ [key: number]: boolean }>(
     {}
   );
   const profileButtonRef = useRef<HTMLButtonElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
+  
+  const favouriteServices = useAppSelector(
+    (state: any) => state.favourites.favouriteServices
+  );
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const toggleProfileMenu = () => setIsProfileOpen((prev) => !prev);
   const handleSignOut = async () => {
@@ -89,7 +101,7 @@ const MobileMenu = ({ user }: { user: any }) => {
       {/* Hamburger Menu Button */}
       <div className="flex items-center justify-between h-16">
         <button
-          className="text-black hover:text-blue-500 focus:outline-none ml-4"
+          className="text-black hover:text-indigo-600 focus:outline-none ml-4"
           onClick={toggleNavbar}
         >
           <FiMenu
@@ -103,6 +115,21 @@ const MobileMenu = ({ user }: { user: any }) => {
         {/* User Profile Image and Name */}
         {user && (
           <div className="flex items-center space-x-3 mr-4">
+             <div className=" flex items-center ">
+                  <div
+                    className="relative flex items-center p-3 bg-[#f8fcfd] rounded-full cursor-pointer"
+                    onClick={toggleSidebar}
+                  >
+                    {favouriteServices.length === 0 ? (
+                      <FaRegHeart className="text-indigo-600 text-xl hover:scale-105 transition-transform" />
+                    ) : (
+                      <FaHeart className="text-indigo-600 text-xl hover:scale-105 transition-transform" />
+                    )}
+                    <span className="absolute -top-2 -right-3 bg-indigo-600 text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                      {favouriteServices.length}
+                    </span>
+                  </div>
+                </div>
             <button
               onClick={toggleProfileMenu}
               ref={profileButtonRef}
@@ -174,13 +201,13 @@ const MobileMenu = ({ user }: { user: any }) => {
               <div className="flex justify-between items-center">
                 <Link
                   href={item.href}
-                  className="hover:text-blue-500  px-3 py-2 rounded-md font-medium"
+                  className="hover:text-indigo-600  px-3 py-2 rounded-md font-medium"
                 >
                   {item.title}
                 </Link>
                 {item.subItems && item.subItems.length > 0 && (
                   <button
-                    className="text-black hover:text-blue-500 focus:outline-none"
+                    className="text-black hover:text-indigo-600 focus:outline-none"
                     onClick={() => toggleDropdown(index)}
                   >
                     <FiChevronDown
@@ -198,7 +225,7 @@ const MobileMenu = ({ user }: { user: any }) => {
                     <Link
                       key={subIndex}
                       href={subItem.href}
-                      className="text-black hover:text-blue-500 block px-3 py-2 rounded-md text-base font-medium"
+                      className="text-black hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium"
                     >
                       {subItem.title}
                     </Link>
@@ -214,13 +241,13 @@ const MobileMenu = ({ user }: { user: any }) => {
           ) : (
             <div className="flex items-center space-x-2">
               <Link href="/choose-signup">
-                <button className="flex items-center px-4 py-2 mt-4 bg-indigo-600 text-white rounded-full  text-md">
+                <button className="flex items-center px-4 py-2 mt-4 text-indigo-600 bg-white rounded-md  text-md border border-indigo-600 hover:bg-indigo-600 hover:text-white">
                   <FiUserPlus className="mr-2" />
                   Register
                 </button>
               </Link>
               <Link href="/login">
-                <button className="flex items-center px-4 py-2 mt-4 bg-indigo-600 text-white rounded-full shadow-md text-md">
+                <button className="flex items-center px-4 py-2 mt-4 text-indigo-600 bg-white rounded-md  text-md border border-indigo-600 hover:bg-indigo-600 hover:text-white">
                   <FiLogIn className="mr-2" />
                   Login
                 </button>
@@ -236,6 +263,15 @@ const MobileMenu = ({ user }: { user: any }) => {
           className="fixed inset-0 bg-black opacity-50 z-40"
           onClick={toggleNavbar} // Close sidebar when backdrop is clicked
         ></div>
+      )}
+         {sidebarOpen && (
+        <>
+          <Cart services={favouriteServices} onClose={toggleSidebar} />
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            onClick={toggleSidebar}
+          ></div>
+        </>
       )}
     </div>
   );

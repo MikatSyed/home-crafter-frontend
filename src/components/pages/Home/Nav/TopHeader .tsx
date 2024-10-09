@@ -151,14 +151,16 @@ const TopHeader = () => {
                   </div>
                 </div>
               )}
-
+              
               {user ? (
                 <div className="flex items-center space-x-3 relative">
+                  
                   <button
                     onClick={toggleProfileMenu}
                     ref={profileButtonRef}
                     className="focus:outline-none cursor-pointer"
                   >
+                    
                     <div className="w-12 h-12 overflow-hidden rounded-full shadow-md">
                       <Image
                         src={user?.profileImg[0]}
