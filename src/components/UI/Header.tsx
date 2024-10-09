@@ -36,14 +36,32 @@ const Header: React.FC<HeaderProps> = ({ isSidebarOpen, onToggleSidebar,data,isL
   const user = data?.data;
 
   return (
-    <header className="z-10 shadow-md">
+    <header className="z-10 shadow-md ">
       <div className="container flex items-center justify-between mx-2 text-blue-600 py-4">
         <div className="flex items-center">
           <button className="mr-3 md:hidden" onClick={onToggleSidebar}>
-            {isSidebarOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
+            {isSidebarOpen ? <FiX className="w-7 h-7" /> : <FiMenu className="w-7 h-7" />}
           </button>
+     <div className='px-6 hidden md:block'>     <Link href="/">
+                <div className="flex items-center justify-center space-x-3">
+                  <div className="p-2 bg-indigo-600 rounded-full text-white">
+                    <Image
+                      src="/assets/logo.png"
+                      alt="Logo"
+                      height={40}
+                      width={40}
+                      className="p-1"
+                    />
+                  </div>
+                  <h1 className="text-2xl font-bold text-indigo-600">
+                    Home <span className="text-gray-900">Crafter</span>
+                  </h1>
+                </div>
+              </Link></div>
         </div>
-        <div className="flex items-center space-x-3">
+        
+        <div className="flex items-center space-x-3 mr-5 md:mr-0">
+          
           <Link href="/">
             <button className="p-2 rounded-full hover:text-[#4f46e5] text-gray-500 flex items-center text-sm">
               <TfiWorld className="w-4 h-4 mr-2" />

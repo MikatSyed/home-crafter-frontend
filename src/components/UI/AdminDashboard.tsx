@@ -63,7 +63,8 @@ const AdminDashboard = ({ data }: any) => {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-lg font-semibold text-gray-800">Earning</h3>
-              <p className="text-4xl font-bold text-red-600">${totalEarning}</p>
+              <p className="text-4xl font-bold text-red-600">${parseInt(totalEarning)}</p>
+
             </div>
             <div className="bg-red-100 p-3 rounded-full">
               <FiPieChart className="text-red-600 h-6 w-6" />

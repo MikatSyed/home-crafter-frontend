@@ -1,6 +1,7 @@
 
 import { useCategoriesQuery } from "@/redux/api/categoryApi";
 import FormSelectField, { SelectOptions } from "./FormSelectField";
+import { useLoggedUserQuery } from "@/redux/api/userApi";
 
 type CategoryFieldProps = {
   name: string;
@@ -8,7 +9,7 @@ type CategoryFieldProps = {
 };
 
 const CategoryField = ({ name, label }: CategoryFieldProps) => {
-  const { data, isLoading }:any = useCategoriesQuery({
+  const { data }:any = useCategoriesQuery({
     limit: 100,
     page: 1,
   });
@@ -23,11 +24,14 @@ const CategoryField = ({ name, label }: CategoryFieldProps) => {
   });
 
   return (
+    <>
     <FormSelectField
       name={name}
       label={label}
       options={CategoryOptions as SelectOptions[]}
     />
+   
+  </>
   );
 };
 

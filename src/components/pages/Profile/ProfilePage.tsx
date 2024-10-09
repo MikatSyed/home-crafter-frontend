@@ -1,15 +1,14 @@
 // ProfilePage.tsx
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import { FiEdit, FiLock, FiArrowLeftCircle, FiHome } from "react-icons/fi";
 import { useLoggedUserQuery } from "@/redux/api/userApi";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import UpdateProfile from "./UpdateProfile";
 import Loader from "@/components/UI/Loader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import ProfileImageUpload from "../../UI/ProfileImageUpload"; // Import the new component
+import ProfileImageUpload from "../../UI/ProfileImageUpload"; 
 
 const ProfilePage = () => {
   const router = useRouter();

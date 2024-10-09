@@ -52,8 +52,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, data }) => {
           )}
         </button>
 
+        {/* Sidebar Header with "Home Crafter" Text */}
+        {isOpen && (
+          <div className="pl-6 md:hidden">
+           
+            <h1 className="text-2xl font-bold text-indigo-600">
+              Home <span className="text-gray-900">Crafter</span>
+            </h1>
+          </div>
+        )}
+
         {/* Sidebar Menu Items */}
-        <div className={`mt-6 md:mt-0 ${isOpen ? 'block' : 'hidden'} md:block overflow-y-auto h-[calc(100vh-3rem)] w-[250px]`}>
+        <div className={`mt-2 md:mt-0 ${isOpen ? 'block' : 'hidden'} md:block overflow-y-auto h-[calc(100vh-3rem)] w-[250px]`}>
           <Link href={`/${role}/dashboard`}>
             <p onClick={() => handleLinkClick('dashboard')} className={getLinkClass('dashboard')}>
               <MdOutlineDashboard className="w-5 h-5 mr-2 text-gray-800" />

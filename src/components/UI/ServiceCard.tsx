@@ -19,6 +19,8 @@ interface ServiceCardProps {
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) => {
+  console.log(data,'data')
+
   const { isServiceFavourite, handleFavouriteClick } = useFavourites();
   const [swiper, setSwiper] = useState<any | null>(null);
 
@@ -106,14 +108,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
 
                  
                   <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-start w-full">
-                    <Link href={`/service-details/${service.provider.id}`} className="flex items-center">
+                    <div  className="flex items-center">
                       <img
-                        src={service.provider.profileImg[0] || "/default-profile.png"} 
+                        src={service?.provider?.profileImg[0] || "/default-profile.png"} 
                         className="avatar w-10 h-10 rounded-full"
                         alt="User"
                       />
                       <span className="ml-2 text-white">{`${service?.provider?.fName} ${service?.provider?.lName}`}</span>
-                    </Link>
+                    </div>
                   </div>
                       </SwiperSlide>
                     ))}

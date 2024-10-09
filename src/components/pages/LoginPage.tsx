@@ -12,9 +12,9 @@ import { useRouter } from "next/navigation";
 import loginSchema from "@/schemas/login";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-interface LoginProps {
-  callbackUrl?: string;
-}
+// interface LoginProps {
+//   callbackUrl?: string;
+// }
 
 const LoginPage = ({ callbackUrl }: any) => {
   const { push } = useRouter();
@@ -34,14 +34,7 @@ const LoginPage = ({ callbackUrl }: any) => {
       });
 
       if (result?.error) {
-        toast.error(`Error: ${result.error}`, {
-          icon: <span style={{ color: "white" }}>❌</span>,
-          style: {
-            borderRadius: "10px",
-            background: "red",
-            color: "#fff",
-          },
-        });
+        toast.error(`${result.error}`);
       } else {
         push(callbackUrl || "/");
       }
@@ -106,14 +99,14 @@ const LoginPage = ({ callbackUrl }: any) => {
           <div className="hidden md:flex flex-col justify-center items-center bg-indigo-600 text-white p-8 w-1/2">
             <h1 className="text-4xl font-bold mb-4">Welcome Back!</h1>
             <p className="text-lg mb-6">To continue, please login with your credentials.</p>
-            <img src="/images/login-illustration.svg" alt="Login Illustration" className="w-64" />
+           
           </div>
 
           <div className="flex justify-center self-center md:w-1/2 p-6 bg-white">
             <div className="mx-auto rounded-3xl w-full p-8">
               <div className="flex flex-col items-center mb-7">
                 <h3 className="font-semibold text-3xl text-gray-800 mb-2">
-                  Welcome to <span className="text-gray-700">Home Crafter</span>
+                  Welcome to <span className="text-gray-700"><span className="text-indigo-600">Home </span> Crafter</span>
                 </h3>
                 <p className="text-gray-600">Login to your account</p>
               </div>
@@ -142,7 +135,7 @@ const LoginPage = ({ callbackUrl }: any) => {
                     loading
                       ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed"
                       : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"
-                  } p-3 rounded-full font-semibold cursor-pointer transition duration-300 ease-in-out`}
+                  } p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
                     disabled={loading}
                   >
                     {loading ? <Spinner /> : "Login"}
@@ -165,7 +158,7 @@ const LoginPage = ({ callbackUrl }: any) => {
                     isProviderLoading
                       ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed"
                       : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"
-                  } p-3 rounded-full font-semibold cursor-pointer transition duration-300 ease-in-out`}
+                  } p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
                   disabled={isProviderLoading}
                 >
                   {isProviderLoading ? <Spinner /> : <><FaUserTie className="mr-2" /> Login as Provider</>}
@@ -178,7 +171,7 @@ const LoginPage = ({ callbackUrl }: any) => {
                     isAdminLoading
                       ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed"
                       : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"
-                  } p-3 rounded-full font-semibold cursor-pointer transition duration-300 ease-in-out`}
+                  } p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
                   disabled={isAdminLoading}
                 >
                   {isAdminLoading ? <Spinner /> : <><FaUserShield className="mr-2" /> Login as Admin</>}

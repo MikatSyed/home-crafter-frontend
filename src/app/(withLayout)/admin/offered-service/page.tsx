@@ -151,7 +151,7 @@ const OfferServicePage = () => {
                                         <td className="py-3 px-6 text-center">
                                             <div className="flex item-center justify-center space-x-2">
                                                 <button
-                                                    className="text-blue-500 hover:text-blue-700 transform hover:scale-110"
+                                                    className="text-indigo-600 hover:text-indigo-700 transform hover:scale-110"
                                                     onClick={() => handleApplyOfferClick(offer)}
                                                 >
                                                     <FaEdit size={16} />

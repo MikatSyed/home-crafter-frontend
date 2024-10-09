@@ -21,7 +21,7 @@ const serviceSchema = yup.object().shape({
   
   categoryId: yup
     .string()
-    .required("Category is required"),
+    .required("Category is required").optional(),
   
   description: yup
     .string()

@@ -15,6 +15,7 @@ instance.defaults.timeout = 30000;
 instance.interceptors.request.use(async function (config) {
     // Do something before request is sent
     const session : any = await getSession()
+    console.log(session,'18')
     const accessToken = session?.token;
     if(accessToken){
         config.headers.Authorization = accessToken;

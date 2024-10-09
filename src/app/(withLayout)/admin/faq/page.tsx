@@ -1,11 +1,11 @@
-import Main from '@/components/pages/Dashboard/Provider/Bookings/Main';
+import Main from '@/components/pages/Dashboard/Provider/Faq/Main';
 import React from 'react';
 
 const page = () => {
   return (
-    <>
+    <div>
       <Main/>
-    </>
+    </div>
   );
 };
 

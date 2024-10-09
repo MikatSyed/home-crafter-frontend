@@ -8,6 +8,7 @@ const FeaturedServices = () => {
   const { data, isLoading } = useServicesQuery(undefined);
   const services = data?.data;
 
+
   if (isLoading) {
     return <Loader />;
   }

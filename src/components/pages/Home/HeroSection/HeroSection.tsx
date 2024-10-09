@@ -22,7 +22,7 @@ const HeroSection = () => {
                                     {['avatar-06', 'avatar-07', 'avatar-08', 'avatar-09', 'avatar-10'].map((avatar, index) => (
                                         <li key={index}>
                                             <a href="#">
-                                                <img src={`https://truelysell.dreamstechnologies.com/html/template/assets/img/profiles/${avatar}.jpg`} alt="User" className="rounded-full w-10 h-10 border-2 border-white shadow-lg"/>
+                                                <img src={`assets/${avatar}.jpg`} alt="User" className="rounded-full w-10 h-10 border-2 border-white shadow-lg"/>
                                             </a>
                                         </li>
                                     ))}
@@ -32,7 +32,10 @@ const HeroSection = () => {
                     </div>
                     <div className="lg:w-6/12 w-full mt-8 lg:mt-0">
                         <div className="relative flex justify-center">
-                            <img src="https://truelysell.dreamstechnologies.com/html/template/assets/img/hero-section-seven-ryt.png" alt="image" className="w-72 md:w-96 rounded-xl shadow-2xl border-4 border-white"/>
+                            <div className='border-4 border-white'>
+                            <img src="assets/provider-7.png" alt="image" className="w-72 md:w-96  shadow-2xl  "/>
+
+                            </div>
                             <div className="absolute bottom-4 left-4 lg:left-auto lg:right-4 bg-white p-6 rounded-lg shadow-xl">
                                 <div className="flex items-center space-x-2">
                                     <h5 className="text-2xl font-bold text-indigo-700">+21 k</h5>
@@ -59,7 +62,7 @@ const HeroSection = () => {
                         <p className="text-gray-700 text-center mb-6">
                             Get top-notch service with our verified professionals, ensuring you receive the highest quality for every task.
                         </p>
-                        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 mx-auto block">
+                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 hover:text-white mx-auto block">
                             Learn More
                         </button>
                     </div>
@@ -73,7 +76,7 @@ const HeroSection = () => {
                         <p className="text-gray-700 text-center mb-6">
                             Our dedicated support team is available 24/7 to assist with any queries, ensuring a smooth experience.
                         </p>
-                        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 mx-auto block">
+                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 hover:text-white mx-auto block">
                             Get Support
                         </button>
                     </div>
@@ -87,7 +90,7 @@ const HeroSection = () => {
                         <p className="text-gray-700 text-center mb-6">
                             Choose from a variety of affordable packages tailored to fit your needs, offering great value for money.
                         </p>
-                        <button className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 mx-auto block">
+                        <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-800 hover:text-white mx-auto block">
                             View Plans
                         </button>
                     </div>

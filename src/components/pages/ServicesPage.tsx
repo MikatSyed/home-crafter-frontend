@@ -1,14 +1,17 @@
 "use client";
 import { useServicesQuery } from "@/redux/api/servicesApi";
 import React, { Suspense, useEffect, useState } from "react";
-import { FaChevronDown, FaHeart, FaMapMarkerAlt, FaRegStar, FaStar } from "react-icons/fa";
+import { FaChevronDown, FaHeart, FaMapMarkerAlt, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import Loader from "../UI/Loader";
 import { useCategoriesNameQuery } from "@/redux/api/categoryApi";
-import { useDebounced } from "@/redux/hook";
+import { useDebounced, useFavourites } from "@/redux/hook";
 import { useSearchParams } from "next/navigation";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import Rating from "../UI/Rating";
 import Link from "next/link";
+import { Toaster } from "react-hot-toast";
+import Pagination from "../UI/Pagination";
+
 
 const ServicesPage = () => {
   const query: Record<string, any> = {};
@@ -23,7 +26,7 @@ const ServicesPage = () => {
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('asc');
+  const [selectedOption, setSelectedOption] = useState<'asc' | 'desc'>('asc');
   const [ratingCounts, setRatingCounts] = useState<Record<number, number>>({
     5: 0,
     4: 0,
@@ -33,6 +36,7 @@ const ServicesPage = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6); 
+  const { isServiceFavourite, handleFavouriteClick } = useFavourites();
 
  
 
@@ -40,11 +44,11 @@ const ServicesPage = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleOptionClick = (option: string) => {
+  const handleOptionClick = (option: 'asc' | 'desc') => {
     setSelectedOption(option);
     setIsDropdownOpen(false);
   };
-
+  
   useEffect(() => {
     if (categoryId) {
       setSelectedCategories([categoryId]);
@@ -54,7 +58,9 @@ const ServicesPage = () => {
   query["limit"] = size;
   query["page"] = page;
  
-  query["sortOrder"] = selectedOption;
+  query["sortOrder"] = selectedOption; 
+  query["sortBy"] = "regularPrice"; 
+  
 
   const debouncedSearchTerm = useDebounced({
     searchQuery: searchTerm,
@@ -82,7 +88,7 @@ const ServicesPage = () => {
     query["rating"] = selectedRating;
   }
 
-  const servicesPerPage = 6
+  const servicesPerPage = 4
 
   const { data, isLoading } = useServicesQuery({
     ...query,
@@ -157,6 +163,7 @@ const ServicesPage = () => {
 
   return (
    <>
+     <Toaster position="top-center" reverseOrder={false} />
     <div className="md:px-[6rem] py-6">
       <section>
         <div className="flex justify-between items-center w-full mb-4 ">
@@ -174,20 +181,20 @@ const ServicesPage = () => {
             </button>
             {isDropdownOpen && (
               <div className="absolute  w-48 bg-white border rounded shadow-lg">
-                <a
-                  href="#"
+                <p
+                
                   onClick={() => handleOptionClick('asc')}
                   className={`block px-4 py-2 ${selectedOption === 'asc' ? 'bg-[#6240ed] text-white' : 'text-gray-700 hover:bg-[#f8fcfd] hover:text-black'}`}
                 >
                   Price Low to High
-                </a>
-                <a
-                  href="#"
+                </p>
+                <p
+               
                   onClick={() => handleOptionClick('desc')}
                   className={`block px-4 py-2 ${selectedOption === 'desc' ? 'bg-[#6240ed] text-white' : 'text-gray-700 hover:bg-[#f8fcfd] hover:text-black'}`}
                 >
                   Price High to Low
-                </a>
+                </p>
               </div>
             )}
           </div>
@@ -313,10 +320,14 @@ const ServicesPage = () => {
                       alt={service.serviceName}
                       src={service.serviceImg[service.serviceImg.length - 1]}
                     />
-                    <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md">
-                      <a href="" className="text-red-500">
-                        <FaHeart size={20} />
-                      </a>
+                    <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md"  onClick={() => handleFavouriteClick(service)}>
+                 
+                          {isServiceFavourite(service.id) ? (
+                            <FaHeart className="text-indigo-600" />
+                          ) : (
+                            <FaRegHeart className="text-gray-500" />
+                          )}
+                        
                     </div>
                   </div>
 
@@ -344,11 +355,7 @@ const ServicesPage = () => {
                     </div>
 
                     <div className="mt-2 flex items-center">
-                      <img
-                        className="w-10 h-10 rounded-full border-2 border-blue-500 mr-3"
-                        src="https://truelysell.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg"
-                        alt="User"
-                      />
+                     
                       <span className="text-yellow-500 flex items-center">
                       <Rating rating={service?.averageRating || 0} />  ({service?.averageRating})
                       </span>
@@ -364,7 +371,7 @@ const ServicesPage = () => {
                       </h6>
                       <a
                         href={`/service-details/${service.id}`}
-                        className="bg-[#6240ed] text-white py-2 px-6 rounded-full hover:bg-blue-600 transition-colors"
+                        className="text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white py-2 px-6 rounded-md "
                       >
                         Book Now
                       </a>
@@ -373,44 +380,21 @@ const ServicesPage = () => {
                 </div>
               </div>
             ))}
-{totalPages > 4 && (
-  <div className="flex justify-end mt-8">
-          <button
-            className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
-              currentPage === 1
-                ? "text-gray-500 cursor-not-allowed text-sm bg-gray-300"
-                : "text-gray-700 bg-[#f8fcfd] hover:from-blue-500 hover:to-blue-700 text-sm font-bold hover:text-[#4f46e5]"
-            }`}
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            <FiArrowLeft className="mr-1" /> PREV
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              className={`px-4 py-2 mx-1 rounded-lg transition-colors ${
-                currentPage === index + 1
-                  ? "bg-[#4f46e5] text-white"
-                  : "bg-[#f8fcfd] border border-gray-300 text-gray-800 hover:bg-[#4f46e5] text-sm hover:text-white"
-              }`}
-              onClick={() => setCurrentPage(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-          <button
-            className={`inline-flex items-center px-4 py-2 mx-1 rounded-lg transition-colors ${
-              currentPage === totalPages
-                ? "text-gray-500 cursor-not-allowed text-sm bg-gray-300"
-                : "text-gray-700 bg-[#f8fcfd] text-sm font-bold hover:text-[#4f46e5]"
-            }`}
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            NEXT <FiArrowRight className="ml-1" />
-          </button>
-        </div> )}
+
+{
+  data?.meta?.total > 3 && <div className="flex items-center justify-end mt-10">
+       
+  <Pagination
+    currentPage={currentPage}
+    totalPages={totalPages}
+    onPageChange={setCurrentPage}
+  />
+</div>
+}
+
+      
+    
+        
 
           </div>
 

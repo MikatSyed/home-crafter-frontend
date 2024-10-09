@@ -140,18 +140,20 @@ const ProviderBlog = () => {
             ))}
           </div>
 
-          {/* Pagination and Items Per Page Selector */}
-          <div className="flex items-center justify-end mt-10">
-            <ItemsPerPageSelector
-              itemsPerPage={itemsPerPage}
-              onItemsPerPageChange={handleItemsPerPageChange}
-            />
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
+       {
+        blogs?.length > 0 &&  <div className="flex items-center justify-end mt-10">
+        <ItemsPerPageSelector
+          itemsPerPage={itemsPerPage}
+          onItemsPerPageChange={handleItemsPerPageChange}
+        />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
+       }
+         
         </>
       ) : (
         <div className="text-center text-gray-500 mt-6">No blogs available.</div>

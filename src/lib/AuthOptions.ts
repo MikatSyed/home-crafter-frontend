@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { getNewAccessToken } from "../../services/getNewAccessToken";
 import { jwtHelpers } from "../../services/jwtHelpers";
 
-const apiUrl = process.env.NODE_ENV === 'production' ? 'http://localhost:6060/api/v1/auth/login' : 'http://localhost:6060/api/v1/auth/login';
+const apiUrl = process.env.NODE_ENV === 'production' ? 'https://home-crafter-backend.vercel.app/api/v1/auth/login' : 'http://localhost:6060/api/v1/auth/login';
 
 
 export const authOptions: AuthOptions = {
@@ -25,7 +25,7 @@ export const authOptions: AuthOptions = {
                     body: JSON.stringify(credentials),
                     headers: { "Content-Type": "application/json" },
                   });
-              
+                 console.log(res,'28')
                   // Check if response is not ok (e.g., status 400, 401)
                   if (!res.ok) {
                     const errorData = await res.json();
