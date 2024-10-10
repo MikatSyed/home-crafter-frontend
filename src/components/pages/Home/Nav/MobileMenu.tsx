@@ -112,10 +112,7 @@ const MobileMenu = ({ user }: { user: any }) => {
           />
         </button>
 
-        {/* User Profile Image and Name */}
-        {user && (
-          <div className="flex items-center space-x-3 mr-4">
-             <div className=" flex items-center ">
+        <div className={`flex items-center  ml-[13rem] mr-[2rem]`}>
                   <div
                     className="relative flex items-center p-3 bg-[#f8fcfd] rounded-full cursor-pointer"
                     onClick={toggleSidebar}
@@ -130,6 +127,10 @@ const MobileMenu = ({ user }: { user: any }) => {
                     </span>
                   </div>
                 </div>
+       
+        {user && (
+          <div className="flex items-center space-x-3 mr-4">
+           
             <button
               onClick={toggleProfileMenu}
               ref={profileButtonRef}
@@ -257,11 +258,11 @@ const MobileMenu = ({ user }: { user: any }) => {
         </div>
       </div>
 
-      {/* Backdrop (optional) */}
+     
       {isOpen && (
         <div
           className="fixed inset-0 bg-black opacity-50 z-40"
-          onClick={toggleNavbar} // Close sidebar when backdrop is clicked
+          onClick={toggleNavbar}
         ></div>
       )}
          {sidebarOpen && (

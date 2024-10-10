@@ -8,6 +8,7 @@ import { useDeleteProviderMutation, useProvidersForAdminQuery, useUpdateProvider
 import { ShowToast } from '@/components/UI/ShowToast';
 import { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
+import Loader from '@/components/UI/Loader';
 
 const ProviderPage = () => {
     const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
@@ -74,7 +75,7 @@ const ProviderPage = () => {
         }
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loader/>;
     if (isError) return <div>Error loading providers.</div>;
 
     return (
@@ -97,6 +98,7 @@ const ProviderPage = () => {
                                         <th className="py-4 px-6 text-left">Email</th>
                                         <th className="py-4 px-6 text-left">Phone</th>
                                         <th className="py-4 px-6 text-left">Gender</th>
+                                        <th className="py-4 px-6 text-left">Category</th>
                                       
                                         <th className="py-4 px-6 text-left">Approval Status</th>
                                         <th className="py-4 px-6 text-center">Actions</th>
@@ -124,6 +126,9 @@ const ProviderPage = () => {
                                             <td className="py-4 px-6 text-left">
                                                 <span>{provider.gender}</span>
                                             </td>
+                                            <td className="py-4 px-6 text-left">
+                                                <span>{provider?.category?.categoryName}</span>
+                                            </td>
                                            
                                             <td className="py-4 px-6 text-left">
                                                 <select
@@ -138,7 +143,7 @@ const ProviderPage = () => {
                                             </td>
                                             <td className="py-3 px-6 text-center">
                                                 <div className="flex item-center justify-center space-x-4">
-                                                   <Link href={`/provider/${provider?.id}`}>
+                                                   <Link href={`/provider-details/${provider?.id}`}>
                                                    <button className="text-blue-600 hover:text-gray-700 transform hover:scale-110">
                                                         <FaEye size={16} />
                                                     </button>

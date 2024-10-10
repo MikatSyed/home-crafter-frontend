@@ -50,8 +50,8 @@ const LoginPage = ({ callbackUrl }: any) => {
     setProviderLoading(true);
     try {
       const result = await signIn("home-crafter", {
-        email: "gazi@gmail.com",
-        password: "gazi123", 
+        email: "syednew5000@gmail.com",
+        password: "syed123", 
         redirect: false,
         callbackUrl,
       });
@@ -73,8 +73,8 @@ const LoginPage = ({ callbackUrl }: any) => {
     setAdminLoading(true);
     try {
       const result = await signIn("home-crafter", {
-        email: "syed@gmail.com",
-        password: "syed123", 
+        email: "mikatsyed@gmail.com",
+        password: "mikat123", 
         redirect: false,
         callbackUrl,
       });
@@ -92,7 +92,7 @@ const LoginPage = ({ callbackUrl }: any) => {
   };
 
   return (
-    <div className="">
+    <div className="mx-4 md:mx-0">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-center items-center">
         <div className="flex flex-col md:flex-row justify-center md:w-[80%] mt-4 shadow-lg rounded-lg bg-white overflow-hidden">
