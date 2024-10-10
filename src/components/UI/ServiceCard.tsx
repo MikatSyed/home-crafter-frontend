@@ -57,6 +57,24 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
               </div>
             </div>
           )}
+          {data?.length > 1 && (
+            <div className="w-full md:w-1/2 text-right block md:hidden">
+              <div className="inline-flex items-center space-x-4">
+                <button
+                  className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
+                  onClick={handlePrevious}
+                >
+                  <IoIosArrowBack className="w-5 h-5" />
+                </button>
+                <button
+                  className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
+                  onClick={handleNext}
+                >
+                  <IoIosArrowForward className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

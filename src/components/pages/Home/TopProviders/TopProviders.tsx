@@ -83,7 +83,7 @@ const TopProviders = () => {
               {displayedProviders?.map((provider: any, index: number) => (
                 <div
                   key={index}
-                  className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-8 "
+                  className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-8 mr-3"
                 >
                   <div className="bg-white shadow-md rounded-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
                     <div className="p-4">

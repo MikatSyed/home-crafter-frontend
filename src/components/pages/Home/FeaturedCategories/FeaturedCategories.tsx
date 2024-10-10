@@ -40,7 +40,7 @@ const FeaturedCategories = () => {
                             <p className="text-gray-400 mt-4">What do you need to find?</p>
                         </div>
                         <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
-                    {displayCategories?.length > 4 &&       <Link href="/categories">
+                    {displayCategories?.length > 3 &&       <Link href="/categories">
                           <button className="text-indigo-600 border border-indigo-600  inline-flex items-center bg-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition duration-300">
       View All
       <FiArrowRightCircle className="ml-2" size={20} />
@@ -78,7 +78,7 @@ const FeaturedCategories = () => {
                                             <a href={`/service-details/${category.id}`} className="rounded transition flex flex-col items-center justify-center text-center">
                                                 <div>
                                                     <span className="inline-block p-3 bg-gray-100 rounded-full mr-4">
-                                                        <img src={category.categoryIcon} alt="icon" />
+                                                        <img src={category.categoryIcon} alt="icon" className=' h-10 w-10' />
                                                     </span>
                                                 </div>
                                             </a>
