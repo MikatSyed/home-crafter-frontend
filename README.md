@@ -33,26 +33,30 @@ Photo Gallery: Service detail pages showcase service images in an engaging, user
 
 Accessibility: Features designed to ensure usability for all users.
 
-Technology Stack
-Frontend: React, Framer Motion (for animations), HTML5, CSS3, JavaScript
-Backend: Node.js, Express
-Database: MongoDB (for service listings, user details, bookings, and provider statistics)
-Payment Gateway: SslCommerz integration for secure transactions
-Email Service: EmailJS (for email notifications)
+
 
 Technology Stack
+
 Frontend: TypeScript, Next.js,Tailwind, Redux-Toolkit, Axios, HookForm, Yup 
+
 Backend: Express.js,Zod Prisma ,JWT
+
 Authentication: NextAuth.js, JWT Token for session management
+
 Database: Prisma ORM with a relational database (PostgreSQL)
+
 File Storage: Cloudinary for image and media file uploads
+
 Payment Gateway: SslCommerz integration for secure transactions
+
 Email Service: NodeMailer, EmailJS for sending email notifications 
+
 Hosting: Vercel for frontend hosting, backend deployment
 
 
 
 Challenges
+
 During the development process, several challenges were encountered and addressed:
 
 Day-wise Slot Creation & Deletion: Implementing a system where providers can create, manage, and delete service slots based on available days was a complex task. This required efficient handling of availability in the database and ensuring flexibility for providers to update schedules on the go.
