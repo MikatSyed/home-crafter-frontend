@@ -1,14 +1,10 @@
 import React from 'react';
 import { FiCheck } from 'react-icons/fi';
-import Image from 'next/image';
-import pricingImg1 from '../../../public/assets/pricing-seven-1.svg';
-import pricingImg2 from '../../../public/assets/pricing-seven-2.svg';
-import pricingImg3 from '../../../public/assets/pricing-seven-3.svg';
 import Link from 'next/link';
 
 const PricingPlan = () => {
   return (
-    <div className="mx-auto px-6 md:px-[6rem] py-10 md:py-14 ">
+    <div className="mx-auto px-6 md:px-[6rem] py-10 md:py-14 bg-[#f8fcfd] main">
       <div className="text-center ">
         <div className="section-heading section-heading-seven" data-aos="fade-up">
           <h2 className="text-4xl font-bold text-gray-900 leading-tight">Pricing Plan</h2>

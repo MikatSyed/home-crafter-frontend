@@ -9,6 +9,8 @@ type FormConfig = {
 };
 
 type FormProps = {
+  email?:string;
+  password?:string;
   amount?: string;
   billId?: string;
   phoneNumber?: string;
@@ -41,6 +43,8 @@ const Form = ({
   const onSubmit = (data: any) => {
     submitHandler(data);
     reset({
+      email:"",
+      password:"",
       description: "",
       content:"",
       comment:"",

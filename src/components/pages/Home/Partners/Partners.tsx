@@ -13,7 +13,7 @@ const Partners = () => {
   ];
 
   return (
-    <div className="mx-auto px-6 md:px-[6rem] py-14">
+    <div className="mx-auto px-6 md:px-[6rem] py-14 main">
       <div className="text-center mb-16" >
         <h2 className="text-4xl font-bold text-gray-800">Our Partners</h2>
         <p className="text-lg text-gray-600 mt-2">Lorem ipsum dolor sit amet, consectetur elit</p>

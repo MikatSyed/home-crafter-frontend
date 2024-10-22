@@ -63,7 +63,7 @@ const ResetPassword = () => {
                 <FormInput
                   type={passwordVisible.newPassword ? 'text' : 'password'}
                   name="newPassword"
-                  size="large"
+              
                   label="New Password"
                   className="w-full pr-10"
                 />
@@ -82,7 +82,7 @@ const ResetPassword = () => {
                 <FormInput
                   type={passwordVisible.confirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
-                  size="large"
+                  
                   label="Confirm Password"
                   className="w-full pr-10"
                 />

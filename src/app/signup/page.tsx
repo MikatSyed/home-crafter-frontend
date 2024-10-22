@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 const Signup = () => {
 
   return (
-    <>
+    <div className='main'>
      <SignupPage/>
-    </>
+    </div>
   );
 };
 

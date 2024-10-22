@@ -72,22 +72,24 @@ const SignupPage = () => {
     <>
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="flex justify-center items-center min-h-screen relative">
-        <div className="w-full max-w-xl flex justify-center items-center">
+      <div className="flex justify-center items-center  relative mx-4 md:mx-0">
+        <div className="w-full max-w-2xl flex justify-center items-center">
           <div className="p-12 bg-white rounded-3xl w-full">
             <div className="mb-7">
               <h3 className="font-semibold text-3xl text-gray-800">Signup</h3>
             </div>
             <Form submitHandler={onSubmit} resolver={yupResolver(signupSchema)}>
-              <div className="flex flex-col sm:flex-row sm:space-x-4 mb-4">
-                <FormInput name="fName" label="First Name" type="text" />
-                <FormInput name="lName" label="Last Name" type="text" />
+              <div className="w-full flex flex-col sm:flex-row md:space-x-6 mb-4">
+                <FormInput name="fName" label="First Name" type="text" className="w-full"/>
+                <FormInput name="lName" label="Last Name" type="text" className="w-full" />
               </div>
 
               <FormInput name="email" label="Email" type="email" />
-              <FormInput name="contactNo" label="Phone Number" type="number" />
+             <div className="mt-2">
+             <FormInput name="contactNo" label="Phone Number" type="number" />
+             </div>
 
-              <div className="relative mb-5">
+              <div className="relative mb-5 mt-2">
                 <FormInput
                   name="password"
                   label="Password"

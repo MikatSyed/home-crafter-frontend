@@ -52,7 +52,7 @@ const ServiceBooking = () => {
   };
 
   return (
-    <div className="max-w-full px-12 py-6 md:px-[8rem]">
+    <div className="max-w-full px-12 py-6 md:px-[8rem] ">
       {/* Stepper Navigation */}
       <Stepper steps={steps} currentStep={currentStep} onStepClick={handleStepChange} />
 

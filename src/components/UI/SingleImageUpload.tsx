@@ -75,11 +75,11 @@ const SingleImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label, i
         </div>
       )}
       {imgPreview && !loading && (
-        <div className="relative mt-2 w-[100px] h-[100px]">
+        <div className="relative mt-2 w-[100px] h-[60px]">
           <Image
             src={imgPreview}
             alt="Profile Image"
-            height={100}
+            height={60}
             width={100}
             className="rounded-md shadow-md"
           />

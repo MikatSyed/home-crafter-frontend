@@ -80,7 +80,7 @@ const TopHeader = () => {
   return (
     <>
       <div
-        className={`hidden md:block mx-auto px-6 md:px-[6rem]  ${
+        className={`hidden md:block  px-6 md:px-[6rem] main ${
           pathname === "/" ? "bg-[#f8fcfd]" : "bg-white shadow-xl"
         }`}
       >

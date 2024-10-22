@@ -24,7 +24,7 @@ const Stepper: React.FC<StepperProps> = ({ steps, currentStep, onStepClick }) =>
         return (
           <button
             key={index}
-            onClick={() => onStepClick(index + 1)} // Enable step clicking
+         
             className={`flex items-center p-4 w-full ${
               isActive
                 ? "border-b-4 border-[#4c40ed]"

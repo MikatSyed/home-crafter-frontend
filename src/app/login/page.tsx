@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const Login = ({searchParams:{callbackUrl}}:any) => {
 
     return (
-        <div className='login-bg'>
+        <div className='login-bg main'>
             <LoginPage  callbackUrl={callbackUrl || "/"} />
            
         </div>

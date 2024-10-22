@@ -35,8 +35,18 @@ const ServiceCard = ({ service,role }: any) => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
+     <div className=''>
+     <button
+          onClick={(e) => handleBookService(e)}
+          className="bg-white hover:bg-indigo-600 border border-indigo-600 text-indigo-600 hover:text-white px-4 py-3 rounded-md w-full block text-center mb-6"
+        >
+          Book Service
+        </button>
+     </div>
       <div className="p-4 border rounded-lg bg-white">
+        
         <div className="p-3 rounded-lg mb-8">
+        
           <div className="flex justify-between items-center mb-2">
             <div>
               {service?.offeredPrice ? (
@@ -64,6 +74,7 @@ const ServiceCard = ({ service,role }: any) => {
               />
             </div>
           </div>
+          
         </div>
 
         <div className="mb-8 p-3 bg-[#f8fcfd] rounded-lg">
@@ -110,13 +121,7 @@ const ServiceCard = ({ service,role }: any) => {
           ></iframe>
         </div>
 
-        {/* Updated `button` with event handler */}
-        <button
-          onClick={(e) => handleBookService(e)}
-          className="bg-white hover:bg-indigo-600 border border-indigo-600 text-indigo-600 hover:text-white px-4 py-3 rounded-md w-full block text-center"
-        >
-          Book Service
-        </button>
+     
       </div>
     </>
   );

@@ -14,11 +14,13 @@ const FeaturedServices = () => {
   }
 
   return (
-    <ServiceCard
+   <div className="main mx-auto">
+     <ServiceCard
       data={services}
       title="Featured Services"
       description="Explore the greatest of our services. You won’t be disappointed."
     />
+   </div>
   );
 };
 

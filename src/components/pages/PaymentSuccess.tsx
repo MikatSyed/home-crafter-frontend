@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const PaymentSuccess = () => {
   return (
-    <div className="flex flex-col-reverse md:flex-row py-8">
+    <div className="flex flex-col-reverse md:flex-row py-8 main">
       <div className="text-center md:text-left py-8 md:py-12 md:pr-12">
         <h2 className="text-gray-700 text-2xl md:text-4xl font-semibold">
           Successfully Completed Payment

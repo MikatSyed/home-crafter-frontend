@@ -30,7 +30,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="mx-auto py-10 md:py-14 bg-[#f8fcfd]">
+    <div className=" py-10 md:py-14 bg-[#f8fcfd] main">
       <div className="text-center mb-10  px-6 md:px-[6rem]">
         <div ata-aos="fade-up">
           <h2 className="text-4xl font-extrabold text-gray-900 leading-tight">How It Works</h2>

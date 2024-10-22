@@ -3,10 +3,30 @@
 @tailwind utilities;
 
 
+::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Hide scrollbar for IE and Edge */
+* {
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 body{
   box-sizing: border-box;
   font-family: "Gill Sans", sans-serif;
 }
+
+
+
+@media screen and (min-width: 1400px) {
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
 .login-bg {
   background-image: url('../../public/assets/mourizal-zativa-90JFNMyBeek-unsplash.jpg'); /* Path to your image */
   background-size: cover; /* Ensures the image covers the entire div */

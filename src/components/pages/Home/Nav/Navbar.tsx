@@ -7,9 +7,13 @@ import { FaHeart } from "react-icons/fa";
 import { useAppSelector } from "@/redux/hook";
 import Cart from "../Cart/Cart";
 import { FaRegHeart } from "react-icons/fa6";
+import { useLoggedUserQuery } from "@/redux/api/userApi";
 
 
 const Navbar = () => {
+  const { data } = useLoggedUserQuery(undefined);
+  const user = data?.data;
+ 
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false); 
   const favouriteServices = useAppSelector((state: any) => state.favourites.favouriteServices); 
 
@@ -28,7 +32,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="mx-auto px-6 md:px-[6rem] hidden md:block">
+      <nav className=" px-6 md:px-[6rem] hidden md:block main ">
         <div className="md:mx-0">
           <div className="flex items-center justify-between h-16">
             {/* Navigation Links */}
@@ -56,17 +60,30 @@ const Navbar = () => {
                 </span>
               </div>
 
-              {/* Become a Provider / User */}
-              <Link href="/signup/provider">
-                <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
-                  Become A Provider
-                </p>
-              </Link>
-              <Link href="/signup">
-                <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
-                  Become A User
-                </p>
-              </Link>
+              
+  {!user ? ( // If there's no user, show both links
+    <>
+      <Link href="/signup">
+        <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
+          Become A User
+        </p>
+      </Link>
+      <Link href="/signup/provider">
+        <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
+          Become A Provider
+        </p>
+      </Link>
+    </>
+  ) : user.role === 'User' ? ( // If the user is a User, show only Become A Provider
+    <Link href="/signup/provider">
+      <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
+        Become A Provider
+      </p>
+    </Link>
+  ) : null} {/* If the user is a Provider, show nothing */}
+
+
+
             </div>
           </div>
         </div>

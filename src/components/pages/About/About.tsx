@@ -9,7 +9,7 @@ const About = () => {
   return (
     <>
       <BreadcrumbBar header="About" name="About" />
-      <div className="">
+      <div className="main">
       <div className=" px-6 md:px-[6rem] py-16">
       <div className="w-full flex flex-wrap  justify-between">
         

@@ -59,7 +59,7 @@ const Cart: React.FC<CartProps> = ({ services, onClose }) => {
           services.map((service) => (
          
               <div className="flex items-center justify-between border-t border-b py-4">
-                  <Link href={`service-details/${service?.id}`} key={service.id}>
+                  <Link href={`/service-details/${service?.id}`} key={service.id}>
                   <div className="flex items-center space-x-3">
                   <Image
                     src={service.serviceImg[service.serviceImg.length - 1] || "/default-image.jpg"}

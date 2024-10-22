@@ -58,7 +58,7 @@ const MobileMenu = ({ user }: { user: any }) => {
   const userRole = user?.role;
 
   const navItems = [
-    { title: "Home", href: "/home" },
+    { title: "Home", href: "/" },
     { title: "Services", href: "/services" },
     { title: "Providers", href: "/providers" },
     { title: "Blog", href: "/blogs" },
@@ -179,7 +179,7 @@ const MobileMenu = ({ user }: { user: any }) => {
                 ))}
               </div>
             )}
-            <p className="text-sm font-medium">{`${user?.fName} ${user?.lName}`}</p>
+            <p className="text-sm font-medium hidden md:block">{`${user?.fName} ${user?.lName}`}</p>
           </div>
         )}
       </div>
@@ -203,6 +203,7 @@ const MobileMenu = ({ user }: { user: any }) => {
                 <Link
                   href={item.href}
                   className="hover:text-indigo-600  px-3 py-2 rounded-md font-medium"
+                  onClick={() => setIsOpen(false)}
                 >
                   {item.title}
                 </Link>
@@ -219,7 +220,7 @@ const MobileMenu = ({ user }: { user: any }) => {
                   </button>
                 )}
               </div>
-              {/* Dropdown for sub-items */}
+             
               {dropdownOpen[index] && (
                 <div className="pl-4">
                   {item?.subItems?.map((subItem: any, subIndex: number) => (
@@ -236,7 +237,7 @@ const MobileMenu = ({ user }: { user: any }) => {
             </div>
           ))}
 
-          {/* User Profile or Login/SignUp */}
+        
           {user ? (
             <></>
           ) : (

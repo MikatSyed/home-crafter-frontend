@@ -55,7 +55,7 @@ const Checkout = ({ params }: IDProps) => {
     return <Loader/>
   }
   return (
-    <div className="max-w-full px-12 py-6 md:px-[8rem]">
+    <div className="max-w-full px-12 py-6 md:px-[8rem] main">
       <Stepper steps={steps} currentStep={2} onStepClick={handleStepChange} />
       <CheckoutPage data={data} />
     </div>

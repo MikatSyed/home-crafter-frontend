@@ -12,6 +12,7 @@ import Spinner from '@/components/UI/Spinner';
 import serviceSchema from '@/schemas/service';
 import { useRouter } from 'next/navigation';
 import Loader from '@/components/UI/Loader';
+import { ShowToast } from '@/components/UI/ShowToast';
 
 type IDProps = {
   params: any;
@@ -66,23 +67,18 @@ const EditService = ({ params }: IDProps) => {
 
       if (res) {
         setLoading(false);
-        toast('Service Updated Successfully', {
-          icon: <span style={{ marginRight: -8, fontSize: 22 }}><TiTickOutline /></span>,
-          style: {
-            borderRadius: '10px',
-            background: '#4f46e5',
-            color: '#fff',
-          },
-          duration: 2000,
-        });
+        ShowToast({
+          message:'Service Updated Successfully'
+        })
 
         // Redirect to the services list or detail page
-        router.push('/provider/services');
+        setTimeout(()=>{
+          router.push('/provider/services');
+        },2000)
       } else {
         throw new Error('Unexpected response format');
       }
     } catch (err: any) {
-      // console.log(err, '64');
       toast.error(err?.data);
       setLoading(false);
     }

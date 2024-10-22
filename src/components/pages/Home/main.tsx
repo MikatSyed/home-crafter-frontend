@@ -1,4 +1,5 @@
 
+import { Metadata } from "next";
 import Blog from "./Blog/Main";
 import Faq from "./Faq/Faq";
 import FeaturedCategories from "./FeaturedCategories/FeaturedCategories";
@@ -14,6 +15,7 @@ import Partners from "./Partners/Partners";
 import PricingPlan from "./PricingPlan/PricingPlan";
 import Testimonial from "./Testimonial/Testimonial";
 import TopProviders from "./TopProviders/TopProviders";
+
 
 
 

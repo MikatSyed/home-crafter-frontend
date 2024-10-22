@@ -47,7 +47,7 @@ const OfferedServices = () => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="bg-white py-10 md:py-14">
+      <div className="bg-white py-10 md:py-14 main">
         <div className="mb-8 mx-auto px-6 md:px-[6rem]">
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-1/2" data-aos="fade-up">

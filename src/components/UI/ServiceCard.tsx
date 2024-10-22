@@ -32,8 +32,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
   if (!data) return <Loader />;
 
   return (
-    <div className="bg-white py-10 md:py-14">
-      <div className="mb-8 mx-auto px-6 md:px-[6rem]">
+    <div className="bg-white py-10 md:py-14 ">
+      <div className="mb-8 px-6 md:px-[6rem]">
         <div className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2" data-aos="fade-up">
             <h2 className="text-4xl font-bold">{title}</h2>
@@ -93,7 +93,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
           {data.map((service: any, index: number) => (
             <SwiperSlide key={index}>
               <div
-                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ml-1 md:ml-4 mr-1 mb-1 md:mb-4"
+                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ml-1 md:ml-4 mr-1 mb-1 md:mb-4 h-[400px]"
                 data-aos="fade-up"
               >
                 <div className="relative">
@@ -102,7 +102,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description }) =
                     {service.serviceImg.map((imgSrc: string, imgIndex: number) => (
                       <SwiperSlide key={imgIndex}>
                         <Image
-                          className="w-full rounded-md transition-transform duration-300 ease-in-out h-[230px]"
+                          className="w-full rounded-md transition-transform duration-300 ease-in-out h-[240px]"
                           alt="Service Image"
                           src={imgSrc}
                           height={230}

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const ComboPackPage = () => {
   return (
-    <div>
+    <div className='main'>
       <ServiceComboPack/>
     </div>
   );

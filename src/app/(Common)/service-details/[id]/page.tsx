@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 const page = ({params}:IDProps) => {
     const {id} = params;
     return (
-        <>
+        <div  className='main'>
             <ServiceDetails id={id}/>
-        </>
+        </div>
     );
 };
 

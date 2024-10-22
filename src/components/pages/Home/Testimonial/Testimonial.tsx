@@ -49,10 +49,10 @@ const Testimonial: React.FC = () => {
   })) || [];
 
   return (
-    <div className="mx-auto px-6 md:px-[6rem] bg-[#f8fcfd] py-10  md:py-14 relative" data-aos="fade-up">
+    <div className=" px-6 md:px-[6rem]  py-10  md:py-14 relative main" data-aos="fade-up">
       <div className="text-center mb-16">
         <div className="section-heading">
-          <h2 className="text-4xl font-bold text-indigo-900"> Hear From Our Valued Clients</h2>
+          <h2 className="text-4xl font-bold text-gray-900"> Hear From Our Valued Clients</h2>
           <p className="text-gray-600 mt-4 text-sm">
   See how our clients benefit from our services through their reviews.
 </p>
@@ -81,8 +81,8 @@ const Testimonial: React.FC = () => {
           }}
         >
           {testimonials.map((testimonial:any) => (
-            <SwiperSlide key={testimonial?.id} className="bg-white p-6 rounded-lg ">
-            <div className=' h-[250px]'>
+            <SwiperSlide key={testimonial?.id} className="bg-white p-6 rounded-lg border">
+            <div className=' h-[300px] md:[250px]'>
             <div className="flex justify-center mb-4 relative">
              
              <div className="image-half-bg absolute top-0 left-0 w-full h-full bg-[#f8fcfd] rounded-t-lg"></div>

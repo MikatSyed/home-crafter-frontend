@@ -14,7 +14,7 @@ const BlogDetails = ({ params }: IDProps) => {
   const { id } = params;
 
   return (
-    <div>
+    <div  className='main'>
       <BreadcrumbBar header="Blog Details" name="Blog Details"  />
       <Main id={id}/>
     </div>

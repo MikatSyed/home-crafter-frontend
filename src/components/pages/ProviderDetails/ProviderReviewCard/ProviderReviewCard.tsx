@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useReviewByProviderIdQuery } from '@/redux/api/reviewApi';
 import { FaStar, FaThumbsUp, FaThumbsDown, FaReply } from 'react-icons/fa';
+import Rating from '@/components/UI/Rating';
 
 interface Review {
   id: string;
@@ -63,26 +64,14 @@ const ProviderReviewCard: React.FC<ServiceCardProps> = ({ providerId }) => {
               </div>
               <div className="ml-auto flex items-center mt-3">
                 <div className="rating flex">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <FaStar key={i} className="text-yellow-500" />
-                  ))}
+                <Rating rating={review.rating}/>
                 </div>
               </div>
             </div>
             <p className="mb-4 text-gray-700">{review.comment}</p>
             <div className="flex justify-end items-center">
               
-              {/* <div className="recommend-info flex items-center space-x-2">
-                <p className="text-gray-700">Recommend?</p>
-                <a href="#" className="flex items-center space-x-1 text-green-600">
-                  <FaThumbsUp />
-                  <span>Yes</span>
-                </a>
-                <a href="#" className="flex items-center space-x-1 text-red-600">
-                  <FaThumbsDown />
-                  <span>No</span>
-                </a>
-              </div> */}
+           
             </div>
           </li>
         ))}

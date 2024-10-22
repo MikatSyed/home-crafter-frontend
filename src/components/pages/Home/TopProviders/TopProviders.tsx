@@ -39,7 +39,7 @@ const TopProviders = () => {
   const totalPages = Math.ceil(providers.length / providersPerPage);
   // console.log(totalPages, "32");
   return (
-    <section className=" px-6 md:px-[6rem] bg-white py-14">
+    <section className=" px-6 md:px-[6rem] bg-white py-14 main ">
       <div className="">
         {pathname !== "/providers" && (
            <div className="section-heading mb-8">
@@ -85,7 +85,7 @@ View All
           height={195}
           width={220}
           alt="Provider"
-          className="w-full h-48 object-cover rounded-md"
+          className="w-full h-54 object-cover rounded-md"
         />
       </div>
 

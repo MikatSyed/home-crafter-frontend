@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useReviewByServiceIdQuery } from '@/redux/api/reviewApi';
 import { FaStar, FaThumbsUp, FaThumbsDown, FaReply } from 'react-icons/fa';
+import Rating from '@/components/UI/Rating';
 
 interface Review {
   id: string;
@@ -52,7 +53,7 @@ const ReviewCard: React.FC<ServiceCardProps> = ({ serviceId }) => {
                 <h6 className="text-lg font-semibold">{review.user.fName} {review.user.lName}</h6>
                 <p className="text-sm text-gray-600">
                   {new Date(review.createdAt).toLocaleString('en-US', {
-                    weekday: 'long',
+                  
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
@@ -63,9 +64,8 @@ const ReviewCard: React.FC<ServiceCardProps> = ({ serviceId }) => {
               </div>
               <div className="ml-auto flex items-center mt-3">
                 <div className="rating flex">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <FaStar key={i} className="text-yellow-500" />
-                  ))}
+            
+                  <Rating rating={review.rating}/>
                 </div>
               </div>
             </div>

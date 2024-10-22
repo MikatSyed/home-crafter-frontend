@@ -57,8 +57,7 @@ const ProviderDetails = ({ id }: any) => {
           <div className="lg:w-1/3 w-full mb-8 lg:mb-0">
             <div className="relative rounded-lg shadow-lg">
             <div className="absolute top-2 left-2 bg-white hover:text-white text-[#665cf0] hover:bg-[#665cf0] text-sm px-3 py-1 rounded">
-  {/* Check if category and categoryName are available */}
-  {/* {category?.categoryName || "Unknown Category"} */}
+
 </div>
               <img
                 src={profileImg[0]}

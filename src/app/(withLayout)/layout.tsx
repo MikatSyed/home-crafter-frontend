@@ -22,7 +22,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   }
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden main">
       <div className="flex flex-col flex-1 w-full h-screen">
         {/* Header Component */}
         <Header isSidebarOpen={isSidebarOpen} onToggleSidebar={toggleSidebar} data={data} isLoading={isLoading} />

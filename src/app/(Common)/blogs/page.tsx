@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const Blogs = () => {
 
     return (
-        <div>
+        <div className=''>
                <BreadcrumbBar header="Our Blogs" name="Blogs"/>
             <Main/>
         </div>

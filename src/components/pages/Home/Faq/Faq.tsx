@@ -25,7 +25,7 @@ const Faq = () => {
     return displayedFaqs.map((faq: any) => (
       <div
         key={faq.id}
-        className=" border rounded-lg mb-4 overflow-hidden"
+        className=" border rounded-lg mb-4 overflow-hidden "
       >
         
         <div
@@ -57,7 +57,7 @@ const Faq = () => {
   };
 
   return (
-    <section className="py-10 md:py-14 px-6 md:px-16 ">
+    <section className="py-10 md:py-14 px-6 md:px-16 main">
       <div className="max-w-5xl mx-auto">
         {/* FAQ Header Section */}
         <div className="text-center mb-12">

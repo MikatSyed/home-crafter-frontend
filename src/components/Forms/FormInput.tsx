@@ -5,25 +5,19 @@ import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
 interface FormInputProps {
   name: string;
   type?: string;
-  size?: any;
-  value?: string;
   id?: string;
-  placeholder?: string;
-  validation?: any;
-  label?: string;
-  className?: string;
+  placeholder?: string; // Optional for the placeholder
+  label: string; // Required for the label
+  className?: string; // For additional classes
 }
 
 const FormInput: React.FC<FormInputProps> = ({
   name,
   type = "text",
-  size,
-  value,
   id,
-  placeholder,
-  validation,
+  placeholder = "",
   label,
-  className
+  className = "",
 }) => {
   const {
     control,
@@ -33,7 +27,7 @@ const FormInput: React.FC<FormInputProps> = ({
   const errorMessage = getErrorMessageByPropertyName(errors, name);
 
   return (
-    <div className="relative z-0 w-full mb-5 group">
+    <div className={`relative ${className}`}>
       <Controller
         control={control}
         name={name}
@@ -41,18 +35,28 @@ const FormInput: React.FC<FormInputProps> = ({
           <>
             <input
               type={type}
-              size={size}
               id={id}
-              placeholder=" "
+              placeholder={placeholder}
               {...field}
-              value={value !== undefined ? value : field.value ?? ""}
-              className={`block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b ${errorMessage ? 'border-red-500' : 'border-gray-200'} appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 ${errorMessage ? 'focus:border-red-500' : 'focus:border-blue-600'} peer ${className}`}
+              className={`peer py-3 px-0 block w-full bg-transparent border-b-2 border-gray-300 text-sm 
+                placeholder:text-transparent outline-none
+                focus:border-b-[#4f46e5] focus:outline-none 
+                focus:pt-5 focus:pb-2 
+                [&:not(:placeholder-shown)]:pt-5 [&:not(:placeholder-shown)]:pb-2 
+                autofill:pt-5 autofill:pb-2 transition-all duration-200 
+                ${errorMessage ? "border-red-500" : ""}`}
             />
             <label
               htmlFor={id}
-              className={`peer-focus:font-medium absolute text-sm ${errorMessage ? 'text-red-500' : 'text-black'} dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto ${errorMessage ? 'peer-focus:text-red-500' : 'peer-focus:text-blue-600'} peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+              className={`absolute top-0 left-0 py-4 h-full text-sm truncate pointer-events-none transition-all duration-200 
+                origin-[0_0] dark:text-white 
+                peer-disabled:opacity-50 peer-disabled:pointer-events-none 
+                peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:text-[#4f46e5] 
+                ${field.value ? "scale-75 -translate-y-4 text-[#4f46e5]" : "text-gray-500"}
+                dark:peer-focus:text-neutral-500 
+                dark:text-neutral-500`}
             >
-              {label }
+              {label}
             </label>
           </>
         )}

@@ -5,7 +5,7 @@ import logo from '../../../../../public/assets/home (5).png';
 
 const Footer = () => {
   return (
-    <footer className="mx-auto px-6 md:px-[6rem] py-10 md:py-14 bg-[#f8fcfd]">
+    <footer className="mx-auto px-6 md:px-[6rem] py-10 md:py-14 bg-[#f8fcfd] main">
       <div>
         <div className=" mx-auto ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -48,9 +48,9 @@ const Footer = () => {
               <div className="footer-widget">
                 <h2 className="footer-title text-lg mb-4 font-semibold text-indigo-900">Contact Us</h2>
                 <div className="space-y-2 text-sm text-gray-600">
-                  <p><span><i className="feather-map-pin mr-2"></i></span> 367 Hillcrest Lane, Irvine, California, United States</p>
-                  <p><span><i className="feather-phone mr-2"></i></span> +1 (321) 546 8764</p>
-                  <p><span><i className="feather-mail mr-2"></i></span> support@homecrafter.com</p>
+                  <p><span><i className="feather-map-pin mr-2"></i></span> Muradpur,Chittagong(Bangladesh)</p>
+                  <p><span><i className="feather-phone mr-2"></i></span> +88 01858832211</p>
+                  <p><span><i className="feather-mail mr-2"></i></span> mikatsyed@gmail.com</p>
                 </div>
               </div>
             </div>
@@ -60,11 +60,11 @@ const Footer = () => {
               <div className="footer-widget">
                 <h2 className="footer-title text-lg mb-4 font-semibold text-indigo-900">Follow Us</h2>
                 <div className="flex space-x-4 mb-6 text-indigo-700">
-                  <a href="https://www.facebook.com" className="hover:text-indigo-500 transition"><FaFacebook className="text-2xl" /></a>
-                  <a href="https://www.twitter.com" className="hover:text-indigo-500 transition"><FaTwitter className="text-2xl" /></a>
-                  <a href="https://www.instagram.com" className="hover:text-indigo-500 transition"><FaInstagram className="text-2xl" /></a>
-                  <a href="https://www.linkedin.com" className="hover:text-indigo-500 transition"><FaLinkedin className="text-2xl" /></a>
-                  <a href="https://www.youtube.com" className="hover:text-indigo-500 transition"><FaYoutube className="text-2xl" /></a>
+                  <a href="https://web.facebook.com/syedmilka.cricket/" className="hover:text-indigo-500 transition"><FaFacebook className="text-2xl" /></a>
+                  <a href="#" className="hover:text-indigo-500 transition"><FaTwitter className="text-2xl" /></a>
+                  <a href="#" className="hover:text-indigo-500 transition"><FaInstagram className="text-2xl" /></a>
+                  <a href="https://www.linkedin.com/in/mikat-syed/" className="hover:text-indigo-500 transition"><FaLinkedin className="text-2xl" /></a>
+                  <a href="#" className="hover:text-indigo-500 transition"><FaYoutube className="text-2xl" /></a>
                 </div>
                
               </div>
@@ -78,14 +78,14 @@ const Footer = () => {
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center justify-between">
             <div className="text-center md:text-left text-sm text-gray-600">
-              <p className="mb-0">&copy;All Rights Reserved by @Mikat Syed.</p>
+              <p className="mb-0">&copy;All Rights Reserved by @Syed Gaziul Haque.</p>
             </div>
             <div className="flex justify-center mt-4 md:mt-0">
               <ul className="flex space-x-4">
-                <li><a href="#"><img src="assets/img/payment/visa.png" alt="Visa" className="h-8" /></a></li>
-                <li><a href="#"><img src="assets/img/payment/mastercard.png" alt="Mastercard" className="h-8" /></a></li>
-                <li><a href="#"><img src="assets/img/payment/stripe.png" alt="Stripe" className="h-8" /></a></li>
-                <li><a href="#"><img src="assets/img/payment/discover.png" alt="Discover" className="h-8" /></a></li>
+                <li><a href="#"><img src="assets/visa.jpg" alt="Visa" className="h-14 w-14" /></a></li>
+                <li><a href="#"><img src="assets/masterd-card.png" alt="Mastercard" className="h-14 w-14" /></a></li>
+                <li><a href="#"><img src="assets/ssl.png" alt="SslCommerz" className="h-14 w-14" /></a></li>
+                
               </ul>
             </div>
             <div className="text-center md:text-right text-sm text-gray-600 mt-4 md:mt-0">

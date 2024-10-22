@@ -96,11 +96,26 @@ const LoginPage = ({ callbackUrl }: any) => {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-center items-center">
         <div className="flex flex-col md:flex-row justify-center md:w-[80%] mt-4 shadow-lg rounded-lg bg-white overflow-hidden">
-          <div className="hidden md:flex flex-col justify-center items-center bg-indigo-600 text-white p-8 w-1/2">
-            <h1 className="text-4xl font-bold mb-4">Welcome Back!</h1>
-            <p className="text-lg mb-6">To continue, please login with your credentials.</p>
-           
-          </div>
+        <div className="hidden md:flex flex-col items-center bg-indigo-600 text-white p-8 w-1/2">
+  <h1 className="text-4xl font-bold mb-4">Welcome Back!</h1>
+  <p className="text-lg mb-6">
+    We're thrilled to have you back! To continue, please login with your credentials and access your personalized dashboard.
+  </p>
+  
+  <h2 className="text-2xl font-semibold mb-3">Why Login?</h2>
+  <ul className="list-disc list-inside text-lg mb-6">
+    <li>Access exclusive content tailored just for you.</li>
+    <li>Track your home improvement projects in real-time.</li>
+    <li>Get personalized recommendations from top service providers.</li>
+    <li>Enjoy seamless collaboration with professionals on your projects.</li>
+  </ul>
+
+ 
+  <p className="text-lg font-semibold">
+    Ready to transform your home? Login now to get started!
+  </p>
+</div>
+
 
           <div className="flex justify-center self-center md:w-1/2 p-6 bg-white">
             <div className="mx-auto rounded-3xl w-full p-8">
@@ -111,8 +126,10 @@ const LoginPage = ({ callbackUrl }: any) => {
                 <p className="text-gray-600">Login to your account</p>
               </div>
               <Form submitHandler={onSubmit} resolver={yupResolver(loginSchema)}>
-                <FormInput name="email" type="email" label="Email address" />
-                <div className="relative mb-5">
+              <div className="mb-2">
+              <FormInput name="email" type="email" label="Email" />
+              </div>
+                <div className="relative mb-6">
                   <FormInput name="password" label="Password" type={passwordVisible ? "text" : "password"} />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                     {passwordVisible ? (
@@ -145,7 +162,7 @@ const LoginPage = ({ callbackUrl }: any) => {
               <div className="flex flex-col items-center mt-5">
                 <p className="text-sm">
                   Don't have an account?{" "}
-                  <Link href="/choose-signup" className="text-gray-700 hover:text-gray-900 ml-1">
+                  <Link href="/signup" className="text-gray-700 hover:text-gray-900 ml-1">
                     Sign up
                   </Link>
                 </p>

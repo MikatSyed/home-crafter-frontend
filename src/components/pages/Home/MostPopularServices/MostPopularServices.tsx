@@ -17,13 +17,13 @@ const MostPopularServices = () => {
   }
 
   return (
-    <>
+    <div className="main">
       <ServiceCard
       data={services}
       title="Most Popular Services"
       description="Explore the greatest of our services. You won’t be disappointed"
     />
-    </>
+    </div>
   );
 };
 

@@ -49,7 +49,7 @@ const Main = () => {
 
   return (
     <>
-    <div className="mx-auto px-6 md:px-[5rem] py-10 md:py-14">
+    <div className="mx-auto px-6 md:px-[5rem] py-10 md:py-14 bg-[#f8fcfd] main">
       {pathname !== "/blogs" && (
         <div className="text-center mb-8">
           <div

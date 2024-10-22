@@ -46,7 +46,7 @@ const BookingDone = () => {
   };
 
   return (
-    <div className="max-w-full px-12 py-6 md:px-[8rem]">
+    <div className="max-w-full px-12 py-6 md:px-[8rem] main">
       <Stepper steps={steps} currentStep={3} onStepClick={handleStepChange} />
       <PaymentSuccess  />
     </div>

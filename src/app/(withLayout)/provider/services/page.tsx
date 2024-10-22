@@ -1,10 +1,9 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FaStar, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { FiEdit, FiMapPin, FiTrash } from "react-icons/fi";
 import {
-  useServicesQuery,
   useUpdateServiceMutation,
   useDeleteServiceMutation,
   useApplyOfferMutation,
@@ -87,14 +86,17 @@ const Services = () => {
       selectedService.status === "Active" ? "Inactive" : "Active";
 
     try {
-      // Pass the updated status in the payload
-      const response = await updateService({
+      const res = await updateService({
         id: selectedService.id,
         body: { status: updatedStatus },
       }).unwrap();
-      console.log("Update response:", response);
-      setIsModalOpen(false);
-      setSelectedService(null);
+      if(res.data){
+        ShowToast({
+          message:'Status Updated Successfully'
+        })
+        setIsModalOpen(false);
+        setSelectedService(null);
+      }
     } catch (error) {
       console.error("Failed to update status:", error);
     }

@@ -78,7 +78,7 @@ const Main = ({id}:any) => {
                 alt="User"
                 className="w-full h-auto md:h-[250px]  rounded-lg mb-4"
               />
-              <p className="text-gray-700 mb-6">
+              <p className="text-gray-700 mb-6 text-justify">
                {blog?.provider?.bio}
               </p>
               <Link

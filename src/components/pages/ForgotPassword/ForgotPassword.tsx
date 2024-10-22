@@ -57,7 +57,7 @@ const ForgotPassword = () => {
           <FormInput
             type="email"
             name="email"
-            size="large"
+          
             label="Email"
             className="w-full pr-10"
           />

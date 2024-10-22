@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const Services = () => {
     return (
-        <div>
+        <div className='main'>
           <BreadcrumbBar header="Our Services" name="Services"/>
             <ServicesPage/>
         </div>
