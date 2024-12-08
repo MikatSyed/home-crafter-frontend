@@ -1,5 +1,3 @@
-
-import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getNewAccessToken } from "../../services/getNewAccessToken";
 import { jwtHelpers } from "../../services/jwtHelpers";
@@ -7,7 +5,7 @@ import { jwtHelpers } from "../../services/jwtHelpers";
 const apiUrl = process.env.NODE_ENV === 'production' ? 'https://home-crafter-backend.vercel.app/api/v1/auth/login' : 'http://localhost:6060/api/v1/auth/login';
 
 
-export const authOptions: AuthOptions = {
+export const authOptions: any = {
     // Configure one or more authentication providers
     providers: [
         CredentialsProvider({
@@ -53,7 +51,7 @@ export const authOptions: AuthOptions = {
         })
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user }:any) {
             console.log(token, "token auth option")
             console.log(user, "user auth option")
             return {

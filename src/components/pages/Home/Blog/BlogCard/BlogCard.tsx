@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const BlogCard = ({blog}:any) => {
+const BlogCard = ({blog,isLoading}:any) => {
   const {id,title,blogImg,category,provider,createdAt} = blog;
     return (
         <div className=''>

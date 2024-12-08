@@ -80,7 +80,7 @@ const TopHeader = () => {
   return (
     <>
       <div
-        className={`hidden md:block  px-6 md:px-[6rem] main ${
+        className={`hidden md:block  px-6 md:px-[4rem] main ${
           pathname === "/" ? "bg-[#f8fcfd]" : "bg-white shadow-xl"
         }`}
       >
@@ -89,15 +89,7 @@ const TopHeader = () => {
             <div className="flex-shrink-0 mr-8 mt-2">
               <Link href="/">
                 <div className="flex items-center justify-center space-x-3">
-                  <div className="p-2 bg-indigo-600 rounded-full text-white">
-                    <Image
-                      src="/assets/logo.png"
-                      alt="Logo"
-                      height={40}
-                      width={40}
-                      className="p-1"
-                    />
-                  </div>
+                  
                   <h1 className="text-2xl font-bold text-indigo-600">
                     Home <span className="text-gray-900">Crafter</span>
                   </h1>

@@ -8,14 +8,10 @@ import "swiper/css";
 import { useOfferServicesQuery } from "@/redux/api/servicesApi";
 import Link from "next/link";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import Loader from "@/components/UI/Loader";
-import dayjs from "dayjs";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter"; // Import the plugin
 import { useFavourites } from "@/redux/hook";
 import { Toaster } from "react-hot-toast";
 import Rating from "@/components/UI/Rating";
-
-dayjs.extend(isSameOrAfter);
+import ServiceSkeletonCard from "@/components/UI/ServiceSkeletonCard";
 
 const OfferedServices = () => {
   const [swiper, setSwiper] = useState<any | null>(null);
@@ -40,15 +36,11 @@ const OfferedServices = () => {
   const { data, isLoading } = useOfferServicesQuery(undefined);
   const services = data?.data;
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-white py-10 md:py-14 main">
-        <div className="mb-8 mx-auto px-6 md:px-[6rem]">
+        <div className="mb-8 mx-auto px-6 md:px-[4rem]">
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-1/2" data-aos="fade-up">
               <h2 className="text-4xl font-bold">Offered Services</h2>
@@ -76,49 +68,38 @@ const OfferedServices = () => {
                 </div>
               </div>
             )}
-            {services?.length > 1 && (
-              <div className="w-full md:w-1/2 text-right block md:hidden">
-                <div className="inline-flex items-center space-x-4">
-                  <button
-                    className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
-                    onClick={handlePrevious}
-                  >
-                    <IoIosArrowBack className="w-5 h-5" />
-                  </button>
-                  <button
-                    className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
-                    onClick={handleNext}
-                  >
-                    <IoIosArrowForward className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
 
-        <div className="px-5 md:px-[5rem]">
-          <Swiper
-            onSwiper={handleSwiper}
-            loop={true}
-            slidesPerView={1}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-          >
-            {services?.map((service: any, index: number) => {
-              return (
+        <div className="px-5 md:px-[3rem]">
+          {isLoading ? (
+           
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {Array.from({ length: 3 }).map((_, index) => (
+                <ServiceSkeletonCard key={index} />
+              ))}
+            </div>
+          ) : (
+            <Swiper
+              onSwiper={handleSwiper}
+              loop={true}
+              slidesPerView={1}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                },
+                768: {
+                  slidesPerView: 3,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
+            >
+              {services?.map((service: any, index: number) => (
                 <SwiperSlide key={index}>
                   <div
-                    className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ml-1 md:ml-4 mr-1 mb-1 md:mb-4"
+                    className="bg-white h-[430px] rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ml-1 md:ml-4 mr-1 mb-1 md:mb-4"
                     data-aos="fade-up"
                   >
                     <div className="relative">
@@ -148,8 +129,8 @@ const OfferedServices = () => {
                             <FaRegHeart className="text-gray-500" />
                           )}
                         </div>
+                        
                       </div>
-
                       <div className="item-info absolute bottom-0 right-0 p-4 flex items-center justify-between w-full">
                         <div className="flex items-center justify-center">
                           <img
@@ -171,14 +152,15 @@ const OfferedServices = () => {
                       <div className="mt-4 text-sm text-indigo-600">
                         <p>
                           <strong>{service?.offer?.offerName}</strong>
-
                           {parseInt(service?.daysLeft) > 0
                             ? ` (${service?.daysLeft} days left)`
                             : " (Last day!)"}
                         </p>
                       </div>
                       <h3 className="title text-xl font-bold">
-                        <a href="service-details.html">{service.serviceName}</a>
+                        <Link href={`/service-details/${service.id}`}>
+                          {service.serviceName}
+                        </Link>
                       </h3>
                       <div className="flex items-center justify-between mt-2">
                         <p className="text-gray-500 flex items-center">
@@ -188,7 +170,6 @@ const OfferedServices = () => {
                           {service?.offeredPrice ? (
                             <>
                               <h6 className="text-md font-bold">
-                                {" "}
                                 ${service?.offeredPrice}
                               </h6>
                               <span className="line-through text-gray-500 ml-2 text-sm">
@@ -196,11 +177,9 @@ const OfferedServices = () => {
                               </span>
                             </>
                           ) : (
-                            <>
-                              <h6 className="text-md font-bold">
-                                ${service?.regularPrice}
-                              </h6>
-                            </>
+                            <h6 className="text-md font-bold">
+                              ${service?.regularPrice}
+                            </h6>
                           )}
                         </p>
                       </div>
@@ -222,9 +201,9 @@ const OfferedServices = () => {
                     </div>
                   </div>
                 </SwiperSlide>
-              );
-            })}
-          </Swiper>
+              ))}
+            </Swiper>
+          )}
         </div>
       </div>
     </>

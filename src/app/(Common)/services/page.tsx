@@ -1,7 +1,8 @@
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
-import ServicesPage from '@/components/pages/ServicesPage';
+import Loader from '@/components/UI/Loader';
+import ServicesPage from '@/components/pages/Services/ServicesPage';
 import { Metadata } from 'next';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: "HC | Services",
@@ -9,10 +10,12 @@ export const metadata: Metadata = {
 
 const Services = () => {
     return (
-        <div className='main'>
+       <Suspense fallback={<Loader/>}>
+         <div className='main'>
           <BreadcrumbBar header="Our Services" name="Services"/>
             <ServicesPage/>
         </div>
+       </Suspense>
     );
 };
 

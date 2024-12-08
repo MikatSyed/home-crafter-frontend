@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className=" px-6 md:px-[6rem] hidden md:block main ">
+      <nav className=" px-6 md:px-[4rem] hidden md:block main ">
         <div className="md:mx-0">
           <div className="flex items-center justify-between h-16">
             {/* Navigation Links */}

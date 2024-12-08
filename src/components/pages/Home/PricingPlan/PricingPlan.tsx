@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const PricingPlan = () => {
   return (
-    <div className="mx-auto px-6 md:px-[6rem] py-10 md:py-14 bg-[#f8fcfd] main">
+    <div className="mx-auto px-6 md:px-[4rem] py-10 md:py-14 bg-[#f8fcfd] main">
       <div className="text-center ">
         <div className="section-heading section-heading-seven" data-aos="fade-up">
           <h2 className="text-4xl font-bold text-gray-900 leading-tight">Pricing Plan</h2>
@@ -14,45 +14,7 @@ const PricingPlan = () => {
    
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-20" data-aos="fade-up">
        
-        {/* <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-          <div className="flex justify-center mb-6">
-           
-          </div>
-          <div className=" text-center mb-6">
-            <h5 className="text-4xl font-bold text-indigo-600">Basic</h5>
-            <h6 className="text-2xl font-extrabold text-gray-800"><span>$</span>10.00</h6>
-          </div>
-          <div className=" mb-6">
-            <ul className="space-y-3">
-              <li className="flex items-center text-gray-700">
-                <FiCheck className="mr-3 text-indigo-600" />
-                1 Bathroom cleaning
-              </li>
-              <li className="flex items-center text-gray-700">
-                <FiCheck className="mr-3 text-indigo-600" />
-                Up to 3 bedrooms cleaning
-              </li>
-              <li className="flex items-center text-gray-400">
-                <FiCheck className="mr-3" />
-                1 Livingroom cleaning
-              </li>
-              <li className="flex items-center text-gray-400">
-                <FiCheck className="mr-3" />
-                Small kitchen (0 - 150 ft²)
-              </li>
-              <li className="flex items-center text-gray-400">
-                <FiCheck className="mr-3" />
-                Up to 2 additional rooms cleaning
-              </li>
-            </ul>
-          </div>
-          <div className="text-center">
-            <a href="search.html" className="bg-white text-indigo-600 border border-indigo-600 font-semibold px-6 py-3 rounded-md shadow hover:shadow-lg transition-shadow duration-300">
-              Choose Plan
-            </a>
-          </div>
-        </div> */}
-            <div className="bg-white py-8 px-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-white w-auto py-8 px-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
           <div className="flex justify-center mb-6">
            
           </div>
@@ -94,7 +56,7 @@ const PricingPlan = () => {
           </div>
         </div>
        
-        <div className=" price-new  bg-indigo-600 text-white py-8 px-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 relative transform lg:scale-105 lg:translate-y-[-10px]">
+        <div className="   bg-indigo-600 text-white py-8 px-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 relative transform lg:scale-105 lg:translate-y-[-10px]">
           <div className="price-block absolute top-0 right-0 bg-red-500 text-white px-2 py-1 rounded-bl-lg">
             <span className="text-sm font-bold">MOST POPULAR</span>
           </div>
@@ -138,8 +100,8 @@ const PricingPlan = () => {
            
           </div>
         </div>
-        {/* Pricing Plan 3 */}
-        <div className="pricing-plans price-new pricing-plans-seven bg-white py-8 px-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+  
+        <div className="bg-white py-8 px-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
           <div className="flex justify-center mb-6">
           
           </div>

@@ -1,8 +1,9 @@
 
 import Main from '@/components/pages/Home/Blog/Main';
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
+import Loader from '@/components/UI/Loader';
 import { Metadata } from 'next';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: "HC | Blogs",
@@ -10,10 +11,10 @@ export const metadata: Metadata = {
 const Blogs = () => {
 
     return (
-        <div className=''>
+        <Suspense fallback={<Loader/>} >
                <BreadcrumbBar header="Our Blogs" name="Blogs"/>
             <Main/>
-        </div>
+        </Suspense>
     );
 };
 

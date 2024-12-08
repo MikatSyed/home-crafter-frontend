@@ -2,15 +2,16 @@
 import { useServicesQuery } from "@/redux/api/servicesApi";
 import React, { Suspense, useEffect, useState } from "react";
 import { FaChevronDown, FaHeart, FaMapMarkerAlt, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
-import Loader from "../UI/Loader";
+import Loader from "../../UI/Loader";
 import { useCategoriesNameQuery } from "@/redux/api/categoryApi";
 import { useDebounced, useFavourites } from "@/redux/hook";
 import { useSearchParams } from "next/navigation";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import Rating from "../UI/Rating";
+import Rating from "../../UI/Rating";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
-import Pagination from "../UI/Pagination";
+import Pagination from "../../UI/Pagination";
+import SkeletonServiceCard from "./SkeletonServiceCard";
 
 
 const ServicesPage = () => {
@@ -35,7 +36,6 @@ const ServicesPage = () => {
     1: 0
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6); 
   const { isServiceFavourite, handleFavouriteClick } = useFavourites();
 
  
@@ -95,7 +95,7 @@ const ServicesPage = () => {
     ...selectedFilters,
     price_gte: sliderValue,
   });
-  // console.log(data)
+
 
   const services = data?.data?.slice(
     (currentPage - 1) * servicesPerPage,
@@ -103,7 +103,7 @@ const ServicesPage = () => {
   );
 
   const totalPages = Math.ceil(data?.meta?.total / servicesPerPage);
-  // console.log(totalPages)
+
 
   useEffect(() => {
     if (data?.meta?.ratingCounts) {
@@ -155,16 +155,12 @@ const ServicesPage = () => {
 
   
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
 
 
   return (
    <>
      <Toaster position="top-center" reverseOrder={false} />
-    <div className="md:px-[6rem] py-6">
+    <div className="md:px-[4rem] py-6">
       <section>
         <div className="flex justify-between items-center w-full mb-4 ">
           <h2 className="text-xl font-semibold text-gray-800 ml-4 md:ml-0">Filter By</h2>
@@ -272,7 +268,7 @@ const ServicesPage = () => {
                     className="w-full h-2 rounded-full bg-blue-600 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
                     min={0}
                     max={100}
-                    value={sliderValue} // Use the upper limit of the range
+                    value={sliderValue} 
                     onChange={handleSliderChange}
                   />
                   <span className="text-gray-700 ml-4">$100</span>
@@ -308,7 +304,9 @@ const ServicesPage = () => {
             </div>
           </div>
           <div className="col-span-4 md:col-span-3 mx-4 my-4 md:mx-0 md:my-0">
-            {services?.map((service: any) => (
+           {isLoading ? <> {Array.from({ length: 4 }).map((_, index) => (
+        <SkeletonServiceCard key={index} />
+      ))} </> : <> {services?.map((service: any) => (
               <div
                 key={service.id}
                 className="bg-white border px-3 rounded-lg overflow-hidden w-full mx-auto mb-3"
@@ -379,7 +377,7 @@ const ServicesPage = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))}</>}
 
 {
   data?.meta?.total > 3 && <div className="flex items-center justify-end mt-10">

@@ -1,12 +1,12 @@
 import React from 'react';
-import { FiMapPin, FiSearch } from 'react-icons/fi';
-import { FaShieldAlt, FaHandsHelping, FaDollarSign } from "react-icons/fa"; // Example icons for cards
+import { FaSearch } from "react-icons/fa"; 
 import Image from 'next/image';
 import suitcase from "../../../../../public/assets/suitcase.svg";
+import HeroSearchInput from './HeroSearchInput';
 
 const HeroSection = () => {
     return (
-        <div className="mx-auto px-6 md:px-[6rem] bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-500 pt-14 main">
+        <div className="mx-auto px-6 pb-8 md:pb-0 md:px-[4rem] hero-bg pt-14 main ">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-wrap items-center w-full">
                     <div className="lg:w-6/12 w-full">
@@ -15,19 +15,26 @@ const HeroSection = () => {
                             <h1 className="text-4xl md:text-6xl font-bold mt-2 text-white leading-tight">
                                 Best Solution for Every 
                             </h1>
-                            <h1 className="text-4xl md:text-6xl font-bold mt-2 text-yellow-300">House Problems</h1>
-                            <div className="bg-white mt-6 p-6 rounded-lg shadow-lg w-full md:w-4/5">
-                                <h6 className="text-xl text-gray-800">2M+ Professionals registered</h6>
-                                <ul className="flex mt-4 space-x-2">
+                            <h1 className="text-4xl md:text-6xl font-bold mt-2 text-indigo-600">House Problems</h1>
+                            <div className="bg-white p-2 rounded-lg shadow-xl flex items-center my-8">
+                            <input 
+                                type="text" 
+                                placeholder="What service do you need?" 
+                                className="flex-grow p-3 outline-none text-gray-700"
+                            />
+                        <HeroSearchInput/>
+                        </div>
+                        <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-xl">
+                            <h6 className="text-xl text-white mb-4">Trusted by 2M+ Professionals</h6>
+                            <div className="flex items-center">
+                                <div className="flex -space-x-2 mr-4">
                                     {['avatar-06', 'avatar-07', 'avatar-08', 'avatar-09', 'avatar-10'].map((avatar, index) => (
-                                        <li key={index}>
-                                            <a href="#">
-                                                <img src={`assets/${avatar}.jpg`} alt="User" className="rounded-full w-10 h-10 border-2 border-white shadow-lg"/>
-                                            </a>
-                                        </li>
+                                        <img key={index} src={`assets/${avatar}.jpg`} alt="User" className="w-10 h-10 rounded-full border-2 border-white"/>
                                     ))}
-                                </ul>
+                                </div>
+                                <span className="text-gray-300">Join our growing community!</span>
                             </div>
+                        </div>
                         </div>
                     </div>
                     <div className="lg:w-6/12 w-full mt-8 lg:mt-0">
@@ -52,51 +59,7 @@ const HeroSection = () => {
                 </div>
                 
              
-              <div className='hidden md:block'>
-              <div className="mt-10 mb-[-8rem] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-                
-                <div className="bg-white p-8 rounded-lg shadow-lg">
-                    <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
-                        <FaShieldAlt className="text-3xl"/>
-                    </div>
-                    <h3 className="text-2xl font-bold text-indigo-600 mb-4 text-center">Quality Assurance</h3>
-                    <p className="text-gray-700 text-center mb-6">
-                        Get top-notch service with our verified professionals, ensuring you receive the highest quality for every task.
-                    </p>
-                    <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-600 hover:text-white mx-auto block">
-                        Learn More
-                    </button>
-                </div>
-
-              
-                <div className="bg-white p-8 rounded-lg shadow-lg">
-                    <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
-                        <FaHandsHelping className="text-3xl"/>
-                    </div>
-                    <h3 className="text-2xl font-bold text-indigo-600 mb-4 text-center">Customer Support</h3>
-                    <p className="text-gray-700 text-center mb-6">
-                        Our dedicated support team is available 24/7 to assist with any queries, ensuring a smooth experience.
-                    </p>
-                    <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-600 hover:text-white mx-auto block">
-                        Get Support
-                    </button>
-                </div>
-
-                {/* Premium Card 3 */}
-                <div className="bg-white p-8 rounded-lg shadow-lg">
-                    <div className="flex items-center justify-center bg-indigo-600 text-white w-16 h-16 rounded-full mx-auto mb-4">
-                        <FaDollarSign className="text-3xl"/>
-                    </div>
-                    <h3 className="text-2xl font-bold text-indigo-600 mb-4 text-center">Affordable Packages</h3>
-                    <p className="text-gray-700 text-center mb-6">
-                        Choose from a variety of affordable packages tailored to fit your needs, offering great value for money.
-                    </p>
-                    <button className="text-indigo-600 bg-white border border-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-600 hover:text-white mx-auto block">
-                        View Plans
-                    </button>
-                </div>
-            </div>
-              </div>
+         
             </div>
         </div>
     );

@@ -2,7 +2,7 @@
 import { Metadata } from "next";
 import Blog from "./Blog/Main";
 import Faq from "./Faq/Faq";
-import FeaturedCategories from "./FeaturedCategories/FeaturedCategories";
+
 import FeaturedServices from "./FeaturedServices/FeaturedServices";
 import Footer from "./Footer/Footer";
 import HeroSection from "./HeroSection/HeroSection";
@@ -15,20 +15,22 @@ import Partners from "./Partners/Partners";
 import PricingPlan from "./PricingPlan/PricingPlan";
 import Testimonial from "./Testimonial/Testimonial";
 import TopProviders from "./TopProviders/TopProviders";
+import FeaturedCategories from "./FeaturedCategories/FeaturedCategories";
+import { Suspense } from "react";
+import Loader from "@/components/UI/Loader";
 
 
 
 
 const HomePage = () => {
     return (
-        <>
+        <Suspense fallback={<Loader/>}>
             <MainNavbar />
             <HeroSection/>
             <FeaturedCategories/>
             <FeaturedServices/>
             <TopProviders/>
             <HowItWorks/>
-            {/* <Offer/> */}
             <OfferedServices/>
             <PricingPlan/>
             <Testimonial/>
@@ -37,7 +39,7 @@ const HomePage = () => {
             <Faq/>
             <Partners/>
             <Footer/>
-        </>
+        </Suspense>
     );
 };
 

@@ -1,3 +1,4 @@
+
 import FeaturedCategories from '@/components/pages/Home/FeaturedCategories/FeaturedCategories';
 import BreadcrumbBar from '@/components/UI/BreadcrumbBar';
 import { Metadata } from 'next';

@@ -12,9 +12,6 @@ const MostPopularServices = () => {
 
   const { data, isLoading } = usePopularServicesQuery(undefined);
   const services = data?.data;
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <div className="main">
@@ -22,6 +19,7 @@ const MostPopularServices = () => {
       data={services}
       title="Most Popular Services"
       description="Explore the greatest of our services. You won’t be disappointed"
+      isLoading={isLoading}
     />
     </div>
   );

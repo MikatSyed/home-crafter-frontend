@@ -9,7 +9,7 @@ import BlogCard from "./BlogCard/BlogCard";
 import { Swiper, SwiperSlide, Swiper as SwiperType } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
-import Loader from "@/components/UI/Loader";
+import SkeletonBlog from "./SkeletonBlog";
 const Main = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -29,9 +29,6 @@ const Main = () => {
 
   const blogs = data?.data;
  
-
-
-  // Calculate the displayed blogs based on the current page and pathname
   const displayedBlogs =
     pathname === "/"
       ? blogs
@@ -40,16 +37,16 @@ const Main = () => {
           currentPage * blogsPerPage
         );
 
-  // Calculate the total number of pages for pagination
+  
   const totalPages = Math.ceil(blogs?.length / blogsPerPage);
 
   if(isLoading){
-    return  <Loader/>
+    return  <SkeletonBlog/>
   }
 
   return (
     <>
-    <div className="mx-auto px-6 md:px-[5rem] py-10 md:py-14 bg-[#f8fcfd] main">
+    <div className="mx-auto px-6 md:px-[4rem] py-10 md:py-14 bg-[#f8fcfd] main">
       {pathname !== "/blogs" && (
         <div className="text-center mb-8">
           <div
@@ -89,7 +86,7 @@ const Main = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedBlogs?.map((blog: any) => (
-            <BlogCard key={blog?.id} blog={blog} />
+            <BlogCard key={blog?.id} blog={blog} isLoading={isLoading} />
           ))}
         </div>
       )}
