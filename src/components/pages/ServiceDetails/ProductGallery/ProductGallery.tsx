@@ -36,7 +36,7 @@ const ServiceGallery = ({ data }: any) => {
    <>
      <Toaster position="top-center" reverseOrder={false} />
     <section className="w-full">
-      <div className="mx-auto px-6 md:px-[6rem] py-4 w-full">
+      <div className="mx-auto px-6 md:px-[4rem] py-4 w-full">
         <h2 className="text-4xl font-semibold mb-4">{service.serviceName}</h2>
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-6">

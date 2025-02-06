@@ -57,7 +57,7 @@ const ServiceInfo: React.FC<ProviderInfoProps> = ({ data }) => {
 
   return (
     <div>
-      <div className="mx-auto px-6 md:px-[6rem] ">
+      <div className="mx-auto px-6 md:px-[4rem] ">
         <div className="flex flex-wrap lg:flex-nowrap mb-[8rem]">
           <div className="lg:w-2/3 w-full mb-8 lg:mb-0 md:h-[1810px] overflow-y-auto scrollbar-hide ">
             <div>

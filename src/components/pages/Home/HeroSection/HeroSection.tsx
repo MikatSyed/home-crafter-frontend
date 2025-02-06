@@ -15,18 +15,12 @@ const HeroSection = () => {
                             <h1 className="text-4xl md:text-6xl font-bold mt-2 text-white leading-tight">
                                 Best Solution for Every 
                             </h1>
-                            <h1 className="text-4xl md:text-6xl font-bold mt-2 text-indigo-600">House Problems</h1>
-                            <div className="bg-white p-2 rounded-lg shadow-xl flex items-center my-8">
-                            <input 
-                                type="text" 
-                                placeholder="What service do you need?" 
-                                className="flex-grow p-3 outline-none text-gray-700"
-                            />
+                            <h1 className="text-4xl md:text-6xl font-bold mt-4 mb-4 text-indigo-600">House Problems</h1>
+                          
                         <HeroSearchInput/>
-                        </div>
-                        <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-xl">
+                        <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-xl mt-8">
                             <h6 className="text-xl text-white mb-4">Trusted by 2M+ Professionals</h6>
-                            <div className="flex items-center">
+                            <div className="md:flex md:items-center">
                                 <div className="flex -space-x-2 mr-4">
                                     {['avatar-06', 'avatar-07', 'avatar-08', 'avatar-09', 'avatar-10'].map((avatar, index) => (
                                         <img key={index} src={`assets/${avatar}.jpg`} alt="User" className="w-10 h-10 rounded-full border-2 border-white"/>

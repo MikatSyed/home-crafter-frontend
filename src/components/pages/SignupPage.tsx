@@ -71,79 +71,83 @@ const SignupPage = () => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
+      <div className="flex justify-center items-center relative mx-4 md:mx-0 bg-[#f8fcfd]">
+  <div className="w-full max-w-2xl flex justify-center items-center">
+    <div className="p-12 bg-white rounded-3xl w-full my-8">
+      <div className="text-center mb-8">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-indigo-600">HOME CRAFTER</h1>  
+        <p className="text-md mt-4 text-gray-700">Please fill in the details below to create your account and start exploring our services.</p>
+      </div>
+      </div>
 
-      <div className="flex justify-center items-center  relative mx-4 md:mx-0">
-        <div className="w-full max-w-2xl flex justify-center items-center">
-          <div className="p-12 bg-white rounded-3xl w-full">
-            <div className="mb-7">
-              <h3 className="font-semibold text-3xl text-gray-800">Signup</h3>
-            </div>
-            <Form submitHandler={onSubmit} resolver={yupResolver(signupSchema)}>
-              <div className="w-full flex flex-col sm:flex-row md:space-x-6 mb-4">
-                <FormInput name="fName" label="First Name" type="text" className="w-full"/>
-                <FormInput name="lName" label="Last Name" type="text" className="w-full" />
-              </div>
+      <Form submitHandler={onSubmit} resolver={yupResolver(signupSchema)}>
+        <div className="w-full flex flex-col sm:flex-row md:space-x-6 mb-6">
+          <FormInput name="fName" label="First Name" type="text" className="w-full" />
+          <FormInput name="lName" label="Last Name" type="text" className="w-full" />
+        </div>
 
-              <FormInput name="email" label="Email" type="email" />
-             <div className="mt-2">
-             <FormInput name="contactNo" label="Phone Number" type="number" />
-             </div>
+        <FormInput name="email" label="Email" type="email" />
+        
+        <div className="mt-4">
+          <FormInput name="contactNo" label="Phone Number" type="number" />
+        </div>
 
-              <div className="relative mb-5 mt-2">
-                <FormInput
-                  name="password"
-                  label="Password"
-                  type={passwordVisible ? "text" : "password"}
-                />
-                <div className="flex items-center absolute inset-y-0 right-0 mr-3 text-sm leading-5">
-                  {passwordVisible ? (
-                    <FaEyeSlash onClick={() => setPasswordVisible(!passwordVisible)} />
-                  ) : (
-                    <FaEye onClick={() => setPasswordVisible(!passwordVisible)} />
-                  )}
-                </div>
-              </div>
-
-              <SingleImageUpload
-                label="Upload Profile"
-                imgPreview={imgPreview}
-                setImgPreview={setImgPreview}
-                onImageChange={setProfileImg}
-              />
-
-            
-              {imageError && (
-                <div className="text-red-600 text-sm mt-2">
-                  {imageError}
-                </div>
-              )}
-
-              <div className="mt-5">
-           <button
-  type="submit"
-  className={`w-full flex justify-center items-center border border-indigo-600 p-3 rounded-lg font-semibold cursor-pointer transition ease-in duration-300 ${
-    loading
-      ? "bg-indigo-600 text-white opacity-50 cursor-not-allowed"
-      : "bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white"
-  }`}
-  disabled={loading}
->
-  {loading ? <Spinner /> : "Register"}
-</button>
-
-              </div>
-            </Form>
-            <div className="flex items-center justify-between mt-5">
-              <div className="text-sm">
-                Already have an account?
-                <a href="/login" className="text-blue-700 hover:text-blue-600 ml-1">
-                  Login
-                </a>
-              </div>
-            </div>
+        <div className="relative mb-6 mt-4">
+          <FormInput
+            name="password"
+            label="Password"
+            type={passwordVisible ? "text" : "password"}
+          />
+          <div className="flex items-center absolute inset-y-0 right-0 mr-3 text-sm leading-5">
+            {passwordVisible ? (
+              <FaEyeSlash onClick={() => setPasswordVisible(!passwordVisible)} />
+            ) : (
+              <FaEye onClick={() => setPasswordVisible(!passwordVisible)} />
+            )}
           </div>
         </div>
+
+        <SingleImageUpload
+          label="Upload Profile"
+          imgPreview={imgPreview}
+          setImgPreview={setImgPreview}
+          onImageChange={setProfileImg}
+        />
+
+        {imageError && (
+          <div className="text-red-600 text-sm mt-2">
+            {imageError}
+          </div>
+        )}
+
+        <div className="mt-6">
+          <button
+            type="submit"
+            className={`w-full flex justify-center items-center border border-indigo-600 p-3 rounded-lg font-semibold cursor-pointer transition ease-in duration-300 ${
+              loading
+                ? "bg-indigo-600 text-white opacity-50 cursor-not-allowed"
+                : "bg-white text-indigo-600 hover:bg-indigo-600 hover:text-white"
+            }`}
+            disabled={loading}
+          >
+            {loading ? <Spinner /> : "Register"}
+          </button>
+        </div>
+      </Form>
+
+      <div className="flex items-center justify-between mt-5">
+        <div className="text-sm">
+          Already have an account?
+          <a href="/login" className="text-blue-700 hover:text-blue-600 ml-1">
+            Login
+          </a>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
+
     </>
   );
 };

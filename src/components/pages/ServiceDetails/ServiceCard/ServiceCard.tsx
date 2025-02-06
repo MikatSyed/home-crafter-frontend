@@ -60,11 +60,11 @@ const ServiceCard = ({ service,role }: any) => {
                 <h5 className="text-2xl font-bold">${service?.regularPrice}</h5>
               )}
 
-              <p className="flex items-center text-yellow-500 text-sm">
+              <div className="flex items-center text-yellow-500 text-sm">
                 <Rating rating={service?.averageServiceRating || 0} />
                 <span className="ml-1 text-black">{service?.averageServiceRating}</span>
                 <span className="text-gray-600 ml-1">({service?.totalServiceReviews} reviews)</span>
-              </p>
+              </div>
             </div>
             <div className="flex items-center">
               <img

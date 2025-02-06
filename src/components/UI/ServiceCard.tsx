@@ -31,11 +31,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description, isL
       <div className="mb-8 px-6 md:px-[4rem]">
         <div className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2" data-aos="fade-up">
-            <h2 className="text-4xl font-bold">{title}</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">{title}</h2>
             <p className="text-gray-400 mt-4">{description}</p>
           </div>
           {!isLoading && data?.length > 3 && (
-            <div className="w-full md:w-1/2 text-right hidden md:block">
+            <div className="w-full md:w-1/2 text-right mt-4 md:mt-0">
               <div className="inline-flex items-center space-x-4">
                 <button
                   className="rounded-full text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white p-3 shadow-lg hover:shadow-xl"
@@ -73,7 +73,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description, isL
               1024: { slidesPerView: 3 },
             }}
           >
-            {data.map((service: any, index: number) => (
+            {data?.map((service: any, index: number) => (
               <SwiperSlide key={index}>
                 <div
                   className="bg-white h-[420px] rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ml-1 md:ml-4 mr-1 mb-1 md:mb-4 h-[400px]"
@@ -117,7 +117,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description, isL
                       <p className="text-gray-500 flex items-center">
                         <FiMapPin className="mr-1" /> {service.location}
                       </p>
-                      <p className="flex items-center">
+                      <div className="flex items-center">
                         {service?.offeredPrice ? (
                           <>
                             <h6 className="text-md font-bold">${service?.offeredPrice}</h6>
@@ -128,7 +128,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description, isL
                         ) : (
                           <h6 className="text-md font-bold">${service?.regularPrice}</h6>
                         )}
-                      </p>
+                      </div>
                     </div>
                     <div className="mt-8 mb-2 flex items-center justify-between">
                       <div className="flex items-center ">

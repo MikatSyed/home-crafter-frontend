@@ -22,12 +22,12 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/services", label: "Service" },
-    { href: "/providers", label: "Providers" },
-    { href: "/blogs", label: "Blogs" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: "HOME" },
+    { href: "/services", label: "SERVICES" },
+    { href: "/providers", label: "PROVIDER" },
+    { href: "/blogs", label: "BLOGS" },
+    { href: "/about", label: "ABOUT" },
+    { href: "/contact", label: "CONTACT" },
   ];
 
   return (
@@ -35,9 +35,9 @@ const Navbar = () => {
       <nav className=" px-6 md:px-[4rem] hidden md:block main ">
         <div className="md:mx-0">
           <div className="flex items-center justify-between h-16">
-            {/* Navigation Links */}
+         
             <div className="hidden md:flex flex-1 justify-start">
-              <ul className="flex space-x-6 font-medium">
+              <ul className="flex space-x-6">
                 {navLinks.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className="text-black hover:text-indigo-500 py-2">
@@ -65,12 +65,12 @@ const Navbar = () => {
     <>
       <Link href="/signup">
         <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
-          Become A User
+          BECOME A USER
         </p>
       </Link>
       <Link href="/signup/provider">
         <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
-          Become A Provider
+          BECOME A PROVIDER
         </p>
       </Link>
     </>

@@ -69,12 +69,12 @@ const TopHeader = () => {
         ];
 
   const navItems = [
-    { title: "Home", href: "/" },
-    { title: "Services", href: "/services" },
-    { title: "Providers", href: "/providers" },
-    { title: "Blog", href: "/blogs" },
-    { title: "About", href: "/about" },
-    { title: "Contact", href: "/contact" },
+    { title: "HOME", href: "/" },
+    { title: "SERVICES", href: "/services" },
+    { title: "PROVIDERS", href: "/providers" },
+    { title: "BLOG", href: "/blogs" },
+    { title: "ABOUT", href: "/about" },
+    { title: "CONTACT", href: "/contact" },
   ];
 
   return (
@@ -90,8 +90,8 @@ const TopHeader = () => {
               <Link href="/">
                 <div className="flex items-center justify-center space-x-3">
                   
-                  <h1 className="text-2xl font-bold text-indigo-600">
-                    Home <span className="text-gray-900">Crafter</span>
+                  <h1 className="text-3xl font-bold text-indigo-600">
+                    HOME <span className="text-gray-900">CRAFTER</span>
                   </h1>
                 </div>
               </Link>
@@ -166,7 +166,7 @@ const TopHeader = () => {
                   {isProfileOpen && (
                     <div
                       ref={profileMenuRef}
-                      className="absolute top-12 left-2 w-48 bg-white border border-gray-300 rounded-lg shadow-xl z-50 p-4"
+                      className="absolute top-12 right-1 w-48 bg-white border border-gray-300 rounded-lg shadow-xl z-50 p-4"
                     >
                       {profileDropdownItems.map((item, idx) => (
                         <div
@@ -185,10 +185,10 @@ const TopHeader = () => {
                             </Link>
                           ) : (
                             <p
-                              className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-[#f8fcfd]"
+                              className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-[#f8fcfd] cursor-pointer"
                               onClick={item.action}
                             >
-                              <span className="mr-2">{item?.icon}</span>
+                              <span className="mr-2 ">{item?.icon}</span>
                               {item.title}
                             </p>
                           )}
@@ -196,7 +196,7 @@ const TopHeader = () => {
                       ))}
                     </div>
                   )}
-                  <p className="text-sm font-medium m-0">{`${user?.fName} ${user?.lName}`}</p>
+                  <p className="text-sm font-medium m-0">{`${user?.fName} ${user?.lName} `}</p>
                 </div>
               ) : (
                 <Link href="/login">

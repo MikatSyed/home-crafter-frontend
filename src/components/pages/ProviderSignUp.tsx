@@ -84,11 +84,15 @@ const ProviderSignupPage = () => {
     <>
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="flex justify-center items-center ">
-        <div className="w-full max-w-4xl  p-12 rounded-2xl ">
-          <h3 className="text-3xl font-semibold text-gray-800 mb-8 ">
-            Provider Signup
-          </h3>
+      <div className="flex justify-center items-center  bg-[#f8fcfd]  ">
+        <div className="w-full max-w-4xl bg-white p-12 rounded-2xl my-8">
+        <div className="text-center mb-8">
+        <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-indigo-600">HOME CRAFTER</h1>
+        <p className="text-md mt-4 text-gray-700">Create your Provider Account and start offering your services to thousands of customers.</p>
+    
+      </div>
+          </div>
           <Form submitHandler={onSubmit} resolver={yupResolver(signupForProviderSchema)}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <FormInput name="fName" label="First Name" type="text" />

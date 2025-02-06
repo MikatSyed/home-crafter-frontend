@@ -64,7 +64,7 @@ export const categoryApi = baseApi.injectEndpoints({
     }),
 
   }),
-  
+  overrideExisting: true
 });
 
 export const { useAddCategoryMutation,useUpdateCategoryMutation,useDeleteCategoryMutation,useCategoryQuery,useCategoriesQuery,useCategoriesNameQuery } = categoryApi;

@@ -23,11 +23,11 @@ export const authOptions: any = {
                     body: JSON.stringify(credentials),
                     headers: { "Content-Type": "application/json" },
                   });
-                 console.log(res,'28')
+               
                   // Check if response is not ok (e.g., status 400, 401)
                   if (!res.ok) {
                     const errorData = await res.json();
-                    console.log(errorData,'32')
+                 
                     throw new Error(errorData?.message );
                   }
               
@@ -52,8 +52,7 @@ export const authOptions: any = {
     ],
     callbacks: {
         async jwt({ token, user }:any) {
-            console.log(token, "token auth option")
-            console.log(user, "user auth option")
+          
             return {
                 ...token,
                 ...user
@@ -63,11 +62,10 @@ export const authOptions: any = {
             session: any,
             token: any
         }) {
-            console.log(session, "session auth option")
-            console.log(token, "token auth option inside session")
+          
             const verifiedToken = jwtHelpers.verifyToken(token?.token, process.env.JWT_SECRET!)
             if (!verifiedToken) {
-                // console.log("token expired so new token generated")
+               
                 const { data } = await getNewAccessToken(token?.token)
                 token.token = data?.token
             }

@@ -34,12 +34,15 @@ const FeaturedCategories = () => {
                 <div className="section-heading mb-8">
                     <div className="flex flex-wrap items-center">
                         <div className="w-full md:w-1/2" data-aos="fade-up">
-                            <h2 className="text-4xl font-bold text-gray-900 leading-tight">Featured Categories</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
+  Featured Categories
+</h2>
+
                             <p className="text-gray-400 mt-4">What do you need to find?</p>
                         </div>
                         <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
                     {displayCategories?.length > 3 &&       <Link href="/categories">
-                          <button className="text-indigo-600 border border-indigo-600  inline-flex items-center bg-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition duration-300">
+                          <button className="text-indigo-600 border border-indigo-600  inline-flex items-center bg-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition duration-300 mt-4 md:mt-0">
       View All
       <FiArrowRightCircle className="ml-2" size={20} />
     </button></Link>}

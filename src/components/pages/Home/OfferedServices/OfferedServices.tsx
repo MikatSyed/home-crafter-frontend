@@ -166,22 +166,19 @@ const OfferedServices = () => {
                         <p className="text-gray-500 flex items-center">
                           <FiMapPin className="mr-1" /> {service.location}
                         </p>
-                        <p className="flex items-center">
-                          {service?.offeredPrice ? (
-                            <>
-                              <h6 className="text-md font-bold">
-                                ${service?.offeredPrice}
-                              </h6>
-                              <span className="line-through text-gray-500 ml-2 text-sm">
-                                ${service?.regularPrice}
-                              </span>
-                            </>
-                          ) : (
-                            <h6 className="text-md font-bold">
-                              ${service?.regularPrice}
-                            </h6>
-                          )}
-                        </p>
+                        <div className="flex items-center">
+  {service?.offeredPrice ? (
+    <>
+      <h6 className="text-md font-bold">${service?.offeredPrice}</h6>
+      <span className="line-through text-gray-500 ml-2 text-sm">
+        ${service?.regularPrice}
+      </span>
+    </>
+  ) : (
+    <h6 className="text-md font-bold">${service?.regularPrice}</h6>
+  )}
+</div>
+
                       </div>
 
                       <div className="mt-4 mb-2 flex items-center justify-between">

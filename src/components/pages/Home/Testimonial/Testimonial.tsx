@@ -49,7 +49,7 @@ const Testimonial: React.FC = () => {
     <div className="px-6 md:px-[6rem] py-10 md:py-14 relative main" data-aos="fade-up">
       <div className="text-center mb-16">
         <div className="section-heading">
-          <h2 className="text-4xl font-bold text-gray-900">Hear From Our Valued Clients</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">Hear From Our Valued Clients</h2>
           <p className="text-gray-600 mt-4 text-sm">
             See how our clients benefit from our services through their reviews.
           </p>
@@ -74,12 +74,12 @@ const Testimonial: React.FC = () => {
             >
            <div className=" md:h-[230px]">   <div className="flex justify-center mb-4 relative">
                 <div className="image-half-bg absolute top-0 left-0 w-full h-full bg-[#f8fcfd] rounded-t-lg"></div>
-                <Image
+                <img
                   src={testimonial.image}
                   alt={`Image of ${testimonial.name}`}
-                  className="rounded-full w-24 h-24 border-4 border-indigo-100 relative z-10"
-                  width={72}
-                  height={72}
+                  className="rounded-full w-20 h-20 border-4 border-indigo-100 relative z-10"
+                  width={52}
+                  height={52}
                 />
               </div>
               <div className="text-center">

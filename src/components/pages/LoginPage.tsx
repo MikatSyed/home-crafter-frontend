@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
@@ -11,17 +11,44 @@ import { FaUserShield, FaUserTie } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import loginSchema from "@/schemas/login";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-// interface LoginProps {
-//   callbackUrl?: string;
-// }
+import { useLoggedUserQuery } from "@/redux/api/userApi"; 
 
 const LoginPage = ({ callbackUrl }: any) => {
-  const { push } = useRouter();
+  console.log(callbackUrl,'17')
+  const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isProviderLoading, setProviderLoading] = useState(false);
   const [isAdminLoading, setAdminLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  console.log(isLoggedIn,'24')
+  const [isRedirecting, setIsRedirecting] = useState(false); 
+  console.log(isRedirecting,'25')
+
+  
+  const { data, isFetching, refetch } = useLoggedUserQuery(undefined);
+  const user = data?.data;
+  console.log(user,'30')
+
+  
+  useEffect(() => {
+    if (isLoggedIn && !isFetching && user) {
+      setIsRedirecting(true); 
+    }
+  }, [isLoggedIn, isFetching, user]);
+
+  useEffect(() => {
+    if (isRedirecting) {
+      const targetUrl = callbackUrl || "/"
+      console.log("Attempting to redirect to:", targetUrl)
+      
+      try {
+        window.location.href = targetUrl;
+      } catch (error) {
+        console.error("Error during redirection:", error)
+      }
+    }
+  }, [isRedirecting, router, callbackUrl])
 
   // Handler for regular login form submission
   const onSubmit = async (data: any) => {
@@ -36,7 +63,8 @@ const LoginPage = ({ callbackUrl }: any) => {
       if (result?.error) {
         toast.error(`${result.error}`);
       } else {
-        push(callbackUrl || "/");
+        setIsLoggedIn(true); 
+        refetch(); 
       }
     } catch (result: any) {
       toast.error(`${result.error}`);
@@ -51,7 +79,7 @@ const LoginPage = ({ callbackUrl }: any) => {
     try {
       const result = await signIn("home-crafter", {
         email: "syednew5000@gmail.com",
-        password: "syed123", 
+        password: "syed123",
         redirect: false,
         callbackUrl,
       });
@@ -59,7 +87,8 @@ const LoginPage = ({ callbackUrl }: any) => {
       if (result?.error) {
         toast.error(`Error: ${result.error}`);
       } else {
-        push(callbackUrl || "/");
+        setIsLoggedIn(true); 
+        refetch(); 
       }
     } catch (error) {
       toast.error("An error occurred during Provider login.");
@@ -74,7 +103,7 @@ const LoginPage = ({ callbackUrl }: any) => {
     try {
       const result = await signIn("home-crafter", {
         email: "mikatsyed@gmail.com",
-        password: "mikat123", 
+        password: "mikat123",
         redirect: false,
         callbackUrl,
       });
@@ -82,7 +111,8 @@ const LoginPage = ({ callbackUrl }: any) => {
       if (result?.error) {
         toast.error(`Error: ${result.error}`);
       } else {
-        push(callbackUrl || "/");
+        setIsLoggedIn(true); // Set login state after successful sign-in
+        refetch(); // Manually refetch the logged-in user data
       }
     } catch (error) {
       toast.error("An error occurred during Admin login.");
@@ -90,32 +120,29 @@ const LoginPage = ({ callbackUrl }: any) => {
       setAdminLoading(false);
     }
   };
-
   return (
     <div className="mx-4 md:mx-0">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-center items-center">
         <div className="flex flex-col md:flex-row justify-center md:w-[80%] mt-4 shadow-lg rounded-lg bg-white overflow-hidden">
-        <div className="hidden md:flex flex-col items-center bg-indigo-600 text-white p-8 w-1/2">
-  <h1 className="text-4xl font-bold mb-4">Welcome Back!</h1>
-  <p className="text-lg mb-6">
-    We're thrilled to have you back! To continue, please login with your credentials and access your personalized dashboard.
-  </p>
-  
-  <h2 className="text-2xl font-semibold mb-3">Why Login?</h2>
-  <ul className="list-disc list-inside text-lg mb-6">
-    <li>Access exclusive content tailored just for you.</li>
-    <li>Track your home improvement projects in real-time.</li>
-    <li>Get personalized recommendations from top service providers.</li>
-    <li>Enjoy seamless collaboration with professionals on your projects.</li>
-  </ul>
+          <div className="hidden md:flex flex-col items-center bg-indigo-600 text-white p-8 w-1/2">
+            <h1 className="text-4xl font-bold mb-4">Welcome Back!</h1>
+            <p className="text-lg mb-6">
+              We're thrilled to have you back! To continue, please login with your credentials and access your personalized dashboard.
+            </p>
 
- 
-  <p className="text-lg font-semibold">
-    Ready to transform your home? Login now to get started!
-  </p>
-</div>
+            <h2 className="text-2xl font-semibold mb-3">Why Login?</h2>
+            <ul className="list-disc list-inside text-lg mb-6">
+              <li>Access exclusive content tailored just for you.</li>
+              <li>Track your home improvement projects in real-time.</li>
+              <li>Get personalized recommendations from top service providers.</li>
+              <li>Enjoy seamless collaboration with professionals on your projects.</li>
+            </ul>
 
+            <p className="text-lg font-semibold">
+              Ready to transform your home? Login now to get started!
+            </p>
+          </div>
 
           <div className="flex justify-center self-center md:w-1/2 p-6 bg-white">
             <div className="mx-auto rounded-3xl w-full p-8">
@@ -126,9 +153,9 @@ const LoginPage = ({ callbackUrl }: any) => {
                 <p className="text-gray-600">Login to your account</p>
               </div>
               <Form submitHandler={onSubmit} resolver={yupResolver(loginSchema)}>
-              <div className="mb-2">
-              <FormInput name="email" type="email" label="Email" />
-              </div>
+                <div className="mb-2">
+                  <FormInput name="email" type="email" label="Email" />
+                </div>
                 <div className="relative mb-6">
                   <FormInput name="password" label="Password" type={passwordVisible ? "text" : "password"} />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -148,11 +175,8 @@ const LoginPage = ({ callbackUrl }: any) => {
                   <button
                     type="submit"
                     className={`w-full flex justify-center items-center border border-indigo-700 
-                  ${
-                    loading
-                      ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed"
-                      : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"
-                  } p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
+                      ${loading ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed" : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"}
+                    p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
                     disabled={loading}
                   >
                     {loading ? <Spinner /> : "Login"}
@@ -171,11 +195,8 @@ const LoginPage = ({ callbackUrl }: any) => {
                 <button
                   onClick={handleProviderLogin}
                   className={`w-full flex justify-center items-center border border-indigo-700 
-                  ${
-                    isProviderLoading
-                      ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed"
-                      : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"
-                  } p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
+                    ${isProviderLoading ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed" : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"}
+                  p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
                   disabled={isProviderLoading}
                 >
                   {isProviderLoading ? <Spinner /> : <><FaUserTie className="mr-2" /> Login as Provider</>}
@@ -184,11 +205,8 @@ const LoginPage = ({ callbackUrl }: any) => {
                 <button
                   onClick={handleAdminLogin}
                   className={`w-full flex justify-center items-center border border-indigo-700 
-                  ${
-                    isAdminLoading
-                      ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed"
-                      : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"
-                  } p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
+                    ${isAdminLoading ? "bg-indigo-700 text-white p-3 opacity-50 cursor-not-allowed" : "bg-white text-indigo-700 hover:bg-indigo-700 hover:text-white"}
+                  p-3 rounded-md font-semibold cursor-pointer transition duration-300 ease-in-out`}
                   disabled={isAdminLoading}
                 >
                   {isAdminLoading ? <Spinner /> : <><FaUserShield className="mr-2" /> Login as Admin</>}

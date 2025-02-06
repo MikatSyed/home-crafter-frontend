@@ -38,7 +38,7 @@ const FormInput: React.FC<FormInputProps> = ({
               id={id}
               placeholder={placeholder}
               {...field}
-              className={`peer py-3 px-0 block w-full bg-transparent border-b-2 border-gray-300 text-sm 
+              className={`peer py-3 px-0 block w-full bg-transparent border-b-[1px] border-gray-300 text-sm 
                 placeholder:text-transparent outline-none
                 focus:border-b-[#4f46e5] focus:outline-none 
                 focus:pt-5 focus:pb-2 

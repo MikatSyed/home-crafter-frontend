@@ -35,7 +35,7 @@ const TopProviders = () => {
           <div className="section-heading mb-8">
             <div className="flex flex-wrap items-center">
               <div className="w-full md:w-1/2" data-aos="fade-up">
-                <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
                   Top Providers
                 </h2>
                 <p className="text-gray-400 mt-4">
@@ -46,7 +46,7 @@ const TopProviders = () => {
               <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
                 {displayedProviders?.length > 3 && (
                   <Link href="/providers">
-                    <button className="text-indigo-600 border border-indigo-600 inline-flex items-center bg-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition duration-300">
+                    <button className="text-indigo-600 border border-indigo-600 inline-flex items-center bg-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition duration-300 mt-4 md:mt-4">
                       View All
                       <FiArrowRightCircle className="ml-2" size={20} />
                     </button>

@@ -3,7 +3,9 @@
 import Navbar from "./Navbar";
 import TopHeader from "./TopHeader ";
 
-const MainNavbar = () => {
+
+const MainNavbar = async() => {
+
   return (
     <>
       <TopHeader />
