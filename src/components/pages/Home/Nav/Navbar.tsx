@@ -22,12 +22,12 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { href: "/", label: "HOME" },
-    { href: "/services", label: "SERVICES" },
-    { href: "/providers", label: "PROVIDER" },
-    { href: "/blogs", label: "BLOGS" },
-    { href: "/about", label: "ABOUT" },
-    { href: "/contact", label: "CONTACT" },
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
+    { href: "/providers", label: "Providers" },
+    { href: "/blogs", label: "Blogs" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ];
 
   return (
@@ -65,12 +65,12 @@ const Navbar = () => {
     <>
       <Link href="/signup">
         <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
-          BECOME A USER
+          Become A User
         </p>
       </Link>
       <Link href="/signup/provider">
         <p className="text-black text-sm hover:text-indigo-600 font-medium m-0">
-          BECOME A PROVIDER
+          Become A Provider
         </p>
       </Link>
     </>

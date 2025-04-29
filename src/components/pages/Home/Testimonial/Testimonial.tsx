@@ -6,15 +6,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import AOS from "aos";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
+
 import TestimonialSkeleton from "./TestimonialSkeleton";
-import { useReviewsQuery } from "@/redux/api/reviewApi";
 
 // Default fallback image for missing profile pictures
 const DEFAULT_AVATAR = "/assets/default-avatar.jpg";
 
 const Testimonial: React.FC = () => {
   const [swiper, setSwiper] = useState<any | null>(null);
-  const { data, error, isLoading } = useReviewsQuery(undefined);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -25,25 +24,30 @@ const Testimonial: React.FC = () => {
   const handlePrevious = () => swiper?.slidePrev();
   const handleNext = () => swiper?.slideNext();
 
- 
-  const testimonials =
-    data?.data?.map((review: any) => ({
-      id: review.id,
-      image: review.user.profileImg?.[0] || DEFAULT_AVATAR,
-      text: review.comment,
-      name: `${review.user.fName} ${review.user.lName}`,
-      rating: review.rating,
-    })) || [];
-
-  if (isLoading) return <TestimonialSkeleton />;
-
-  if (error) {
-    return (
-      <div className="text-center py-10 text-red-600">
-        <p className="text-lg font-semibold">Failed to load testimonials. Please try again later.</p>
-      </div>
-    );
-  }
+  // Static data for testimonials
+  const testimonials = [
+    {
+      id: 1,
+      image: "/assets/testimonial1.jpg", // Example image
+      text: "This is an amazing service. Highly recommended!",
+      name: "John Doe",
+      rating: 4.5,
+    },
+    {
+      id: 2,
+      image: "/assets/testimonial2.jpg", // Example image
+      text: "Fantastic experience! Very professional.",
+      name: "Jane Smith",
+      rating: 5,
+    },
+    {
+      id: 3,
+      image: "/assets/testimonial3.jpg", // Example image
+      text: "I am so satisfied with the results, thank you!",
+      name: "Mike Johnson",
+      rating: 4,
+    },
+  ];
 
   return (
     <div className="px-6 md:px-[6rem] py-10 md:py-14 relative main" data-aos="fade-up">
@@ -67,33 +71,35 @@ const Testimonial: React.FC = () => {
             1024: { slidesPerView: 2, spaceBetween: 10 },
           }}
         >
-          {testimonials.map((testimonial:any) => (
+          {testimonials.map((testimonial) => (
             <SwiperSlide
               key={testimonial.id || Math.random()}
               className="bg-white p-6 rounded-lg border"
             >
-           <div className=" md:h-[230px]">   <div className="flex justify-center mb-4 relative">
-                <div className="image-half-bg absolute top-0 left-0 w-full h-full bg-[#f8fcfd] rounded-t-lg"></div>
-                <img
-                  src={testimonial.image}
-                  alt={`Image of ${testimonial.name}`}
-                  className="rounded-full w-20 h-20 border-4 border-indigo-100 relative z-10"
-                  width={52}
-                  height={52}
-                />
+              <div className="md:h-[230px]">
+                <div className="flex justify-center mb-4 relative">
+                  <div className="image-half-bg absolute top-0 left-0 w-full h-full bg-[#f8fcfd] rounded-t-lg"></div>
+                  <img
+                    src={testimonial.image || DEFAULT_AVATAR}
+                    alt={`Image of ${testimonial.name}`}
+                    className="rounded-full w-20 h-20 border-4 border-indigo-100 relative z-10"
+                    width={52}
+                    height={52}
+                  />
+                </div>
+                <div className="text-center">
+                  <ReactStars
+                    count={5}
+                    value={testimonial.rating}
+                    size={24}
+                    isHalf={true}
+                    edit={false}
+                    activeColor="#ffd700"
+                  />
+                  <p className="text-gray-700 my-4">{testimonial.text}</p>
+                  <h5 className="text-xl font-bold text-indigo-700">{testimonial.name}</h5>
+                </div>
               </div>
-              <div className="text-center">
-                <ReactStars
-                  count={5}
-                  value={testimonial.rating}
-                  size={24}
-                  isHalf={true}
-                  edit={false}
-                  activeColor="#ffd700"
-                />
-                <p className="text-gray-700 my-4">{testimonial.text}</p>
-                <h5 className="text-xl font-bold text-indigo-700">{testimonial.name}</h5>
-              </div></div>
             </SwiperSlide>
           ))}
         </Swiper>

@@ -36,13 +36,11 @@ const ProviderDetails = ({ id }: any) => {
     bio,
     dob,
     gender,
-    category,
     lName,
     address,
     createdAt,
     email,
     contactNo,
-    services,
     averageRating,
     totalReviews,
   } = provider;
@@ -55,7 +53,7 @@ const ProviderDetails = ({ id }: any) => {
       <div className="mx-auto px-6 md:px-[6rem] py-8">
         <div className="flex flex-wrap lg:flex-nowrap rounded-lg">
           <div className="lg:w-1/3 w-full mb-8 lg:mb-0">
-            <div className="relative rounded-lg shadow-lg">
+            <div className="relative rounded-lg">
             <div className="absolute top-2 left-2 bg-white hover:text-white text-[#665cf0] hover:bg-[#665cf0] text-sm px-3 py-1 rounded">
 
 </div>
