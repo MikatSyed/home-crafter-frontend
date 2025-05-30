@@ -154,16 +154,17 @@ const Navbar = () => {
         <div className="max-w-8xl mx-auto md:px-[3rem] px-6">
       <div className="flex items-center justify-between text-sm py-2">
         {/* Trust badges */}
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-2">
-            <FaShieldAlt className="h-4 w-4" />
-            <span>Licensed &amp; Insured</span>
+         <div className="flex items-center space-x-6">
+            <a href="https://facebook.com/yourpage" aria-label="Facebook" className="hover:text-gray-600">
+              <FaFacebookF className="h-4 w-4" />
+            </a>
+            <a href="https://twitter.com/yourprofile" aria-label="Twitter" className="hover:text-gray-600">
+              <FaTwitter className="h-4 w-4" />
+            </a>
+            <a href="https://instagram.com/yourprofile" aria-label="Instagram" className="hover:text-gray-600">
+              <FaInstagram className="h-4 w-4" />
+            </a>
           </div>
-          <div className="flex items-center space-x-2">
-            <FaStar className="h-4 w-4 text-yellow-300" />
-            <span>5-Star Rated Service</span>
-          </div>
-        </div>
 
         {/* Contact info + social icons */}
         <div className="flex items-center space-x-6">
@@ -175,17 +176,7 @@ const Navbar = () => {
             <FaClock className="h-4 w-4" />
             <span>Mon–Sat: 9 AM – 6 PM</span>
           </div>
-          <div className="flex items-center space-x-4">
-            <a href="https://facebook.com/yourpage" aria-label="Facebook" className="hover:text-gray-600">
-              <FaFacebookF className="h-4 w-4" />
-            </a>
-            <a href="https://twitter.com/yourprofile" aria-label="Twitter" className="hover:text-gray-600">
-              <FaTwitter className="h-4 w-4" />
-            </a>
-            <a href="https://instagram.com/yourprofile" aria-label="Instagram" className="hover:text-gray-600">
-              <FaInstagram className="h-4 w-4" />
-            </a>
-          </div>
+       
         </div>
 
         {/* Tagline */}
@@ -222,7 +213,7 @@ const Navbar = () => {
                     <h1 className={`text-2xl font-bold ${logoStyles.title}`}>
                       HOME <span className={logoStyles.subtitle}>CRAFTER</span>
                     </h1>
-                    <p className={`text-xs font-medium -mt-0.5 ${logoStyles.description}`}>Home Services</p>
+                    {/* <p className={`text-xs font-medium -mt-0.5 ${logoStyles.description}`}>Home Services</p> */}
                   </div>
                 </div>
               </Link>

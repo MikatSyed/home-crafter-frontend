@@ -21,11 +21,45 @@ body{
 }
 
 ::-webkit-scrollbar-thumb {
-  background:#4f46e5; /* Color of the scrollbar handle */
+  background:#1f54dd; /* Color of the scrollbar handle */
   border-radius: 10px; /* Rounded corners for the handle */
 }
 
 
+.premium-service-swiper .swiper-pagination-bullet {
+  @apply bg-[#1f54dd] opacity-50;
+}
+
+.premium-service-swiper .swiper-pagination-bullet-active {
+  @apply opacity-100 bg-gradient-to-r from-[#1f54dd] to-blue-600;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 
 
 
