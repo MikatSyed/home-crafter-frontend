@@ -32,18 +32,20 @@ const FeaturedCategories = () => {
         <div className={`mx-auto px-6 md:px-[3rem] main ${pathname === '/categories' ? 'bg-white' : 'bg-[#f8fcfd] '} py-10 md:py-20`}>
             {pathname !== '/categories' ? (
                 <div className="section-heading mb-8">
+                    
                     <div className="flex flex-wrap items-center">
                         <div className="w-full md:w-1/2" data-aos="fade-up">
                         <h2 className="text-3xl md:text-4xl  font-bold text-gray-900 leading-tight">
   Featured Categories
 </h2>
 
+
                             <p className="text-gray-400 mt-4">What do you need to find?</p>
                         </div>
                         <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
                     {displayCategories?.length > 3 &&       <Link href="/categories">
-                          <button className="text-indigo-600 border border-indigo-600  inline-flex items-center bg-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition duration-300 mt-4 md:mt-0">
-      View All
+                          <button className="group relative overflow-hidden bg-[#1f54dd] hover:bg-[#1a4bc4] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 inline-flex items-center">
+      View All Categories
       <FiArrowRightCircle className="ml-2" size={20} />
     </button></Link>}
                         </div>
