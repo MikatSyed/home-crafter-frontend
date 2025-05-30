@@ -31,12 +31,12 @@ const HomePage = () => {
             {/* <TopHeader/> */}
             <Navbar />
             <HeroSection/> 
+            <HowItWorks/>
             <FeaturedCategories/>
             <FeaturedServices/>
-            <TopProviders/>
-            <HowItWorks/>
             <OfferedServices/>
             <PricingPlan/>
+            <TopProviders/>
             <Testimonial/>
             <MostPopularServices/>
             <Blog/>

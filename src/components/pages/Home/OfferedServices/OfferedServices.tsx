@@ -40,8 +40,8 @@ const OfferedServices = () => {
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-white py-10 md:py-14 main">
-        <div className="mb-8 mx-auto px-6 md:px-[4rem]">
-          <div className="flex flex-wrap items-center">
+        <div className="mb-8 mx-auto px-6 md:px-[3rem]">
+ {services?.length > 0 &&   <div className="flex flex-wrap items-center">
             <div className="w-full md:w-1/2" data-aos="fade-up">
               <h2 className="text-4xl font-bold">Offered Services</h2>
               <p className="text-gray-400 mt-4">
@@ -68,7 +68,8 @@ const OfferedServices = () => {
                 </div>
               </div>
             )}
-          </div>
+          </div>}
+        
         </div>
 
         <div className="px-5 md:px-[3rem]">

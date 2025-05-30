@@ -47,7 +47,9 @@ const TopProviders = () => {
   }
 
   return (
-    <section className="px-6 md:px-[4rem] bg-gradient-to-br from-gray-50 to-white py-16 md:py-24 main">
+    <section className="px-6 md:px-[3rem] bg-gradient-to-br from-gray-50 to-white py-16 md:py-24 main">
+
+      
       <div>
         {pathname !== "/providers" && (
           <div className="section-heading mb-12">
