@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   FaSearch,
   FaUserCheck,
@@ -14,6 +15,8 @@ import {
 } from "react-icons/fa"
 
 const HowItWorks = () => {
+    const [isHovered, setIsHovered] = useState(false)
+
   const steps = [
     {
       id: 1,
@@ -182,17 +185,38 @@ const HowItWorks = () => {
         </div>
 
         {/* Premium CTA Section */}
-        <div className="mt-16 text-center" data-aos="fade-up" data-aos-delay="600">
-          <div className="bg-gradient-to-r from-[#1f54dd] via-[#1a4bc7] to-[#1f54dd] rounded-2xl p-8 shadow-2xl">
-            <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">Ready to Experience Premium Service?</h3>
-            <p className="text-[#1f54dd]/80 text-base mb-6 max-w-2xl mx-auto">
-              Join thousands of satisfied customers who trust us with their home service needs.
-            </p>
-            <button className="bg-white text-[#1f54dd] px-6 py-3 rounded-xl font-bold text-base hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl">
-              Get Started Today
-            </button>
-          </div>
+       <div className="mt-16 text-center" data-aos="fade-up" data-aos-delay="600">
+      <div
+        className="relative rounded-2xl shadow-2xl overflow-hidden h-96 md:h-[500px] lg:h-[600px] flex items-center justify-center"
+        style={{
+          backgroundImage: "url('/assets/workers-6477163_1280.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50" />
+
+        {/* Content - Centered both vertically and horizontally */}
+        <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-4 sm:mb-6">
+            Ready to Experience Premium Service?
+          </h3>
+          <p className="text-white/80 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
+            Join thousands of satisfied customers who trust us with their home service needs.
+          </p>
+          <button
+            className={`bg-white text-[#1f54dd] px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 shadow-lg ${
+              isHovered ? "shadow-xl scale-105" : ""
+            }`}
+          >
+            Get Started Today
+          </button>
         </div>
+      </div>
+    </div>
       </div>
     </section>
   )
