@@ -13,7 +13,7 @@ const HeroSearchInput = () => {
           className="flex-grow px-3 py-2 sm:p-2 outline-none text-gray-700 sm:mb-2 mb-0"
         />
         <Link href="/services">
-          <button className="bg-indigo-600 text-white px-6 py-2 sm:px-4 sm:py-2 rounded-md hover:bg-indigo-700 transition duration-300 w-full sm:w-auto">
+          <button className="bg-[#2563eb] text-white px-6 py-2 sm:px-4 sm:py-2 rounded-md hover:bg-indigo-700 transition duration-300 w-full sm:w-auto">
             <FaSearch className="inline mr-2" />
             Search
           </button>

@@ -18,15 +18,19 @@ import TopProviders from "./TopProviders/TopProviders";
 import FeaturedCategories from "./FeaturedCategories/FeaturedCategories";
 import { Suspense } from "react";
 import Loader from "@/components/UI/Loader";
+import Navbar from "./Nav/Navbar";
+
+
 
 
 
 
 const HomePage = () => {
     return (
-        <Suspense fallback={<Loader/>}>
-            <MainNavbar />
-            <HeroSection/>
+         <Suspense fallback={<Loader/>}>
+            {/* <TopHeader/> */}
+            <Navbar />
+            <HeroSection/> 
             <FeaturedCategories/>
             <FeaturedServices/>
             <TopProviders/>
