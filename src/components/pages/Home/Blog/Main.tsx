@@ -19,10 +19,10 @@ const Main = () => {
   const year = searchParams.get("year");
  
 
-  const blogsPerPage = 3;
+  const blogsPerPage = 4;
 
   const { data, isLoading } = useBlogsQuery({ categoryId, month: month ? parseInt(month, 10) : undefined, year: year ? parseInt(year, 10) : undefined });
-
+  console.log(data,'🎈🎈🎈')
   useEffect(() => {
     setCurrentPage(1);
   }, [categoryId, month, year]);
@@ -61,19 +61,19 @@ const Main = () => {
        {pathname === "/" ? (
         <Swiper
           modules={[Pagination]}
-          pagination
+          // pagination
           loop={true}
           spaceBetween={20}
           slidesPerView={1}
           breakpoints={{
             640: {
-              slidesPerView: 2,
+              slidesPerView: 1,
             },
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 2,
             },
           }}
         >
@@ -84,7 +84,7 @@ const Main = () => {
           ))}
         </Swiper>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {displayedBlogs?.map((blog: any) => (
             <BlogCard key={blog?.id} blog={blog} isLoading={isLoading} />
           ))}
