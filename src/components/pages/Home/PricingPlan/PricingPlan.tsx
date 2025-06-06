@@ -8,17 +8,12 @@ const PricingPlan = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-[#1f54dd]/10 text-[#1f54dd] px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <FiStar className="w-4 h-4" />
-            Premium Service Plans
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            Choose Your
-            <span className="block bg-gradient-to-r from-[#1f54dd] to-blue-600 bg-clip-text text-transparent">
-              Perfect Plan
-            </span>
+         
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
+            Choose Your Plan
+            
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-gray-700 text-lg leading-relaxed font-medium">
             Unlock premium services tailored to your needs. Experience excellence with our flexible pricing options
             designed for every lifestyle.
           </p>
@@ -140,14 +135,7 @@ const PricingPlan = () => {
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <p className="text-gray-600 mb-6">Need a custom solution? We're here to help you find the perfect fit.</p>
-          <button className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-2xl hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl">
-            Contact Our Team
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          </button>
-        </div>
+     
       </div>
     </div>
   )

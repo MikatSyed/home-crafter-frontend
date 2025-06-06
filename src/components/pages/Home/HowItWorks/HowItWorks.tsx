@@ -82,13 +82,13 @@ const HowItWorks = () => {
         <div className="text-center mb-12" data-aos="fade-up">
         
           <div className="relative mb-6">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent leading-tight">
+            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
               How It Works
             </h2>
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-[#1f54dd] via-[#1f54dd] to-[#1f54dd] rounded-full"></div>
           </div>
 
-          <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
+          <p className="text-gray-700 text-lg leading-relaxed font-medium">
             Experience our streamlined 6-step journey that transforms your home service needs into exceptional results.
           </p>
         </div>

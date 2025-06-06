@@ -184,7 +184,7 @@ const FeaturedCategories = () => {
         <div className="section-heading mb-20">
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-1/2" data-aos="fade-up">
-              <div className="flex items-center space-x-4 mb-6">
+              {/* <div className="flex items-center space-x-4 mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-[#1f54dd] to-[#1a4bc4] rounded-2xl flex items-center justify-center shadow-xl">
                   <FiGrid className="text-white text-2xl" />
                 </div>
@@ -192,23 +192,23 @@ const FeaturedCategories = () => {
                   <FiTrendingUp className="w-4 h-4 mr-2" />
                   Premium Collection
                 </span>
-              </div>
-              <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
+              </div> */}
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
                 Elite Service Categories
               </h2>
               <p className="text-gray-700 text-lg leading-relaxed font-medium">
                 Discover our premium collection of professional services, meticulously curated to deliver exceptional
-                results for your business growth and success.
+                
               </p>
             </div>
             <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
               {displayCategories?.length > 3 && (
                 <Link href="/categories">
-                  <button className="group bg-gradient-to-r from-[#1f54dd] to-[#1a4bc4] hover:from-[#1a4bc4] hover:to-[#1f54dd] text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 hover:shadow-2xl hover:scale-105 text-lg inline-flex items-center">
+                  <button className="group bg-gradient-to-r from-[#1f54dd] to-[#1a4bc4] hover:from-[#1a4bc4] hover:to-[#1f54dd] text-white p-4 rounded-2xl font-bold transition-all duration-300 hover:shadow-2xl hover:scale-105 text-md inline-flex items-center">
                     Explore All Categories
                     <FiArrowRightCircle
                       className="ml-3 group-hover:translate-x-2 transition-transform duration-300"
-                      size={22}
+                      size={20}
                     />
                   </button>
                 </Link>

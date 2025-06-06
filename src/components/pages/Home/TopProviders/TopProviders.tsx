@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
-import "aos/dist/aos.css"
 import { FaCheckCircle, FaStar, FaStarHalfAlt, FaRegStar, FaMapMarkerAlt, FaUserCheck } from "react-icons/fa"
 import { FiArrowLeft, FiArrowRight, FiArrowRightCircle } from "react-icons/fi"
 import { HiOutlineBadgeCheck } from "react-icons/hi"
@@ -47,9 +46,7 @@ const TopProviders = () => {
   }
 
   return (
-    <section className="px-6 md:px-[3rem] bg-gradient-to-br from-gray-50 to-white py-16 md:py-24 main">
-
-      
+    <section className="px-6 md:px-[3rem] bg-gradient-to-br from-gray-50 to-white py-16 md:py-24 providers-section">
       <div>
         {pathname !== "/providers" && (
           <div className="section-heading mb-12">
@@ -57,11 +54,11 @@ const TopProviders = () => {
               <div className="w-full md:w-2/3" data-aos="fade-up">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-1 bg-gradient-to-r from-[#1f54dd] to-blue-600 rounded-full mr-4"></div>
-                  <span className="text-[#1f54dd] font-semibold text-sm uppercase tracking-wider">
+                  <span className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
                     Expert Providers
                   </span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">Top Providers</h2>
+                <h2 className="text-gray-700 text-lg leading-relaxed font-medium">Top Providers</h2>
                 <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
                   Discover the best providers offering top-rated services for all your needs.
                 </p>

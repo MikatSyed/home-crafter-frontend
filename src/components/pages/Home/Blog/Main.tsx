@@ -1,8 +1,6 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useBlogsQuery } from "@/redux/api/blogApi";
 import BlogCard from "./BlogCard/BlogCard";
@@ -53,8 +51,8 @@ const Main = () => {
            
             data-aos="fade-up"
           >
-            <h2 className="text-3xl font-semibold">Our Recent Blog</h2>
-            <p className="text-gray-400 mt-4">Discover useful guides and expert advice to help you maintain and enhance your living spaces</p>
+            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">Our Recent Blog</h2>
+            <p className="text-gray-700 text-lg leading-relaxed font-medium">Discover useful guides and expert advice to help you maintain and enhance your living spaces</p>
           </div>
         </div>
       )}

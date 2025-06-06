@@ -1,15 +1,12 @@
 
-import { Metadata } from "next";
+
 import Blog from "./Blog/Main";
 import Faq from "./Faq/Faq";
-
 import FeaturedServices from "./FeaturedServices/FeaturedServices";
 import Footer from "./Footer/Footer";
 import HeroSection from "./HeroSection/HeroSection";
 import HowItWorks from "./HowItWorks/HowItWorks";
 import MostPopularServices from "./MostPopularServices/MostPopularServices";
-import MainNavbar from "./Nav/MainNavbar";
-import Offer from "./OfferCard/OfferCard";
 import OfferedServices from "./OfferedServices/OfferedServices";
 import Partners from "./Partners/Partners";
 import PricingPlan from "./PricingPlan/PricingPlan";
@@ -28,7 +25,7 @@ import Navbar from "./Nav/Navbar";
 const HomePage = () => {
     return (
          <Suspense fallback={<Loader/>}>
-            {/* <TopHeader/> */}
+         
             <Navbar />
             <HeroSection/> 
             <HowItWorks/>
@@ -46,5 +43,4 @@ const HomePage = () => {
         </Suspense>
     );
 };
-
 export default HomePage;

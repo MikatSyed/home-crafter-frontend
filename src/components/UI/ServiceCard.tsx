@@ -116,7 +116,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description, isL
   }
 
   const SkeletonCard = () => (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden ">
       <div className="h-64 bg-gray-200"></div>
       <div className="p-6">
         <div className="h-4 bg-gray-200 rounded mb-4"></div>
@@ -148,8 +148,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ data, title, description, isL
       <div className="mb-12 px-6 md:px-[3rem]">
         <div className="flex flex-wrap items-center justify-between">
           <div className="w-full md:w-2/3" data-aos="fade-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">{title}</h2>
-            <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">{description}</p>
+            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">{title}</h2>
+            <p className="text-gray-700 text-lg leading-relaxed font-medium">{description}</p>
           </div>
           {!isLoading && data && data.length > 3 && (
             <div className="w-full md:w-1/3 text-right mt-6 md:mt-0">
