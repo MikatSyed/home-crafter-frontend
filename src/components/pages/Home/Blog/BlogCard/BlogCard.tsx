@@ -40,11 +40,11 @@ const HorizontalBlogCard = ({ blog }: BlogCardProps) => {
 
   return (
     <article className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100/50 backdrop-blur-sm h-80 hover:-translate-y-1">
-      {/* Gradient overlay for premium feel */}
+     
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
 
       <div className="flex flex-col md:flex-row h-full relative z-20">
-        {/* Enhanced Image Section */}
+      
         <div className="md:w-2/5 h-40 md:h-full relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
           <img
@@ -55,7 +55,7 @@ const HorizontalBlogCard = ({ blog }: BlogCardProps) => {
 
           {/* Enhanced Category Badge */}
           <div className="absolute top-4 left-4 z-20">
-            <span className="bg-[#2563eb] text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg backdrop-blur-sm border border-white/20">
+            <span className="bg-[#4f46e5] text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg backdrop-blur-sm border border-white/20">
               {category?.categoryName}
             </span>
           </div>
@@ -71,7 +71,7 @@ const HorizontalBlogCard = ({ blog }: BlogCardProps) => {
           </div>
 
           {/* Reading Progress Indicator */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#2563eb] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#4f46e5] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
         </div>
 
         {/* Enhanced Content Section */}
@@ -80,7 +80,7 @@ const HorizontalBlogCard = ({ blog }: BlogCardProps) => {
             {/* Enhanced Meta Info */}
             <div className="flex items-center gap-6 text-sm text-gray-500 mb-4">
               <div className="flex items-center gap-2 bg-gray-50 px-3 py-1 rounded-full">
-                <FiCalendar className="w-4 h-4 text-[#2563eb]" />
+                <FiCalendar className="w-4 h-4 text-[#4f46e5]" />
                 <span className="font-medium">{formatDate(createdAt)}</span>
               </div>
               <div className="flex items-center gap-2 bg-gray-50 px-3 py-1 rounded-full">
@@ -90,7 +90,7 @@ const HorizontalBlogCard = ({ blog }: BlogCardProps) => {
             </div>
 
             {/* Enhanced Title */}
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-[#2563eb] transition-all duration-300 leading-tight">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-[#4f46e5] transition-all duration-300 leading-tight">
               <Link href={`/blog-details/${id}`} className="hover:no-underline">
                 {title}
               </Link>
@@ -107,7 +107,7 @@ const HorizontalBlogCard = ({ blog }: BlogCardProps) => {
                 <img
                   src={provider?.profileImg[0] || "/placeholder.svg?height=40&width=40"}
                   alt={`${provider?.fName} ${provider?.lName}`}
-                  className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-100 group-hover:ring-[#2563eb]/30 transition-all duration-300"
+                  className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-100 group-hover:ring-[#4f46e5]/30 transition-all duration-300"
                 />
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
               </div>
@@ -121,7 +121,7 @@ const HorizontalBlogCard = ({ blog }: BlogCardProps) => {
 
             <Link
               href={`/blog-details/${id}`}
-              className="inline-flex items-center bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:shadow-[#2563eb]/25 transform hover:scale-105 group/btn"
+              className="inline-flex items-center bg-[#4f46e5] hover:bg-[#1d4ed8] text-white px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:shadow-[#4f46e5]/25 transform hover:scale-105 group/btn"
             >
               Read Article
               <FiArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
@@ -131,7 +131,7 @@ const HorizontalBlogCard = ({ blog }: BlogCardProps) => {
       </div>
 
       {/* Premium glow effect */}
-      <div className="absolute inset-0 rounded-2xl bg-[#2563eb]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl bg-[#4f46e5]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
     </article>
   )
 }

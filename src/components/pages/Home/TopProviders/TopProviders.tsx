@@ -53,8 +53,8 @@ const TopProviders = () => {
             <div className="flex flex-wrap items-center justify-between">
               <div className="w-full md:w-2/3" data-aos="fade-up">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-1 bg-gradient-to-r from-[#1f54dd] to-blue-600 rounded-full mr-4"></div>
-                  <span className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
+                  <div className="w-12 h-1 bg-gradient-to-r from-[#4f46e5] to-blue-600 rounded-full mr-4"></div>
+                  <span className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#4f46e5] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
                     Expert Providers
                   </span>
                 </div>
@@ -66,10 +66,10 @@ const TopProviders = () => {
               <div className="w-full md:w-1/3 text-right mt-6 md:mt-0" data-aos="fade-up">
                 {displayedProviders?.length > 3 && (
                   <Link href="/providers">
-                    <button className="group relative overflow-hidden bg-[#1f54dd] hover:bg-[#1a4bc4] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 inline-flex items-center">
+                    <button className="group relative overflow-hidden bg-[#4f46e5] hover:bg-[#1a4bc4] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 inline-flex items-center">
                       <span className="relative z-10">View All Providers</span>
                       <FiArrowRightCircle className="ml-2 relative z-10" size={20} />
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#1a4bc4] to-[#1f54dd] transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#1a4bc4] to-[#4f46e5] transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                     </button>
                   </Link>
                 )}
@@ -126,7 +126,7 @@ const TopProviders = () => {
                     {/* Category Badge */}
                     {provider?.category?.categoryName && (
                       <div className="absolute top-4 right-4">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/90 backdrop-blur-sm text-[#1f54dd] border border-[#1f54dd]/20">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/90 backdrop-blur-sm text-[#4f46e5] border border-[#4f46e5]/20">
                           {provider.category.categoryName}
                         </span>
                       </div>
@@ -140,11 +140,11 @@ const TopProviders = () => {
                       <div className="flex items-center justify-between mb-2">
                         <Link
                           href={`/provider-details/${provider?.id}`}
-                          className="text-xl font-bold text-gray-900 hover:text-[#1f54dd] transition-colors group-hover:text-[#1f54dd]"
+                          className="text-xl font-bold text-gray-900 hover:text-[#4f46e5] transition-colors group-hover:text-[#4f46e5]"
                         >
                           {provider?.fName} {provider?.lName}
                         </Link>
-                        <HiOutlineBadgeCheck className="w-6 h-6 text-[#1f54dd]" />
+                        <HiOutlineBadgeCheck className="w-6 h-6 text-[#4f46e5]" />
                       </div>
                       <div className="flex items-center text-sm text-gray-500">
                         <FaCheckCircle className="w-3 h-3 text-green-500 mr-1" />
@@ -160,7 +160,7 @@ const TopProviders = () => {
                     {/* Location */}
                     {provider?.address && (
                       <div className="flex items-center text-sm text-gray-600 mb-4">
-                        <FaMapMarkerAlt className="w-4 h-4 mr-2 text-[#1f54dd]" />
+                        <FaMapMarkerAlt className="w-4 h-4 mr-2 text-[#4f46e5]" />
                         {provider.address}
                       </div>
                     )}
@@ -178,9 +178,9 @@ const TopProviders = () => {
 
                     {/* Action Button */}
                     <Link href={`/provider-details/${provider.id}`} className="w-full">
-                      <button className="w-full group/btn relative overflow-hidden bg-[#1f54dd] hover:bg-[#1a4bc4] text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">
+                      <button className="w-full group/btn relative overflow-hidden bg-[#4f46e5] hover:bg-[#1a4bc4] text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">
                         <span className="relative z-10">View Profile</span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#1a4bc4] to-[#1f54dd] transform translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#1a4bc4] to-[#4f46e5] transform translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300"></div>
                       </button>
                     </Link>
                   </div>
@@ -195,7 +195,7 @@ const TopProviders = () => {
                   className={`inline-flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                     currentPage === 1
                       ? "text-gray-400 cursor-not-allowed"
-                      : "text-gray-700 hover:text-[#1f54dd] hover:bg-gray-50"
+                      : "text-gray-700 hover:text-[#4f46e5] hover:bg-gray-50"
                   }`}
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
@@ -210,8 +210,8 @@ const TopProviders = () => {
                       key={index}
                       className={`w-10 h-10 rounded-lg font-medium transition-all duration-300 ${
                         currentPage === index + 1
-                          ? "bg-[#1f54dd] text-white shadow-lg"
-                          : "bg-white border border-gray-200 text-gray-700 hover:bg-[#1f54dd] hover:text-white hover:border-[#1f54dd]"
+                          ? "bg-[#4f46e5] text-white shadow-lg"
+                          : "bg-white border border-gray-200 text-gray-700 hover:bg-[#4f46e5] hover:text-white hover:border-[#4f46e5]"
                       }`}
                       onClick={() => setCurrentPage(index + 1)}
                     >
@@ -224,7 +224,7 @@ const TopProviders = () => {
                   className={`inline-flex items-center px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                     currentPage === totalPages
                       ? "text-gray-400 cursor-not-allowed"
-                      : "text-gray-700 hover:text-[#1f54dd] hover:bg-gray-50"
+                      : "text-gray-700 hover:text-[#4f46e5] hover:bg-gray-50"
                   }`}
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={currentPage === totalPages}

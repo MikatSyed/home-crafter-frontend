@@ -20,8 +20,8 @@ const Footer = () => {
     <footer className="relative bg-white overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 bg-[url('/placeholder.svg?height=100&width=100')] opacity-5" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#2563eb]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#2563eb]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#4f46e5]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#4f46e5]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
       <div className="relative mx-auto px-6 md:px-[3rem] py-16 md:py-20">
         {/* Main Footer Content */}
@@ -32,10 +32,10 @@ const Footer = () => {
               <div className="group">
                 {/* Logo */}
                 <div className="mb-6">
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-[#2563eb] to-blue-400 bg-clip-text text-transparent">
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-[#4f46e5] to-blue-400 bg-clip-text text-transparent">
                     Home <span className="text-gray-900">Crafter</span>
                   </h1>
-                  <div className="w-16 h-1 bg-gradient-to-r from-[#2563eb] to-blue-400 rounded-full mt-2 group-hover:w-24 transition-all duration-300" />
+                  <div className="w-16 h-1 bg-gradient-to-r from-[#4f46e5] to-blue-400 rounded-full mt-2 group-hover:w-24 transition-all duration-300" />
                 </div>
 
                 <div className="mt-6">
@@ -52,9 +52,9 @@ const Footer = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-l-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#2563eb] focus:bg-white transition-all duration-300"
+                      className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-l-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#4f46e5] focus:bg-white transition-all duration-300"
                     />
-                    <button className="px-6 py-3 bg-[#2563eb] hover:bg-[#1d4ed8] text-white rounded-r-lg transition-colors duration-300 font-semibold shadow-lg hover:shadow-xl">
+                    <button className="px-6 py-3 bg-[#4f46e5] hover:bg-[#1d4ed8] text-white rounded-r-lg transition-colors duration-300 font-semibold shadow-lg hover:shadow-xl">
                       Subscribe
                     </button>
                   </div>
@@ -67,7 +67,7 @@ const Footer = () => {
               <div className="footer-widget">
                 <h2 className="text-xl mb-6 font-bold text-gray-900 relative">
                   Quick Links
-                  <div className="absolute -bottom-2 left-0 w-12 h-1 bg-[#2563eb] rounded-full" />
+                  <div className="absolute -bottom-2 left-0 w-12 h-1 bg-[#4f46e5] rounded-full" />
                 </h2>
                 <ul className="space-y-4">
                   {[
@@ -81,9 +81,9 @@ const Footer = () => {
                     <li key={index}>
                       <a
                         href={link.href}
-                        className="text-gray-600 hover:text-[#2563eb] transition-all duration-300 flex items-center group"
+                        className="text-gray-600 hover:text-[#4f46e5] transition-all duration-300 flex items-center group"
                       >
-                        <span className="w-2 h-2 bg-[#2563eb] rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <span className="w-2 h-2 bg-[#4f46e5] rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         {link.name}
                       </a>
                     </li>
@@ -97,17 +97,17 @@ const Footer = () => {
               <div className="footer-widget">
                 <h2 className="text-xl mb-6 font-bold text-gray-900 relative">
                   Contact Us
-                  <div className="absolute -bottom-2 left-0 w-12 h-1 bg-[#2563eb] rounded-full" />
+                  <div className="absolute -bottom-2 left-0 w-12 h-1 bg-[#4f46e5] rounded-full" />
                 </h2>
                 <div className="space-y-6">
                   {[
                     { icon: FaMapMarkerAlt, text: "Muradpur, Chittagong (Bangladesh)", color: "text-red-500" },
                     { icon: FaPhone, text: "+88 01858832211", color: "text-green-500" },
-                    { icon: FaEnvelope, text: "mikatsyed@gmail.com", color: "text-[#2563eb]" },
+                    { icon: FaEnvelope, text: "mikatsyed@gmail.com", color: "text-[#4f46e5]" },
                   ].map((contact, index) => (
                     <div key={index} className="flex items-start space-x-4 group">
                       <div
-                        className={`flex-shrink-0 w-10 h-10 ${contact.color} bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-[#2563eb] group-hover:text-white transition-all duration-300 shadow-sm`}
+                        className={`flex-shrink-0 w-10 h-10 ${contact.color} bg-gray-50 rounded-lg flex items-center justify-center group-hover:bg-[#4f46e5] group-hover:text-white transition-all duration-300 shadow-sm`}
                       >
                         <contact.icon className="text-sm" />
                       </div>
@@ -132,7 +132,7 @@ const Footer = () => {
               <div className="footer-widget">
                 <h2 className="text-xl mb-6 font-bold text-gray-900 relative">
                   Follow Us
-                  <div className="absolute -bottom-2 left-0 w-12 h-1 bg-[#2563eb] rounded-full" />
+                  <div className="absolute -bottom-2 left-0 w-12 h-1 bg-[#4f46e5] rounded-full" />
                 </h2>
 
                 {/* Social Media Icons */}
@@ -162,8 +162,8 @@ const Footer = () => {
                 <div className="p-4 bg-gray-50 rounded-lg border border-gray-100">
                   <h3 className="text-gray-900 font-semibold mb-3">Certifications</h3>
                   <div className="flex space-x-3">
-                    <div className="w-12 h-12 bg-[#2563eb]/10 border border-[#2563eb]/20 rounded-lg flex items-center justify-center">
-                      <span className="text-[#2563eb] font-bold text-xs">ISO</span>
+                    <div className="w-12 h-12 bg-[#4f46e5]/10 border border-[#4f46e5]/20 rounded-lg flex items-center justify-center">
+                      <span className="text-[#4f46e5] font-bold text-xs">ISO</span>
                     </div>
                     <div className="w-12 h-12 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center justify-center">
                       <span className="text-green-600 font-bold text-xs">ECO</span>
@@ -182,7 +182,7 @@ const Footer = () => {
               <div className="text-center md:text-left text-gray-600">
                 <p className="mb-0">
                   &copy; 2024 All Rights Reserved by{" "}
-                  <span className="text-[#2563eb] font-semibold">@Syed Gaziul Haque</span>.
+                  <span className="text-[#4f46e5] font-semibold">@Syed Gaziul Hoque</span>.
                 </p>
               </div>
 
@@ -203,12 +203,12 @@ const Footer = () => {
               <div className="text-center md:text-right text-gray-600 mt-4 md:mt-0">
                 <ul className="flex space-x-6">
                   <li>
-                    <a href="privacy-policy.html" className="hover:text-[#2563eb] transition-colors duration-300">
+                    <a href="privacy-policy.html" className="hover:text-[#4f46e5] transition-colors duration-300">
                       Privacy Policy
                     </a>
                   </li>
                   <li>
-                    <a href="terms-condition.html" className="hover:text-[#2563eb] transition-colors duration-300">
+                    <a href="terms-condition.html" className="hover:text-[#4f46e5] transition-colors duration-300">
                       Terms & Conditions
                     </a>
                   </li>
@@ -221,7 +221,7 @@ const Footer = () => {
         {/* Scroll to Top Button */}
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-[#2563eb] hover:bg-[#1d4ed8] text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center z-50"
+          className="fixed bottom-8 right-8 w-12 h-12 bg-[#4f46e5] hover:bg-[#1d4ed8] text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center z-50"
         >
           <FaArrowUp className="text-sm" />
         </button>

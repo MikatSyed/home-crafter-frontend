@@ -28,7 +28,7 @@ const HeroSection = () => {
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight md:leading-tight tracking-tight animate-slide-up">
                   Best Solution for Every
                 </h1>
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#2563eb]">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#4f46e5]">
                   House Problems
                 </h1>
               </div>

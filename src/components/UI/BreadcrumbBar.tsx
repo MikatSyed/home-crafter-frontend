@@ -2,7 +2,7 @@ import React from 'react';
 
 const BreadcrumbBar = ({header,name,subtitle}:any) => {
   return (
-    <div className="breadcrumb-bar bg-[#f8fcfd] py-4 main">
+    <div className="breadcrumb-bar bg-[#f4f4ff] py-4 main h-[280px]">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center">
           <h2 className="text-4xl font-bold mb-2"> {header}</h2>

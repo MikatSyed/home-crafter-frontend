@@ -27,12 +27,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRef, useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
+import { useLoggedUserQuery } from "@/redux/api/userApi"
 
 
 const Navbar = () => {
   const pathname = usePathname()
   // Mock data for demonstration
-  const data = { data: null } // Replace with actual useLoggedUserQuery
+  const {data} = useLoggedUserQuery(undefined)
   const favouriteServices: any[] = [] // Replace with actual useAppSelector
 
   const [isProfileOpen, setIsProfileOpen] = useState(false)
@@ -112,7 +113,7 @@ const Navbar = () => {
     if (isHomePage && !isScrolled) {
       return isActive ? "text-white" : "text-white hover:text-white"
     }
-    return isActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
+    return isActive ? "text-[#4f46e5]" : "text-gray-700 hover:text-blue-600"
   }
 
   const getLogoStyles = () => {
@@ -121,15 +122,15 @@ const Navbar = () => {
         container: "bg-white/20 backdrop-blur-sm",
         icon: "text-white",
         title: "text-white",
-        subtitle: "text-[#1f54dd]",
+        subtitle: "text-[#4f46e5]",
         description: "text-gray-200",
       }
     }
     return {
-      container: "bg-gradient-to-br from-blue-600 to-blue-700",
+      container: "bg-[#4f46e5]",
       icon: "text-white",
       title: "text-gray-900",
-      subtitle: "text-blue-600",
+      subtitle: "text-[#4f46e5]",
       description: "text-gray-500",
     }
   }
@@ -139,55 +140,7 @@ const Navbar = () => {
   return (
     <>
    
-     {isHomePage &&  <div
-        className={`hidden lg:block bg-[#1f54dd] text-white py-2.5 transition-all duration-500 ${
-          isScrolled ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
-        }`}
-        style={{
-          position: isHomePage ? "fixed" : "relative",
-          top: isHomePage ? "" : "",
-          left: 0,
-          right: 0,
-          zIndex: 59,
-        }}
-      >
-        <div className="max-w-8xl mx-auto md:px-[3rem] px-6">
-      <div className="flex items-center justify-between text-sm py-2">
-        {/* Trust badges */}
-         <div className="flex items-center space-x-6">
-            <a href="https://facebook.com/yourpage" aria-label="Facebook" className="hover:text-gray-600">
-              <FaFacebookF className="h-4 w-4" />
-            </a>
-            <a href="https://twitter.com/yourprofile" aria-label="Twitter" className="hover:text-gray-600">
-              <FaTwitter className="h-4 w-4" />
-            </a>
-            <a href="https://instagram.com/yourprofile" aria-label="Instagram" className="hover:text-gray-600">
-              <FaInstagram className="h-4 w-4" />
-            </a>
-          </div>
-
-        {/* Contact info + social icons */}
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-2">
-            <FaEnvelope className="h-4 w-4" />
-            <span>info@yourdomain.com</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <FaClock className="h-4 w-4" />
-            <span>Mon–Sat: 9 AM – 6 PM</span>
-          </div>
-       
-        </div>
-
-        {/* Tagline */}
-        <div className="flex items-center space-x-2 text-right">
-          <FaMapMarkerAlt className="h-4 w-4" />
-          <span>123 Main St, Springfield, IL 62704</span>
-        </div>
-      </div>
-    </div>
-        
-      </div>}
+   
 
       {/* Main Navigation Bar */}
       <nav
@@ -195,7 +148,7 @@ const Navbar = () => {
           isHomePage ? "fixed left-0 right-0" : "sticky top-0"
         } z-50 transition-all duration-500 ${getNavbarStyles()}`}
         style={{
-          top: isHomePage ? (isScrolled ? "0" : "60px") : "0",
+          top: isHomePage ? (isScrolled ? "0" : "") : "0",
         }}
       >
         <div className="max-w-8xl px-6 md:px-[3rem]">
@@ -333,7 +286,7 @@ const Navbar = () => {
                     className={`flex items-center px-5 py-2 rounded-lg text-sm font-medium transition-colors ${
                       isHomePage && !isScrolled
                         ? "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 border border-white/30"
-                        : "bg-blue-600 hover:bg-blue-700 text-white"
+                        : "bg-[#4f46e5]  text-white"
                     }`}
                   >
                     <FiLogIn className="mr-2 h-4 w-4" />

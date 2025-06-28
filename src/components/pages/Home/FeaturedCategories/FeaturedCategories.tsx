@@ -76,19 +76,19 @@ const FeaturedCategories = () => {
                 />
                 {/* Premium Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute inset-0 bg-[#1f54dd]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-[#4f46e5]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Premium Badge */}
-                <div className="absolute top-4 right-4">
+                {/* <div className="absolute top-4 right-4">
                   <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1">
                     <FiStar className="w-3 h-3 text-yellow-500 fill-current" />
                     <span className="text-xs font-semibold text-gray-800">Premium</span>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Service Count Badge */}
                 <div className="absolute top-4 left-4">
-                  <div className="bg-[#1f54dd]/90 backdrop-blur-sm rounded-full px-3 py-1">
+                  <div className="bg-[#4f46e5]/90 backdrop-blur-sm rounded-full px-3 py-1">
                     <span className="text-xs font-semibold text-white">{category._count.services} Services</span>
                   </div>
                 </div>
@@ -99,7 +99,7 @@ const FeaturedCategories = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="relative">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[#1f54dd] to-[#1a4bc4] rounded-2xl p-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                      <div className="w-16 h-16 bg-gradient-to-br from-[#4f46e5] to-[#1a4bc4] rounded-2xl p-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                         <img
                           src={category.categoryIcon || "/placeholder.svg?height=32&width=32&query=professional icon"}
                           alt="icon"
@@ -109,7 +109,7 @@ const FeaturedCategories = () => {
                       <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-green-400 to-green-500 rounded-full border-3 border-white shadow-lg" />
                     </div>
                     <div>
-                      <h5 className="text-2xl font-bold text-gray-900 group-hover:text-[#1f54dd] transition-colors duration-300 mb-1">
+                      <h5 className="text-2xl font-bold text-gray-900 group-hover:text-[#4f46e5] transition-colors duration-300 mb-1">
                         {category.categoryName}
                       </h5>
                       <p className="text-sm text-gray-600 font-medium">Professional Excellence</p>
@@ -122,8 +122,8 @@ const FeaturedCategories = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="bg-gradient-to-r from-[#1f54dd]/10 to-[#1f54dd]/20 rounded-xl px-4 py-2">
-                      <span className="text-sm font-bold text-[#1f54dd]">Explore</span>
+                    <div className="bg-gradient-to-r from-[#4f46e5]/10 to-[#4f46e5]/20 rounded-xl px-4 py-2">
+                      <span className="text-sm font-bold text-[#4f46e5]">Explore</span>
                     </div>
                   </div>
                 </div>
@@ -143,14 +143,14 @@ const FeaturedCategories = () => {
               </div>
 
               {/* Premium Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1f54dd]/30 via-[#1f54dd]/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#4f46e5]/30 via-[#4f46e5]/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
 
               {/* Glass Effect */}
               <div className="absolute inset-0 backdrop-blur-[1px] group-hover:backdrop-blur-[2px] transition-all duration-500" />
 
               <div className="relative z-10">
                 <div className="mb-6 relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-[#1f54dd] to-[#1a4bc4] rounded-2xl p-5 mx-auto shadow-2xl group-hover:shadow-3xl transition-shadow duration-300 group-hover:scale-110 transform transition-transform">
+                  <div className="w-20 h-20 bg-gradient-to-br from-[#4f46e5] to-[#1a4bc4] rounded-2xl p-5 mx-auto shadow-2xl group-hover:shadow-3xl transition-shadow duration-300 group-hover:scale-110 transform transition-transform">
                     <img
                       src={category.categoryIcon || "/placeholder.svg?height=40&width=40&query=premium service icon"}
                       alt="icon"
@@ -178,22 +178,23 @@ const FeaturedCategories = () => {
 
   return (
     <div
-      className={`mx-auto px-6 md:px-12 lg:px-20 ${pathname === "/categories" ? "bg-gradient-to-br from-gray-50 to-gray-100" : "bg-gradient-to-br from-[#1f54dd]/8 via-white to-[#1f54dd]/12"} py-16 md:py-24`}
+      className={`mx-auto px-6 md:px-[3rem]  ${pathname === "/categories" ? "bg-gradient-to-br from-gray-50 to-gray-100" : "bg-gradient-to-br from-[#4f46e5]/8 via-white to-[#4f46e5]/12"} py-16 md:py-24`}
     >
       {pathname !== "/categories" ? (
         <div className="section-heading mb-20">
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-1/2" data-aos="fade-up">
               {/* <div className="flex items-center space-x-4 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#1f54dd] to-[#1a4bc4] rounded-2xl flex items-center justify-center shadow-xl">
+                <div className="w-14 h-14 bg-gradient-to-br from-[#4f46e5] to-[#1a4bc4] rounded-2xl flex items-center justify-center shadow-xl">
                   <FiGrid className="text-white text-2xl" />
                 </div>
-                <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-[#1f54dd]/10 to-[#1f54dd]/20 text-[#1f54dd] border border-[#1f54dd]/30">
+                <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-[#4f46e5]/10 to-[#4f46e5]/20 text-[#4f46e5] border border-[#4f46e5]/30">
                   <FiTrendingUp className="w-4 h-4 mr-2" />
                   Premium Collection
                 </span>
               </div> */}
-              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#1f54dd] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
+              
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-[#4f46e5] to-[#1a4bc4] bg-clip-text text-transparent leading-tight mb-6">
                 Elite Service Categories
               </h2>
               <p className="text-gray-700 text-lg leading-relaxed font-medium">
@@ -204,8 +205,8 @@ const FeaturedCategories = () => {
             <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
               {displayCategories?.length > 3 && (
                 <Link href="/categories">
-                  <button className="group bg-gradient-to-r from-[#1f54dd] to-[#1a4bc4] hover:from-[#1a4bc4] hover:to-[#1f54dd] text-white p-4 rounded-2xl font-bold transition-all duration-300 hover:shadow-2xl hover:scale-105 text-md inline-flex items-center">
-                    Explore All Categories
+                  <button className="group bg-gradient-to-r from-[#4f46e5] to-[#1a4bc4] hover:from-[#1a4bc4] hover:to-[#4f46e5] text-white p-4 rounded-2xl font-bold transition-all duration-300 hover:shadow-2xl hover:scale-105 text-md inline-flex items-center">
+                     All Categories
                     <FiArrowRightCircle
                       className="ml-3 group-hover:translate-x-2 transition-transform duration-300"
                       size={20}
@@ -217,9 +218,9 @@ const FeaturedCategories = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-between items-center mb-10 p-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+        <div className="flex justify-between items-center mb-10  ">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">Premium Categories</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">Categories</h1>
             <p className="text-gray-600 text-lg">
               Explore our comprehensive collection of professional service categories
             </p>
@@ -232,7 +233,7 @@ const FeaturedCategories = () => {
               id="itemsPerPage"
               value={itemsPerPage}
               onChange={handleItemsPerPageChange}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1f54dd] focus:border-transparent bg-white shadow-lg text-sm font-medium"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4f46e5] focus:border-transparent bg-white shadow-lg text-sm font-medium"
             >
               {[3, 6, 9, 12, 15, 18, 21].map((value) => (
                 <option key={value} value={value}>
@@ -266,7 +267,7 @@ const FeaturedCategories = () => {
             className={`px-8 py-4 rounded-xl transition-all duration-300 text-base font-semibold ${
               currentPage === 1
                 ? "text-gray-400 cursor-not-allowed bg-gray-100"
-                : "text-gray-700 hover:bg-[#1f54dd] hover:text-white border-2 border-gray-300 hover:border-[#1f54dd] bg-white shadow-lg hover:shadow-xl"
+                : "text-gray-700 hover:bg-[#4f46e5] hover:text-white border-2 border-gray-300 hover:border-[#4f46e5] bg-white shadow-lg hover:shadow-xl"
             }`}
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
@@ -275,7 +276,7 @@ const FeaturedCategories = () => {
             Previous
           </button>
 
-          <div className="px-6 py-4 text-base font-semibold text-gray-700 bg-gradient-to-r from-[#1f54dd]/10 to-[#1f54dd]/20 rounded-xl border border-[#1f54dd]/30">
+          <div className="px-6 py-4 text-base font-semibold text-gray-700 bg-gradient-to-r from-[#4f46e5]/10 to-[#4f46e5]/20 rounded-xl border border-[#4f46e5]/30">
             Page {currentPage} of {totalPages}
           </div>
 
@@ -283,7 +284,7 @@ const FeaturedCategories = () => {
             className={`px-8 py-4 rounded-xl transition-all duration-300 text-base font-semibold ${
               currentPage === totalPages
                 ? "text-gray-400 cursor-not-allowed bg-gray-100"
-                : "text-gray-700 hover:bg-[#1f54dd] hover:text-white border-2 border-gray-300 hover:border-[#1f54dd] bg-white shadow-lg hover:shadow-xl"
+                : "text-gray-700 hover:bg-[#4f46e5] hover:text-white border-2 border-gray-300 hover:border-[#4f46e5] bg-white shadow-lg hover:shadow-xl"
             }`}
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === totalPages}

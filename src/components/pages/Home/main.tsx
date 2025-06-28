@@ -31,9 +31,9 @@ const HomePage = () => {
             <HowItWorks/>
             <FeaturedCategories/>
             <FeaturedServices/>
+            <TopProviders/>
             <OfferedServices/>
             <PricingPlan/>
-            <TopProviders/>
             <Testimonial/>
             <MostPopularServices/>
             <Blog/>
